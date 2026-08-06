@@ -135,6 +135,35 @@
   border-radius: var(--ts-radius-sm);
 }
 
+/* ---- Print (SPEC-009 §Certificate) ----
+ * Any page hosting a .ts-print-sheet prints the sheet alone: app chrome (nav,
+ * tab bar, buttons) disappears, the sheet lifts to the top of the page, and
+ * A4/Letter both work via size:auto. The sheet designs are grayscale-safe. */
+@media print {
+  @page {
+    size: auto;
+    margin: 12mm;
+  }
+  body:has(.ts-print-sheet) {
+    background: var(--ts-paper-0);
+  }
+  body:has(.ts-print-sheet) * {
+    visibility: hidden;
+  }
+  body:has(.ts-print-sheet) .ts-print-sheet,
+  body:has(.ts-print-sheet) .ts-print-sheet * {
+    visibility: visible;
+  }
+  body:has(.ts-print-sheet) .ts-print-sheet {
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    margin: 0;
+    border-color: var(--ts-line-200);
+    box-shadow: none;
+  }
+}
+
 /* Subtly ruled notebook background for journal surfaces (DESIGN-003). */
 .ts-ruled {
   background-image: repeating-linear-gradient(

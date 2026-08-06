@@ -15,6 +15,8 @@ from .errors import ApiError
 from .ingest import ingest as ingest_mod
 from .routers import auth as auth_router
 from .routers import course as course_router
+from .routers import dev as dev_router
+from .routers import instructor as instructor_router
 from .routers import journal as journal_router
 from .routers import meta as meta_router
 from .routers import progress as progress_router
@@ -61,6 +63,9 @@ def create_app() -> FastAPI:
     app.include_router(journal_router.router, prefix="/api")
     app.include_router(tutor_router.router, prefix="/api")
     app.include_router(meta_router.router, prefix="/api")
+    app.include_router(instructor_router.router, prefix="/api")
+    if get_settings().fixtures:  # QA-002 J2 helper — dev boots only
+        app.include_router(dev_router.router, prefix="/api")
 
     @app.exception_handler(ApiError)
     async def handle_api_error(request: Request, exc: ApiError) -> JSONResponse:

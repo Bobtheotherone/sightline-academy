@@ -16,6 +16,7 @@ import json
 import re
 import unicodedata
 import uuid
+from collections.abc import Iterator
 from dataclasses import dataclass, field
 
 from sqlalchemy import select
@@ -62,54 +63,46 @@ def split_suggestions(raw_text: str) -> tuple[str, list[str]]:
     return raw_text[: m.start()].strip(), [s for s in suggestions if isinstance(s, str)]
 
 
-def answer(
-    db: Session, user: User, message: str, lesson_id: str | None = None
+def _policy_reply(db: Session, user: User, msg: str, cat: dict) -> TutorReply:
+    """Hard triage hit: answer from the policy template and stop (persisted)."""
+    reply = TutorReply(
+        text=cat["template"],
+        grounding="triage",
+        triage_category=cat["id"],
+        sources=[],
+        suggestions=_triage_suggestions(cat["id"]),
+        provider="policy",
+    )
+    _persist(db, user, msg, reply)
+    return reply
+
+
+def _compose_system(db, user, kept, lesson_id: str | None, cat: dict | None) -> str:
+    system = prompts.render_system(
+        prompts.curriculum_map(db),
+        prompts.learner_position(db, user),
+        prompts.format_chunks(kept),
+    )
+    if lesson_id:
+        system += prompts.lesson_context(db, lesson_id)
+    if cat:  # legal_specific: shape the generation, don't refuse (ADR-005)
+        system += prompts.LEGAL_SHAPING_NOTE
+    return system
+
+
+def _extractive_text(msg: str, kept: list[Chunk], cat: dict | None) -> str:
+    if cat:  # legal_specific offline: policy template, rule category filled in
+        return cat["template"].replace("{RULE_CATEGORY}", _rule_category(kept))
+    return providers.extractive_answer(msg, kept)
+
+
+def _shape_and_persist(
+    db, user, msg, text, suggestions, cat, grounding, kept, provider
 ) -> TutorReply:
-    msg = normalize(message)                                     # 1 normalize
-
-    cat = triage(msg)                                            # 2 triage
-    if cat and cat["id"] != "legal_specific":
-        reply = TutorReply(
-            text=cat["template"],
-            grounding="triage",
-            triage_category=cat["id"],
-            sources=[],
-            suggestions=_triage_suggestions(cat["id"]),
-            provider="policy",
-        )
-        _persist(db, user, msg, reply)                           # 7 persist
-        return reply
-
-    raw = query_chroma(msg)                                      # 3 retrieve
-    kept = shape_retrieval(raw)
-    grounding = grounding_label(kept)
-
-    if providers.active_provider() == "anthropic":               # 4-5 compose+generate
-        system = prompts.render_system(
-            prompts.curriculum_map(db),
-            prompts.learner_position(db, user),
-            prompts.format_chunks(kept),
-        )
-        if lesson_id:
-            system += prompts.lesson_context(db, lesson_id)
-        if cat:  # legal_specific: shape the generation, don't refuse (ADR-005)
-            system += prompts.LEGAL_SHAPING_NOTE
-        history = _history(db, user)
-        raw_text = providers.generate_anthropic(system, history, msg)
-        provider = "anthropic"
-    else:
-        if cat:  # legal_specific offline: policy template, rule category filled in
-            raw_text = cat["template"].replace("{RULE_CATEGORY}", _rule_category(kept))
-        else:
-            raw_text = providers.extractive_answer(msg, kept)
-        provider = "extractive"
-
-    text, suggestions = split_suggestions(raw_text)              # 6 shape
     if not suggestions:
         suggestions = (
             _triage_suggestions(cat["id"]) if cat else _default_suggestions(grounding, kept)
         )
-
     reply = TutorReply(
         text=text,
         grounding=grounding,
@@ -123,6 +116,103 @@ def answer(
     )
     _persist(db, user, msg, reply)                               # 7 persist
     return reply
+
+
+def answer(
+    db: Session, user: User, message: str, lesson_id: str | None = None
+) -> TutorReply:
+    msg = normalize(message)                                     # 1 normalize
+
+    cat = triage(msg)                                            # 2 triage
+    if cat and cat["id"] != "legal_specific":
+        return _policy_reply(db, user, msg, cat)                 # 7 persist (inside)
+
+    raw = query_chroma(msg)                                      # 3 retrieve
+    kept = shape_retrieval(raw)
+    grounding = grounding_label(kept)
+
+    if providers.active_provider() == "anthropic":               # 4-5 compose+generate
+        raw_text = providers.generate_anthropic(
+            _compose_system(db, user, kept, lesson_id, cat), _history(db, user), msg
+        )
+        provider = "anthropic"
+    else:
+        raw_text = _extractive_text(msg, kept, cat)
+        provider = "extractive"
+
+    text, suggestions = split_suggestions(raw_text)              # 6 shape
+    return _shape_and_persist(db, user, msg, text, suggestions, cat, grounding, kept, provider)
+
+
+# ── Streaming twin (SPEC-008 R5.6) ─────────────────────────────────────────── #
+
+_STREAM_WORDS_PER_TOKEN = 10
+_FENCE = "```"
+
+
+def _token_events(text: str) -> Iterator[tuple[str, str]]:
+    """Word-chunked token events for pre-composed text (extractive/policy):
+    UI parity with real streaming; whitespace and newlines survive intact."""
+    pieces = re.findall(r"\S+\s*", text)
+    for i in range(0, len(pieces), _STREAM_WORDS_PER_TOKEN):
+        yield ("token", "".join(pieces[i : i + _STREAM_WORDS_PER_TOKEN]))
+
+
+def answer_stream(
+    db: Session, user: User, message: str, lesson_id: str | None = None
+) -> Iterator[tuple[str, str | TutorReply]]:
+    """answer() with the same stages and persistence, yielding ("token", text)
+    events followed by exactly one ("meta", TutorReply).
+
+    Anthropic streams real deltas; the in-band suggestions block never reaches
+    the client as tokens — emission holds at the first ``` fence, and the held
+    tail is flushed after split_suggestions() when it wasn't that block.
+    """
+    msg = normalize(message)                                     # 1 normalize
+
+    cat = triage(msg)                                            # 2 triage
+    if cat and cat["id"] != "legal_specific":
+        reply = _policy_reply(db, user, msg, cat)                # 7 persist (inside)
+        yield from _token_events(reply.text)
+        yield ("meta", reply)
+        return
+
+    raw = query_chroma(msg)                                      # 3 retrieve
+    kept = shape_retrieval(raw)
+    grounding = grounding_label(kept)
+
+    if providers.active_provider() == "anthropic":               # 4-5 compose+generate
+        provider = "anthropic"
+        raw_text = ""
+        emitted = 0      # chars of raw_text already sent as tokens
+        holding = False  # a fence appeared — hold the rest until the stream ends
+        for delta in providers.stream_anthropic(
+            _compose_system(db, user, kept, lesson_id, cat), _history(db, user), msg
+        ):
+            raw_text += delta
+            if holding:
+                continue
+            fence = raw_text.find(_FENCE, emitted)
+            if fence != -1:
+                holding = True
+                if fence > emitted:
+                    yield ("token", raw_text[emitted:fence])
+                    emitted = fence
+            else:
+                safe = len(raw_text) - (len(_FENCE) - 1)  # keep a fence prefix back
+                if safe > emitted:
+                    yield ("token", raw_text[emitted:safe])
+                    emitted = safe
+        text, suggestions = split_suggestions(raw_text)          # 6 shape
+        if len(text) > emitted:  # held tail that wasn't the suggestions block
+            yield ("token", text[emitted:])
+    else:
+        provider = "extractive"
+        text, suggestions = split_suggestions(_extractive_text(msg, kept, cat))
+        yield from _token_events(text)
+
+    reply = _shape_and_persist(db, user, msg, text, suggestions, cat, grounding, kept, provider)
+    yield ("meta", reply)
 
 
 # --------------------------------------------------------------------------- #

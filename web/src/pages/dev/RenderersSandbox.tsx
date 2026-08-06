@@ -441,10 +441,302 @@ const STEPS: { source: string; step: StepOut }[] = [
     },
   },
   {
+    source: "module-02 · m2-l1-s2",
+    step: {
+      id: "m2-l1-s2",
+      order: 8,
+      section: "learn",
+      renderer: "hotspot_list",
+      title: "Explore the machine",
+      minutes: 7,
+      required: true,
+      payload: {
+        instructions:
+          "Tap every waypoint on the machine. Each one earns its place in the walkaround you'll learn next lesson.",
+        assetSlot: "scene-atv-anatomy",
+        intro: "Side view of a typical single-rider utility ATV.",
+        requireAll: true,
+        hotspots: [
+          {
+            id: "tires",
+            label: "Tires & wheels",
+            x: 22,
+            y: 72,
+            description:
+              "Low-pressure, deep-tread tires designed to deform around soft, uneven ground — that deformation IS the grip. Pressure a few PSI off changes handling more than you'd expect, and it's why these tires behave badly on pavement (Module 6).",
+          },
+          {
+            id: "handlebars",
+            label: "Handlebars & controls",
+            x: 55,
+            y: 22,
+            description:
+              "Steering plus the control cluster: throttle (usually a thumb lever), brakes, and switches. On an ATV you steer with the bars *and* your body weight together — which is why fit and free movement matter so much.",
+          },
+          {
+            id: "brakes",
+            label: "Brakes",
+            x: 30,
+            y: 62,
+            description:
+              "Front and rear systems, hand and/or foot operated. The walkaround checks lever feel and function *before* you need them, because the bottom of a hill is a bad place to learn your rear brake is soft.",
+          },
+          {
+            id: "suspension",
+            label: "Suspension",
+            x: 38,
+            y: 58,
+            description:
+              "Keeps the tires in contact with uneven ground so grip and braking stay available. Sagging or leaking suspension quietly shrinks your margins on every bump.",
+          },
+          {
+            id: "engine",
+            label: "Engine & fuel",
+            x: 48,
+            y: 50,
+            description:
+              "Fuel level, oil level, and leaks are walkaround items — running dry or seizing far from the trailhead turns a ride into a recovery. Engine size classes also drive youth-fit rules (Lesson 4).",
+          },
+          {
+            id: "footwells",
+            label: "Footwells & pegs",
+            x: 62,
+            y: 68,
+            description:
+              "Where your feet live — and stay. Footwells keep boots away from the wheels; the rider's ability to stand and shift weight through the pegs is core to how ATVs handle terrain.",
+          },
+          {
+            id: "racks",
+            label: "Racks & cargo points",
+            x: 82,
+            y: 38,
+            description:
+              "Utility ATVs carry loads — but every kilogram changes the balance you'll study in Module 4. Racks have posted limits, and loads must be secured low and centered (Module 6 covers loading).",
+          },
+          {
+            id: "chassis",
+            label: "Frame & chassis",
+            x: 58,
+            y: 55,
+            description:
+              "The skeleton everything bolts to. The walkaround's chassis check is a look for cracks, loose fasteners, and anything hanging — small findings here are cheap; discovered-on-trail findings are not.",
+          },
+        ],
+      },
+    },
+  },
+  {
+    source: "module-04 · m4-l1-s2",
+    step: {
+      id: "m4-l1-s2",
+      order: 9,
+      section: "try",
+      renderer: "hotspot_list",
+      title: "Read the scene",
+      minutes: 8,
+      required: true,
+      payload: {
+        instructions: "A trail scene with seven hazards broadcasting cues. Find and read all seven.",
+        assetSlot: "scene-trail-hazards",
+        intro: "Mid-morning, mixed forest trail descending toward a drainage.",
+        requireAll: true,
+        hotspots: [
+          {
+            id: "crest",
+            label: "Blind crest",
+            x: 18,
+            y: 30,
+            description:
+              "The trail rises and vanishes — beyond it could be a washout, a stopped machine, or an oncoming one. The cue is the vanishing point itself. Response category: speed you could stop within the visible distance, and position for sight line.",
+          },
+          {
+            id: "shadow_rut",
+            label: "Shadowed ruts",
+            x: 40,
+            y: 62,
+            description:
+              "Deep wheel ruts running through shade. Shadow flattens depth perception — a rut that looks like a stripe can swallow a wheel. Cue: linear shadows aligned with the trail. Read them where light crosses them.",
+          },
+          {
+            id: "wet_clay",
+            label: "Dark wet patch",
+            x: 55,
+            y: 70,
+            description:
+              "A darker, smoother band across the trail low in the drainage — moisture. Wet clay and algae-slick rock behave like ice for knobby tires. Cue: color change plus location (low points collect water).",
+          },
+          {
+            id: "loose_over_hard",
+            label: "Gravel over hardpack",
+            x: 68,
+            y: 58,
+            description:
+              "A sheen of loose marbles over a hard base — the classic traction trap on corners and brakes. Cue: uniform sparkle, scattered stones at the trail edge where wheels have thrown them.",
+          },
+          {
+            id: "deadfall",
+            label: "Downed limb",
+            x: 78,
+            y: 44,
+            description:
+              "A limb across the far side of the trail, partly screened by brush. Fresh deadfall means the trail differs from every previous ride — the familiarity discount's favorite ambush. Cue: horizontal line breaking the trail's vertical texture.",
+          },
+          {
+            id: "side_slope",
+            label: "Off-camber section",
+            x: 30,
+            y: 48,
+            description:
+              "The trail tilts sideways where it traverses the hillside. Side-slopes attack stability directly — next lesson's lab shows exactly how. Cue: the trail's far edge sits lower than its near edge; vegetation leans.",
+          },
+          {
+            id: "soft_edge",
+            label: "Undercut soft edge",
+            x: 62,
+            y: 78,
+            description:
+              "The downhill trail edge above the drainage is soft and possibly undercut — edges fail under weight, and this one has water working beneath it. Cue: crumbled edge line, exposed roots, cracks parallel to the edge. Response category: track away from suspect edges.",
+          },
+        ],
+      },
+    },
+  },
+  {
+    source: "module-02 · m2-l3-s2",
+    step: {
+      id: "m2-l3-s2",
+      order: 10,
+      section: "try",
+      renderer: "lab_objective",
+      title: "Lab — the walkaround",
+      minutes: 8,
+      required: true,
+      payload: {
+        instructions:
+          "Work the machine from above: place each T-CLOC zone, then step through what each check looks for.",
+        lab: "walkaround",
+        config: {
+          assetSlot: "scene-walkaround-top",
+          zones: ["tires", "controls", "lights", "oil", "chassis"],
+        },
+        objectives: [
+          {
+            id: "place_all",
+            text: "Place all five T-CLOC zone labels on the correct regions of the machine",
+          },
+          {
+            id: "review_all",
+            text: 'Step through every zone\'s "what you\'re looking for" card',
+          },
+        ],
+        debrief:
+          "Five zones, in the same order every time — order is what makes it a ritual, and ritual is what makes it reliable when you're tired, cold, or excited to ride. Next: log the practice in your journal so the sequence is in your own words.",
+      },
+    },
+  },
+  {
+    source: "module-04 · m4-l2-s2",
+    step: {
+      id: "m4-l2-s2",
+      order: 11,
+      section: "try",
+      renderer: "lab_objective",
+      title: "Lab — stability explorer",
+      minutes: 9,
+      required: true,
+      payload: {
+        instructions:
+          "Tilt the ground and move the rider. Watch the CoG line against the support area. Meet all three objectives.",
+        lab: "stability_explorer",
+        config: {
+          views: ["rear", "side"],
+          sliders: ["slope_angle", "rider_lean", "cargo_load"],
+          showMarginMeter: true,
+        },
+        objectives: [
+          {
+            id: "find_edge",
+            text: "On the rear view, increase side-slope until the CoG line reaches the support edge — note the angle",
+          },
+          {
+            id: "lean_recovery",
+            text: "At that angle, shift rider lean uphill and watch the margin return — then find the steeper angle where even full lean isn't enough",
+          },
+          {
+            id: "cargo_effect",
+            text: "Add rear cargo load on the side view and observe how the same uphill grade now spends more margin",
+          },
+        ],
+        debrief:
+          "Three things worth keeping forever: the edge arrives earlier than intuition says; rider position genuinely buys margin but only a finite amount; and load quietly re-draws the whole envelope. When real ground makes you wonder which side of the edge you're on — that wondering IS the answer. Choose different ground.",
+      },
+    },
+  },
+  {
+    source: "module-06 · m6-l4-s3 (checkpoint inner, mounted bare)",
+    step: {
+      id: "sandbox-sr",
+      order: 12,
+      section: "learn",
+      renderer: "structured_response",
+      title: "The go/no-go, bare",
+      minutes: 5,
+      required: true,
+      payload: {
+        instructions: "Written response against visible criteria.",
+        prompt:
+          "Morning of your planned ride: describe two specific things that could be different from your plan's assumptions that would make you shorten, change, or cancel the ride — and for each, name the exact moment you'd decide.",
+        criteria: [
+          "Two concrete condition changes (not generic 'bad weather')",
+          "A specific decision point for each (a time, a place, an observation)",
+          "The change is proportionate — shorten vs cancel reasoning is visible",
+        ],
+        minLength: 200,
+        placeholder:
+          "1) If the creek at the second junction is running higher than the step I can see from the bank, then at that junction I...",
+        exemplar:
+          'One strong shape: "1) Overnight rain heavier than forecast — my decision point is the driveway: if the yard\'s low spot is standing water, the drainage crossings will be worse, and the loop becomes the ridge out-and-back. 2) My riding partner cancels — my decision point is the moment they text: solo changes my remoteness math, so the ride shortens to the front country where my check-in window is 2 hours, and I re-text the new plan to my contact before leaving." Notice: observable triggers, named moments, proportionate responses.',
+      },
+    },
+  },
+  {
+    source: "module-06 · m6-l4-s3",
+    step: {
+      id: "m6-l4-s3",
+      order: 13,
+      section: "checkpoint",
+      renderer: "checkpoint",
+      title: "Checkpoint — the go/no-go",
+      minutes: 5,
+      required: true,
+      payload: {
+        instructions: "The final checkpoint of the course. Written response.",
+        mode: "structured_response",
+        passCopy:
+          "That's the course. The final assessment awaits when you're ready — and your Ride Plan is in your journal, ready for the real thing.",
+        reviseCopy: "Push past restating the plan — this asks what would make you STOP the plan.",
+        inner: {
+          prompt:
+            "Morning of your planned ride: describe two specific things that could be different from your plan's assumptions that would make you shorten, change, or cancel the ride — and for each, name the exact moment you'd decide.",
+          criteria: [
+            "Two concrete condition changes (not generic 'bad weather')",
+            "A specific decision point for each (a time, a place, an observation)",
+            "The change is proportionate — shorten vs cancel reasoning is visible",
+          ],
+          minLength: 200,
+          placeholder:
+            "1) If the creek at the second junction is running higher than the step I can see from the bank, then at that junction I...",
+          exemplar:
+            'One strong shape: "1) Overnight rain heavier than forecast — my decision point is the driveway: if the yard\'s low spot is standing water, the drainage crossings will be worse, and the loop becomes the ridge out-and-back. 2) My riding partner cancels — my decision point is the moment they text: solo changes my remoteness math, so the ride shortens to the front country where my check-in window is 2 hours, and I re-text the new plan to my contact before leaving." Notice: observable triggers, named moments, proportionate responses.',
+        },
+      },
+    },
+  },
+  {
     source: "module-01 · m1-l2-s3",
     step: {
       id: "m1-l2-s3",
-      order: 8,
+      order: 14,
       section: "debrief",
       renderer: "reflection",
       title: "Your own leak",
@@ -463,7 +755,7 @@ const STEPS: { source: string; step: StepOut }[] = [
     source: "module-01 · m1-l3-s2",
     step: {
       id: "m1-l3-s2",
-      order: 9,
+      order: 15,
       section: "journal",
       renderer: "journal_builder",
       title: "Build your risk profile",
@@ -701,8 +993,9 @@ export default function RenderersSandbox() {
           </span>
         </div>
         <p className="mt-2 max-w-2xl text-sm text-ink-500">
-          Every Wave 1 activity renderer mounted through ActivityHost with verbatim curriculum
-          payloads. Evidence stays in local state — no API needed.
+          Every activity renderer — all twelve SPEC-007 types, both labs included — mounted through
+          ActivityHost with verbatim curriculum payloads. Evidence stays in local state — no API
+          needed.
         </p>
         <nav aria-label="Jump to renderer" className="mt-4 flex flex-wrap gap-2">
           {STEPS.map(({ step }) => (

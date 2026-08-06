@@ -271,7 +271,7 @@ export default function MatchActivity({ step, evidence, onEvidence }: ActivityPr
           tone="positive"
           label="All matched"
           animate={!revisit}
-          md="Every control is wired to its job. Give the connected set one last read — it's the mental model the next step builds on."
+          md="Every pair found its partner. Give the connected set one last read — it's the mental model the next step builds on."
         />
       ) : (
         <p className="text-sm text-ink-500">

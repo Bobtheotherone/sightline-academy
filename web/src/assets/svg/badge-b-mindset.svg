@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img">
+  <!-- Clear Eyes: an eye whose pupil is the trail blaze. -->
+  <path d="M10 16 Q24 8 38 16" fill="none" stroke="#0E2A23" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M6 25 Q24 9 42 25 Q24 41 6 25 Z" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <circle cx="24" cy="25" r="8.5" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5"/>
+  <rect x="-3.4" y="-3.4" width="6.8" height="6.8" rx="1.8" transform="translate(24 25) rotate(45)" fill="#C4622D"/>
+  <circle cx="20.5" cy="21.5" r="1.7" fill="#FBFCFA"/>
+</svg>

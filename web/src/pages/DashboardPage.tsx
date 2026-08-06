@@ -217,7 +217,8 @@ function RecentXp({ progress }: { progress: ProgressResponse | undefined }) {
           <ul className="flex flex-col gap-2">
             {events.map((event) => (
               <li key={event.id} className="flex items-baseline justify-between gap-3">
-                <span className="min-w-0 truncate text-sm text-pine-950">{event.label}</span>
+                {/* Full reflow, never a mid-word ellipsis (crawl pass-2 P2). */}
+                <span className="min-w-0 text-sm leading-snug text-pine-950">{event.label}</span>
                 <span className="shrink-0 font-mono text-xs font-medium text-clay-500">
                   +{event.xp}
                 </span>

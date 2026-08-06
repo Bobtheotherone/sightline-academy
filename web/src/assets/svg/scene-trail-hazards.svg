@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300" role="img">
+  <!-- Field-guide plate: mid-morning forest trail dipping through a drainage.
+       Hotspot contract (percent of canvas): crest(18,30) side_slope(30,48)
+       shadow_rut(40,62) wet_clay(55,70) loose_over_hard(68,58) deadfall(78,44)
+       soft_edge(62,78). Canvas 500x300 -> crest(90,90) side_slope(150,144)
+       shadow_rut(200,186) wet_clay(275,210) loose_over_hard(340,174)
+       deadfall(390,132) soft_edge(310,234). -->
+  <rect width="500" height="300" fill="#FBFCFA"/>
+  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+    <path d="M-10 40 C 90 15, 190 55, 300 35 S 470 18, 510 40"/>
+    <path d="M150 70 C 230 50, 320 82, 420 60"/>
+  </g>
+  <!-- mid-morning sun, light from the left -->
+  <circle cx="52" cy="38" r="12" fill="#E0A72E" stroke="#0E2A23" stroke-width="1.5"/>
+  <!-- distant ridge seen through the drainage gap -->
+  <path d="M118 172 Q250 80 412 156 L412 210 L118 210 Z" fill="#9CC3B4"/>
+  <!-- hillside terrain: crest at left, drainage dip, far slope climbing right -->
+  <path d="M0 196 Q46 98 92 86 Q150 100 190 132 Q240 168 280 178 Q330 180 370 140 Q400 116 442 98 L500 88 L500 300 L0 300 Z"
+        fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <!-- trail ribbon: over the crest, down through the dip, up the far side -->
+  <path d="M90 88
+           Q112 100 138 132 Q160 158 178 178 Q206 196 240 206 Q268 212 292 210
+           Q316 202 332 184 Q352 160 372 142 Q388 126 402 114 L410 106
+           L419 114 Q408 130 396 144 Q380 166 362 182 Q344 198 316 210
+           Q286 222 252 218 Q216 212 188 196 Q164 180 144 154 Q124 126 104 106 Z"
+        fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <!-- SIDE_SLOPE (150,144): off-camber ticks + leaning sapling -->
+  <g stroke="#0E2A23" stroke-width="1.5" fill="none" stroke-linecap="round">
+    <path d="M136 132 L155 124"/>
+    <path d="M143 143 L163 135"/>
+    <path d="M151 154 L171 146"/>
+  </g>
+  <g transform="rotate(14 140 108)">
+    <path d="M140 108 V86" stroke="#0E2A23" stroke-width="1.5"/>
+    <path d="M140 58 L152 86 H128 Z M140 68 L150 92 H130 Z" fill="#1F5546" stroke="#0E2A23" stroke-width="1" stroke-linejoin="round"/>
+  </g>
+  <!-- SHADOW_RUT (200,186): tree-shadow band + rut lines inside it -->
+  <path d="M176 168 L228 190 L221 202 L169 180 Z" fill="#4A5A54"/>
+  <path d="M184 174 L214 188 M192 170 L222 184" stroke="#0E2A23" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- WET_CLAY (275,210): dark smooth band across the low point -->
+  <path d="M248 206 Q262 198 282 202 Q302 206 300 214 Q296 222 272 220 Q250 218 248 206 Z"
+        fill="#2E6E8E" stroke="#0E2A23" stroke-width="1.5"/>
+  <path d="M262 208 Q270 205 278 208 M268 214 Q274 212 280 214" stroke="#FBFCFA" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <!-- LOOSE_OVER_HARD (340,174): gravel sheen patch -->
+  <path d="M320 190 Q314 172 336 162 Q356 154 364 166 Q370 178 350 188 Q330 196 320 190 Z" fill="#D8E0DA"/>
+  <g fill="#0E2A23">
+    <circle cx="330" cy="176" r="1.8"/><circle cx="337" cy="170" r="1.8"/>
+    <circle cx="344" cy="176" r="1.8"/><circle cx="350" cy="169" r="1.8"/>
+    <circle cx="335" cy="183" r="1.8"/><circle cx="343" cy="185" r="1.8"/>
+    <circle cx="352" cy="179" r="1.8"/><circle cx="328" cy="168" r="1.8"/>
+    <circle cx="357" cy="172" r="1.8"/><circle cx="347" cy="162" r="1.8"/>
+    <circle cx="324" cy="184" r="1.8"/><circle cx="358" cy="185" r="1.8"/>
+  </g>
+  <!-- SOFT_EDGE (310,234): crumbling undercut edge + water beneath -->
+  <path d="M294 240 Q290 268 280 300 L298 300 Q302 266 310 244 Z" fill="#2E6E8E" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <g stroke="#0E2A23" stroke-width="1.5" fill="none" stroke-linecap="round">
+    <path d="M292 228 L324 221"/>
+    <path d="M296 236 L318 231"/>
+    <path d="M305 224 q7 8 3 15"/>
+  </g>
+  <path d="M288 232 l6 5 -8 3 Z M320 226 l7 3 -6 5 Z" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1"/>
+  <!-- DEADFALL (390,132): limb across the far climb, screened by brush -->
+  <path d="M372 148 L414 120" stroke="#0E2A23" stroke-width="5" stroke-linecap="round"/>
+  <path d="M384 140 L379 131 M398 131 L403 122" stroke="#0E2A23" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M408 128 Q404 114 418 110 Q432 106 436 118 Q439 129 426 132 Q412 135 408 128 Z"
+        fill="#9CC3B4" stroke="#0E2A23" stroke-width="1.5"/>
+  <!-- forest: conifers flanking the trail -->
+  <g stroke="#0E2A23" stroke-linejoin="round">
+    <path d="M36 226 V206" stroke-width="2"/>
+    <path d="M36 152 L56 210 H16 Z M36 168 L52 222 H20 Z" fill="#1F5546" stroke-width="1.5"/>
+    <path d="M68 214 V198" stroke-width="2"/>
+    <path d="M68 150 L84 198 H52 Z M68 163 L81 208 H55 Z" fill="#1F5546" stroke-width="1.5"/>
+    <path d="M452 232 V210" stroke-width="2"/>
+    <path d="M452 148 L472 212 H432 Z M452 165 L468 226 H436 Z" fill="#1F5546" stroke-width="1.5"/>
+    <path d="M478 190 L490 226 H466 Z" fill="#9CC3B4" stroke-width="1.5"/>
+  </g>
+  <!-- plate blaze -->
+  <rect x="-5" y="-5" width="10" height="10" rx="2.5" transform="translate(30 274) rotate(45)" fill="#C4622D"/>
+</svg>

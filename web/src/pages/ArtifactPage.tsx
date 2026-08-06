@@ -1,17 +1,19 @@
 /* Artifact detail (DESIGN-003 §Journal): full ArtifactPreview with the field
  * labels from the authoring payload, provenance line ("Built in Module N ·
  * <title>"), and an edit action deep-linking to the journal step. The
+ * ride_plan gets a print action (DESIGN-003: the plan is the course's
+ * carry-it-with-you product) via the shared .ts-print-sheet stylesheet. The
  * not-built state ships the module CTA instead.
  */
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowLeft, PenLine } from "lucide-react";
+import { ArrowLeft, PenLine, Printer } from "lucide-react";
 import { api, type ArtifactType, type SectionId } from "../lib/api";
 import type { JournalBuilderPayload } from "../activities/types";
 import { ARTIFACT_FACTS } from "../lib/modules";
 import { ArtifactPreview, type ArtifactPreviewEntry } from "../components/ArtifactPreview";
 import { Card } from "../components/Card";
-import { LinkButton } from "../components/Button";
+import { Button, LinkButton } from "../components/Button";
 import { EmptyState } from "../components/EmptyState";
 import { shortDate } from "../components/JournalCard";
 import { SlotArt } from "../components/SlotArt";
@@ -118,14 +120,26 @@ export default function ArtifactPage() {
           <h1 className="mt-1 font-display text-3xl font-extrabold">{facts.name}</h1>
           <p className="mt-2 max-w-xl text-ink-500">{facts.blurb}</p>
         </div>
-        {artifact && editHref && (
-          <LinkButton
-            to={editHref}
-            variant="secondary"
-            iconLeft={<PenLine className="size-4" strokeWidth={1.5} aria-hidden />}
-          >
-            Edit in the lesson
-          </LinkButton>
+        {artifact && (
+          <div className="flex flex-wrap gap-3">
+            {editHref && (
+              <LinkButton
+                to={editHref}
+                variant="secondary"
+                iconLeft={<PenLine className="size-4" strokeWidth={1.5} aria-hidden />}
+              >
+                Edit in the lesson
+              </LinkButton>
+            )}
+            {artifactType === "ride_plan" && (
+              <Button
+                onClick={() => window.print()}
+                iconLeft={<Printer className="size-4" strokeWidth={1.5} aria-hidden />}
+              >
+                Print your plan
+              </Button>
+            )}
+          </div>
         )}
       </div>
 
@@ -142,6 +156,7 @@ export default function ArtifactPage() {
               title={artifact.title || facts.name}
               entries={entries}
               status={artifact.status}
+              className={artifactType === "ride_plan" ? "ts-print-sheet" : undefined}
             />
             <p className="mt-3 text-right font-mono text-xs text-ink-500">
               Last updated {shortDate(artifact.updatedAt)}

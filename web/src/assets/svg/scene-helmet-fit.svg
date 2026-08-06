@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300" role="img">
+  <!-- Fit-check plate: helmet in cross-section on a head — shell, liner, and
+       comfort padding as layers; strap V and brow-gap check called out. -->
+  <rect width="500" height="300" fill="#FBFCFA"/>
+  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+    <path d="M-10 250 C 90 228, 200 266, 310 246 S 470 230, 510 252"/>
+    <path d="M320 60 C 380 44, 440 70, 510 52"/>
+  </g>
+  <!-- head profile (facing right) -->
+  <g stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M186 258 Q182 230 176 208 Q160 180 162 148 Q166 108 210 100 Q252 96 266 126 Q272 138 270 148 Q276 152 276 156 Q276 160 270 161 Q272 166 268 168 Q272 172 268 177 Q264 182 254 181 Q246 194 234 200 Q230 218 236 240 Q238 252 240 258"
+          fill="#FBFCFA"/>
+    <!-- ear -->
+    <path d="M228 158 Q220 152 218 162 Q217 174 228 176 Q234 174 232 166" fill="#FBFCFA"/>
+    <!-- eye + brow -->
+    <path d="M250 141 Q256 137 262 141 Q256 145 250 141 Z" fill="#0E2A23"/>
+    <path d="M248 130 Q256 126 264 130" fill="none"/>
+    <!-- mouth -->
+    <path d="M258 170 Q263 171 266 169" fill="none"/>
+  </g>
+  <!-- comfort padding (inner layer) -->
+  <path d="M158 138 Q160 102 208 94 Q260 90 270 132 L262 133 Q250 100 208 104 Q170 110 168 140 Z"
+        fill="#9CC3B4" stroke="#0E2A23" stroke-width="1"/>
+  <!-- impact liner (middle layer) -->
+  <path d="M148 140 Q150 92 206 84 Q270 80 279 132 L270 132 Q260 90 208 94 Q160 102 158 138 Z"
+        fill="#EEF3EC" stroke="#0E2A23" stroke-width="1"/>
+  <!-- outer shell (band) -->
+  <path d="M136 172 Q134 82 204 72 Q280 64 290 120 Q292 132 290 140 L278 138 Q282 90 206 84 Q150 92 148 168 Z"
+        fill="#1F5546" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <!-- cut-face hatching on the section edges -->
+  <g stroke="#0E2A23" stroke-width="1" fill="none">
+    <path d="M138 168 L148 160 M138 160 L147 153 M139 152 L148 145"/>
+    <path d="M280 134 L289 128 M280 126 L288 121"/>
+  </g>
+  <!-- strap V + buckle -->
+  <g stroke="#C4622D" stroke-width="3.5" fill="none" stroke-linecap="round">
+    <path d="M170 172 Q184 196 208 212"/>
+    <path d="M230 180 Q222 198 212 210"/>
+  </g>
+  <rect x="204" y="208" width="14" height="9" rx="2" fill="#0E2A23"/>
+  <!-- brow-gap check: two fingers between brow and rim -->
+  <g transform="rotate(-14 268 120)">
+    <rect x="255" y="111" width="26" height="7" rx="3.5" fill="#E0A72E" stroke="#0E2A23" stroke-width="1"/>
+    <rect x="257" y="120" width="26" height="7" rx="3.5" fill="#E0A72E" stroke="#0E2A23" stroke-width="1"/>
+  </g>
+  <!-- snug-fit arrows pressing inward -->
+  <g stroke="#0E2A23" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M206 44 V60 M200 54 L206 61 L212 54"/>
+    <path d="M112 118 H128 M122 112 L129 118 L122 124"/>
+    <path d="M114 192 L132 181 M124 184 L133 180 L125 176"/>
+  </g>
+  <!-- callout leaders to the right margin -->
+  <g stroke="#0E2A23" stroke-width="1" fill="none">
+    <path d="M292 110 L368 92"/>
+    <path d="M283 129 L380 150"/>
+    <path d="M220 214 L372 218"/>
+  </g>
+  <g stroke="#0E2A23" stroke-width="1.5">
+    <circle cx="375" cy="90" r="4.5" fill="#FBFCFA"/>
+    <circle cx="387" cy="151" r="4.5" fill="#FBFCFA"/>
+    <circle cx="379" cy="218" r="4.5" fill="#FBFCFA"/>
+  </g>
+  <g fill="#C4622D">
+    <circle cx="375" cy="90" r="1.8"/>
+    <circle cx="387" cy="151" r="1.8"/>
+    <circle cx="379" cy="218" r="1.8"/>
+  </g>
+  <rect x="-5" y="-5" width="10" height="10" rx="2.5" transform="translate(30 274) rotate(45)" fill="#C4622D"/>
+</svg>

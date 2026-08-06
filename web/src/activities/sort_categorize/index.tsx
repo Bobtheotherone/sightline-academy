@@ -147,7 +147,7 @@ export default function SortCategorizeActivity({ step, evidence, onEvidence }: A
           tone="positive"
           label="All sorted"
           animate={!revisit}
-          md="Every item is where it belongs. The columns above are the packing logic — worth one more read before you continue."
+          md="Every card is where it belongs. The columns above are the logic worth keeping — give them one more read before you continue."
         />
       ) : (
         <div>

@@ -25,9 +25,8 @@ import { Markdown } from "./Markdown";
 
 type ActivityComponent = ComponentType<ActivityProps>;
 
-/* Wave 1 registry — one lazy chunk per renderer, activities/<type>/index.tsx
- * default-export convention. hotspot_list, structured_response, and
- * lab_objective register here in Wave 2. */
+/* The full SPEC-007 registry — one lazy chunk per renderer,
+ * activities/<type>/index.tsx default-export convention. */
 const REGISTRY: Partial<Record<RendererType, LazyExoticComponent<ActivityComponent>>> = {
   content: lazy(() => import("./content")),
   prediction_reveal: lazy(() => import("./prediction_reveal")),
@@ -35,9 +34,12 @@ const REGISTRY: Partial<Record<RendererType, LazyExoticComponent<ActivityCompone
   checkpoint: lazy(() => import("./checkpoint")),
   sort_categorize: lazy(() => import("./sort_categorize")),
   match: lazy(() => import("./match")),
+  hotspot_list: lazy(() => import("./hotspot_list")),
   branching_decision: lazy(() => import("./branching_decision")),
+  structured_response: lazy(() => import("./structured_response")),
   reflection: lazy(() => import("./reflection")),
   journal_builder: lazy(() => import("./journal_builder")),
+  lab_objective: lazy(() => import("./lab_objective")),
 };
 
 /** Designed "content unavailable" state — never a blank screen (SPEC-007). */

@@ -37,6 +37,9 @@ interface LiveTurn {
   question: string;
   askedAt: string;
   status: "pending" | "done" | "failed";
+  /** Tokens streamed so far (SPEC-008 R5.6) — rendered into the pending ranger
+   * bubble; grounding/sources/suggestions attach when the meta event lands. */
+  streamText?: string;
   answer?: TutorAskResponse;
   answeredAt?: string;
   errorMessage?: string;
@@ -134,8 +137,26 @@ export default function TutorChat({
   const offline = healthQuery.data?.provider === "extractive";
 
   const ask = useMutation({
-    mutationFn: (turn: { key: string; question: string }) =>
-      api.tutorAsk(lessonId ? { message: turn.question, lessonId } : { message: turn.question }),
+    // Streaming first (POST /tutor/ask/stream): tokens append into the pending
+    // bubble as they arrive. Transport/parse failures fall back silently to
+    // plain POST /ask; server-reported errors surface through onError as usual.
+    mutationFn: async (turn: { key: string; question: string }) => {
+      const body = lessonId
+        ? { message: turn.question, lessonId }
+        : { message: turn.question };
+      try {
+        return await api.tutorAskStream(body, (token) =>
+          setTurns((prev) =>
+            prev.map((t) =>
+              t.key === turn.key ? { ...t, streamText: (t.streamText ?? "") + token } : t,
+            ),
+          ),
+        );
+      } catch (err) {
+        if (err instanceof ApiError && err.status > 0) throw err;
+        return api.tutorAsk(body);
+      }
+    },
     onMutate: (turn) =>
       setTurns((prev) => {
         const retrying = prev.some((t) => t.key === turn.key);
@@ -151,7 +172,13 @@ export default function TutorChat({
       setTurns((prev) =>
         prev.map((t) =>
           t.key === turn.key
-            ? { ...t, status: "done", answer, answeredAt: new Date().toISOString() }
+            ? {
+                ...t,
+                status: "done",
+                answer,
+                streamText: undefined,
+                answeredAt: new Date().toISOString(),
+              }
             : t,
         ),
       ),
@@ -294,7 +321,19 @@ export default function TutorChat({
                   triageCategory={null}
                   timestamp={t.askedAt}
                 />
-                {t.status === "pending" && <TypingBubble />}
+                {t.status === "pending" &&
+                  (t.streamText ? (
+                    <ChatMessage
+                      role="assistant"
+                      markdown={t.streamText}
+                      grounding={null}
+                      sources={[]}
+                      triageCategory={null}
+                      timestamp={t.askedAt}
+                    />
+                  ) : (
+                    <TypingBubble />
+                  ))}
                 {t.status === "failed" && (
                   <ChatMessage
                     role="assistant"

@@ -1,32 +1,139 @@
 {
-  "$comment": "Illustration slot tracker (DESIGN-002 §Illustration slots). Status is 'placeholder' (SlotArt designed placeholder) or 'art' (real house-style asset). All slots must be 'art' by wave 3.",
+  "$comment": "Illustration slot tracker (DESIGN-002 §Illustration slots). Each slot is {status, file, alt}: status 'real' = house-style SVG in src/assets/svg (SlotArt renders it as an <img> with the alt text below), 'lab-owned' = the renderer draws its own scene inline. Hotspot bases (scene-atv-anatomy, scene-trail-hazards) are authored on a 500x300 (5:3) canvas and composed so the curriculum's hotspot x/y percentages land on the named features — present them at their intrinsic 5:3 ratio (SlotArt ratio=\"5 / 3\") so percent coordinates stay exact.",
   "slots": {
-    "hero-landing": "placeholder",
-    "hero-m1-mindset": "placeholder",
-    "hero-m2-machine": "placeholder",
-    "hero-m3-gear": "placeholder",
-    "hero-m4-terrain": "placeholder",
-    "hero-m5-environment": "placeholder",
-    "hero-m6-roads": "placeholder",
-    "scene-atv-anatomy": "placeholder",
-    "scene-walkaround-top": "placeholder",
-    "scene-helmet-fit": "placeholder",
-    "scene-trail-hazards": "placeholder",
-    "scene-crossing": "placeholder",
-    "scene-loading-cargo": "placeholder",
-    "badge-b-mindset": "placeholder",
-    "badge-b-mechanic": "placeholder",
-    "badge-b-geared": "placeholder",
-    "badge-b-terrain": "placeholder",
-    "badge-b-prepared": "placeholder",
-    "badge-b-roadwise": "placeholder",
-    "badge-b-journal": "placeholder",
-    "badge-b-scholar": "placeholder",
-    "badge-b-graduate": "placeholder",
-    "empty-journal": "placeholder",
-    "empty-tutor": "placeholder",
-    "state-404": "placeholder",
-    "state-locked": "placeholder",
-    "cert-seal": "placeholder"
+    "hero-landing": {
+      "status": "real",
+      "file": "svg/hero-landing.svg",
+      "alt": "A helmeted rider seated on a utility ATV on a blazed trail, drawn as a flat field-guide plate with contour lines and waypoint blazes."
+    },
+    "hero-m1-mindset": {
+      "status": "real",
+      "file": "svg/hero-m1-mindset.svg",
+      "alt": "A rider stands at a trail junction, scan line tracing the blazed left route while an unmarked route fades right — choosing the line before riding it."
+    },
+    "hero-m2-machine": {
+      "status": "real",
+      "file": "svg/hero-m2-machine.svg",
+      "alt": "Side view of a utility ATV drawn as a field-guide plate, with callout ticks at the handlebars, rear rack, front tire, and footwells."
+    },
+    "hero-m3-gear": {
+      "status": "real",
+      "file": "svg/hero-m3-gear.svg",
+      "alt": "Flat-lay plate of the riding kit: full-face helmet, padded gloves, and over-ankle boots arranged like museum specimens."
+    },
+    "hero-m4-terrain": {
+      "status": "real",
+      "file": "svg/hero-m4-terrain.svg",
+      "alt": "A hillside drawn as nested contour rings with a switchback trail climbing to the summit and caution cues marking the steep face."
+    },
+    "hero-m5-environment": {
+      "status": "real",
+      "file": "svg/hero-m5-environment.svg",
+      "alt": "A storm front crossing a valley trail, drawn map-style with a cold-front line, rain over the west ridge, a compass rose, and a scale bar."
+    },
+    "hero-m6-roads": {
+      "status": "real",
+      "file": "svg/hero-m6-roads.svg",
+      "alt": "Bird's-eye view of a trail meeting a paved road at a marked crossing: the rider stopped square at the stop bar with sight lines drawn both ways."
+    },
+    "scene-atv-anatomy": {
+      "status": "real",
+      "file": "svg/scene-atv-anatomy.svg",
+      "alt": "Side view of a single-rider utility ATV with its systems in place: low-pressure tires, front brake caliper, coil-over suspension, engine, frame tube, footwell running boards, handlebars, and front and rear cargo racks."
+    },
+    "scene-walkaround-top": {
+      "status": "lab-owned",
+      "note": "The walkaround lab renderer authors its own interactive top-view scene inline; SlotArt keeps the designed placeholder for this slot."
+    },
+    "scene-helmet-fit": {
+      "status": "real",
+      "file": "svg/scene-helmet-fit.svg",
+      "alt": "Cross-section of a helmet on a rider's head showing shell, impact liner, and comfort padding as layers, with the strap V fastened and a two-finger brow-gap check drawn at the rim."
+    },
+    "scene-trail-hazards": {
+      "status": "real",
+      "file": "svg/scene-trail-hazards.svg",
+      "alt": "A mid-morning forest trail dipping through a drainage, broadcasting seven cues: a blind crest, an off-camber section, shadowed ruts, a dark wet patch at the low point, gravel over hardpack on the climb out, a downed limb screened by brush, and a soft undercut edge above the water."
+    },
+    "scene-crossing": {
+      "status": "real",
+      "file": "svg/scene-crossing.svg",
+      "alt": "Bird's-eye view of an ATV stopped square behind the stop bar at a road crossing, sight lines swept in both directions along the road and a vehicle approaching from the left."
+    },
+    "scene-loading-cargo": {
+      "status": "real",
+      "file": "svg/scene-loading-cargo.svg",
+      "alt": "Rear-view comparison of rack loading: a low, centered, strapped case with a low center of gravity beside a tall loose stack whose high center of gravity tips the machine."
+    },
+    "badge-b-mindset": {
+      "status": "real",
+      "file": "svg/badge-b-mindset.svg",
+      "alt": "Clear Eyes badge: an eye with a trail blaze for a pupil."
+    },
+    "badge-b-mechanic": {
+      "status": "real",
+      "file": "svg/badge-b-mechanic.svg",
+      "alt": "Walkaround Ready badge: a wrench crossed over a tire."
+    },
+    "badge-b-geared": {
+      "status": "real",
+      "file": "svg/badge-b-geared.svg",
+      "alt": "Geared Up badge: a full-face helmet."
+    },
+    "badge-b-terrain": {
+      "status": "real",
+      "file": "svg/badge-b-terrain.svg",
+      "alt": "Terrain Reader badge: an eye scanning contour lines."
+    },
+    "badge-b-prepared": {
+      "status": "real",
+      "file": "svg/badge-b-prepared.svg",
+      "alt": "Storm Smart badge: a storm cloud read with a compass."
+    },
+    "badge-b-roadwise": {
+      "status": "real",
+      "file": "svg/badge-b-roadwise.svg",
+      "alt": "Road Wise badge: a marked road-crossing sign."
+    },
+    "badge-b-journal": {
+      "status": "real",
+      "file": "svg/badge-b-journal.svg",
+      "alt": "Field Scribe badge: a field notebook and pen."
+    },
+    "badge-b-scholar": {
+      "status": "real",
+      "file": "svg/badge-b-scholar.svg",
+      "alt": "Sharp Eye badge: a checkmark striking a target."
+    },
+    "badge-b-graduate": {
+      "status": "real",
+      "file": "svg/badge-b-graduate.svg",
+      "alt": "Sightline Graduate badge: a summit flag over the range, flanked by laurels."
+    },
+    "empty-journal": {
+      "status": "real",
+      "file": "svg/empty-journal.svg",
+      "alt": "An open, blank field notebook with ruled pages, a bookmark ribbon, and a pen lying ready."
+    },
+    "empty-tutor": {
+      "status": "real",
+      "file": "svg/empty-tutor.svg",
+      "alt": "Ranger's campaign hat beside a compass with its needle set — ready for a question."
+    },
+    "state-404": {
+      "status": "real",
+      "file": "svg/state-404.svg",
+      "alt": "A dotted route running off the torn edge of a trail map; the signpost's second board hangs askew, pointing nowhere."
+    },
+    "state-locked": {
+      "status": "real",
+      "file": "svg/state-locked.svg",
+      "alt": "A padlocked gate across the trail; beyond it the route continues, faded, toward the next blaze."
+    },
+    "cert-seal": {
+      "status": "real",
+      "file": "svg/cert-seal.svg",
+      "alt": "Circular certificate seal: rope border, pine ring, and a clay trail blaze bearing a summit line at the center."
+    }
   }
 }

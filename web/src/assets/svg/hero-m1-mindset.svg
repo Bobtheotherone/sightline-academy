@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img">
+  <!-- Module 1 hero: a rider stands at a trail junction reading the terrain —
+       the marked route curves left, the unmarked one fades right. -->
+  <rect width="400" height="300" fill="#FBFCFA"/>
+  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+    <path d="M-10 46 C 70 20, 160 60, 250 40 S 380 24, 410 46"/>
+    <path d="M-10 84 C 80 58, 170 98, 260 78 S 380 58, 410 84"/>
+  </g>
+  <circle cx="346" cy="52" r="14" fill="#E0A72E" stroke="#0E2A23" stroke-width="1.5"/>
+  <!-- rolling ground -->
+  <path d="M0 232 Q90 214 200 224 Q310 234 400 218 L400 300 L0 300 Z" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <!-- conifers flanking -->
+  <g stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round">
+    <path d="M48 240 V222" stroke-width="2"/>
+    <path d="M48 172 L66 224 H30 Z M48 186 L62 236 H34 Z" fill="#1F5546"/>
+    <path d="M352 246 V230" stroke-width="2"/>
+    <path d="M352 186 L368 232 H336 Z M352 199 L365 242 H339 Z" fill="#1F5546"/>
+    <path d="M76 232 L86 256 H66 Z" fill="#9CC3B4"/>
+  </g>
+  <!-- trail up to the junction -->
+  <path d="M186 300 Q192 262 197 240 L207 240 Q210 262 214 300 Z" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <!-- chosen route: blazed, curving left -->
+  <path d="M196 232 Q150 200 114 168 Q92 148 86 126" fill="none" stroke="#C4622D" stroke-width="2.5" stroke-dasharray="1 8" stroke-linecap="round"/>
+  <rect x="-4" y="-4" width="8" height="8" rx="2" transform="translate(158 204) rotate(45)" fill="#C4622D"/>
+  <rect x="-4" y="-4" width="8" height="8" rx="2" transform="translate(114 170) rotate(45)" fill="#C4622D"/>
+  <rect x="-4" y="-4" width="8" height="8" rx="2" transform="translate(88 130) rotate(45)" fill="#C4622D"/>
+  <!-- other route: unmarked, fading right -->
+  <path d="M210 230 Q256 208 296 192 Q330 178 350 162" fill="none" stroke="#4A5A54" stroke-width="2" stroke-dasharray="2 9" stroke-linecap="round"/>
+  <circle cx="354" cy="159" r="3.5" fill="none" stroke="#4A5A54" stroke-width="1.5"/>
+  <!-- signpost at the junction -->
+  <g stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round">
+    <path d="M254 178 V236" stroke-width="4"/>
+    <path d="M252 180 H218 L208 187 L218 194 H252 Z" fill="#EEF3EC"/>
+    <path d="M256 200 H288 L298 207 L288 214 H256 Z" fill="#EEF3EC"/>
+  </g>
+  <!-- rider, back view, scanning the left route -->
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <path d="M194 262 L192 288 M206 262 L208 288" stroke="#0E2A23" stroke-width="6.5"/>
+    <rect x="185" y="226" width="30" height="40" rx="10" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5"/>
+    <path d="M187 234 L180 258" fill="none" stroke="#1F5546" stroke-width="6"/>
+    <path d="M213 234 L224 222 L216 216" fill="none" stroke="#1F5546" stroke-width="6"/>
+    <circle cx="180" cy="260" r="2.8" fill="#0E2A23"/>
+    <circle cx="200" cy="212" r="13" fill="#E0A72E" stroke="#0E2A23" stroke-width="1.5"/>
+    <path d="M189 218 Q200 224 211 218" fill="none" stroke="#0E2A23" stroke-width="1.5"/>
+  </g>
+  <!-- scan line from the helmet toward the chosen route -->
+  <path d="M210 200 Q224 168 196 152 Q168 138 138 152" fill="none" stroke="#2E6E8E" stroke-width="2" stroke-dasharray="5 6" stroke-linecap="round"/>
+  <path d="M148 145 L136 153 L148 158" fill="none" stroke="#2E6E8E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="-5" y="-5" width="10" height="10" rx="2.5" transform="translate(28 274) rotate(45)" fill="#C4622D"/>
+</svg>

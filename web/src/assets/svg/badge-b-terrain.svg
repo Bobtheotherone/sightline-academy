@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img">
+  <!-- Terrain Reader: an eye scanning contour lines. -->
+  <path d="M11 14 Q24 4 37 14 Q24 24 11 14 Z" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <circle cx="24" cy="14" r="4.6" fill="#1F5546" stroke="#0E2A23" stroke-width="1"/>
+  <circle cx="24" cy="14" r="1.6" fill="#C4622D"/>
+  <path d="M6 43 Q24 19 42 43 Z" fill="#9CC3B4" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M12 43 Q24 27.5 36 43 Z" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M18 43 Q24 35.5 30 43 Z" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+</svg>

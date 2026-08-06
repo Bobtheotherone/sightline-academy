@@ -1,11 +1,34 @@
 /**
- * SlotArt — the DESIGNED placeholder for illustration slots (DESIGN-002
- * §Illustration slots): contour panel + blaze + slot label in mono. Acceptable
- * at waves 0–1; real art replaces it by wave 3. Slots tracked in
- * src/assets/manifest.json.
+ * SlotArt — resolves an illustration slot (DESIGN-002 §Illustration slots) to
+ * its house-style SVG plate. Slots, files, and alt text live in
+ * src/assets/manifest.json; the art itself in src/assets/svg/. Slots without
+ * real art (e.g. the lab-owned walkaround scene) fall back to the designed
+ * placeholder: contour panel + blaze + slot label in mono.
+ *
+ * Plates are drawn on paper-0 with quiet edges and rendered object-contain on
+ * a paper-0 ground, so any requested aspect ratio letterboxes invisibly.
+ * Hotspot bases (scene-atv-anatomy, scene-trail-hazards) are authored at 5:3 —
+ * present those at ratio "5 / 3" so percent coordinates stay exact.
  */
+import manifest from "../assets/manifest.json";
 import { ContourPanel } from "./ContourPanel";
 import { BlazeMarker } from "./BlazeMarker";
+
+interface SlotMeta {
+  status: string;
+  file?: string;
+  alt?: string;
+  note?: string;
+}
+
+const SLOTS: Record<string, SlotMeta | undefined> = manifest.slots;
+
+/** Eager URL map of every produced plate, keyed by its path from this file. */
+const ART_URLS = import.meta.glob<string>("../assets/svg/*.svg", {
+  eager: true,
+  query: "?url",
+  import: "default",
+});
 
 export function SlotArt({
   slot,
@@ -20,6 +43,29 @@ export function SlotArt({
   ratio?: string;
   className?: string;
 }) {
+  const meta = SLOTS[slot];
+  const src =
+    meta?.status === "real" && meta.file
+      ? ART_URLS[`../assets/${meta.file}`]
+      : undefined;
+
+  if (src) {
+    return (
+      <span
+        style={{ aspectRatio: ratio }}
+        className={`block overflow-hidden rounded-md border bg-paper-0 ${
+          variant === "dark" ? "border-paper-0/15" : "border-line-200"
+        } ${className}`}
+      >
+        <img
+          src={src}
+          alt={meta?.alt ?? `Illustration plate: ${slot}`}
+          className="h-full w-full object-contain"
+        />
+      </span>
+    );
+  }
+
   return (
     <ContourPanel
       variant={variant}

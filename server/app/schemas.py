@@ -7,7 +7,7 @@ Errors always use the envelope {"error": {"code", "message"}}.
 import re
 from typing import Any
 
-from pydantic import BaseModel, ConfigDict, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 from pydantic.alias_generators import to_camel
 
 _EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
@@ -253,6 +253,25 @@ class ProgressOut(ApiModel):
     recent_xp: list[XpEventOut]
 
 
+class AssessmentOptionOut(ApiModel):
+    id: str
+    text: str
+
+
+class AssessmentQuestionOut(ApiModel):
+    id: str
+    module: str
+    prompt: str
+    options: list[AssessmentOptionOut]
+
+
+class AssessmentBankOut(ApiModel):
+    """Sanitized question set for the assessment page — no correct flags,
+    no feedback (those arrive only in the POST result per SPEC-004)."""
+
+    questions: list[AssessmentQuestionOut]
+
+
 class FinalAssessmentIn(ApiModel):
     answers: dict[str, str]  # questionId -> optionId
 
@@ -357,6 +376,17 @@ class TutorSuggestedOut(ApiModel):
     prompts: list[str]
 
 
+class TutorStreamMeta(ApiModel):
+    """The one `meta` SSE event closing a /tutor/ask/stream response — the
+    TutorAskOut fields minus the text, which already streamed as tokens."""
+
+    id: str
+    grounding: str
+    sources: list[TutorSource]
+    suggestions: list[str]
+    triage: TutorTriage | None = None
+
+
 # ── Meta (SPEC-004 §Meta) ────────────────────────────────────────────────────
 
 
@@ -399,9 +429,21 @@ class TutorTheme(ApiModel):
     count: int
 
 
+class TriageCount(ApiModel):
+    category: str
+    count: int
+
+
 class InstructorOverviewOut(ApiModel):
+    # certificates_issued / median_modules_completed / triage_counts are the
+    # SPEC-011 topline cards + §4 triage tally; additive over the SPEC-004 row.
     learners: int
-    active_last7d: int
+    # Explicit alias: to_camel would emit "activeLast7D"; the contract (and
+    # api.ts) spell it "activeLast7d".
+    active_last7d: int = Field(alias="activeLast7d")
+    certificates_issued: int
+    median_modules_completed: float
     module_funnel: list[ModuleFunnelRow]
     knowledge_check_stats: list[KnowledgeCheckStat]
     tutor_themes: list[TutorTheme]
+    triage_counts: list[TriageCount]

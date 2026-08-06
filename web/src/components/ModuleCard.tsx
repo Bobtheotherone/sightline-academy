@@ -70,8 +70,10 @@ export function ModuleCard({
               strokeWidth={4}
               label={`Module ${order}: ${Math.round(percent)} percent complete`}
             >
-              <span className="font-mono text-xs font-medium text-pine-950">
+              {/* Percent always carries its % sign (crawl pass-2 P3 unification). */}
+              <span className="font-mono text-[11px] font-medium text-pine-950">
                 {Math.round(percent)}
+                <span className="text-[9px]">%</span>
               </span>
             </ProgressRing>
           )}

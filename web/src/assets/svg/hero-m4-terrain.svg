@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img">
+  <!-- Module 4 hero: a hillside read like a map — contour rings, a switchback
+       trail climbing to the summit blaze, caution cues on the way up. -->
+  <rect width="400" height="300" fill="#FBFCFA"/>
+  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+    <path d="M-10 42 C 70 18, 160 56, 250 36 S 380 20, 410 42"/>
+    <path d="M-10 78 C 80 54, 170 92, 260 72 S 380 54, 410 80"/>
+  </g>
+  <circle cx="58" cy="52" r="13" fill="#E0A72E" stroke="#0E2A23" stroke-width="1.5"/>
+  <!-- ground line -->
+  <path d="M24 288 H 376" stroke="#0E2A23" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- contour rings of the hill -->
+  <g stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round">
+    <path d="M60 240 Q40 140 150 90 Q290 40 350 120 Q392 180 330 236 Q220 282 120 262 Q70 252 60 240 Z" fill="#EEF3EC"/>
+    <path d="M110 222 Q92 150 180 112 Q280 74 322 136 Q348 184 296 222 Q210 254 140 240 Q116 234 110 222 Z" fill="#9CC3B4"/>
+    <path d="M160 204 Q152 152 216 132 Q276 114 296 158 Q308 192 264 208 Q206 224 172 214 Q162 210 160 204 Z" fill="#EEF3EC"/>
+    <path d="M204 186 Q202 158 240 150 Q272 146 274 168 Q274 186 240 192 Q212 194 204 186 Z" fill="#FBFCFA"/>
+  </g>
+  <!-- conifers anchoring scale -->
+  <g stroke="#0E2A23" stroke-linejoin="round">
+    <path d="M54 288 V272" stroke-width="2"/>
+    <path d="M54 226 L70 274 H38 Z M54 240 L67 284 H41 Z" fill="#1F5546" stroke-width="1.5"/>
+    <path d="M372 288 V276" stroke-width="2"/>
+    <path d="M372 240 L384 278 H360 Z" fill="#1F5546" stroke-width="1.5"/>
+    <path d="M330 96 L340 122 H320 Z" fill="#9CC3B4" stroke-width="1.5"/>
+  </g>
+  <!-- switchback trail to the summit -->
+  <g fill="none" stroke="#C4622D" stroke-width="2.5" stroke-dasharray="1 8" stroke-linecap="round">
+    <path d="M120 286 Q210 268 292 242"/>
+    <path d="M292 242 Q230 232 166 210"/>
+    <path d="M166 210 Q220 200 274 186"/>
+    <path d="M274 186 Q258 176 240 172"/>
+  </g>
+  <rect x="-4" y="-4" width="8" height="8" rx="2" transform="translate(293 242) rotate(45)" fill="#C4622D"/>
+  <rect x="-4" y="-4" width="8" height="8" rx="2" transform="translate(167 210) rotate(45)" fill="#C4622D"/>
+  <rect x="-4" y="-4" width="8" height="8" rx="2" transform="translate(274 186) rotate(45)" fill="#C4622D"/>
+  <rect x="-5.5" y="-5.5" width="11" height="11" rx="2.5" transform="translate(238 170) rotate(45)" fill="#C4622D" stroke="#0E2A23" stroke-width="1"/>
+  <!-- rut cue on the second leg + caution blaze -->
+  <g stroke="#0E2A23" stroke-width="1.5" stroke-linecap="round">
+    <path d="M222 222 L232 234 M230 220 L240 232"/>
+  </g>
+  <rect x="-7" y="-7" width="14" height="14" rx="3" transform="translate(214 248) rotate(45)" fill="#E0A72E" stroke="#0E2A23" stroke-width="1.5"/>
+  <!-- fall-line arrows on the steep east face -->
+  <g stroke="#0E2A23" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M318 148 L332 166 M328 160 L332 167 L325 168"/>
+    <path d="M304 160 L316 176 M312 170 L316 177 L309 178"/>
+  </g>
+  <!-- slope hatches on the west face -->
+  <g stroke="#0E2A23" stroke-width="1.5" stroke-linecap="round">
+    <path d="M96 172 L110 166 M92 188 L107 182 M92 204 L107 199"/>
+  </g>
+  <rect x="-5" y="-5" width="10" height="10" rx="2.5" transform="translate(374 44) rotate(45)" fill="#C4622D"/>
+</svg>

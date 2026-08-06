@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img">
+  <!-- Module 3 hero: gear flat-lay plate — helmet, gloves, and boots laid out
+       like museum specimens with hairline dividers. -->
+  <rect width="400" height="300" fill="#FBFCFA"/>
+  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+    <path d="M-10 270 C 80 248, 180 286, 280 266 S 380 248, 410 270"/>
+  </g>
+  <!-- plate dividers -->
+  <path d="M212 56 V252 M224 158 H372" stroke="#D8E0DA" stroke-width="1.5"/>
+  <!-- corner ticks -->
+  <g stroke="#0E2A23" stroke-width="1.5" stroke-linecap="round">
+    <path d="M24 36 H38 M24 36 V50"/>
+    <path d="M376 36 H362 M376 36 V50"/>
+    <path d="M24 264 H38 M24 264 V250"/>
+    <path d="M376 264 H362 M376 264 V250"/>
+  </g>
+  <!-- helmet, front view -->
+  <g stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round">
+    <path d="M62 168 Q62 72 120 72 Q178 72 178 168 Q178 186 160 186 L80 186 Q62 186 62 168 Z" fill="#1F5546"/>
+    <path d="M112 112 V84 Q112 73.5 120 73.5 Q128 73.5 128 84 V112 Z" fill="#E0A72E" stroke-width="1"/>
+    <rect x="84" y="112" width="72" height="30" rx="15" fill="#FBFCFA"/>
+    <path d="M92 158 H108 M132 158 H148" stroke-width="2"/>
+    <path d="M92 186 L98 206 M148 186 L142 206" stroke-width="2.5"/>
+    <path d="M96 208 Q120 214 144 208" fill="none" stroke-width="2.5"/>
+  </g>
+  <!-- gloves, pair -->
+  <g stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round">
+    <g transform="rotate(-10 268 104)">
+      <path d="M250 128 V86 Q250 72 262 70 Q284 66 286 82 L287 126 Z" fill="#4A5A54"/>
+      <path d="M250 92 Q240 88 238 96 Q236 104 248 108" fill="#4A5A54"/>
+      <path d="M259 76 V94 M270 74 V94 M280 76 V94" stroke="#FBFCFA" stroke-width="1.5" fill="none"/>
+      <rect x="247" y="124" width="43" height="12" rx="4" fill="#9CC3B4"/>
+    </g>
+    <g transform="rotate(10 330 108) scale(-1 1) translate(-660 0)">
+      <path d="M312 132 V90 Q312 76 324 74 Q346 70 348 86 L349 130 Z" fill="#4A5A54"/>
+      <path d="M312 96 Q302 92 300 100 Q298 108 310 112" fill="#4A5A54"/>
+      <path d="M321 80 V98 M332 78 V98 M342 80 V98" stroke="#FBFCFA" stroke-width="1.5" fill="none"/>
+      <rect x="309" y="128" width="43" height="12" rx="4" fill="#9CC3B4"/>
+    </g>
+  </g>
+  <!-- boots, pair, side view -->
+  <g stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round">
+    <g>
+      <path d="M262 226 V186 Q262 179 270 179 H290 V206 L312 206 Q320 206 320 216 V226 Z" fill="#4A5A54"/>
+      <rect x="258" y="226" width="68" height="8" rx="3" fill="#9CC3B4"/>
+    </g>
+    <g>
+      <path d="M240 234 V194 Q240 187 248 187 H268 V214 L290 214 Q298 214 298 224 V234 Z" fill="#0E2A23"/>
+      <rect x="236" y="234" width="68" height="8" rx="3" fill="#9CC3B4"/>
+      <path d="M247 196 L262 200 M247 204 L262 208 M247 212 L262 216" stroke="#C4622D" stroke-width="2" fill="none"/>
+    </g>
+  </g>
+  <!-- item blazes -->
+  <rect x="-4" y="-4" width="8" height="8" rx="2" transform="translate(46 78) rotate(45)" fill="#C4622D"/>
+  <rect x="-4" y="-4" width="8" height="8" rx="2" transform="translate(238 66) rotate(45)" fill="#C4622D"/>
+  <rect x="-4" y="-4" width="8" height="8" rx="2" transform="translate(238 186) rotate(45)" fill="#C4622D"/>
+</svg>

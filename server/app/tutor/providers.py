@@ -5,7 +5,9 @@ The extractive fallback keeps the app fully demo-able keyless (ADR-005: with no
 chunks it says so honestly rather than refusing).
 """
 
+import json
 import re
+from collections.abc import Iterator
 
 import httpx
 
@@ -77,6 +79,51 @@ def generate_anthropic(system: str, history: list[dict], user_message: str) -> s
         for block in data.get("content", [])
         if block.get("type") == "text"
     )
+
+
+def stream_anthropic(system: str, history: list[dict], user_message: str) -> Iterator[str]:
+    """Streaming Messages API call (R5.6): yields text deltas as they arrive.
+
+    Parses the API's SSE frames directly (`content_block_delta` / `text_delta`);
+    timeout and non-200 map to the same errors as the non-streaming path.
+    """
+    settings = get_settings()
+    try:
+        with httpx.stream(
+            "POST",
+            ANTHROPIC_URL,
+            headers={
+                "x-api-key": settings.anthropic_api_key,
+                "anthropic-version": ANTHROPIC_VERSION,
+                "content-type": "application/json",
+            },
+            json={
+                "model": settings.tutor_model,
+                "max_tokens": MAX_TOKENS,
+                "system": system,
+                "messages": [*history, {"role": "user", "content": user_message}],
+                "stream": True,
+            },
+            timeout=GENERATION_TIMEOUT_SECONDS,
+        ) as response:
+            if response.status_code != 200:
+                response.read()
+                raise TutorUpstreamError(response.status_code)
+            for line in response.iter_lines():
+                if not line.startswith("data:"):
+                    continue
+                try:
+                    event = json.loads(line[len("data:"):].strip())
+                except json.JSONDecodeError:
+                    continue
+                if event.get("type") == "content_block_delta":
+                    delta = event.get("delta", {})
+                    if delta.get("type") == "text_delta" and delta.get("text"):
+                        yield delta["text"]
+                elif event.get("type") == "error":
+                    raise TutorUpstreamError(response.status_code)
+    except httpx.TimeoutException as exc:
+        raise TutorTimeoutError() from exc
 
 
 def extractive_answer(message: str, kept: list[Chunk]) -> str:

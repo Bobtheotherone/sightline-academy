@@ -3,13 +3,17 @@
 POST /ask runs the full SPEC-008 pipeline (tutor/pipeline.py) and returns the
 shaped answer; provider timeouts raise TutorTimeoutError (an ApiError carrying
 the DESIGN-005 copy), which main.py's handler maps to the envelope untouched.
-/ask/stream is deferred to Wave 2 — the extractive provider can't stream, and
-SPEC-008 R5.6 streaming lands with the anthropic path.
+POST /ask/stream (R5.6) runs the same pipeline but emits SSE: `token` events
+carrying the display text, then ONE `meta` event with the non-text fields.
+An ApiError after streaming starts becomes an envelope-shaped `error` event
+(headers are already on the wire, so the JSON handlers can't run).
 """
 
+import json
 from functools import lru_cache
 
 from fastapi import APIRouter, Depends, Response
+from fastapi.responses import StreamingResponse
 from sqlalchemy import delete, select
 from sqlalchemy.orm import Session
 
@@ -27,7 +31,13 @@ from ..models import (
     TutorMessage,
     User,
 )
-from ..schemas import TutorAskIn, TutorAskOut, TutorHistoryOut, TutorSuggestedOut
+from ..schemas import (
+    TutorAskIn,
+    TutorAskOut,
+    TutorHistoryOut,
+    TutorStreamMeta,
+    TutorSuggestedOut,
+)
 from ..tutor import pipeline
 
 router = APIRouter(prefix="/tutor", tags=["tutor"])
@@ -36,13 +46,14 @@ HISTORY_LIMIT = 50
 
 
 @lru_cache
-def _chunk_meta() -> dict[str, tuple[str, str]]:
-    """chunk id -> (title, first module ref); parsed once from corpus front matter."""
-    meta: dict[str, tuple[str, str]] = {}
+def chunk_meta() -> dict[str, tuple[str, str, str]]:
+    """chunk id -> (title, first module ref, topic); parsed once from corpus
+    front matter. Also the instructor router's chunk->topic resolver."""
+    meta: dict[str, tuple[str, str, str]] = {}
     for path in sorted(get_settings().corpus_path.glob("*.md")):
         chunk_id, _, fm = ingest.parse_chunk(path)
         refs = [ref for ref in fm["module_refs"].split(",") if ref]
-        meta[chunk_id] = (fm["title"], refs[0] if refs else "")
+        meta[chunk_id] = (fm["title"], refs[0] if refs else "", fm["topic"])
     return meta
 
 
@@ -50,7 +61,7 @@ def _source_refs(chunk_ids: list) -> list[dict]:
     """Resolve stored chunk ids to SourceChip data; unknown ids are dropped."""
     refs = []
     for chunk_id in chunk_ids:
-        found = _chunk_meta().get(chunk_id)
+        found = chunk_meta().get(chunk_id)
         if found:
             refs.append({"chunk_id": chunk_id, "title": found[0], "module_ref": found[1]})
     return refs
@@ -79,6 +90,60 @@ def ask(
             "suggestions": reply.suggestions,
             "triage": {"category": reply.triage_category} if reply.triage_category else None,
         }
+    )
+
+
+def _sse(event: str, data: object) -> str:
+    """One SSE frame; data is JSON-encoded (never multi-line on the wire)."""
+    return f"event: {event}\ndata: {json.dumps(data)}\n\n"
+
+
+@router.post("/ask/stream")
+def ask_stream(
+    body: TutorAskIn,
+    user: User = Depends(auth_svc.current_user),
+    db: Session = Depends(get_db),
+) -> StreamingResponse:
+    if not body.message.strip():
+        raise ApiError(
+            422, "validation_error", "Type a question first — Ranger can't answer a blank message."
+        )
+
+    def event_stream():
+        try:
+            for kind, payload in pipeline.answer_stream(db, user, body.message, body.lesson_id):
+                if kind == "token":
+                    yield _sse("token", payload)
+                else:  # the one closing meta event (SPEC-004)
+                    reply = payload
+                    meta = TutorStreamMeta.model_validate(
+                        {
+                            "id": reply.extra["message_id"],
+                            "grounding": reply.grounding,
+                            "sources": [
+                                {
+                                    "chunk_id": s["id"],
+                                    "title": s["title"],
+                                    "module_ref": s["module_ref"],
+                                }
+                                for s in reply.sources
+                            ],
+                            "suggestions": reply.suggestions,
+                            "triage": (
+                                {"category": reply.triage_category}
+                                if reply.triage_category
+                                else None
+                            ),
+                        }
+                    )
+                    yield _sse("meta", meta.model_dump(by_alias=True))
+        except ApiError as exc:
+            yield _sse("error", {"error": {"code": exc.code, "message": exc.message}})
+
+    return StreamingResponse(
+        event_stream(),
+        media_type="text/event-stream",
+        headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
     )
 
 

@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300" role="img">
+  <!-- Field-guide plate: side view of a utility ATV, front facing left.
+       Hotspot contract (percent of canvas): tires(22,72) handlebars(55,22)
+       brakes(30,62) suspension(38,58) engine(48,50) footwells(62,68)
+       racks(82,38) chassis(58,55). Canvas 500x300. -->
+  <rect width="500" height="300" fill="#FBFCFA"/>
+  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+    <path d="M-10 55 C 90 25, 190 75, 300 50 S 470 30, 510 55"/>
+    <path d="M-10 95 C 100 65, 200 115, 310 90 S 470 70, 510 95"/>
+    <path d="M-10 135 C 95 108, 195 150, 305 128 S 470 108, 510 132"/>
+  </g>
+  <!-- ground -->
+  <ellipse cx="258" cy="252" rx="205" ry="9" fill="#EEF3EC"/>
+  <path d="M42 252 H 468" stroke="#0E2A23" stroke-width="1.5" stroke-linecap="round"/>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <!-- rear wheel (365,208) r42 : hotspot tires analogue is front wheel -->
+    <circle cx="365" cy="208" r="42" fill="#0E2A23"/>
+    <circle cx="365" cy="208" r="35" fill="none" stroke="#FBFCFA" stroke-width="3" stroke-dasharray="5 9" opacity="0.55"/>
+    <circle cx="365" cy="208" r="20" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+    <path d="M365 191 V225 M348 208 H382" stroke="#0E2A23" stroke-width="1.5"/>
+    <circle cx="365" cy="208" r="4.5" fill="#0E2A23"/>
+    <!-- front wheel (118,208) r40 : tires hotspot (110,216) -->
+    <circle cx="118" cy="208" r="40" fill="#0E2A23"/>
+    <circle cx="118" cy="208" r="33" fill="none" stroke="#FBFCFA" stroke-width="3" stroke-dasharray="5 9" opacity="0.55"/>
+    <circle cx="118" cy="208" r="19" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+    <path d="M118 192 V224 M102 208 H134" stroke="#0E2A23" stroke-width="1.5"/>
+    <circle cx="118" cy="208" r="4.5" fill="#0E2A23"/>
+    <!-- chassis: main frame tube passing (290,165) -->
+    <path d="M170 194 L340 156" stroke="#0E2A23" stroke-width="4"/>
+    <path d="M176 200 L250 192" stroke="#0E2A23" stroke-width="2.5"/>
+    <!-- suspension: lower A-arm + coil-over strut centered near (190,174) -->
+    <path d="M122 206 L214 190" stroke="#0E2A23" stroke-width="3"/>
+    <path d="M214 146 L164 202" stroke="#0E2A23" stroke-width="3"/>
+    <g stroke="#0E2A23" stroke-width="2.5">
+      <path d="M191 161 L202 170"/>
+      <path d="M186 167 L197 176"/>
+      <path d="M181 173 L192 182"/>
+      <path d="M176 179 L187 188"/>
+    </g>
+    <!-- brake caliper on front disc : hotspot (150,186) -->
+    <circle cx="118" cy="208" r="26" fill="none" stroke="#FBFCFA" stroke-width="2"/>
+    <rect x="140" y="178" width="19" height="13" rx="3.5" fill="#C4622D" stroke="#0E2A23" stroke-width="1.5"/>
+    <!-- fenders (crescents over wheels) -->
+    <path d="M70 196 Q74 160 118 155 Q162 160 166 196 Q158 172 118 170 Q78 172 70 196 Z" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5"/>
+    <path d="M316 196 Q320 156 366 151 Q412 156 416 196 Q406 172 366 168 Q326 172 316 196 Z" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5"/>
+    <!-- engine : hotspot (240,150) -->
+    <rect x="226" y="118" width="24" height="16" rx="3" fill="#4A5A54" stroke="#0E2A23" stroke-width="1.5"/>
+    <rect x="220" y="130" width="46" height="42" rx="5" fill="#4A5A54" stroke="#0E2A23" stroke-width="1.5"/>
+    <path d="M226 142 H262 M226 150 H262 M226 158 H262" stroke="#FBFCFA" stroke-width="1.5"/>
+    <path d="M266 148 Q286 146 294 158" stroke="#0E2A23" stroke-width="3" fill="none"/>
+    <rect x="290" y="154" width="40" height="13" rx="6.5" fill="#4A5A54" stroke="#0E2A23" stroke-width="1.5"/>
+    <path d="M298 160.5 H322" stroke="#FBFCFA" stroke-width="1.5"/>
+    <!-- footwell running board : hotspot (310,204) -->
+    <path d="M172 206 L322 200 L322 212 L178 218 Z" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5"/>
+    <path d="M290 202.6 V210 M298 202.3 V210 M306 202 V210 M314 201.7 V210" stroke="#0E2A23" stroke-width="1.5"/>
+    <!-- front cowl + headlight -->
+    <path d="M174 190 L192 140 L222 132 L222 188 Z" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5"/>
+    <circle cx="196" cy="155" r="5" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+    <!-- steering stem + handlebars : hotspot (275,66) -->
+    <path d="M214 132 L258 82" stroke="#0E2A23" stroke-width="4"/>
+    <path d="M254 86 Q262 66 276 64" stroke="#0E2A23" stroke-width="3" fill="none"/>
+    <path d="M276 64 L296 68" stroke="#0E2A23" stroke-width="7"/>
+    <path d="M270 56 L286 52" stroke="#C4622D" stroke-width="2.5"/>
+    <!-- seat -->
+    <path d="M262 144 L262 132 Q262 124 274 122 L348 116 Q364 115 366 126 L366 142 Q320 148 262 144 Z" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5"/>
+    <!-- rear rack : hotspot (410,114) -->
+    <path d="M362 106 V123 M375 106 V123 M388 106 V123 M401 106 V123 M414 106 V123 M427 106 V123 M438 106 V123" stroke="#0E2A23" stroke-width="1.5"/>
+    <path d="M354 110 H444 M354 119 H444" stroke="#0E2A23" stroke-width="2.5"/>
+    <path d="M368 121 L367 150 M436 121 L416 156" stroke="#0E2A23" stroke-width="2.5"/>
+    <!-- front rack -->
+    <path d="M84 136 V152 M96 136 V152 M108 136 V152 M120 136 V152 M132 136 V152 M144 136 V152" stroke="#0E2A23" stroke-width="1.5"/>
+    <path d="M76 140 H150 M76 148 H150" stroke="#0E2A23" stroke-width="2.5"/>
+    <path d="M86 149 L92 160 M138 149 L128 161" stroke="#0E2A23" stroke-width="2.5"/>
+  </g>
+  <!-- plate blaze -->
+  <rect x="-5" y="-5" width="10" height="10" rx="2.5" transform="translate(30 272) rotate(45)" fill="#C4622D"/>
+</svg>

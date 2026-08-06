@@ -216,6 +216,25 @@ export interface ProgressResponse {
   recentXp: XpEvent[];
 }
 
+export interface AssessmentBankOption {
+  id: string;
+  text: string;
+}
+
+export interface AssessmentBankQuestion {
+  id: string;
+  /** Source module id, e.g. "m1-riders-mindset". */
+  module: string;
+  prompt: string;
+  options: AssessmentBankOption[];
+}
+
+/** Sanitized question set from GET /assessment/final — no correct flags, no
+ * feedback (those arrive only in the POST result). */
+export interface AssessmentBankResponse {
+  questions: AssessmentBankQuestion[];
+}
+
 export interface AssessmentSubmitRequest {
   answers: Record<string, string>;
 }
@@ -282,6 +301,16 @@ export interface TutorAskResponse {
   triage?: { category: string };
 }
 
+/** The one `meta` SSE event closing POST /tutor/ask/stream — the
+ * TutorAskResponse fields minus the text, which already streamed as tokens. */
+export interface TutorStreamMeta {
+  id: string;
+  grounding: Grounding;
+  sources: SourceRef[];
+  suggestions: string[];
+  triage?: { category: string } | null;
+}
+
 export interface TutorMessageOut {
   id: string;
   role: "user" | "assistant";
@@ -317,7 +346,10 @@ export interface HealthResponse {
 export interface InstructorOverview {
   learners: number;
   activeLast7d: number;
+  certificatesIssued: number;
+  medianModulesCompleted: number;
   moduleFunnel: { moduleId: string; started: number; completed: number }[];
+  /** Sorted lowest first-attempt-correct % first (the misconception radar). */
   knowledgeCheckStats: {
     stepId: string;
     prompt: string;
@@ -325,6 +357,7 @@ export interface InstructorOverview {
     commonWrong: { optionId: string; text: string; pct: number }[];
   }[];
   tutorThemes: { topic: string; count: number }[];
+  triageCounts: { category: string; count: number }[];
 }
 
 // ---------------------------------------------------------------------------
@@ -366,6 +399,118 @@ async function request<T>(
 }
 
 // ---------------------------------------------------------------------------
+// SSE reader for POST /tutor/ask/stream (SPEC-004 §Tutor, SPEC-008 R5.6)
+// ---------------------------------------------------------------------------
+
+/** One parsed SSE frame: `event:` name plus JSON-decoded `data:` payload. */
+function parseSseFrame(frame: string): { event: string; data: unknown } | null {
+  let event = "message";
+  const dataLines: string[] = [];
+  for (const line of frame.split("\n")) {
+    if (line.startsWith("event:")) event = line.slice(6).trim();
+    else if (line.startsWith("data:")) dataLines.push(line.slice(5).trimStart());
+  }
+  if (dataLines.length === 0) return null;
+  return { event, data: JSON.parse(dataLines.join("\n")) as unknown };
+}
+
+/**
+ * Streams a tutor ask: `token` events feed `onToken` as they arrive; the one
+ * closing `meta` event supplies the non-text fields. Resolves to the same
+ * TutorAskResponse shape POST /tutor/ask returns, with answerMarkdown
+ * accumulated from the tokens. Throws ApiError on HTTP errors, in-band `error`
+ * events, or a stream that ends without its meta (callers fall back to /ask).
+ */
+async function tutorAskStream(
+  body: { message: string; lessonId?: string },
+  onToken: (token: string) => void,
+): Promise<TutorAskResponse> {
+  let res: Response;
+  try {
+    res = await fetch(`${BASE}/tutor/ask/stream`, {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+  } catch {
+    throw new ApiError("network", "Could not reach Sightline Safety Academy.", 0);
+  }
+
+  if (!res.ok) {
+    let envelope: ApiErrorEnvelope | null = null;
+    try {
+      envelope = (await res.json()) as ApiErrorEnvelope;
+    } catch {
+      envelope = null;
+    }
+    throw new ApiError(
+      envelope?.error?.code ?? "unexpected",
+      envelope?.error?.message ?? "Something went wrong on our side.",
+      res.status,
+      envelope?.error?.incidentId,
+    );
+  }
+  if (!res.body) {
+    throw new ApiError("stream_unsupported", "Streaming isn't available here.", 0);
+  }
+
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = "";
+  let text = "";
+  let meta: TutorStreamMeta | null = null;
+
+  const consume = (chunk: string) => {
+    buffer += chunk;
+    let boundary: number;
+    while ((boundary = buffer.indexOf("\n\n")) !== -1) {
+      const frame = parseSseFrame(buffer.slice(0, boundary));
+      buffer = buffer.slice(boundary + 2);
+      if (!frame) continue;
+      if (frame.event === "token") {
+        const token = String(frame.data);
+        text += token;
+        onToken(token);
+      } else if (frame.event === "meta") {
+        meta = frame.data as TutorStreamMeta;
+      } else if (frame.event === "error") {
+        const envelope = frame.data as ApiErrorEnvelope;
+        throw new ApiError(
+          envelope.error?.code ?? "unexpected",
+          envelope.error?.message ?? "Something went wrong on our side.",
+          res.status,
+        );
+      }
+    }
+  };
+
+  try {
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      consume(decoder.decode(value, { stream: true }));
+    }
+    consume(decoder.decode());
+  } finally {
+    reader.releaseLock();
+  }
+
+  const closing = meta as TutorStreamMeta | null;
+  if (!closing) {
+    throw new ApiError("stream_incomplete", "The stream ended before Ranger finished.", 0);
+  }
+  return {
+    id: closing.id,
+    answerMarkdown: text,
+    grounding: closing.grounding,
+    sources: closing.sources,
+    suggestions: closing.suggestions,
+    triage: closing.triage ?? undefined,
+  };
+}
+
+// ---------------------------------------------------------------------------
 // Endpoint methods — one per row of SPEC-004
 // ---------------------------------------------------------------------------
 
@@ -395,6 +540,7 @@ export const api = {
   putEvidence: (stepId: string, body: EvidencePutRequest) =>
     request<EvidencePutResponse>(`/steps/${stepId}/evidence`, { method: "PUT", body }),
   progress: () => request<ProgressResponse>("/progress"),
+  assessmentBank: () => request<AssessmentBankResponse>("/assessment/final"),
   submitAssessment: (body: AssessmentSubmitRequest) =>
     request<AssessmentResult>("/assessment/final", { method: "POST", body }),
   certificate: () => request<CertificateOut>("/certificate"),
@@ -408,6 +554,7 @@ export const api = {
   // Tutor
   tutorAsk: (body: { message: string; lessonId?: string }) =>
     request<TutorAskResponse>("/tutor/ask", { method: "POST", body }),
+  tutorAskStream,
   tutorHistory: () => request<TutorHistoryResponse>("/tutor/history"),
   clearTutorHistory: () => request<void>("/tutor/history", { method: "DELETE" }),
   tutorSuggested: () => request<TutorSuggestedResponse>("/tutor/suggested"),

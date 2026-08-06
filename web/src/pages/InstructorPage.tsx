@@ -76,24 +76,45 @@ function Overview() {
   }
 
   const moduleTitle = (id: string) => MODULE_FACTS.find((m) => m.id === id)?.title ?? id;
+  // Median of integers can land on .5 — show one decimal only when it does.
+  const median = Number.isInteger(data.medianModulesCompleted)
+    ? String(data.medianModulesCompleted)
+    : data.medianModulesCompleted.toFixed(1);
+
+  const topline = [
+    { label: "Learners", value: String(data.learners) },
+    { label: "Active last 7 days", value: String(data.activeLast7d) },
+    { label: "Certificates issued", value: String(data.certificatesIssued) },
+    { label: "Median modules completed", value: median },
+  ];
 
   return (
     <div className="flex flex-col gap-8">
-      <div className="grid gap-4 sm:grid-cols-2">
-        <Card padding="m">
-          <p className="ts-eyebrow">Learners</p>
-          <p className="mt-2 font-mono text-3xl font-medium">{data.learners}</p>
-        </Card>
-        <Card padding="m">
-          <p className="ts-eyebrow">Active last 7 days</p>
-          <p className="mt-2 font-mono text-3xl font-medium">{data.activeLast7d}</p>
-        </Card>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {topline.map((card) => (
+          <Card key={card.label} padding="m">
+            <p className="ts-eyebrow">{card.label}</p>
+            <p className="mt-2 font-mono text-3xl font-medium">{card.value}</p>
+          </Card>
+        ))}
       </div>
 
       <section aria-labelledby="funnel-heading">
-        <h2 id="funnel-heading" className="font-display text-xl font-bold">
-          Module funnel
-        </h2>
+        <div className="flex flex-wrap items-baseline justify-between gap-3">
+          <h2 id="funnel-heading" className="font-display text-xl font-bold">
+            Module funnel
+          </h2>
+          <p className="flex items-center gap-4 text-xs text-ink-500">
+            <span className="flex items-center gap-1.5">
+              <span className="h-2 w-5 rounded-full bg-pine-300" aria-hidden />
+              started
+            </span>
+            <span className="flex items-center gap-1.5">
+              <span className="h-2 w-5 rounded-full bg-pine-700" aria-hidden />
+              completed
+            </span>
+          </p>
+        </div>
         <Card padding="m" className="mt-4 flex flex-col gap-4">
           {data.moduleFunnel.map((row) => {
             const max = Math.max(1, ...data.moduleFunnel.map((r) => r.started));
@@ -124,30 +145,58 @@ function Overview() {
       </section>
 
       <section aria-labelledby="checks-heading">
-        <h2 id="checks-heading" className="font-display text-xl font-bold">
-          Knowledge check insights
-        </h2>
+        <div className="flex flex-wrap items-baseline justify-between gap-3">
+          <h2 id="checks-heading" className="font-display text-xl font-bold">
+            Knowledge check insights
+          </h2>
+          <p className="text-xs text-ink-500">Sorted lowest first-try correct first</p>
+        </div>
         <Card padding="m" className="mt-4 overflow-x-auto">
-          <table className="w-full min-w-[560px] text-left text-sm">
-            <thead>
-              <tr className="border-b border-line-200 text-xs text-ink-500">
-                <th className="py-2 pr-4 font-semibold">Checkpoint</th>
-                <th className="py-2 pr-4 font-semibold">First-try correct</th>
-                <th className="py-2 font-semibold">Most-picked wrong answer</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.knowledgeCheckStats.map((row) => (
-                <tr key={row.stepId} className="border-b border-line-200 last:border-0">
-                  <td className="max-w-[280px] truncate py-2.5 pr-4">{row.prompt}</td>
-                  <td className="py-2.5 pr-4 font-mono">{Math.round(row.firstAttemptCorrectPct)}%</td>
-                  <td className="max-w-[220px] truncate py-2.5 text-ink-500">
-                    {row.commonWrong[0]?.text ?? "—"}
-                  </td>
+          {data.knowledgeCheckStats.length > 0 ? (
+            <table className="w-full min-w-[560px] text-left text-sm">
+              <thead>
+                <tr className="border-b border-line-200 text-xs text-ink-500">
+                  <th className="py-2 pr-4 font-semibold">Checkpoint</th>
+                  <th className="py-2 pr-4 font-semibold">First-try correct</th>
+                  <th className="py-2 font-semibold">Most-picked wrong answer</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {data.knowledgeCheckStats.map((row) => {
+                  const wrong = row.commonWrong[0];
+                  return (
+                    <tr key={row.stepId} className="border-b border-line-200 last:border-0">
+                      <td className="max-w-[280px] truncate py-2.5 pr-4">{row.prompt}</td>
+                      <td
+                        className={`py-2.5 pr-4 font-mono ${
+                          row.firstAttemptCorrectPct < 50 ? "font-medium text-clay-500" : ""
+                        }`}
+                      >
+                        {Math.round(row.firstAttemptCorrectPct)}%
+                      </td>
+                      <td className="max-w-[260px] py-2.5 text-ink-500">
+                        {wrong ? (
+                          <span className="flex items-baseline gap-2">
+                            <span className="min-w-0 truncate">{wrong.text}</span>
+                            <span className="shrink-0 font-mono text-xs">
+                              {Math.round(wrong.pct)}%
+                            </span>
+                          </span>
+                        ) : (
+                          "—"
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          ) : (
+            <p className="text-sm text-ink-500">
+              No checkpoint attempts yet — this fills in as learners hit their first knowledge
+              checks.
+            </p>
+          )}
         </Card>
       </section>
 
@@ -155,15 +204,47 @@ function Overview() {
         <h2 id="themes-heading" className="font-display text-xl font-bold">
           Ranger themes
         </h2>
-        <Card padding="m" className="mt-4 flex flex-wrap gap-2">
-          {data.tutorThemes.map((theme) => (
-            <span
-              key={theme.topic}
-              className="rounded-sm border border-line-200 bg-moss-100 px-3 py-1.5 text-sm"
-            >
-              {theme.topic} <span className="font-mono text-xs text-ink-500">×{theme.count}</span>
-            </span>
-          ))}
+        <Card padding="m" className="mt-4 flex flex-col gap-5">
+          <div>
+            <p className="ts-eyebrow">Questions by course topic</p>
+            {data.tutorThemes.length > 0 ? (
+              <div className="mt-2.5 flex flex-wrap gap-2">
+                {data.tutorThemes.map((theme) => (
+                  <span
+                    key={theme.topic}
+                    className="rounded-sm border border-line-200 bg-moss-100 px-3 py-1.5 text-sm"
+                  >
+                    {theme.topic}{" "}
+                    <span className="font-mono text-xs text-ink-500">×{theme.count}</span>
+                  </span>
+                ))}
+              </div>
+            ) : (
+              <p className="mt-2 text-sm text-ink-500">
+                No Ranger questions yet — topics appear as learners start asking.
+              </p>
+            )}
+          </div>
+          <div>
+            <p className="ts-eyebrow">Triage events by category</p>
+            {data.triageCounts.length > 0 ? (
+              <div className="mt-2.5 flex flex-wrap gap-2">
+                {data.triageCounts.map((row) => (
+                  <span
+                    key={row.category}
+                    className="rounded-sm border border-sun-400/50 bg-sun-400/10 px-3 py-1.5 text-sm"
+                  >
+                    {row.category.replaceAll("_", " ")}{" "}
+                    <span className="font-mono text-xs text-ink-500">×{row.count}</span>
+                  </span>
+                ))}
+              </div>
+            ) : (
+              <p className="mt-2 text-sm text-ink-500">
+                No triage events — nobody has pushed Ranger's boundaries.
+              </p>
+            )}
+          </div>
         </Card>
       </section>
 

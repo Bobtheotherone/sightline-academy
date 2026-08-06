@@ -1,22 +1,24 @@
 /* checkpoint renderer (SPEC-007 §12): lesson-ending assessment wrapper with
- * the distinct "Checkpoint" banner framing around the inner renderer. Wave 1
- * ships mode "multiple_choice"; "structured_response" mode gets its component
- * in Wave 2 and shows the designed unavailable state until then. Evidence is
- * re-kinded to checkpoint_response; passCopy/reviseCopy surface by result.
+ * the distinct "Checkpoint" banner framing around the inner renderer. Both
+ * modes ship: multiple_choice surfaces passCopy on the best answer and
+ * reviseCopy on a miss; structured_response has no wrong answer, so passCopy
+ * lands on submit and reviseCopy rides along as the coach's note while the
+ * draft is in progress. Evidence is re-kinded to checkpoint_response.
  */
 import { useMemo, useState } from "react";
 import { Flag } from "lucide-react";
 import type { StepOut } from "../../lib/api";
 import type { ActivityProps, CheckpointPayload, EvidenceDraft } from "../types";
 import { FeedbackStrip } from "../../components/FeedbackStrip";
-import { ActivityUnavailable } from "../ActivityHost";
 import MultipleChoiceActivity from "../multiple_choice";
+import StructuredResponseActivity from "../structured_response";
 
 export default function CheckpointActivity({ step, evidence, onEvidence }: ActivityProps) {
   const payload = step.payload as CheckpointPayload;
   const [lastAttemptBest, setLastAttemptBest] = useState<boolean | null>(
     evidence ? Boolean(evidence.complete) : null,
   );
+  const [drafting, setDrafting] = useState(false);
   const [revisit] = useState(Boolean(evidence?.complete));
 
   /* The inner renderer sees a step carrying the inner payload; its evidence
@@ -27,7 +29,20 @@ export default function CheckpointActivity({ step, evidence, onEvidence }: Activ
   );
 
   const handleInnerEvidence = (draft: EvidenceDraft) => {
-    setLastAttemptBest(draft.complete);
+    if (payload.mode === "structured_response") {
+      /* Writing isn't a failed attempt — passCopy lands on submit; while the
+       * draft is in progress the reviseCopy coaches below the criteria. */
+      if (draft.complete) {
+        setLastAttemptBest(true);
+        setDrafting(false);
+      } else {
+        setLastAttemptBest(null);
+        const text = ((draft.value ?? {}) as { text?: string }).text ?? "";
+        setDrafting(text.trim().length > 0);
+      }
+    } else {
+      setLastAttemptBest(draft.complete);
+    }
     onEvidence({ kind: "checkpoint_response", value: draft.value, complete: draft.complete });
   };
 
@@ -55,7 +70,15 @@ export default function CheckpointActivity({ step, evidence, onEvidence }: Activ
             onEvidence={handleInnerEvidence}
           />
         ) : (
-          <ActivityUnavailable renderer={payload.mode} />
+          <StructuredResponseActivity
+            step={innerStep}
+            evidence={evidence}
+            onEvidence={handleInnerEvidence}
+          />
+        )}
+
+        {payload.mode === "structured_response" && drafting && lastAttemptBest !== true && (
+          <FeedbackStrip tone="info" label="Coach's note" md={payload.reviseCopy} />
         )}
 
         {lastAttemptBest === true && (

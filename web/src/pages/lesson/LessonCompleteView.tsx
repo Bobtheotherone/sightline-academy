@@ -122,8 +122,9 @@ function ModuleCompleteMoment({ moduleId, rewards }: { moduleId: string; rewards
             <p className="ts-eyebrow text-sun-400!">Module {facts.order} complete</p>
             <h2 className="mt-1 font-display text-2xl font-bold text-paper-0">{facts.title}</h2>
             <p className="mt-2 max-w-lg text-sm text-paper-0/80">
-              The {artifact.name} you built here rides with you — it comes back when you write
-              your Ride Plan.
+              {facts.artifactType === "ride_plan"
+                ? "The Ride Plan you built here is the course's tangible product — printable from your journal, and yours to reuse for every ride after."
+                : `The ${artifact.name} you built here rides with you — it comes back when you write your Ride Plan.`}
             </p>
           </div>
         </div>

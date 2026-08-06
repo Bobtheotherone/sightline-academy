@@ -118,7 +118,10 @@ export function ToastProvider({ children }: { children: ReactNode }) {
             </RadixToast.Root>
           );
         })}
-        <RadixToast.Viewport className="fixed right-4 bottom-4 z-50 flex w-[min(380px,calc(100vw-32px))] flex-col gap-2 outline-none" />
+        {/* Top-right, clear of the lesson player's sticky footer — a
+         * bottom-right stack lands exactly on Continue/Finish (and the mobile
+         * tab bar) and swallows their clicks for the toast's dwell time. */}
+        <RadixToast.Viewport className="fixed top-20 right-4 z-50 flex w-[min(380px,calc(100vw-32px))] flex-col gap-2 outline-none" />
       </RadixToast.Provider>
     </ToastContext.Provider>
   );
