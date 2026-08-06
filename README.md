@@ -63,8 +63,9 @@ docker compose -f ops/docker-compose.yml up -d --build
 
 The site is served on port **8080** (`http://localhost:8080`); nginx proxies `/api/*`
 to the api container. On first boot the api seeds the course from `content/curriculum/`
-and ingests `content/corpus/` into Chroma — the embedding model is pre-downloaded into
-the image at build time, so first boot needs no network access.
+and ingests `content/corpus/` into Chroma — the embedding model is baked into the image
+at build time and `HF_HUB_OFFLINE=1` keeps huggingface_hub from revalidating it against
+the Hub at runtime, so the build needs network but first boot does not.
 
 **Content is baked into the api image at build time** (content-as-code, ADR-006):
 `content/` is `COPY`ed into the image, not bind-mounted. To change course or corpus

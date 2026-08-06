@@ -341,7 +341,7 @@ export default function LessonPage() {
       <div className="mx-auto w-full max-w-2xl px-6 py-16">
         <Card padding="l">
           <EmptyState
-            art={<SlotArt slot="state-locked" ratio="5 / 3" />}
+            art={<SlotArt slot="state-404" ratio="5 / 3" />}
             heading="Couldn't open this lesson"
             body={
               query.error instanceof ApiError && query.error.status === 404

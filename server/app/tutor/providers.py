@@ -2,7 +2,8 @@
 
 The Anthropic Messages API is called through httpx directly — no SDK dependency.
 The extractive fallback keeps the app fully demo-able keyless (ADR-005: with no
-chunks it says so honestly rather than refusing).
+chunks it says so honestly and names the nearest course topic, rather than
+refusing).
 """
 
 import json
@@ -13,7 +14,7 @@ import httpx
 
 from ..config import get_settings
 from ..errors import ApiError
-from .retrieval import Chunk
+from .retrieval import Chunk, NearestTopic
 
 ANTHROPIC_URL = "https://api.anthropic.com/v1/messages"
 ANTHROPIC_VERSION = "2023-06-01"
@@ -126,20 +127,58 @@ def stream_anthropic(system: str, history: list[dict], user_message: str) -> Ite
         raise TutorTimeoutError() from exc
 
 
-def extractive_answer(message: str, kept: list[Chunk]) -> str:
+# What each corpus topic is about, in one clause. The zero-chunk answer uses it
+# to say where the nearest course material actually goes — orientation drawn
+# from the corpus itself, never a fresh safety claim.
+_TOPIC_ORIENTATION = {
+    "mindset": "how solid riders talk themselves into trouble, and how to head that off",
+    "machine": "what a machine needs from you before a ride and between rides",
+    "gear": "what protective gear actually does and what rides along every time",
+    "terrain": "reading ground — hills, ruts, water — before you commit to it",
+    "environment": "weather, cold, ride plans, and what to do when a day goes sideways",
+    "roads": "pavement, traffic, crossings, and riding around other people",
+    "general": "the ground around riding — machines, training, groups, trail habits",
+}
+_FALLBACK_ORIENTATION = "riding judgment, machines, terrain, gear, and roads"
+
+
+def _no_chunk_answer(nearest: NearestTopic | None) -> str:
+    """Zero retrieved chunks, keyless (SPEC-008, ADR-005): say plainly that the
+    course doesn't reach this, then point at the closest thing it does have —
+    a pointer, never a refusal template."""
+    if nearest is None:
+        return (
+            "The course doesn't cover that, and offline I can't reach past the "
+            "course notes — so I'll say that straight rather than guess. Ask me "
+            "about riding judgment, machines, terrain, gear, or roads and I'll "
+            "read you what the notes hold; this one gets a real answer once I'm "
+            "back on my full connection."
+        )
+    where = f", in {nearest.module}" if nearest.module else ""
+    orientation = _TOPIC_ORIENTATION.get(nearest.topic, _FALLBACK_ORIENTATION)
+    return (
+        "The course doesn't cover that, and offline I can't reach past the "
+        "course notes — so I'd rather point you somewhere real than guess.\n\n"
+        f"The closest thing the course has is “{nearest.title}”{where}, which is "
+        f"about {orientation}. If that's the direction you were headed, ask me "
+        "straight at it and I'll read you what the notes say. If it isn't, this "
+        "one lives outside the course — worth asking again once I'm back on my "
+        "full connection."
+    )
+
+
+def extractive_answer(
+    message: str, kept: list[Chunk], nearest: NearestTopic | None = None
+) -> str:
     """Keyless mode: honest, useful, obviously non-generative (STARTER contract).
 
-    Composes from the retrieved chunks' own prose. The UI shows the
-    offline-mode header (SPEC-010) so nobody mistakes this for the full tutor.
+    Composes from the retrieved chunks' own prose. With nothing above the floor
+    it names `nearest` — the best sub-floor candidate — instead of punting. The
+    UI shows the offline-mode header (SPEC-010) so nobody mistakes this for the
+    full tutor.
     """
     if not kept:
-        return (
-            "I'm running in offline mode right now, and I don't have course "
-            "notes matching that question — so rather than guess, here's my "
-            "suggestion: try rephrasing with the machine, terrain, gear, or "
-            "road topic you're after, or browse the course modules directly. "
-            "When my full connection is back I can answer this properly."
-        )
+        return _no_chunk_answer(nearest)
     parts = [
         "I'm in offline mode, so here's what the course notes say directly:"
     ]

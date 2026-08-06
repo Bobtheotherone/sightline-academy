@@ -22,9 +22,16 @@ from dataclasses import dataclass, field
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from ..models import TutorMessage, User, utc_now_iso
+from ..models import Module, TutorMessage, User, utc_now_iso
 from . import prompts, providers
-from .retrieval import Chunk, grounding_label, query_chroma, shape_retrieval
+from .retrieval import (
+    Chunk,
+    NearestTopic,
+    grounding_label,
+    nearest_candidate,
+    query_chroma,
+    shape_retrieval,
+)
 from .safety import triage
 
 HISTORY_TURNS = 10
@@ -90,18 +97,39 @@ def _compose_system(db, user, kept, lesson_id: str | None, cat: dict | None) -> 
     return system
 
 
-def _extractive_text(msg: str, kept: list[Chunk], cat: dict | None) -> str:
+def _nearest_topic(db: Session, raw: list[Chunk]) -> NearestTopic | None:
+    """Best sub-floor candidate, with its module resolved for display.
+
+    Only the zero-kept branch needs it — that's the one answer with no chunks
+    of its own to name (SPEC-008 nearest-topic pointer).
+    """
+    candidate = nearest_candidate(raw)
+    if candidate is None:
+        return None
+    module = db.get(Module, candidate.module_refs[0]) if candidate.module_refs else None
+    return NearestTopic(
+        title=candidate.title,
+        topic=candidate.topic,
+        module=f"Module {module.order}, {module.title}" if module else "",
+    )
+
+
+def _extractive_text(
+    msg: str, kept: list[Chunk], cat: dict | None, nearest: NearestTopic | None
+) -> str:
     if cat:  # legal_specific offline: policy template, rule category filled in
         return cat["template"].replace("{RULE_CATEGORY}", _rule_category(kept))
-    return providers.extractive_answer(msg, kept)
+    return providers.extractive_answer(msg, kept, nearest)
 
 
 def _shape_and_persist(
-    db, user, msg, text, suggestions, cat, grounding, kept, provider
+    db, user, msg, text, suggestions, cat, grounding, kept, provider, nearest=None
 ) -> TutorReply:
     if not suggestions:
         suggestions = (
-            _triage_suggestions(cat["id"]) if cat else _default_suggestions(grounding, kept)
+            _triage_suggestions(cat["id"])
+            if cat
+            else _default_suggestions(grounding, kept, nearest)
         )
     reply = TutorReply(
         text=text,
@@ -130,6 +158,7 @@ def answer(
     raw = query_chroma(msg)                                      # 3 retrieve
     kept = shape_retrieval(raw)
     grounding = grounding_label(kept)
+    nearest = None if kept else _nearest_topic(db, raw)
 
     if providers.active_provider() == "anthropic":               # 4-5 compose+generate
         raw_text = providers.generate_anthropic(
@@ -137,11 +166,13 @@ def answer(
         )
         provider = "anthropic"
     else:
-        raw_text = _extractive_text(msg, kept, cat)
+        raw_text = _extractive_text(msg, kept, cat, nearest)
         provider = "extractive"
 
     text, suggestions = split_suggestions(raw_text)              # 6 shape
-    return _shape_and_persist(db, user, msg, text, suggestions, cat, grounding, kept, provider)
+    return _shape_and_persist(
+        db, user, msg, text, suggestions, cat, grounding, kept, provider, nearest
+    )
 
 
 # ── Streaming twin (SPEC-008 R5.6) ─────────────────────────────────────────── #
@@ -180,6 +211,7 @@ def answer_stream(
     raw = query_chroma(msg)                                      # 3 retrieve
     kept = shape_retrieval(raw)
     grounding = grounding_label(kept)
+    nearest = None if kept else _nearest_topic(db, raw)
 
     if providers.active_provider() == "anthropic":               # 4-5 compose+generate
         provider = "anthropic"
@@ -208,10 +240,12 @@ def answer_stream(
             yield ("token", text[emitted:])
     else:
         provider = "extractive"
-        text, suggestions = split_suggestions(_extractive_text(msg, kept, cat))
+        text, suggestions = split_suggestions(_extractive_text(msg, kept, cat, nearest))
         yield from _token_events(text)
 
-    reply = _shape_and_persist(db, user, msg, text, suggestions, cat, grounding, kept, provider)
+    reply = _shape_and_persist(
+        db, user, msg, text, suggestions, cat, grounding, kept, provider, nearest
+    )
     yield ("meta", reply)
 
 
@@ -351,9 +385,19 @@ def _triage_suggestions(category_id: str) -> list[str]:
     return list(_TRIAGE_SUGGESTIONS.get(category_id, _BRIDGE_BACK_SUGGESTIONS))
 
 
-def _default_suggestions(grounding: str, kept: list[Chunk]) -> list[str]:
-    """Curriculum-grounded -> adjacent corpus topics; general -> bridge back."""
+def _default_suggestions(
+    grounding: str, kept: list[Chunk], nearest: NearestTopic | None = None
+) -> list[str]:
+    """Curriculum-grounded -> adjacent corpus topics; nothing kept -> the nearest
+    topic the answer just named, then its neighbours (SPEC-008 nearest-topic
+    suggestion). Only a corpus-less store falls back to the bridge-back list."""
     if not kept:
-        return list(_BRIDGE_BACK_SUGGESTIONS)
+        if nearest is None:
+            return list(_BRIDGE_BACK_SUGGESTIONS)
+        adjacent = _ADJACENT_TOPICS.get(nearest.topic, _ADJACENT_TOPICS["general"])
+        return [
+            _TOPIC_SUGGESTIONS.get(nearest.topic, _TOPIC_SUGGESTIONS["general"]),
+            *(_TOPIC_SUGGESTIONS[topic] for topic in adjacent[:2]),
+        ]
     adjacent = _ADJACENT_TOPICS.get(kept[0].topic, _ADJACENT_TOPICS["general"])
     return [_TOPIC_SUGGESTIONS[topic] for topic in adjacent[:3]]

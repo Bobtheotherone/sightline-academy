@@ -18,13 +18,17 @@ import { StatusStitch } from "../../components/JournalCard";
 import { XpChip } from "../../components/XpChip";
 import { RiseIn } from "../../activities/motion";
 
+/* `rewards` accumulates the XP events this mount saw, so a lesson finished
+ * across two sittings has only the latest sitting's events to show. The
+ * heading says "just now" rather than "this lesson" so the number is never a
+ * claim it can't back up; the running total lives on /progress. */
 function XpItemized({ rewards }: { rewards: SessionRewards }) {
   const total = rewards.xp.reduce((sum, e) => sum + e.xp, 0);
   return (
     <Card padding="m">
       <div className="flex items-baseline justify-between gap-3">
         <h2 className="font-display text-lg font-bold">XP earned</h2>
-        <span className="font-mono text-sm text-ink-500">+{total} XP this lesson</span>
+        <span className="font-mono text-sm text-ink-500">+{total} XP just now</span>
       </div>
       <ul className="mt-4 flex flex-col gap-2.5">
         {rewards.xp.map((event, i) => (

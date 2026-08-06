@@ -36,6 +36,16 @@ class Chunk:
     module_refs: list[str] = field(default_factory=list)
 
 
+@dataclass
+class NearestTopic:
+    """The closest thing the corpus has to a question nothing cleared the floor
+    for, resolved for display: what the zero-chunk answer points at (SPEC-008)."""
+
+    title: str
+    topic: str
+    module: str = ""  # "Module 4, Reading the Terrain"; "" when unmapped
+
+
 def _get_collection():
     """Chroma collection with the same client path + embedder the ingester uses."""
     global _collection
@@ -107,6 +117,17 @@ def shape_retrieval(raw: list[Chunk]) -> list[Chunk]:
         if len(kept) == MAX_KEPT:
             break
     return kept
+
+
+def nearest_candidate(raw: list[Chunk]) -> Chunk | None:
+    """Top-scoring chunk of the raw top-k, floor ignored. Pure.
+
+    shape_retrieval drops everything under SOFT_FLOOR, which leaves the
+    zero-kept branch blind to what the corpus does hold. This is that branch's
+    separate view of it — deliberately NOT folded into shape_retrieval, whose
+    kept set drives grounding and citations and stays spec-pinned.
+    """
+    return max(raw, key=lambda c: c.score, default=None)
 
 
 def grounding_label(kept: list[Chunk]) -> str:

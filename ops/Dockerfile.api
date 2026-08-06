@@ -37,6 +37,14 @@ RUN uv sync --frozen --no-dev
 # server cwd. Editing course content = editing content/ and rebuilding.
 COPY content/ /app/content/
 
+# Serve the baked model straight from the cache above: without this,
+# sentence-transformers/huggingface_hub still revalidates against huggingface.co
+# on every boot and STARTUP FAILS when DNS/HF is unreachable (verified: DNS
+# failure -> lifespan traceback -> "Application startup failed. Exiting."), which
+# with restart: unless-stopped becomes a crash loop. SPEC-012 requires first boot
+# to be offline-capable; the model is already in the image, so pin it to cache.
+ENV HF_HUB_OFFLINE=1
+
 # Runtime state (SQLite + Chroma) lives on the sightline-data volume.
 ENV DATA_DIR=/data
 RUN mkdir -p /data

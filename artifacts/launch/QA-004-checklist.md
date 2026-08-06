@@ -112,6 +112,20 @@ Companion AC-by-AC evidence: `artifacts/launch/SPEC-001-acceptance.md`.
       lane's nginx dual-stack fix, cold-boot acceptance, and the final
       Definition-of-Done line.
 
+## Post-walk: adversarial verification round
+
+After this walk, four independent skeptics were run against the done-claims with
+instructions to falsify rather than confirm. Budget/NON-GOALS compliance and
+content fidelity came back CONFIRMED; the keyless and learner-journey claims came
+back PARTIAL. Seven defects were found and all seven fixed and re-observed
+(BUILDLOG 2026-08-06 W3 [fix] entries): the Dashboard Continue card pointing
+backwards at a completed step; the keyless tutor's zero-chunk refusal shape
+(ADR-005); the api container's inability to boot without network; the
+lesson-not-found illustration; the inert authored `passPct`; the lesson-complete
+XP heading over-claiming; and the smoke fixture's leaked scratch dirs. Crawl
+pass 6 (artifacts/crawl/pass-6/REVIEW.md) reconfirms zero P1/P2 across the full
+92-state matrix afterwards, with J1–J3, pytest 90, and all four gates green.
+
 ## Fixes made during this walk
 
 1. `ops/nginx.conf` — added `listen [::]:80;` (dual-stack): the web container's

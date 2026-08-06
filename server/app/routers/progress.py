@@ -38,7 +38,8 @@ from ..services.seed import COURSE_ID, COURSE_TITLE
 router = APIRouter(tags=["progress"])
 
 RECENT_XP_LIMIT = 15
-PASS_PCT = 80.0
+# Fallback only — the live bar is the authored bank's passPct (see _pass_pct).
+DEFAULT_PASS_PCT = 80.0
 CERT_CODE_LENGTH = 10
 CROCKFORD = "0123456789ABCDEFGHJKMNPQRSTVWXYZ"
 # Crockford base32 reads lookalikes as their canonical digit (I/L -> 1, O -> 0).
@@ -110,6 +111,19 @@ def _assessment_bank(db: Session) -> dict:
     if not bank or not bank.get("questions"):
         raise ApiError(503, "course_not_seeded", "The course content isn't loaded yet.")
     return bank
+
+
+def _pass_pct(bank: dict) -> float:
+    """The authored pass bar (final-assessment.md `passPct`, ADR-006 content-as-code).
+
+    Any authored percentage is honoured as written; only an absent, non-numeric
+    or out-of-range value falls back — an unreadable threshold must never be
+    what decides a learner's attempt.
+    """
+    raw = bank.get("passPct")
+    if isinstance(raw, bool) or not isinstance(raw, int | float):
+        return DEFAULT_PASS_PCT
+    return float(raw) if 0 <= raw <= 100 else DEFAULT_PASS_PCT
 
 
 def _ensure_assessment_unlocked(db: Session, user_id: str) -> None:
@@ -191,7 +205,7 @@ def submit_assessment(
         )
 
     score_pct = round(100 * n_correct / len(bank["questions"]), 1)
-    passed = score_pct >= PASS_PCT
+    passed = score_pct >= _pass_pct(bank)
     db.add(
         AssessmentAttempt(
             id=str(uuid.uuid4()),

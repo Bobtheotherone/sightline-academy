@@ -170,7 +170,7 @@ test("J1 — new learner first session: register, play M1, journal, resume", asy
   await expect(page.getByText("Lesson complete", { exact: true })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Why Riders Crash" })).toBeVisible();
   await expect(page.getByText("XP earned")).toBeVisible();
-  await expect(page.getByText(/\+\d+ XP this lesson/)).toBeVisible();
+  await expect(page.getByText(/\+\d+ XP just now/)).toBeVisible();
   await expect(page.getByText("Lesson complete: Why Riders Crash")).toBeVisible();
 
   // Lesson 2: scenario ridden on the strongest line, then the reflection chip

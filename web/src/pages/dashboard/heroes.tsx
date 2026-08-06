@@ -1,12 +1,19 @@
 /* Dashboard hero variants (DESIGN-003 §Dashboard, SPEC-006 §Resume &
- * continuity): the mid-course Continue card deep-linking to the learner_state
- * lesson+step, and the graduate composition (certificate card, Ride Plan card,
- * keep-exploring-with-Ranger prompt) with the assessment-open state when every
- * module is done but the certificate isn't earned yet.
+ * continuity): the mid-course Continue card — deep-linking to the learner_state
+ * lesson+step while that lesson is unfinished, falling forward to the next
+ * lesson once it isn't — and the graduate composition (certificate card, Ride
+ * Plan card, keep-exploring-with-Ranger prompt) with the assessment-open state
+ * when every module is done but the certificate isn't earned yet.
  */
 import { useQuery } from "@tanstack/react-query";
 import { ArrowRight, Award, Compass, NotebookPen } from "lucide-react";
-import { api, ApiError, type LearnerStateOut } from "../../lib/api";
+import {
+  api,
+  ApiError,
+  type LearnerStateOut,
+  type LessonResponse,
+  type LessonSummary,
+} from "../../lib/api";
 import { MODULE_FACTS } from "../../lib/modules";
 import { Card } from "../../components/Card";
 import { ContourPanel } from "../../components/ContourPanel";
@@ -16,17 +23,101 @@ import { LinkButton } from "../../components/Button";
 import { SlotArt } from "../../components/SlotArt";
 import { Skeleton, SkeletonGroup } from "../../components/Skeleton";
 
-/** Mid-course hero: deep-links to the learner_state lesson+step (SPEC-006). */
-export function ContinueCard({ state }: { state: LearnerStateOut }) {
-  const lessonId = state.lastLessonId ?? "";
-  const lessonQuery = useQuery({
-    queryKey: ["lesson", lessonId],
-    queryFn: () => api.lesson(lessonId),
-    enabled: Boolean(lessonId),
-    retry: (n, err) => !(err instanceof ApiError && err.status >= 400) && n < 2,
+/** Shared by the Continue card's lookups: a 4xx is an answer, not a blip. */
+function retryLookup(n: number, err: Error): boolean {
+  return !(err instanceof ApiError && err.status >= 400) && n < 2;
+}
+
+/** What the Continue card opens: a lesson, the graduate hero, or neither yet. */
+type ContinueTarget =
+  | { kind: "loading" }
+  | { kind: "graduate" }
+  | { kind: "unresolved" }
+  | {
+      kind: "lesson";
+      /** Course-fresh summary (title, percent) — the lesson list, not the cached detail. */
+      summary: LessonSummary;
+      /** Step list + evidence for the step counter and the up-next line. */
+      detail: LessonResponse;
+      /** True while that lesson is unfinished: resume the exact step (R1.2). */
+      resume: boolean;
+    };
+
+/**
+ * Where "Continue" actually points. learner_state drives it (SPEC-006 §Resume &
+ * continuity) and R1.2 wants the exact step back — but only while that lesson is
+ * still unfinished. Once it's done, learner_state points backwards, so the card
+ * falls forward through real course data: the next unfinished lesson of that
+ * module, else the first one left in the frontier module the trail card names,
+ * else the graduate hero. Completion comes from ["course"] / ["module"] — the
+ * keys the player invalidates on completion — never from a lesson-detail cache.
+ */
+function useContinueTarget(state: LearnerStateOut): ContinueTarget {
+  const lastLessonId = state.lastLessonId ?? "";
+  /* staleTime 0: the player edits evidence without writing back to this key, so
+   * the card revalidates rather than naming a step already answered. */
+  const lastLessonQuery = useQuery({
+    queryKey: ["lesson", lastLessonId],
+    queryFn: () => api.lesson(lastLessonId),
+    enabled: Boolean(lastLessonId),
+    staleTime: 0,
+    retry: retryLookup,
+  });
+  const courseQuery = useQuery({ queryKey: ["course"], queryFn: () => api.course() });
+
+  const modules = courseQuery.data?.modules;
+  const lastModuleId = lastLessonQuery.data?.lesson.moduleId ?? "";
+  const lastModule = modules?.find((m) => m.id === lastModuleId);
+  // The module holding the next thing to do: the last-visited one while it still
+  // has lessons left, otherwise the frontier.
+  const searchModule =
+    lastModule && !lastModule.complete
+      ? lastModule
+      : modules?.find((m) => !m.complete && !m.locked);
+  const searchModuleId = searchModule?.id ?? "";
+  const lessonsQuery = useQuery({
+    queryKey: ["module", searchModuleId],
+    queryFn: () => api.module(searchModuleId),
+    enabled: Boolean(searchModuleId),
+    retry: retryLookup,
   });
 
-  if (lessonQuery.isLoading) {
+  const lessons = lessonsQuery.data?.lessons;
+  const ordered = lessons ? [...lessons].sort((a, b) => a.order - b.order) : undefined;
+  const lastSummary = ordered?.find((l) => l.id === lastLessonId);
+  const resume = lastSummary !== undefined && !lastSummary.complete;
+  const summary = resume ? lastSummary : (ordered?.find((l) => !l.complete) ?? ordered?.[0]);
+  const targetId = summary?.id ?? "";
+  const targetQuery = useQuery({
+    queryKey: ["lesson", targetId],
+    queryFn: () => api.lesson(targetId),
+    enabled: Boolean(targetId) && targetId !== lastLessonId,
+    staleTime: 0,
+    retry: retryLookup,
+  });
+  const detail = targetId === lastLessonId ? lastLessonQuery.data : targetQuery.data;
+
+  if (summary && detail) return { kind: "lesson", summary, detail, resume };
+  if (
+    lastLessonQuery.isLoading ||
+    courseQuery.isLoading ||
+    lessonsQuery.isLoading ||
+    targetQuery.isLoading
+  ) {
+    return { kind: "loading" };
+  }
+  // Every module done but the progress rollup hasn't said so yet.
+  if (modules !== undefined && modules.length > 0 && modules.every((m) => m.complete)) {
+    return { kind: "graduate" };
+  }
+  return { kind: "unresolved" };
+}
+
+/** Mid-course hero: the next lesson to ride, at the exact step (SPEC-006). */
+export function ContinueCard({ state }: { state: LearnerStateOut }) {
+  const target = useContinueTarget(state);
+
+  if (target.kind === "loading") {
     return (
       /* Height tracks the loaded card (~391px desktop) so the swap doesn't
        * shift the grid below (QA-004 CLS). */
@@ -36,8 +127,9 @@ export function ContinueCard({ state }: { state: LearnerStateOut }) {
     );
   }
 
-  const data = lessonQuery.data;
-  if (!data) {
+  if (target.kind === "graduate") return <GraduateHero />;
+
+  if (target.kind === "unresolved") {
     return (
       <ContourPanel variant="dark" className="overflow-hidden rounded-lg">
         <div className="flex flex-wrap items-center justify-between gap-6 p-8">
@@ -55,14 +147,19 @@ export function ContinueCard({ state }: { state: LearnerStateOut }) {
     );
   }
 
-  const facts = MODULE_FACTS.find((m) => m.id === data.lesson.moduleId);
-  const steps = [...data.steps].sort((a, b) => a.order - b.order);
-  const frontier =
-    steps.find((s) => s.required && !data.evidence[s.id]?.complete) ?? steps[steps.length - 1];
+  const { summary, detail, resume } = target;
+  const facts = MODULE_FACTS.find((m) => m.id === summary.moduleId);
+  const steps = [...detail.steps].sort((a, b) => a.order - b.order);
+  // The target lesson is unfinished by construction, so this always names a step
+  // the learner still owes — never one they've already answered.
+  const frontier = steps.find((s) => s.required && !detail.evidence[s.id]?.complete) ?? steps[0];
   const stepNumber = steps.findIndex((s) => s.id === frontier.id) + 1;
-  const href = state.lastStepId
-    ? `/learn/${data.lesson.id}?step=${state.lastStepId}`
-    : `/learn/${data.lesson.id}`;
+  const href =
+    resume && state.lastStepId
+      ? `/learn/${summary.id}?step=${state.lastStepId}`
+      : `/learn/${summary.id}`;
+  // Only a lesson already under way is one you "pick up".
+  const started = resume || summary.percent > 0;
 
   return (
     <ContourPanel variant="dark" className="overflow-hidden rounded-lg">
@@ -73,12 +170,12 @@ export function ContinueCard({ state }: { state: LearnerStateOut }) {
             Module {facts?.order} · {facts?.title}
           </p>
           <h2 className="mt-1 font-display text-2xl font-bold text-paper-0">
-            {data.lesson.title}
+            {summary.title}
           </h2>
           <div className="mt-4 flex items-center gap-3">
             <ProgressBar
-              value={data.lesson.percent}
-              label={`${data.lesson.title}: ${data.lesson.percent} percent complete`}
+              value={summary.percent}
+              label={`${summary.title}: ${summary.percent} percent complete`}
               className="max-w-56 bg-paper-0/20"
             />
             <span className="font-mono text-xs text-paper-0/70">
@@ -93,7 +190,7 @@ export function ContinueCard({ state }: { state: LearnerStateOut }) {
               size="l"
               iconRight={<ArrowRight className="size-4" strokeWidth={2} aria-hidden />}
             >
-              Pick up the trail
+              {started ? "Pick up the trail" : "Start the lesson"}
             </LinkButton>
           </div>
         </div>

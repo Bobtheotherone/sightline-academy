@@ -8,7 +8,10 @@ Isolation notes:
 - The app boots against a FRESH throwaway DATA_DIR (SQLite + Chroma both live
   there), created under the gitignored .pytest_cache and removed afterwards.
   app/db.py binds its engine at import time, so the module fixture rebinds the
-  shared sessionmaker + module globals before startup runs.
+  shared sessionmaker + module globals before startup runs. Teardown disposes
+  the engine AND stops Chroma first (see _dispose_chroma) — Windows refuses to
+  delete open files, so skipping that orphans the whole scratch dir; if one
+  ever survives anyway the fixture warns instead of leaving it unmentioned.
 - Ranger runs on the extractive provider (no ANTHROPIC_API_KEY) so the tutor
   rows are deterministic and offline.
 - The auth rate limiter is per-IP and process-global; every persona sends its
@@ -21,6 +24,7 @@ from __future__ import annotations
 import os
 import shutil
 import uuid
+import warnings
 from collections.abc import Callable
 from pathlib import Path
 
@@ -30,6 +34,7 @@ from sqlalchemy import create_engine, event
 
 import app.db as db_mod
 from app.config import get_settings
+from app.ingest import ingest as ingest_mod
 from app.main import app as fastapi_app
 from app.models import CourseMeta
 from app.services.seed import COURSE_ID
@@ -44,6 +49,24 @@ Ctx = dict[str, object]
 
 
 # ── App boot against a fresh scratch DATA_DIR ────────────────────────────────
+
+
+def _dispose_chroma() -> None:
+    """Close Chroma's handles on the scratch DATA_DIR before it is removed.
+
+    Chroma keeps one System per persist path in a process-global registry and
+    holds that path's sqlite file + hnsw segment files open. Dropping the
+    registry entry alone only makes the release depend on garbage collection,
+    so stop the System explicitly, then clear both the registry and
+    app.ingest's cached client (a later get_collection() builds a fresh one).
+    chromadb is imported here, not at module scope, for the same reason
+    app/ingest defers it: import time.
+    """
+    from chromadb.api.client import SharedSystemClient
+
+    ingest_mod._client()._system.stop()
+    SharedSystemClient.clear_system_cache()
+    ingest_mod._client.cache_clear()
 
 
 @pytest.fixture(scope="module")
@@ -82,6 +105,11 @@ def ctx() -> Ctx:  # type: ignore[misc]
         _build_personas(context, client_for)
         yield context
 
+    # Let go of the scratch dir's files while DATA_DIR still names it, so a
+    # rebuilt client can never land on the real data dir.
+    _dispose_chroma()
+    engine.dispose()
+
     db_mod.engine = old_engine
     db_mod.settings = old_settings
     db_mod.SessionLocal.configure(bind=old_engine)
@@ -91,8 +119,12 @@ def ctx() -> Ctx:  # type: ignore[misc]
         else:
             os.environ[key] = value
     get_settings.cache_clear()
-    engine.dispose()
     shutil.rmtree(data_dir, ignore_errors=True)
+    if data_dir.exists():
+        warnings.warn(
+            f"smoke: scratch DATA_DIR survived cleanup, delete it by hand: {data_dir}",
+            stacklevel=1,
+        )
 
 
 def _build_personas(context: Ctx, client_for: Callable[[str], TestClient]) -> None:
