@@ -1,0 +1,147 @@
+/* Sightline Safety Academy — app stylesheet.
+ * Order matters: tokens first (ADR-008), then self-hosted fonts, then Tailwind.
+ */
+@import "./tokens.css";
+@import "@fontsource-variable/bricolage-grotesque";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/jetbrains-mono/500.css";
+@import "tailwindcss";
+
+/* Every --ts-* token exposed as a Tailwind theme value. Default palettes are
+ * wiped so library-default grays/blues cannot leak in (DESIGN-006). */
+@theme inline {
+  --color-*: initial;
+  --color-pine-950: var(--ts-pine-950);
+  --color-pine-700: var(--ts-pine-700);
+  --color-pine-300: var(--ts-pine-300);
+  --color-moss-100: var(--ts-moss-100);
+  --color-paper-0: var(--ts-paper-0);
+  --color-clay-500: var(--ts-clay-500);
+  --color-sky-600: var(--ts-sky-600);
+  --color-sun-400: var(--ts-sun-400);
+  --color-danger-600: var(--ts-danger-600);
+  --color-ink-500: var(--ts-ink-500);
+  --color-line-200: var(--ts-line-200);
+
+  --font-*: initial;
+  --font-display: var(--ts-font-display);
+  --font-body: var(--ts-font-body);
+  --font-mono: var(--ts-font-mono);
+
+  --text-*: initial;
+  --text-xs: var(--ts-text-xs);
+  --text-xs--line-height: 1.5;
+  --text-sm: var(--ts-text-sm);
+  --text-sm--line-height: 1.5;
+  --text-base: var(--ts-text-base);
+  --text-base--line-height: 1.5;
+  --text-lg: var(--ts-text-lg);
+  --text-lg--line-height: 1.5;
+  --text-xl: var(--ts-text-xl);
+  --text-xl--line-height: 1.2;
+  --text-2xl: var(--ts-text-2xl);
+  --text-2xl--line-height: 1.15;
+  --text-3xl: var(--ts-text-3xl);
+  --text-3xl--line-height: 1.15;
+  --text-4xl: var(--ts-text-4xl);
+  --text-4xl--line-height: 1.1;
+
+  --radius-*: initial;
+  --radius-sm: var(--ts-radius-sm);
+  --radius-md: var(--ts-radius-md);
+  --radius-lg: var(--ts-radius-lg);
+
+  --shadow-*: initial;
+  --shadow-soft: var(--ts-shadow-soft);
+  --shadow-raised: var(--ts-shadow-raised);
+
+  --ease-out: var(--ts-ease-out);
+  --ease-in-out: var(--ts-ease-in-out);
+
+  --container-page: var(--ts-container-max);
+  --container-lesson: var(--ts-lesson-max);
+}
+
+/* Motion tokens exposed for duration-(--ts-dur-*) / arbitrary use. tokens.css
+ * already defines them on :root; nothing extra needed here. */
+
+@layer base {
+  html {
+    font-family: var(--ts-font-body);
+  }
+  body {
+    background-color: var(--ts-moss-100);
+    color: var(--ts-pine-950);
+    font-family: var(--ts-font-body);
+    font-size: var(--ts-text-base);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--ts-font-display);
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+  }
+  /* Focus ring: 2px pine-300, offset 2 — everywhere (DESIGN-004). */
+  :focus-visible {
+    outline: 2px solid var(--ts-pine-300);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background-color: var(--ts-pine-300);
+    color: var(--ts-pine-950);
+  }
+}
+
+/* ALL-CAPS eyebrow label (DESIGN-001 §Typography). */
+@utility ts-eyebrow {
+  font-size: var(--ts-text-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ts-ink-500);
+}
+
+/* Dark hero variant of the contour motif: same paths as .ts-contour in
+ * tokens.css, ink swapped to paper for pine-950 panels. */
+.ts-contour-dark {
+  background-color: var(--ts-pine-950);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3Cg fill='none' stroke='%23FBFCFA' stroke-opacity='0.07' stroke-width='1'%3E%3Cpath d='M-20 60 C 80 20, 160 100, 260 70 S 440 30, 460 80'/%3E%3Cpath d='M-20 120 C 90 80, 170 160, 270 128 S 440 92, 460 140'/%3E%3Cpath d='M-20 180 C 100 140, 180 220, 280 186 S 440 152, 460 200'/%3E%3Cpath d='M-20 240 C 90 205, 175 280, 275 246 S 440 212, 460 260'/%3E%3Cpath d='M-20 300 C 80 268, 165 340, 265 306 S 440 272, 460 320'/%3E%3Cpath d='M-20 360 C 90 330, 170 400, 270 366 S 440 332, 460 380'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 420px 420px;
+}
+
+/* Skeleton shimmer, 1.6s (DESIGN-004). Composed per page via <Skeleton/>. */
+@keyframes ts-shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+.ts-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--ts-line-200) 30%,
+    var(--ts-paper-0) 50%,
+    var(--ts-line-200) 70%
+  );
+  background-size: 200% 100%;
+  animation: ts-shimmer 1.6s var(--ts-ease-in-out) infinite;
+  border-radius: var(--ts-radius-sm);
+}
+
+/* Subtly ruled notebook background for journal surfaces (DESIGN-003). */
+.ts-ruled {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 31px,
+    var(--ts-line-200) 31px,
+    var(--ts-line-200) 32px
+  );
+}

@@ -1,0 +1,32 @@
+{
+  "$comment": "Illustration slot tracker (DESIGN-002 §Illustration slots). Status is 'placeholder' (SlotArt designed placeholder) or 'art' (real house-style asset). All slots must be 'art' by wave 3.",
+  "slots": {
+    "hero-landing": "placeholder",
+    "hero-m1-mindset": "placeholder",
+    "hero-m2-machine": "placeholder",
+    "hero-m3-gear": "placeholder",
+    "hero-m4-terrain": "placeholder",
+    "hero-m5-environment": "placeholder",
+    "hero-m6-roads": "placeholder",
+    "scene-atv-anatomy": "placeholder",
+    "scene-walkaround-top": "placeholder",
+    "scene-helmet-fit": "placeholder",
+    "scene-trail-hazards": "placeholder",
+    "scene-crossing": "placeholder",
+    "scene-loading-cargo": "placeholder",
+    "badge-b-mindset": "placeholder",
+    "badge-b-mechanic": "placeholder",
+    "badge-b-geared": "placeholder",
+    "badge-b-terrain": "placeholder",
+    "badge-b-prepared": "placeholder",
+    "badge-b-roadwise": "placeholder",
+    "badge-b-journal": "placeholder",
+    "badge-b-scholar": "placeholder",
+    "badge-b-graduate": "placeholder",
+    "empty-journal": "placeholder",
+    "empty-tutor": "placeholder",
+    "state-404": "placeholder",
+    "state-locked": "placeholder",
+    "cert-seal": "placeholder"
+  }
+}

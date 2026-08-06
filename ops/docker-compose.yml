@@ -1,0 +1,46 @@
+# Sightline Safety Academy — single-host deployment (SPEC-012 / ADR-009).
+# Run from the repo root:  docker compose -f ops/docker-compose.yml up -d --build
+# Requires ./.env at the repo root (cp .env.example .env, then edit).
+
+name: sightline
+
+services:
+  api:
+    build:
+      context: ..
+      dockerfile: ops/Dockerfile.api
+    env_file:
+      - ../.env
+    environment:
+      DATA_DIR: /data
+    volumes:
+      - sightline-data:/data
+    restart: unless-stopped
+    healthcheck:
+      # python is what the image has (no curl in python:3.12-slim); urlopen
+      # raises on any non-2xx, which fails the check.
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/meta/health', timeout=5).read()"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      # First boot runs seed + corpus ingest + embedding-model warm-up.
+      start_period: 120s
+
+  web:
+    build:
+      context: ..
+      dockerfile: ops/Dockerfile.web
+    ports:
+      - "8080:80"
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "-", "http://localhost/healthz"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  sightline-data:

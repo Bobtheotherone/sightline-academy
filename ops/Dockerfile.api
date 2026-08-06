@@ -1,0 +1,45 @@
+# Sightline Safety Academy — API image (SPEC-012 / ADR-009)
+# FastAPI + uvicorn + SQLite + Chroma + local sentence-transformers embeddings.
+# Build context is the repo root: docker compose -f ops/docker-compose.yml uses context "..".
+
+FROM python:3.12-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    UV_COMPILE_BYTECODE=1 \
+    UV_LINK_MODE=copy \
+    HF_HOME=/opt/hf-cache \
+    SENTENCE_TRANSFORMERS_HOME=/opt/hf-cache
+
+RUN pip install --no-cache-dir uv
+
+# Mirror the monorepo layout (/app/server + /app/content) so the app resolves
+# content/ the same way it does in dev, where uvicorn runs with cwd server/.
+WORKDIR /app/server
+
+# Dependency layer first (lockfile only) so code edits do not re-resolve deps.
+# torch CPU wheels are pinned by server/pyproject.toml [tool.uv.sources] + uv.lock.
+COPY server/pyproject.toml server/uv.lock ./
+RUN uv sync --frozen --no-dev --no-install-project
+
+ENV PATH="/app/server/.venv/bin:${PATH}"
+
+# Pre-download the embedding model at build time so first boot is fast and
+# needs no network (SPEC-012). Cached under HF_HOME inside the image.
+RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('all-MiniLM-L6-v2')"
+
+# App code, then install the project itself into the same venv.
+COPY server/ ./
+RUN uv sync --frozen --no-dev
+
+# content/ (curriculum + corpus) is baked into the image (ADR-006 content-as-
+# code): the boot-time seed and ingest read it from ../content relative to the
+# server cwd. Editing course content = editing content/ and rebuilding.
+COPY content/ /app/content/
+
+# Runtime state (SQLite + Chroma) lives on the sightline-data volume.
+ENV DATA_DIR=/data
+RUN mkdir -p /data
+
+EXPOSE 8000
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

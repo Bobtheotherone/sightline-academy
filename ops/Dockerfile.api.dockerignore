@@ -1,0 +1,8 @@
+# BuildKit per-Dockerfile ignore: the api image only needs server/ + content/.
+*
+!server
+!content
+server/.venv
+server/**/__pycache__
+server/**/*.pyc
+server/.pytest_cache

@@ -1,0 +1,8 @@
+# BuildKit per-Dockerfile ignore: the web image only needs web/ + ops/nginx.conf.
+*
+!web
+!ops/nginx.conf
+web/node_modules
+web/dist
+web/e2e/test-results
+web/e2e/playwright-report
