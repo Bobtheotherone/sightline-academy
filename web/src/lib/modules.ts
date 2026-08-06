@@ -147,6 +147,18 @@ export const LEVEL_TITLES = [
   "Trail Boss",
 ];
 
+/** Cumulative XP thresholds per level (SPEC-009 §Levels; server-authoritative —
+ * mirrored here only to fire the level-up toast the moment XP lands). */
+export const LEVEL_THRESHOLDS = [0, 100, 250, 450, 700, 1000, 1400];
+
+export function levelFor(xpTotal: number): number {
+  let level = 1;
+  for (let i = 0; i < LEVEL_THRESHOLDS.length; i++) {
+    if (xpTotal >= LEVEL_THRESHOLDS[i]) level = i + 1;
+  }
+  return level;
+}
+
 export function levelTitle(level: number): string {
   return LEVEL_TITLES[Math.min(Math.max(level - 1, 0), LEVEL_TITLES.length - 1)];
 }

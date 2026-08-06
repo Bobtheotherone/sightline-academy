@@ -137,10 +137,8 @@ class CourseMetaOut(ApiModel):
     module_order: list[str]
 
 
-class ModuleProgress(ApiModel):
-    percent: int
-    complete: bool
-    locked: bool
+# Per-user progress fields ride flat on ModuleOut/LessonSummary ("modules
+# include per-user {percent, complete, locked}" — SPEC-004), matching api.ts.
 
 
 class ModuleOut(ApiModel):
@@ -153,17 +151,14 @@ class ModuleOut(ApiModel):
     objectives: list[str]
     badge_id: str
     hero_slot: str
-    progress: ModuleProgress
+    percent: int
+    complete: bool
+    locked: bool
 
 
 class CourseOut(ApiModel):
     course: CourseMetaOut
     modules: list[ModuleOut]
-
-
-class LessonProgress(ApiModel):
-    percent: int
-    complete: bool
 
 
 class LessonSummary(ApiModel):
@@ -174,7 +169,8 @@ class LessonSummary(ApiModel):
     summary: str
     estimated_minutes: int
     sections_present: list[str]
-    progress: LessonProgress
+    percent: int
+    complete: bool
 
 
 class ModuleDetailOut(ApiModel):
@@ -226,8 +222,9 @@ class XpEventOut(ApiModel):
 
 
 class BadgeOut(ApiModel):
-    badge_id: str
-    created_at: str
+    id: str
+    name: str
+    awarded_at: str | None = None
 
 
 class EvidencePutOut(ApiModel):
@@ -240,6 +237,7 @@ class EvidencePutOut(ApiModel):
 
 class ModuleRollup(ApiModel):
     module_id: str
+    title: str
     percent: int
     complete: bool
     lessons_completed: int
@@ -344,6 +342,9 @@ class TutorMessageOut(ApiModel):
     content: str
     grounding: str
     sources: list[str]
+    # Chip data resolved from the stored chunk ids at read time (corpus front
+    # matter), so history renders the same SourceChips as live answers.
+    source_refs: list[TutorSource] = []
     triage_category: str | None = None
     created_at: str
 

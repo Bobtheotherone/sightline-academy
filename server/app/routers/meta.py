@@ -9,6 +9,7 @@ from sqlalchemy.orm import Session
 
 from ..config import get_settings
 from ..db import get_db
+from ..ingest import ingest
 from ..models import CourseMeta
 from ..schemas import HealthOut
 
@@ -34,13 +35,12 @@ def health(db: Session = Depends(get_db)) -> HealthOut:
     course = db.execute(select(CourseMeta)).scalar_one_or_none()
     version = course.version if course else _app_version()
 
-    # Wave 0: Chroma is not wired yet (ingest lands in Wave 1); report 0 docs
-    # rather than importing chromadb at request time and slowing boot.
+    docs = ingest.doc_count()  # cached client/collection — cheap after boot
     return HealthOut.model_validate(
         {
-            "status": "ok" if db_status == "ok" else "degraded",
+            "status": "ok" if db_status == "ok" and docs > 0 else "degraded",
             "db": db_status,
-            "chroma": {"docs": 0},
+            "chroma": {"docs": docs},
             "provider": settings.provider,
             "version": version,
         }

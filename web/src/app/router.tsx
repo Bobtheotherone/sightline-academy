@@ -10,6 +10,11 @@ function page(loader: () => Promise<{ default: React.ComponentType }>) {
 
 /** Every route from SPEC-010 — this list mirrors STARTER/route-manifest.json. */
 export const router = createBrowserRouter([
+  // Dev-only renderer sandbox (SPEC-007 verification surface). The DEV guard
+  // is compile-time, so the lazy chunk is dead-code-eliminated from prod builds.
+  ...(import.meta.env.DEV
+    ? [{ path: "/dev/renderers", ...page(() => import("../pages/dev/RenderersSandbox")) }]
+    : []),
   {
     element: <PublicShell />,
     children: [

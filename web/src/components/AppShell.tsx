@@ -1,15 +1,18 @@
-import { useState } from "react";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { lazy, Suspense, useState } from "react";
+import { matchPath, NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Map, NotebookPen, TrendingUp, Compass, LogOut, UserRound, BarChart3 } from "lucide-react";
 import { Logo } from "./Logo";
 import { OfflineBanner } from "./OfflineBanner";
 import { Popover } from "./Popover";
 import { SlideOver } from "./Modal";
 import { Button } from "./Button";
-import { EmptyState } from "./EmptyState";
-import { SlotArt } from "./SlotArt";
+import { Skeleton, SkeletonGroup } from "./Skeleton";
 import { useSession } from "../lib/session";
 import { useApiError } from "../lib/useApiError";
+
+// Lazy so the shared chat surface (markdown renderer included) stays out of the
+// shell bundle until the slide-over first opens.
+const TutorChat = lazy(() => import("../pages/tutor/TutorChat"));
 
 const NAV = [
   { to: "/course", label: "Course", icon: Map },
@@ -80,28 +83,26 @@ function UserMenu() {
   );
 }
 
-/** The Ranger slide-over reachable from anywhere in the app shell. */
+/** The Ranger slide-over reachable from anywhere in the app shell. It hosts the
+ * same chat surface as /tutor; opened from a lesson it passes the lessonId so
+ * learner context flows into answers (SPEC-008 §Learner context). */
 function RangerSlideOver({ open, onOpenChange }: { open: boolean; onOpenChange: (o: boolean) => void }) {
-  const navigate = useNavigate();
+  const location = useLocation();
+  const lessonMatch = matchPath("/learn/:lessonId", location.pathname);
   return (
     <SlideOver open={open} onOpenChange={onOpenChange} title="Ranger">
-      <div className="flex h-full flex-col justify-center">
-        <EmptyState
-          art={<SlotArt slot="empty-tutor" ratio="5 / 3" />}
-          heading="Meet Ranger"
-          body="Ask anything about ATV or road safety. Ranger knows this course inside out — and plenty beyond it, and will tell you which is which."
-          action={
-            <Button
-              onClick={() => {
-                onOpenChange(false);
-                navigate("/tutor");
-              }}
-            >
-              Ask Ranger
-            </Button>
+      {open && (
+        <Suspense
+          fallback={
+            <SkeletonGroup label="Opening Ranger" className="flex flex-col gap-4 p-4">
+              <Skeleton className="h-16 w-3/5 self-end rounded-md" />
+              <Skeleton className="h-28 w-4/5 self-start rounded-md" />
+            </SkeletonGroup>
           }
-        />
-      </div>
+        >
+          <TutorChat variant="slideOver" lessonId={lessonMatch?.params.lessonId} />
+        </Suspense>
+      )}
     </SlideOver>
   );
 }
@@ -124,15 +125,17 @@ export function AppShell() {
             ))}
           </nav>
           <div className="flex items-center gap-3">
-            <Button
-              variant="secondary"
-              size="s"
-              iconLeft={<Compass className="size-4" strokeWidth={1.5} aria-hidden />}
-              onClick={() => setRangerOpen(true)}
-              className="hidden sm:inline-flex"
-            >
-              Ask Ranger
-            </Button>
+            {/* Hidden below sm: the bottom tab bar already carries Ranger there */}
+            <span className="hidden sm:block">
+              <Button
+                variant="secondary"
+                size="s"
+                iconLeft={<Compass className="size-4" strokeWidth={1.5} aria-hidden />}
+                onClick={() => setRangerOpen(true)}
+              >
+                Ask Ranger
+              </Button>
+            </span>
             <UserMenu />
           </div>
         </div>

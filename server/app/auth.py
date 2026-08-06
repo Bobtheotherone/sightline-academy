@@ -186,15 +186,11 @@ def client_ip(request: Request) -> str:
 
 
 def compute_xp_and_level(db: Session, user_id: str) -> tuple[int, int]:
-    """XP total from xp_events; level 1 baseline until SPEC-009 lands (Wave 2)."""
-    from sqlalchemy import func, select
+    """XP total from xp_events + SPEC-009 level thresholds (services/xp.py)."""
+    from .services import xp
 
-    from .models import XpEvent
-
-    total = db.execute(
-        select(func.coalesce(func.sum(XpEvent.xp), 0)).where(XpEvent.user_id == user_id)
-    ).scalar_one()
-    return int(total), 1
+    total = xp.xp_total(db, user_id)
+    return total, xp.level_for(total)
 
 
 def user_out_payload(db: Session, user: User) -> dict:

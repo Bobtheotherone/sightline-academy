@@ -52,6 +52,9 @@ class CourseMeta(Base):
     tagline: Mapped[str] = mapped_column(String)
     version: Mapped[str] = mapped_column(String)  # content hash
     module_order: Mapped[list] = mapped_column(JSON)  # list of module ids
+    # Authored final-assessment bank (final-assessment.md); smallest home for
+    # a single authored payload — no separate table for one row.
+    assessment_bank: Mapped[dict | None] = mapped_column(JSON, nullable=True)
 
 
 class Module(Base):
@@ -148,6 +151,9 @@ class XpEvent(Base):
     event: Mapped[str] = mapped_column(String)  # rule name
     xp: Mapped[int] = mapped_column(Integer)
     label: Mapped[str] = mapped_column(String)
+    # Dedupe key ("step:m1-l1-s1", "lesson:m1-l1-...") so every rule fires once
+    # per subject no matter how often the client retries (SPEC-002 idempotency).
+    ref: Mapped[str | None] = mapped_column(String, nullable=True, index=True)
     created_at: Mapped[str] = mapped_column(String, default=utc_now_iso)
 
 

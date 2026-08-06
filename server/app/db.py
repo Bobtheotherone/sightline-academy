@@ -36,6 +36,23 @@ def _set_sqlite_pragmas(dbapi_connection, connection_record) -> None:
 SessionLocal = sessionmaker(bind=engine, autoflush=False, expire_on_commit=False)
 
 
+# Columns added after Wave 0 shipped the tables. create_all never ALTERs, so a
+# dev DB created earlier needs these applied by hand (Alembic-free per
+# AGENT_OPERATIONS W0; a real migration tool stays out of budget).
+_LATE_COLUMNS = [
+    ("course_meta", "assessment_bank", "JSON"),
+    ("xp_events", "ref", "VARCHAR"),
+]
+
+
+def _ensure_late_columns() -> None:
+    with engine.begin() as conn:
+        for table, column, ddl in _LATE_COLUMNS:
+            rows = conn.exec_driver_sql(f"PRAGMA table_info({table})").fetchall()
+            if rows and column not in {r[1] for r in rows}:
+                conn.exec_driver_sql(f"ALTER TABLE {table} ADD COLUMN {column} {ddl}")
+
+
 def init_db() -> None:
     """Create the data directory and all tables (Alembic-free per AGENT_OPERATIONS W0)."""
     settings.data_path.mkdir(parents=True, exist_ok=True)
@@ -43,6 +60,7 @@ def init_db() -> None:
     from . import models  # noqa: F401
 
     Base.metadata.create_all(bind=engine)
+    _ensure_late_columns()
 
 
 def get_db() -> Generator[Session, None, None]:

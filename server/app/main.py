@@ -7,31 +7,36 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
-from sqlalchemy import select
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from .config import get_settings
 from .db import SessionLocal, init_db
 from .errors import ApiError
-from .models import Module
+from .ingest import ingest as ingest_mod
 from .routers import auth as auth_router
+from .routers import course as course_router
+from .routers import journal as journal_router
 from .routers import meta as meta_router
-from .services.fixtures import create_fixture_accounts
+from .routers import progress as progress_router
+from .routers import tutor as tutor_router
+from .services.fixtures import create_fixtures
+from .services.seed import run_seed
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")
 logger = logging.getLogger("sightline")
 
 
 def _startup() -> None:
+    """SPEC-002 §Startup: config → create_all → seed → ingest → warm → serve."""
     settings = get_settings()
     init_db()
     with SessionLocal() as db:
-        # Seed hook — the pipeline over content/curriculum/ lands in Wave 1.
-        has_modules = db.execute(select(Module.id).limit(1)).first() is not None
-        if not has_modules or settings.seed_force:
-            logger.info("course tables empty; seed pipeline lands in Wave 1")
-        if settings.fixtures:
-            create_fixture_accounts(db)
+        run_seed(db)
+    ingest_mod.ingest_if_needed(force=bool(settings.seed_force))
+    ingest_mod.warm_embedder()
+    if settings.fixtures:
+        with SessionLocal() as db:
+            create_fixtures(db)
 
 
 @asynccontextmanager
@@ -51,6 +56,10 @@ def create_app() -> FastAPI:
     app = FastAPI(title="Sightline Safety Academy API", lifespan=lifespan)
 
     app.include_router(auth_router.router, prefix="/api")
+    app.include_router(course_router.router, prefix="/api")
+    app.include_router(progress_router.router, prefix="/api")
+    app.include_router(journal_router.router, prefix="/api")
+    app.include_router(tutor_router.router, prefix="/api")
     app.include_router(meta_router.router, prefix="/api")
 
     @app.exception_handler(ApiError)

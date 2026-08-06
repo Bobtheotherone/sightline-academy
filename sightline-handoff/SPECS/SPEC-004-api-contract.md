@@ -29,7 +29,7 @@ Rate limits (R1.3) on register/login: 429 `{error:{code:"rate_limited", ...}}`.
 
 | Method & path | Response |
 | --- | --- |
-| GET `/course` | `{course, modules: ModuleOut[]}` — modules include per-user `{percent, complete, locked}` |
+| GET `/course` | `{course, modules: ModuleOut[]}` — modules include per-user `percent`, `complete`, `locked` as top-level fields (flat, matching web/src/lib/api.ts) |
 | GET `/modules/{moduleId}` | `{module, lessons: LessonSummary[]}` with per-lesson progress |
 | GET `/lessons/{lessonId}` | `{lesson, steps: StepOut[], evidence: {stepId: EvidenceOut}}` — full payloads for the player |
 
@@ -63,7 +63,7 @@ completion/XP server-side (client never self-awards).
 | --- | --- | --- |
 | POST `/tutor/ask` | `{message, lessonId?}` | `{id, answerMarkdown, grounding, sources: [{chunkId, title, moduleRef}], suggestions: string[], triage?: {category}}` |
 | POST `/tutor/ask/stream` | same | SSE: `token` events then one `meta` event with the non-text fields |
-| GET `/tutor/history` | — | `{messages: TutorMessageOut[]}` (last 50) |
+| GET `/tutor/history` | — | `{messages: TutorMessageOut[]}` (last 50; each message carries `sourceRefs: [{chunkId, title, moduleRef}]` resolved at read time — stored rows keep chunk ids only per SPEC-003) |
 | DELETE `/tutor/history` | — | 204 |
 | GET `/tutor/suggested` | — | `{prompts: string[]}` (context-aware starters; varies by learner position) |
 

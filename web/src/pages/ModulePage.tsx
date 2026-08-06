@@ -1,10 +1,19 @@
+/* Module overview (DESIGN-003 §Module overview): ContourPanel header with
+ * objectives blaze list + real ProgressRing, LessonRows with per-lesson status
+ * (sequenced inside an incomplete module, free revisit once complete — R2.5),
+ * BadgeMedal + journal artifact card when complete, and the DESIGN-005 locked
+ * composition with the real frontier module + lessons-away count.
+ */
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowLeft, Clock } from "lucide-react";
-import { api, ApiError } from "../lib/api";
-import { MODULE_FACTS } from "../lib/modules";
+import { api, ApiError, type LessonSummary, type ModuleOut } from "../lib/api";
+import { ARTIFACT_FACTS, BADGE_FACTS, MODULE_FACTS } from "../lib/modules";
 import { ContourPanel } from "../components/ContourPanel";
+import { BadgeMedal } from "../components/BadgeMedal";
 import { BlazeMarker } from "../components/BlazeMarker";
+import { JournalCard, shortDate } from "../components/JournalCard";
+import { LessonRow, type LessonRowStatus } from "../components/LessonRow";
 import { ProgressRing } from "../components/Progress";
 import { Card } from "../components/Card";
 import { Button, LinkButton } from "../components/Button";
@@ -25,93 +34,157 @@ function UnknownModule() {
   );
 }
 
-function LockedModule({ title, previousTitle }: { title: string; previousTitle: string }) {
+/** DESIGN-005 locked visit: real frontier module title + lessons-away count. */
+function LockedModule({ module }: { module: ModuleOut }) {
+  const progressQuery = useQuery({ queryKey: ["progress"], queryFn: () => api.progress() });
+  const frontier = progressQuery.data?.modules.find((m) => !m.complete);
+  const away = frontier ? frontier.lessonsTotal - frontier.lessonsCompleted : null;
+  const body =
+    frontier && away !== null
+      ? `Finish ${frontier.title} first — you're ${away} ${away === 1 ? "lesson" : "lessons"} away.`
+      : `The course builds in order for a reason — finish the module before this one first.`;
+
   return (
-    <div className="mx-auto w-full max-w-2xl px-6 py-16">
-      <EmptyState
-        art={<SlotArt slot="state-locked" ratio="5 / 3" />}
-        heading="You haven't unlocked this yet"
-        body={`${title} opens when you finish ${previousTitle} — the course builds in order for a reason.`}
-        action={<LinkButton to="/course">Back to the course map</LinkButton>}
-      />
+    <div className="flex-1">
+      <ContourPanel variant="light" className="border-b border-line-200">
+        <div className="mx-auto w-full max-w-page px-6 py-10 lg:px-12">
+          <Link
+            to="/course"
+            className="inline-flex items-center gap-1.5 rounded-sm text-sm font-medium text-pine-700 hover:underline"
+          >
+            <ArrowLeft className="size-4" strokeWidth={1.5} aria-hidden />
+            Course map
+          </Link>
+          <div className="mt-6 grid items-start gap-8 opacity-70 grayscale lg:grid-cols-[1fr_320px]">
+            <div>
+              <p className="ts-eyebrow flex items-center gap-2">
+                <BlazeMarker state="locked" size="s" />
+                Module {module.order} · locked
+              </p>
+              <h1 className="mt-1 font-display text-3xl font-extrabold">{module.title}</h1>
+              <p className="mt-2 text-lg text-ink-500">{module.tagline}</p>
+            </div>
+            <SlotArt slot={module.heroSlot} ratio="4 / 3" className="hidden lg:block" />
+          </div>
+        </div>
+      </ContourPanel>
+      <div className="mx-auto w-full max-w-2xl px-6 py-10">
+        <EmptyState
+          art={<SlotArt slot="state-locked" ratio="5 / 3" />}
+          heading="You haven't unlocked this yet"
+          body={body}
+          action={
+            <LinkButton to={frontier ? `/course/${frontier.moduleId}` : "/course"}>
+              {frontier ? `Go to ${frontier.title}` : "Back to the course map"}
+            </LinkButton>
+          }
+        />
+      </div>
     </div>
   );
 }
 
-function LessonList({ moduleId }: { moduleId: string }) {
-  const query = useQuery({
-    queryKey: ["module", moduleId],
-    queryFn: () => api.module(moduleId),
+function lessonStatuses(lessons: LessonSummary[], moduleComplete: boolean): LessonRowStatus[] {
+  let frontierSeen = false;
+  return lessons.map((lesson) => {
+    if (lesson.complete) return "done";
+    if (moduleComplete) return "todo";
+    if (!frontierSeen) {
+      frontierSeen = true;
+      return lesson.percent > 0 ? "active" : "todo";
+    }
+    return "locked";
   });
+}
 
-  if (query.isLoading) {
-    return (
-      <SkeletonGroup label="Loading lessons" className="flex flex-col gap-3">
-        <Skeleton className="h-16 w-full" />
-        <Skeleton className="h-16 w-full" />
-        <Skeleton className="h-16 w-full" />
-      </SkeletonGroup>
-    );
-  }
-
-  if (query.error || !query.data) {
-    return (
-      <Card padding="m">
-        <EmptyState
-          heading="Couldn't load this module's lessons"
-          body={
-            query.error instanceof ApiError && query.error.status === 0
-              ? "The connection dropped before the lessons arrived. Check your network and try again."
-              : "Something went wrong fetching the lesson list. Try again in a moment."
-          }
-          action={
-            <Button variant="secondary" onClick={() => query.refetch()}>
-              Try again
-            </Button>
-          }
-        />
-      </Card>
-    );
-  }
+/** Complete-module extras: the earned BadgeMedal + the artifact built here. */
+function CompleteExtras({ module }: { module: ModuleOut }) {
+  const facts = MODULE_FACTS.find((m) => m.id === module.id);
+  const progressQuery = useQuery({ queryKey: ["progress"], queryFn: () => api.progress() });
+  const journalQuery = useQuery({ queryKey: ["journal"], queryFn: () => api.journal() });
+  const badge = progressQuery.data?.badges.find((b) => b.id === module.badgeId);
+  const badgeName =
+    badge?.name ?? BADGE_FACTS.find((b) => b.id === module.badgeId)?.name ?? "Module badge";
+  const artifact = facts
+    ? journalQuery.data?.artifacts.find((a) => a.artifactType === facts.artifactType)
+    : undefined;
 
   return (
-    <ol className="flex flex-col gap-3">
-      {query.data.lessons.map((lesson) => (
-        <li key={lesson.id}>
-          <Link to={`/learn/${lesson.id}`} className="block rounded-md">
-            <Card interactive padding="s" className="flex items-center gap-4 px-5">
-              <BlazeMarker
-                state={lesson.complete ? "done" : lesson.percent > 0 ? "active" : "todo"}
-                size="m"
-              />
-              <div className="min-w-0 flex-1">
-                <p className="font-medium">{lesson.title}</p>
-                <p className="truncate text-sm text-ink-500">{lesson.summary}</p>
-              </div>
-              <span className="flex shrink-0 items-center gap-1.5 font-mono text-xs text-ink-500">
-                <Clock className="size-3.5" strokeWidth={1.5} aria-hidden />
-                {lesson.estimatedMinutes} min
-              </span>
-            </Card>
-          </Link>
-        </li>
-      ))}
-    </ol>
+    <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-center">
+      <BadgeMedal
+        badgeId={module.badgeId}
+        name={badgeName}
+        earned
+        detail={badge?.awardedAt ? `Earned ${shortDate(badge.awardedAt)}` : "Earned"}
+        size="l"
+        className="shrink-0"
+      />
+      {artifact && facts && (
+        <JournalCard
+          to={`/journal/${artifact.artifactType}`}
+          eyebrow={ARTIFACT_FACTS[artifact.artifactType].name}
+          title={artifact.title || ARTIFACT_FACTS[artifact.artifactType].name}
+          status={artifact.status}
+          updatedAt={artifact.updatedAt}
+          className="w-full max-w-sm"
+        />
+      )}
+    </div>
   );
 }
 
 export default function ModulePage() {
   const { moduleId = "" } = useParams();
-  const facts = MODULE_FACTS.find((m) => m.id === moduleId);
 
-  if (!facts) return <UnknownModule />;
+  const query = useQuery({
+    queryKey: ["module", moduleId],
+    queryFn: () => api.module(moduleId),
+    retry: (n, err) => !(err instanceof ApiError && err.status === 404) && n < 2,
+  });
 
-  // First-run assumption until per-user progress loads with the course API:
-  // Module 1 is open, later modules show the designed locked state.
-  if (facts.order > 1) {
-    const previous = MODULE_FACTS[facts.order - 2];
-    return <LockedModule title={facts.title} previousTitle={previous.title} />;
+  if (query.error instanceof ApiError && query.error.status === 404) return <UnknownModule />;
+
+  if (query.error != null) {
+    return (
+      <div className="mx-auto w-full max-w-2xl px-6 py-16">
+        <Card padding="l">
+          <EmptyState
+            heading="Couldn't load this module"
+            body={
+              query.error instanceof ApiError && query.error.status === 0
+                ? "The connection dropped before the module arrived. Check your network and try again."
+                : "Something went wrong fetching this module. Try again in a moment."
+            }
+            action={
+              <Button variant="secondary" onClick={() => query.refetch()}>
+                Try again
+              </Button>
+            }
+          />
+        </Card>
+      </div>
+    );
   }
+
+  if (query.isLoading || !query.data) {
+    return (
+      <div className="mx-auto w-full max-w-page flex-1 px-6 py-10 lg:px-12">
+        <SkeletonGroup label="Loading this module" className="flex flex-col gap-6">
+          <Skeleton className="h-5 w-32" />
+          <Skeleton className="h-48 w-full" />
+          <Skeleton className="h-16 w-full" />
+          <Skeleton className="h-16 w-full" />
+          <Skeleton className="h-16 w-full" />
+        </SkeletonGroup>
+      </div>
+    );
+  }
+
+  const { module, lessons } = query.data;
+  if (module.locked) return <LockedModule module={module} />;
+
+  const ordered = [...lessons].sort((a, b) => a.order - b.order);
+  const statuses = lessonStatuses(ordered, module.complete);
 
   return (
     <div className="flex-1">
@@ -126,40 +199,73 @@ export default function ModulePage() {
           </Link>
           <div className="mt-6 grid items-start gap-8 lg:grid-cols-[1fr_320px]">
             <div>
-              <p className="ts-eyebrow">Module {facts.order}</p>
-              <h1 className="mt-1 font-display text-3xl font-extrabold">{facts.title}</h1>
-              <p className="mt-2 text-lg text-ink-500">{facts.tagline}</p>
-              <p className="mt-4 max-w-2xl">{facts.mission}</p>
+              <p className="ts-eyebrow">Module {module.order}</p>
+              <h1 className="mt-1 font-display text-3xl font-extrabold">{module.title}</h1>
+              <p className="mt-2 text-lg text-ink-500">{module.tagline}</p>
+              <p className="mt-4 max-w-2xl">{module.mission}</p>
               <div className="mt-5 flex items-center gap-5">
                 <span className="flex items-center gap-1.5 font-mono text-sm text-ink-500">
                   <Clock className="size-4" strokeWidth={1.5} aria-hidden />
-                  About {facts.minutes} minutes
+                  About {module.estimatedMinutes} minutes
                 </span>
-                <ProgressRing value={0} size={44} strokeWidth={4} label="Module not started">
-                  <span className="font-mono text-xs">0%</span>
+                <ProgressRing
+                  value={module.percent}
+                  size={44}
+                  strokeWidth={4}
+                  label={
+                    module.complete
+                      ? "Module complete"
+                      : `Module ${module.percent} percent complete`
+                  }
+                >
+                  <span className="font-mono text-xs">{module.percent}%</span>
                 </ProgressRing>
               </div>
               <div className="mt-6">
                 <p className="ts-eyebrow">You'll be able to</p>
                 <ul className="mt-3 flex flex-col gap-2.5">
-                  {facts.objectives.map((objective) => (
+                  {module.objectives.map((objective) => (
                     <li key={objective} className="flex items-start gap-3">
-                      <BlazeMarker state="todo" size="s" className="mt-1.5" />
+                      <BlazeMarker
+                        state={module.complete ? "done" : "todo"}
+                        size="s"
+                        className="mt-1.5"
+                      />
                       <span className="text-sm">{objective}</span>
                     </li>
                   ))}
                 </ul>
               </div>
+              {module.complete && (
+                <div className="mt-8">
+                  <CompleteExtras module={module} />
+                </div>
+              )}
             </div>
-            <SlotArt slot={facts.heroSlot} ratio="4 / 3" className="hidden lg:block" />
+            <SlotArt slot={module.heroSlot} ratio="4 / 3" className="hidden lg:block" />
           </div>
         </div>
       </ContourPanel>
       <div className="mx-auto w-full max-w-page px-6 py-10 lg:px-12">
-        <h2 className="font-display text-xl font-bold">Lessons</h2>
-        <div className="mt-4">
-          <LessonList moduleId={moduleId} />
+        <div className="flex items-baseline justify-between gap-3">
+          <h2 className="font-display text-xl font-bold">Lessons</h2>
+          {module.complete && (
+            <p className="text-sm text-ink-500">Complete — revisit any lesson freely</p>
+          )}
         </div>
+        <ol className="mt-4 flex flex-col gap-3">
+          {ordered.map((lesson, i) => (
+            <li key={lesson.id}>
+              <LessonRow
+                order={lesson.order}
+                title={lesson.title}
+                minutes={lesson.estimatedMinutes}
+                status={statuses[i]}
+                to={statuses[i] === "locked" ? undefined : `/learn/${lesson.id}`}
+              />
+            </li>
+          ))}
+        </ol>
       </div>
     </div>
   );

@@ -35,13 +35,30 @@ class Settings(BaseSettings):
 
     # Storage (SQLite + Chroma live under one data dir; single volume per ADR-001)
     data_dir: str = "../data"
+    # Authored content (ADR-006 content-as-code; ADR-002 layout)
+    content_dir: str = "../content"
 
-    @property
-    def data_path(self) -> Path:
-        p = Path(self.data_dir)
+    def _resolve(self, raw: str) -> Path:
+        p = Path(raw)
         if not p.is_absolute():
             p = (SERVER_DIR / p).resolve()
         return p
+
+    @property
+    def data_path(self) -> Path:
+        return self._resolve(self.data_dir)
+
+    @property
+    def content_path(self) -> Path:
+        return self._resolve(self.content_dir)
+
+    @property
+    def curriculum_path(self) -> Path:
+        return self.content_path / "curriculum"
+
+    @property
+    def corpus_path(self) -> Path:
+        return self.content_path / "corpus"
 
     @property
     def sqlite_path(self) -> Path:

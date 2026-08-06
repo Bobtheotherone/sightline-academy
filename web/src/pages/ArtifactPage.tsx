@@ -1,20 +1,70 @@
+/* Artifact detail (DESIGN-003 §Journal): full ArtifactPreview with the field
+ * labels from the authoring payload, provenance line ("Built in Module N ·
+ * <title>"), and an edit action deep-linking to the journal step. The
+ * not-built state ships the module CTA instead.
+ */
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { ArrowLeft, PenLine } from "lucide-react";
+import { api, type ArtifactType, type SectionId } from "../lib/api";
+import type { JournalBuilderPayload } from "../activities/types";
 import { ARTIFACT_FACTS } from "../lib/modules";
-import type { ArtifactType } from "../lib/api";
+import { ArtifactPreview, type ArtifactPreviewEntry } from "../components/ArtifactPreview";
 import { Card } from "../components/Card";
 import { LinkButton } from "../components/Button";
 import { EmptyState } from "../components/EmptyState";
+import { shortDate } from "../components/JournalCard";
 import { SlotArt } from "../components/SlotArt";
+import { Skeleton, SkeletonGroup } from "../components/Skeleton";
+
+const JOURNAL_SECTION: SectionId = "journal";
 
 /**
- * Artifact detail (DESIGN-003 §Journal). The live ArtifactPreview arrives with
- * the journal_builder renderer (Wave 2); this shell owns the provenance chrome
- * and the designed not-built-yet state.
+ * Locate the journal_builder step that authors this artifact: the module's
+ * lesson listing names which lesson carries a journal section; that lesson's
+ * steps carry the field definitions (labels + order) and the edit deep-link.
  */
+function useJournalStep(artifactType: ArtifactType, moduleId: string, enabled: boolean) {
+  const moduleQuery = useQuery({
+    queryKey: ["module", moduleId],
+    queryFn: () => api.module(moduleId),
+    enabled,
+  });
+  const journalLesson = moduleQuery.data?.lessons.find((l) =>
+    l.sectionsPresent.includes(JOURNAL_SECTION),
+  );
+  const lessonQuery = useQuery({
+    queryKey: ["lesson", journalLesson?.id ?? ""],
+    queryFn: () => api.lesson(journalLesson?.id ?? ""),
+    enabled: enabled && Boolean(journalLesson),
+  });
+  const step = lessonQuery.data?.steps.find(
+    (s) =>
+      s.renderer === "journal_builder" &&
+      (s.payload as JournalBuilderPayload).artifactType === artifactType,
+  );
+  return {
+    loading: enabled && (moduleQuery.isLoading || lessonQuery.isLoading),
+    lessonId: journalLesson?.id,
+    step,
+  };
+}
+
 export default function ArtifactPage() {
   const { artifactType = "" } = useParams();
   const facts = ARTIFACT_FACTS[artifactType as ArtifactType];
+
+  const journalQuery = useQuery({
+    queryKey: ["journal"],
+    queryFn: () => api.journal(),
+    enabled: Boolean(facts),
+  });
+  const artifact = journalQuery.data?.artifacts.find((a) => a.artifactType === artifactType);
+  const { loading: stepLoading, lessonId, step } = useJournalStep(
+    artifactType as ArtifactType,
+    facts?.moduleId ?? "",
+    Boolean(facts && artifact),
+  );
 
   if (!facts) {
     return (
@@ -29,6 +79,27 @@ export default function ArtifactPage() {
     );
   }
 
+  const payload = step?.payload as JournalBuilderPayload | undefined;
+  const entries: ArtifactPreviewEntry[] = artifact
+    ? payload
+      ? payload.fields.map((f) => {
+          const raw = artifact.fields[f.id];
+          return {
+            id: f.id,
+            label: f.label,
+            value: Array.isArray(raw) ? raw.map(String) : raw === undefined ? "" : String(raw),
+          };
+        })
+      : Object.entries(artifact.fields).map(([id, raw]) => ({
+          id,
+          label: id.replaceAll("_", " "),
+          value: Array.isArray(raw) ? raw.map(String) : String(raw ?? ""),
+        }))
+    : [];
+
+  const editHref =
+    lessonId && step ? `/learn/${lessonId}?step=${step.id}&edit=1` : undefined;
+
   return (
     <div className="mx-auto w-full max-w-3xl flex-1 px-6 py-10">
       <Link
@@ -39,26 +110,58 @@ export default function ArtifactPage() {
         Field Journal
       </Link>
 
-      <div className="mt-6">
-        <p className="ts-eyebrow">
-          Built in Module {facts.moduleOrder} · {facts.moduleTitle}
-        </p>
-        <h1 className="mt-1 font-display text-3xl font-extrabold">{facts.name}</h1>
-        <p className="mt-2 max-w-xl text-ink-500">{facts.blurb}</p>
+      <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p className="ts-eyebrow">
+            Built in Module {facts.moduleOrder} · {facts.moduleTitle}
+          </p>
+          <h1 className="mt-1 font-display text-3xl font-extrabold">{facts.name}</h1>
+          <p className="mt-2 max-w-xl text-ink-500">{facts.blurb}</p>
+        </div>
+        {artifact && editHref && (
+          <LinkButton
+            to={editHref}
+            variant="secondary"
+            iconLeft={<PenLine className="size-4" strokeWidth={1.5} aria-hidden />}
+          >
+            Edit in the lesson
+          </LinkButton>
+        )}
       </div>
 
-      <Card padding="l" className="ts-ruled mt-8">
-        <EmptyState
-          art={<SlotArt slot="empty-journal" ratio="5 / 3" />}
-          heading={`You haven't built your ${facts.name.toLowerCase()} yet`}
-          body={`It comes together inside ${facts.moduleTitle} — the course walks you through every field.`}
-          action={
-            <LinkButton to={`/course/${facts.moduleId}`}>
-              Go to Module {facts.moduleOrder}
-            </LinkButton>
-          }
-        />
-      </Card>
+      <div className="mt-8">
+        {journalQuery.isLoading || stepLoading ? (
+          <SkeletonGroup label="Loading this artifact" className="flex flex-col gap-4">
+            <Skeleton className="h-10 w-full" />
+            <Skeleton className="h-64 w-full" />
+          </SkeletonGroup>
+        ) : artifact ? (
+          <>
+            <ArtifactPreview
+              eyebrow={`Field journal — ${facts.name}`}
+              title={artifact.title || facts.name}
+              entries={entries}
+              status={artifact.status}
+            />
+            <p className="mt-3 text-right font-mono text-xs text-ink-500">
+              Last updated {shortDate(artifact.updatedAt)}
+            </p>
+          </>
+        ) : (
+          <Card padding="l" className="ts-ruled">
+            <EmptyState
+              art={<SlotArt slot="empty-journal" ratio="5 / 3" />}
+              heading={`You haven't built your ${facts.name.toLowerCase()} yet`}
+              body={`It comes together inside ${facts.moduleTitle} — the course walks you through every field.`}
+              action={
+                <LinkButton to={`/course/${facts.moduleId}`}>
+                  Go to Module {facts.moduleOrder}
+                </LinkButton>
+              }
+            />
+          </Card>
+        )}
+      </div>
     </div>
   );
 }

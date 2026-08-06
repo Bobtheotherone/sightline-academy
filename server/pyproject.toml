@@ -15,6 +15,7 @@ dependencies = [
     "chromadb",
     "sentence-transformers",
     "httpx",
+    "pyyaml",
 ]
 
 [dependency-groups]
@@ -34,3 +35,7 @@ ignore = ["B008"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["."]
+# tmp_path under the (gitignored) cache dir — the default %TEMP%\pytest-of-*
+# location is ACL-broken on the dev machine.
+addopts = "--basetemp=.pytest_cache/basetemp"

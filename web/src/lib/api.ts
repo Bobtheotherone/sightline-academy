@@ -128,6 +128,7 @@ export interface LessonSummary {
   title: string;
   summary: string;
   estimatedMinutes: number;
+  sectionsPresent: SectionId[];
   percent: number;
   complete: boolean;
 }
@@ -201,6 +202,8 @@ export interface ModuleProgressRollup {
   title: string;
   percent: number;
   complete: boolean;
+  lessonsCompleted: number;
+  lessonsTotal: number;
 }
 
 export interface ProgressResponse {
@@ -285,6 +288,8 @@ export interface TutorMessageOut {
   content: string;
   grounding: Grounding | null;
   sources: string[];
+  /** Chip-ready refs resolved server-side at read time (stored rows carry only chunk ids). */
+  sourceRefs: SourceRef[];
   triageCategory: string | null;
   createdAt: string;
 }

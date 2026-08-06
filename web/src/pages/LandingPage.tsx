@@ -5,6 +5,7 @@ import { Card } from "../components/Card";
 import { ContourPanel } from "../components/ContourPanel";
 import { BlazeMarker } from "../components/BlazeMarker";
 import { SlotArt } from "../components/SlotArt";
+import { TrailPath } from "../components/TrailPath";
 import { Logo } from "../components/Logo";
 import { MODULE_FACTS } from "../lib/modules";
 
@@ -51,41 +52,40 @@ function TrailMap() {
         gear, the ground, the weather, and finally the road and everyone on it.
       </p>
 
-      <ol className="relative mt-10 flex flex-col gap-6 lg:gap-0">
-        {/* Winding connective path (desktop) */}
-        <span
-          className="absolute top-6 bottom-6 left-[7px] hidden w-px bg-line-200 lg:left-1/2 lg:block"
-          aria-hidden
-        />
-        <span className="absolute top-4 bottom-4 left-[7px] w-px bg-line-200 lg:hidden" aria-hidden />
-        {MODULE_FACTS.map((mod, i) => (
-          <li
-            key={mod.id}
-            className={`relative pl-8 lg:w-[calc(50%-28px)] lg:pl-0 ${
-              i % 2 === 0 ? "lg:self-start lg:pr-0" : "lg:self-end"
-            } ${i > 0 ? "lg:-mt-6" : ""}`}
-          >
-            <span
-              className={`absolute top-6 left-0 lg:left-auto ${
-                i % 2 === 0 ? "lg:-right-[35px]" : "lg:-left-[35px]"
-              }`}
+      {/* The winding trail — same treatment as the course map (TrailPath) */}
+      <div className="relative mt-10">
+        <TrailPath traversed={[]} bow={28} />
+        <ol className="relative flex flex-col gap-6 lg:gap-0">
+          {MODULE_FACTS.map((mod, i) => (
+            <li
+              key={mod.id}
+              className={`relative pl-12 lg:w-[calc(50%-32px)] lg:pl-0 ${
+                i % 2 === 0 ? "lg:self-start lg:pr-0" : "lg:self-end"
+              } ${i > 0 ? "lg:-mt-6" : ""}`}
             >
-              <BlazeMarker state={i === 0 ? "active" : "todo"} size="m" />
-            </span>
-            <Card interactive padding="m" className="h-full">
-              <div className="flex items-baseline justify-between gap-3">
-                <p className="ts-eyebrow">Module {mod.order}</p>
-                <span className="flex items-center gap-1 font-mono text-xs text-ink-500">
-                  <Clock className="size-3.5" strokeWidth={1.5} aria-hidden />
-                  {mod.minutes} min
-                </span>
-              </div>
-              <h3 className="mt-1.5 font-display text-xl font-bold">{mod.title}</h3>
-              <p className="mt-1.5 text-sm text-ink-500">{mod.tagline}</p>
-            </Card>
-          </li>
-        ))}
-      </ol>
+              <span
+                data-trail-anchor
+                className={`absolute top-6 lg:top-1/2 lg:-translate-y-1/2 ${
+                  i % 2 === 0 ? "left-1 lg:left-auto lg:-right-[41px]" : "left-6 lg:-left-[41px]"
+                }`}
+              >
+                <BlazeMarker state={i === 0 ? "active" : "todo"} size="m" />
+              </span>
+              <Card interactive padding="m" className="h-full">
+                <div className="flex items-baseline justify-between gap-3">
+                  <p className="ts-eyebrow">Module {mod.order}</p>
+                  <span className="flex items-center gap-1 font-mono text-xs text-ink-500">
+                    <Clock className="size-3.5" strokeWidth={1.5} aria-hidden />
+                    {mod.minutes} min
+                  </span>
+                </div>
+                <h3 className="mt-1.5 font-display text-xl font-bold">{mod.title}</h3>
+                <p className="mt-1.5 text-sm text-ink-500">{mod.tagline}</p>
+              </Card>
+            </li>
+          ))}
+        </ol>
+      </div>
     </section>
   );
 }
@@ -215,7 +215,8 @@ export default function LandingPage() {
       <div className="mx-auto mb-16 flex max-w-page flex-col items-center gap-4 px-6 text-center">
         <Compass className="size-6 text-clay-500" strokeWidth={1.5} aria-hidden />
         <p className="max-w-md font-display text-xl font-bold">
-          The trail is more fun when you can read it.
+          The trail is more fun when you can{" "}
+          <span className="whitespace-nowrap">read it.</span>
         </p>
         <LinkButton
           to="/register"

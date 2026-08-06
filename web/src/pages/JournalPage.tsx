@@ -1,35 +1,23 @@
-import { Link } from "react-router-dom";
+/* Field Journal index (DESIGN-003 §Journal): JournalCards in a 2-col masonry
+ * on the ruled background — type eyebrow, title, an excerpt in the learner's
+ * words, updated time, status stitch. Empty state copy is DESIGN-005 verbatim.
+ */
 import { useQuery } from "@tanstack/react-query";
 import { api, ApiError, type ArtifactOut } from "../lib/api";
 import { ARTIFACT_FACTS } from "../lib/modules";
 import { Card } from "../components/Card";
 import { Button, LinkButton } from "../components/Button";
 import { EmptyState } from "../components/EmptyState";
+import { JournalCard } from "../components/JournalCard";
 import { SlotArt } from "../components/SlotArt";
 import { Skeleton, SkeletonGroup } from "../components/Skeleton";
-import { BlazeMarker } from "../components/BlazeMarker";
 
-function ArtifactCard({ artifact }: { artifact: ArtifactOut }) {
-  const facts = ARTIFACT_FACTS[artifact.artifactType];
-  return (
-    <Link to={`/journal/${artifact.artifactType}`} className="block break-inside-avoid rounded-md">
-      <Card interactive padding="m" className="ts-ruled">
-        <p className="ts-eyebrow">{facts?.name ?? artifact.artifactType}</p>
-        <h2 className="mt-1 font-display text-lg font-bold">
-          {artifact.title || facts?.name}
-        </h2>
-        <div className="mt-3 flex items-center justify-between">
-          <span className="flex items-center gap-2 text-xs text-ink-500">
-            <BlazeMarker state={artifact.status === "complete" ? "done" : "active"} size="s" />
-            {artifact.status === "complete" ? "Complete" : "Draft"}
-          </span>
-          <span className="font-mono text-xs text-ink-500">
-            {new Date(artifact.updatedAt).toLocaleDateString()}
-          </span>
-        </div>
-      </Card>
-    </Link>
-  );
+/** First filled prose field, quoted on the card. */
+function excerptOf(artifact: ArtifactOut): string | undefined {
+  for (const value of Object.values(artifact.fields)) {
+    if (typeof value === "string" && value.trim().length > 12) return value.trim();
+  }
+  return undefined;
 }
 
 export default function JournalPage() {
@@ -41,6 +29,14 @@ export default function JournalPage() {
     (query.data && query.data.artifacts.length === 0) ||
     (query.error instanceof ApiError && query.error.status === 404);
   const hardError = query.error != null && !emptyish;
+
+  const artifacts = (query.data?.artifacts ?? [])
+    .slice()
+    .sort(
+      (a, b) =>
+        (ARTIFACT_FACTS[a.artifactType]?.moduleOrder ?? 9) -
+        (ARTIFACT_FACTS[b.artifactType]?.moduleOrder ?? 9),
+    );
 
   return (
     <div className="mx-auto w-full max-w-page flex-1 px-6 py-10 lg:px-12">
@@ -85,11 +81,22 @@ export default function JournalPage() {
           </Card>
         )}
 
-        {query.data && query.data.artifacts.length > 0 && (
+        {artifacts.length > 0 && (
           <div className="columns-1 gap-5 md:columns-2 [&>*]:mb-5">
-            {query.data.artifacts.map((artifact) => (
-              <ArtifactCard key={artifact.artifactType} artifact={artifact} />
-            ))}
+            {artifacts.map((artifact) => {
+              const facts = ARTIFACT_FACTS[artifact.artifactType];
+              return (
+                <JournalCard
+                  key={artifact.artifactType}
+                  to={`/journal/${artifact.artifactType}`}
+                  eyebrow={facts?.name ?? artifact.artifactType}
+                  title={artifact.title || facts?.name || artifact.artifactType}
+                  excerpt={excerptOf(artifact)}
+                  status={artifact.status}
+                  updatedAt={artifact.updatedAt}
+                />
+              );
+            })}
           </div>
         )}
       </div>
