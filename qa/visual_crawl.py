@@ -73,6 +73,14 @@ def drive_state(page: Page, route: str, state: dict) -> None:
         target = state["stepId"]
         page.goto(page.url.split("?")[0] + f"?step={target}")
         page.wait_for_load_state("networkidle")
+        try:
+            # First /learn visit cold-compiles the whole lesson chunk graph in
+            # dev; wait for the player to actually mount before driving.
+            page.wait_for_selector(
+                "[data-step-id], [aria-label^='Next section']", timeout=20000
+            )
+        except Exception:
+            pass  # fall through — the loop below reports a real gate
         idle = 0
         for i in range(60):
             if page.locator(f"[data-step-id='{target}']").count():
