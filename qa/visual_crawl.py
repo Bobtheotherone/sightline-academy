@@ -47,7 +47,9 @@ def slug(s: str) -> str:
 def login(page: Page, base: str, email: str) -> None:
     page.goto(f"{base}/login")
     page.get_by_label(re.compile("email", re.I)).fill(email)
-    page.get_by_label(re.compile("password", re.I)).fill(PASSWORD)
+    # ^anchor: the field label is "Password"; an unanchored regex also matches
+    # the PasswordInput's accessible "Show password" toggle (strict-mode clash).
+    page.get_by_label(re.compile(r"^password$", re.I)).fill(PASSWORD)
     page.get_by_role("button", name=re.compile("log ?in|sign ?in", re.I)).click()
     page.wait_for_url(re.compile(r"/dashboard"))
 
@@ -79,7 +81,7 @@ def drive_state(page: Page, route: str, state: dict) -> None:
         page.get_by_role("button", name=re.compile("delete", re.I)).first.click()
     if name == "invalid-credentials":
         page.get_by_label(re.compile("email", re.I)).fill("nobody@crawl.test")
-        page.get_by_label(re.compile("password", re.I)).fill("wrong-pass")
+        page.get_by_label(re.compile(r"^password$", re.I)).fill("wrong-pass")
         page.get_by_role("button", name=re.compile("log ?in", re.I)).click()
         page.wait_for_timeout(400)
     # Unknown states without params: screenshot the default render — the

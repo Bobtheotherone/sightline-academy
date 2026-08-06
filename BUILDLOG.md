@@ -19,3 +19,5 @@ One line per meaningful decision or deviation (AGENT_OPERATIONS §BUILDLOG forma
 2026-08-06 W0 [ops] content/ COPYed into api image (ADR-006 content-as-code; edit ⇒ rebuild); image mirrors monorepo layout so ../content resolves as in dev.
 2026-08-06 W0 [ops] .env.example comments moved to own lines — compose env parser would have made an inline comment the literal ANTHROPIC_API_KEY value and silently selected the anthropic provider.
 2026-08-06 W0 [ops] /api proxy: proxy_buffering off + 75s read timeout so SSE streaming survives nginx; security headers repeated in /assets/ (add_header inheritance reset); compose project name pinned "sightline"; MiniLM pre-downloaded at image build into /opt/hf-cache.
+2026-08-06 W0 [qa] visual_crawl.py login locator anchored (^password$) — unanchored regex also matched the PasswordInput "Show password" toggle (Playwright strict mode). Minimal STARTER-copy fix per copy rule.
+2026-08-06 W0 [qa] Crawl pass 1: 66 shots, 12 skips (all /learn renderer states — no seed yet). Review in artifacts/crawl/pass-1/REVIEW.md. Wave 0 exit criteria met.
