@@ -1,5 +1,5 @@
 {
-  "$comment": "Machine-readable mirror of SPEC-010. Consumed by STARTER/visual_crawl.py. Add a route in SPEC-010 -> add it here in the same commit. 'fixture' names the crawl account (QA-001) whose seeded state makes the route's states reachable.",
+  "$comment": "Machine-readable mirror of SPEC-010. Consumed by qa/visual_crawl.py. Add a route in SPEC-010 -> add it here in the same commit. 'fixture' names the crawl account (QA-001) whose seeded state makes the route's states reachable.",
   "viewports": [
     {
       "name": "desktop",
@@ -102,19 +102,21 @@
       "states": [
         {
           "state": "not-started",
-          "fixture": "mid",
-          "param": "m3-gear-up"
+          "fixture": "fresh",
+          "param": "m1-riders-mindset",
+          "note": "fresh + m1 is the only truly 0% unlocked module (pass-4 remap)"
         },
         {
           "state": "partial",
           "fixture": "mid",
-          "param": "m2-know-your-machine",
-          "note": "reach via in-progress lesson"
+          "param": "m3-gear-up",
+          "note": "mid is mid-Module-3 (43%) — the real partial (pass-4 remap)"
         },
         {
           "state": "complete-badge",
           "fixture": "mid",
-          "param": "m1-riders-mindset"
+          "param": "m2-know-your-machine",
+          "note": "badge + inspection-log artifact card (pass-4 remap)"
         },
         {
           "state": "locked-direct-visit",
@@ -203,6 +205,27 @@
           "param": "m6-l4-ride-plan",
           "stepId": "m6-l4-s3",
           "note": "revisit mode"
+        },
+        {
+          "state": "prediction-locked-revealed",
+          "fixture": "fresh",
+          "param": "m1-l1-why-riders-crash",
+          "stepId": "m1-l1-s2",
+          "note": "deep state: prediction committed — Locked-in pill + per-option unmask + general reveal (DESIGN-004 moment 4)"
+        },
+        {
+          "state": "checkpoint-wrong-answer-feedback",
+          "fixture": "fresh",
+          "param": "m1-l1-why-riders-crash",
+          "stepId": "m1-l1-s4",
+          "note": "QA-001 §crawl item 3: answer MC wrong to capture not-best feedback"
+        },
+        {
+          "state": "sort-wrong-drop-feedback",
+          "fixture": "mid",
+          "param": "m3-l2-head-to-toe",
+          "stepId": "m3-l2-s1",
+          "note": "wrong drop: shake, item back to tray, teaching FeedbackStrip"
         },
         {
           "state": "continue-disabled-with-reason",
@@ -352,6 +375,11 @@
         {
           "state": "long-history-scroll",
           "fixture": "mid"
+        },
+        {
+          "state": "asking-typing-bubble",
+          "fixture": "mid",
+          "note": "between send and first token: three-dot Ranger typing bubble (DESIGN-004 moment 6); harness holds the ask route so nothing persists"
         }
       ]
     },
@@ -417,6 +445,14 @@
       "how": "context.setOffline(true)",
       "routes": [
         "/learn/m1-l1-why-riders-crash"
+      ]
+    },
+    {
+      "state": "focus-visible-tab-through",
+      "how": "keyboard tabbing into the shell nav (QA-001 §crawl item 5: one per shell)",
+      "routes": [
+        "/login",
+        "/dashboard"
       ]
     },
     {

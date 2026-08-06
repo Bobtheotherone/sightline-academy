@@ -143,8 +143,10 @@ function JournalPeek() {
                   {latest.title || ARTIFACT_FACTS[latest.artifactType]?.name}
                 </p>
                 <p className="font-mono text-xs leading-8 text-ink-500">
-                  {latest.status === "complete" ? "Complete" : "Draft"} · updated{" "}
-                  {shortDate(latest.updatedAt)}
+                  {latest.status === "complete" ? "Complete" : "Draft"} ·{" "}
+                  <span className="whitespace-nowrap">
+                    updated {shortDate(latest.updatedAt)}
+                  </span>
                 </p>
               </div>
             </Link>

@@ -73,7 +73,10 @@ export function ActivityHost({ step, evidence, onEvidence, prefill }: ActivityPr
           {answered && (
             <span className="inline-flex items-center gap-1.5 rounded-full border border-line-200 bg-moss-100 px-2.5 py-1 text-xs font-medium text-ink-500">
               <BlazeMarker state="done" size="s" />
-              Answered — changes are saved
+              {/* Content steps aren't "answered" — they're read (pass-4 P3). */}
+              {step.renderer === "content"
+                ? "Read — revisit freely"
+                : "Answered — changes are saved"}
             </span>
           )}
         </div>

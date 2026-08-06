@@ -103,17 +103,21 @@ export default function StructuredResponseActivity({ step, evidence, onEvidence 
         <Markdown inline md={payload.prompt} />
       </p>
 
-      {/* Criteria chips — coaching heuristics, never a gate. */}
+      {/* Criteria chips — coaching heuristics, never a gate. Once submitted
+          they become a plain reference list: keeping live lit/unlit telemetry
+          next to a finished response read like a grade (pass-4 P3). */}
       <section aria-label="What a strong response covers">
         <div className="flex flex-wrap items-baseline justify-between gap-2">
           <p className="ts-eyebrow">A strong response covers</p>
-          <p className="font-mono text-xs text-ink-500" aria-live="polite">
-            {litCount} of {payload.criteria.length} points touched
-          </p>
+          {!submitted && (
+            <p className="font-mono text-xs text-ink-500" aria-live="polite">
+              {litCount} of {payload.criteria.length} points touched
+            </p>
+          )}
         </div>
         <ul className="mt-2 flex flex-col gap-1.5">
           {payload.criteria.map((criterion, i) => {
-            const lit = litFlags[i];
+            const lit = !submitted && litFlags[i];
             return (
               <li
                 key={criterion}
@@ -124,10 +128,10 @@ export default function StructuredResponseActivity({ step, evidence, onEvidence 
                 }`}
               >
                 <BlazeMarker
-                  state={lit ? "done" : "todo"}
+                  state={lit ? "done" : submitted ? "active" : "todo"}
                   size="m"
                   className="mt-1"
-                  label={lit ? "Looks covered" : "Not detected yet"}
+                  label={lit ? "Looks covered" : submitted ? undefined : "Not detected yet"}
                 />
                 <span className="min-w-0">{criterion}</span>
               </li>
@@ -135,8 +139,9 @@ export default function StructuredResponseActivity({ step, evidence, onEvidence 
           })}
         </ul>
         <p className="mt-1.5 text-xs text-ink-500">
-          Chips light as your draft seems to touch each point — a nudge while you write, not a
-          grade.
+          {submitted
+            ? "The angles worth rereading your response against."
+            : "Chips light as your draft seems to touch each point — a nudge while you write, not a grade."}
         </p>
       </section>
 

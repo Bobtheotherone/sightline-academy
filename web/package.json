@@ -7,8 +7,10 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "e2e": "playwright test"
   },
+  "//e2e": "QA-002 journeys J1-J3. Expects servers already up: API :8021 (FIXTURES=1, scratch DATA_DIR, no ANTHROPIC_API_KEY) and vite :5181 (VITE_API_TARGET=http://localhost:8021). Full boot recipe in playwright.config.ts.",
   "dependencies": {
     "@fontsource-variable/bricolage-grotesque": "^5.2.5",
     "@fontsource/inter": "^5.2.5",
@@ -26,6 +28,7 @@
     "react-router-dom": "^6.30.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.62.1",
     "@tailwindcss/vite": "^4.0.9",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",

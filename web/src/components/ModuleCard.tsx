@@ -80,7 +80,7 @@ export function ModuleCard({
         </div>
         <p className="text-sm text-ink-500">{tagline}</p>
         <div className="mt-auto flex items-center justify-between gap-3 pt-2">
-          <span className="inline-flex items-center gap-1.5 text-sm text-ink-500">
+          <span className="inline-flex shrink-0 items-center gap-1.5 text-sm whitespace-nowrap text-ink-500">
             <Clock className="size-4" strokeWidth={1.5} aria-hidden />
             {minutes} min
           </span>

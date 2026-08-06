@@ -131,7 +131,7 @@ export default function CoursePage() {
                         <h2 className="mt-0.5 font-display text-lg font-bold">
                           Final assessment &amp; certificate
                         </h2>
-                        <p className="text-sm text-ink-500">
+                        <p className="text-sm text-balance text-ink-500">
                           Twenty questions, no timer, 80% to earn it.
                         </p>
                       </div>
