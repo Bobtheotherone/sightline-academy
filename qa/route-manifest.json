@@ -1,0 +1,433 @@
+{
+  "$comment": "Machine-readable mirror of SPEC-010. Consumed by STARTER/visual_crawl.py. Add a route in SPEC-010 -> add it here in the same commit. 'fixture' names the crawl account (QA-001) whose seeded state makes the route's states reachable.",
+  "viewports": [
+    {
+      "name": "desktop",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "name": "mobile",
+      "width": 375,
+      "height": 812
+    }
+  ],
+  "fixtures": {
+    "fresh": {
+      "email": "fresh@crawl.test",
+      "note": "0 progress"
+    },
+    "mid": {
+      "email": "mid@crawl.test",
+      "note": "Modules 1-2 complete, 340 XP, 12-message tutor history"
+    },
+    "grad": {
+      "email": "grad@crawl.test",
+      "note": "course + assessment complete, certificate issued"
+    }
+  },
+  "public": [
+    {
+      "route": "/",
+      "page": "Landing",
+      "states": [
+        "default",
+        "scrolled-modules",
+        "scrolled-tutor-teaser"
+      ]
+    },
+    {
+      "route": "/login",
+      "page": "Login",
+      "states": [
+        "default",
+        "invalid-credentials",
+        "rate-limited"
+      ]
+    },
+    {
+      "route": "/register",
+      "page": "Register",
+      "states": [
+        "default",
+        "validation-errors",
+        "duplicate-email"
+      ]
+    },
+    {
+      "route": "/verify/:code",
+      "page": "Certificate verify",
+      "states": [
+        "valid (use grad certificate code)",
+        "invalid-code"
+      ]
+    }
+  ],
+  "app": [
+    {
+      "route": "/dashboard",
+      "page": "Dashboard",
+      "states": [
+        {
+          "state": "first-run",
+          "fixture": "fresh"
+        },
+        {
+          "state": "mid-course-continue-card",
+          "fixture": "mid"
+        },
+        {
+          "state": "graduate",
+          "fixture": "grad"
+        }
+      ]
+    },
+    {
+      "route": "/course",
+      "page": "Course map",
+      "states": [
+        {
+          "state": "mixed-locked-unlocked",
+          "fixture": "mid"
+        },
+        {
+          "state": "all-complete",
+          "fixture": "grad"
+        }
+      ]
+    },
+    {
+      "route": "/course/:moduleId",
+      "page": "Module overview",
+      "states": [
+        {
+          "state": "not-started",
+          "fixture": "mid",
+          "param": "m3-gear-up"
+        },
+        {
+          "state": "partial",
+          "fixture": "mid",
+          "param": "m2-know-your-machine",
+          "note": "reach via in-progress lesson"
+        },
+        {
+          "state": "complete-badge",
+          "fixture": "mid",
+          "param": "m1-riders-mindset"
+        },
+        {
+          "state": "locked-direct-visit",
+          "fixture": "mid",
+          "param": "m5-environment-emergencies"
+        }
+      ]
+    },
+    {
+      "route": "/learn/:lessonId",
+      "page": "Lesson player",
+      "states": [
+        {
+          "state": "renderer-content",
+          "fixture": "fresh",
+          "param": "m1-l1-why-riders-crash",
+          "stepId": "m1-l1-s1"
+        },
+        {
+          "state": "renderer-prediction_reveal",
+          "fixture": "fresh",
+          "param": "m1-l1-why-riders-crash",
+          "stepId": "m1-l1-s2"
+        },
+        {
+          "state": "renderer-checkpoint-multiple_choice",
+          "fixture": "fresh",
+          "param": "m1-l1-why-riders-crash",
+          "stepId": "m1-l1-s4"
+        },
+        {
+          "state": "renderer-branching_decision",
+          "fixture": "fresh",
+          "param": "m1-l2-judgment-pressure",
+          "stepId": "m1-l2-s2"
+        },
+        {
+          "state": "renderer-reflection",
+          "fixture": "fresh",
+          "param": "m1-l2-judgment-pressure",
+          "stepId": "m1-l2-s3"
+        },
+        {
+          "state": "renderer-journal_builder",
+          "fixture": "fresh",
+          "param": "m1-l3-risk-profile",
+          "stepId": "m1-l3-s2"
+        },
+        {
+          "state": "renderer-hotspot_list",
+          "fixture": "mid",
+          "param": "m2-l1-anatomy",
+          "stepId": "m2-l1-s2",
+          "note": "revisit mode"
+        },
+        {
+          "state": "renderer-match",
+          "fixture": "mid",
+          "param": "m2-l2-controls",
+          "stepId": "m2-l2-s1",
+          "note": "revisit mode"
+        },
+        {
+          "state": "renderer-lab_objective-walkaround",
+          "fixture": "mid",
+          "param": "m2-l3-walkaround",
+          "stepId": "m2-l3-s2",
+          "note": "revisit mode"
+        },
+        {
+          "state": "renderer-sort_categorize",
+          "fixture": "mid",
+          "param": "m3-l2-head-to-toe",
+          "stepId": "m3-l2-s1"
+        },
+        {
+          "state": "renderer-lab_objective-stability_explorer",
+          "fixture": "mid",
+          "param": "m4-l2-stability",
+          "stepId": "m4-l2-s2"
+        },
+        {
+          "state": "renderer-checkpoint-structured_response",
+          "fixture": "grad",
+          "param": "m6-l4-ride-plan",
+          "stepId": "m6-l4-s3",
+          "note": "revisit mode"
+        },
+        {
+          "state": "continue-disabled-with-reason",
+          "fixture": "fresh",
+          "param": "m1-l1-why-riders-crash"
+        },
+        {
+          "state": "section-interstitial",
+          "fixture": "fresh",
+          "param": "m1-l1-why-riders-crash"
+        },
+        {
+          "state": "lesson-complete",
+          "fixture": "fresh",
+          "param": "m1-l1-why-riders-crash"
+        }
+      ]
+    },
+    {
+      "route": "/journal",
+      "page": "Field Journal",
+      "states": [
+        {
+          "state": "empty",
+          "fixture": "fresh"
+        },
+        {
+          "state": "two-drafts",
+          "fixture": "mid"
+        },
+        {
+          "state": "all-complete",
+          "fixture": "grad"
+        }
+      ]
+    },
+    {
+      "route": "/journal/:artifactType",
+      "page": "Artifact detail",
+      "states": [
+        {
+          "state": "draft",
+          "fixture": "mid",
+          "param": "inspection_log"
+        },
+        {
+          "state": "complete",
+          "fixture": "mid",
+          "param": "risk_profile"
+        },
+        {
+          "state": "ride_plan-with-prefills",
+          "fixture": "grad",
+          "param": "ride_plan"
+        }
+      ]
+    },
+    {
+      "route": "/progress",
+      "page": "Progress & badges",
+      "states": [
+        {
+          "state": "early",
+          "fixture": "fresh"
+        },
+        {
+          "state": "late-badges-level-ring",
+          "fixture": "grad"
+        }
+      ]
+    },
+    {
+      "route": "/assessment",
+      "page": "Final assessment",
+      "states": [
+        {
+          "state": "locked",
+          "fixture": "mid"
+        },
+        {
+          "state": "intro",
+          "fixture": "grad",
+          "note": "retake entry"
+        },
+        {
+          "state": "in-progress",
+          "fixture": "grad"
+        },
+        {
+          "state": "results-pass",
+          "fixture": "grad"
+        },
+        {
+          "state": "results-fail-interstitial",
+          "fixture": "grad",
+          "note": "scripted failing attempt"
+        }
+      ]
+    },
+    {
+      "route": "/certificate",
+      "page": "Certificate",
+      "states": [
+        {
+          "state": "not-yet-designed-state",
+          "fixture": "mid"
+        },
+        {
+          "state": "issued",
+          "fixture": "grad"
+        },
+        {
+          "state": "print-preview",
+          "fixture": "grad"
+        }
+      ]
+    },
+    {
+      "route": "/tutor",
+      "page": "Ranger full page",
+      "states": [
+        {
+          "state": "first-run-intro",
+          "fixture": "fresh"
+        },
+        {
+          "state": "conversation-grounding-curriculum",
+          "fixture": "mid"
+        },
+        {
+          "state": "conversation-grounding-mixed",
+          "fixture": "mid"
+        },
+        {
+          "state": "conversation-grounding-general",
+          "fixture": "mid"
+        },
+        {
+          "state": "conversation-triage-decline",
+          "fixture": "mid"
+        },
+        {
+          "state": "offline-mode-header",
+          "fixture": "mid",
+          "note": "run with no ANTHROPIC_API_KEY"
+        },
+        {
+          "state": "long-history-scroll",
+          "fixture": "mid"
+        }
+      ]
+    },
+    {
+      "route": "/account",
+      "page": "Account",
+      "states": [
+        {
+          "state": "default",
+          "fixture": "mid"
+        },
+        {
+          "state": "delete-confirm-modal",
+          "fixture": "mid"
+        }
+      ]
+    },
+    {
+      "route": "/instructor",
+      "page": "Instructor overview",
+      "states": [
+        {
+          "state": "with-data",
+          "fixture": "grad",
+          "note": "grad email listed in INSTRUCTOR_EMAILS for crawl env"
+        },
+        {
+          "state": "designed-403",
+          "fixture": "fresh"
+        }
+      ]
+    },
+    {
+      "route": "/definitely-not-a-trail",
+      "page": "Not found",
+      "states": [
+        {
+          "state": "designed-404",
+          "fixture": "mid"
+        }
+      ]
+    }
+  ],
+  "crossCutting": [
+    {
+      "state": "loading-skeletons",
+      "how": "throttled network",
+      "routes": [
+        "/dashboard",
+        "/course",
+        "/tutor"
+      ]
+    },
+    {
+      "state": "error-toast",
+      "how": "kill API mid-session",
+      "routes": [
+        "/dashboard"
+      ]
+    },
+    {
+      "state": "offline-banner",
+      "how": "context.setOffline(true)",
+      "routes": [
+        "/learn/m1-l1-why-riders-crash"
+      ]
+    },
+    {
+      "state": "mobile-set",
+      "viewport": "mobile",
+      "routes": [
+        "/dashboard",
+        "/course",
+        "/learn/m3-l2-head-to-toe",
+        "/journal",
+        "/tutor"
+      ]
+    }
+  ]
+}
