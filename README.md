@@ -17,7 +17,8 @@ React + Vite + Tailwind on the front, deployed as a single-host Docker Compose p
 - `web/` — Vite + React + TypeScript SPA
 - `content/` — curriculum + RAG corpus (data, not docs: seeded/ingested at boot)
 - `ops/` — Dockerfiles, nginx config, docker-compose
-- `qa/` — test and QA assets
+- `qa/` — the visual-crawl harness and its route×state manifest (QA-001)
+- `artifacts/` — the reviewed crawl passes and the final launch gate walk
 
 ## Commands
 
@@ -136,7 +137,8 @@ the repo:
   launch-checklist box with its evidence) and `SPEC-001-acceptance.md`
   (every product-requirement AC, how it was verified, and where).
 - `web/e2e/` — the three QA-002 user journeys (J1 first session, J2 full
-  completion + capstone + certificate, J3 assessment fail→pass + tutor), run
+  completion + capstone + assessment fail→pass + certificate, J3 the Ranger
+  conversation across all four grounding/triage modes), run
   with Playwright against a fixture-seeded stack (`npm run e2e` in `web/`;
   boot recipe in `web/playwright.config.ts`). The API smoke + four unit
   targets live in `server/tests/` (`uv run pytest`).
