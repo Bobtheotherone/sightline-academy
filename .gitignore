@@ -18,10 +18,8 @@ server/data/
 # Env & secrets
 .env
 
-# Crawl output (screenshots are artifacts, reviews are committed)
+# Crawl output (screenshot dumps stay local; artifacts/ reviews are committed)
 qa/crawl-runs/
-artifacts/crawl/*/
-!artifacts/crawl/*/REVIEW.md
 
 # OS noise
 Thumbs.db

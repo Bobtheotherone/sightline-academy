@@ -256,13 +256,15 @@ export default function DashboardPage() {
       <Greeting progress={progress} />
 
       {progressQuery.isLoading ? (
+        /* Skeleton heights track the loaded layout (hero ~391px, cards ~335px on
+         * desktop) so the swap doesn't shift the page (QA-004 CLS). */
         <SkeletonGroup label="Loading your basecamp" className="flex flex-col gap-8">
-          <Skeleton className="h-56 w-full rounded-lg" />
+          <Skeleton className="h-96 w-full rounded-lg" />
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            <Skeleton className="h-44" />
-            <Skeleton className="h-44" />
-            <Skeleton className="h-44" />
-            <Skeleton className="h-44" />
+            <Skeleton className="h-80" />
+            <Skeleton className="h-80" />
+            <Skeleton className="h-80" />
+            <Skeleton className="h-80" />
           </div>
         </SkeletonGroup>
       ) : (

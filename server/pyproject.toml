@@ -14,6 +14,9 @@ dependencies = [
     "python-multipart",
     "chromadb",
     "sentence-transformers",
+    # torch is required by sentence-transformers anyway; declared directly so
+    # [tool.uv.sources] below can pin CPU wheels for the linux Docker image.
+    "torch",
     "httpx",
     "pyyaml",
 ]
@@ -23,6 +26,17 @@ dev = [
     "pytest",
     "ruff",
 ]
+
+# CPU-only torch wheels for the linux Docker image (SPEC-012: "torch-cpu wheels
+# for sentence-transformers"). Without this, PyPI torch drags the full CUDA
+# toolkit (~6 GB) into the api image. Windows/macOS keep PyPI torch (already CPU).
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu", marker = "sys_platform == 'linux'" }]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
 
 [tool.ruff]
 line-length = 100

@@ -122,3 +122,21 @@ academy.example.com {
 
 - **No sound.** The product ships silent by deliberate decision (DESIGN-004).
 - **One light theme.** A single, fully-specified light theme; no dark mode (DESIGN-001).
+
+## Verification artifacts
+
+The launch bar was verified continuously, not terminally. The records live in
+the repo:
+
+- `artifacts/crawl/` — the reviewed screenshot-crawl passes (one `REVIEW.md`
+  per pass; pass 5 is the zero-P1/zero-P2 exit pass over the full 92-state
+  route×state matrix, and its appendix holds the full-site traversal audit:
+  90 page visits, zero dead links, zero console errors).
+- `artifacts/launch/` — the final gate walk: `QA-004-checklist.md` (every
+  launch-checklist box with its evidence) and `SPEC-001-acceptance.md`
+  (every product-requirement AC, how it was verified, and where).
+- `web/e2e/` — the three QA-002 user journeys (J1 first session, J2 full
+  completion + capstone + certificate, J3 assessment fail→pass + tutor), run
+  with Playwright against a fixture-seeded stack (`npm run e2e` in `web/`;
+  boot recipe in `web/playwright.config.ts`). The API smoke + four unit
+  targets live in `server/tests/` (`uv run pytest`).

@@ -6,8 +6,11 @@ export function Skeleton({ className = "" }: { className?: string }) {
 }
 
 /**
- * Wrapper that delays skeleton render by 150ms to avoid flash (DESIGN-005),
- * and labels the region busy for assistive tech.
+ * Wrapper that hides the skeleton for its first 150ms to avoid flash
+ * (DESIGN-005), and labels the region busy for assistive tech. The children
+ * stay mounted (visibility:hidden) so their space is reserved from the first
+ * frame — collapsing to zero height here caused a full-card layout shift when
+ * data arrived near the 150ms boundary (QA-004 CLS).
  */
 export function SkeletonGroup({
   children,
@@ -24,8 +27,12 @@ export function SkeletonGroup({
     return () => window.clearTimeout(t);
   }, []);
   return (
-    <div aria-busy="true" aria-label={label} className={className}>
-      {show ? children : null}
+    <div
+      aria-busy="true"
+      aria-label={label}
+      className={`${className}${show ? "" : " invisible"}`}
+    >
+      {children}
     </div>
   );
 }

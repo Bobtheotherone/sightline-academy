@@ -15,5 +15,13 @@ export default defineConfig(({ mode }) => {
         },
       },
     },
+    preview: {
+      proxy: {
+        "/api": {
+          target: env.VITE_API_TARGET || "http://localhost:8022",
+          changeOrigin: false,
+        },
+      },
+    },
   };
 });

@@ -28,8 +28,10 @@ export function ContinueCard({ state }: { state: LearnerStateOut }) {
 
   if (lessonQuery.isLoading) {
     return (
+      /* Height tracks the loaded card (~391px desktop) so the swap doesn't
+       * shift the grid below (QA-004 CLS). */
       <SkeletonGroup label="Loading where you left off" className="block">
-        <Skeleton className="h-56 w-full rounded-lg" />
+        <Skeleton className="h-96 w-full rounded-lg" />
       </SkeletonGroup>
     );
   }

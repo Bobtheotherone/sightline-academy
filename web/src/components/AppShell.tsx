@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState } from "react";
+import { lazy, Suspense, useRef, useState, type RefObject } from "react";
 import { matchPath, NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Map, NotebookPen, TrendingUp, Compass, LogOut, UserRound, BarChart3 } from "lucide-react";
 import { Logo } from "./Logo";
@@ -86,11 +86,30 @@ function UserMenu() {
 /** The Ranger slide-over reachable from anywhere in the app shell. It hosts the
  * same chat surface as /tutor; opened from a lesson it passes the lessonId so
  * learner context flows into answers (SPEC-008 §Learner context). */
-function RangerSlideOver({ open, onOpenChange }: { open: boolean; onOpenChange: (o: boolean) => void }) {
+function RangerSlideOver({
+  open,
+  onOpenChange,
+  triggerRef,
+}: {
+  open: boolean;
+  onOpenChange: (o: boolean) => void;
+  /** The "Ask Ranger" button that opened us — focus returns there on close. */
+  triggerRef: RefObject<HTMLButtonElement | null>;
+}) {
   const location = useLocation();
   const lessonMatch = matchPath("/learn/:lessonId", location.pathname);
   return (
-    <SlideOver open={open} onOpenChange={onOpenChange} title="Ranger">
+    <SlideOver
+      open={open}
+      onOpenChange={onOpenChange}
+      title="Ranger"
+      onCloseAutoFocus={(event) => {
+        // Controlled open (no Dialog.Trigger): send focus back to the opener
+        // ourselves so keyboard users don't drop to <body> (QA-004).
+        event.preventDefault();
+        triggerRef.current?.focus();
+      }}
+    >
       {open && (
         <Suspense
           fallback={
@@ -110,6 +129,7 @@ function RangerSlideOver({ open, onOpenChange }: { open: boolean; onOpenChange: 
 /** App chrome (DESIGN-003): top nav ≥1024px, bottom tab bar below. */
 export function AppShell() {
   const [rangerOpen, setRangerOpen] = useState(false);
+  const rangerButtonRef = useRef<HTMLButtonElement>(null);
 
   return (
     <div className="flex min-h-screen flex-col pb-16 lg:pb-0">
@@ -128,6 +148,7 @@ export function AppShell() {
             {/* Hidden below sm: the bottom tab bar already carries Ranger there */}
             <span className="hidden sm:block">
               <Button
+                ref={rangerButtonRef}
                 variant="secondary"
                 size="s"
                 iconLeft={<Compass className="size-4" strokeWidth={1.5} aria-hidden />}
@@ -166,7 +187,11 @@ export function AppShell() {
         ))}
       </nav>
 
-      <RangerSlideOver open={rangerOpen} onOpenChange={setRangerOpen} />
+      <RangerSlideOver
+        open={rangerOpen}
+        onOpenChange={setRangerOpen}
+        triggerRef={rangerButtonRef}
+      />
     </div>
   );
 }

@@ -65,6 +65,7 @@ export function SlideOver({
   children,
   trigger,
   width = 440,
+  onCloseAutoFocus,
 }: {
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
@@ -72,6 +73,9 @@ export function SlideOver({
   children: ReactNode;
   trigger?: ReactNode;
   width?: number;
+  /** Controlled-open callers (no Dialog.Trigger) use this to return focus to
+   * their opener on close, so keyboard users don't drop to <body> (QA-004). */
+  onCloseAutoFocus?: (event: Event) => void;
 }) {
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
@@ -79,6 +83,7 @@ export function SlideOver({
       <Dialog.Portal>
         <Dialog.Overlay className={overlayClass} />
         <Dialog.Content
+          onCloseAutoFocus={onCloseAutoFocus}
           style={{ width: `min(${width}px, 100vw)` }}
           className="fixed inset-y-0 right-0 z-50 flex flex-col border-l border-line-200 bg-paper-0 shadow-raised outline-none transition-transform duration-(--ts-dur-slow) ease-out data-[state=closed]:translate-x-full data-[state=open]:translate-x-0"
         >
