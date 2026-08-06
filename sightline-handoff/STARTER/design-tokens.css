@@ -1,0 +1,96 @@
+/* Sightline Safety Academy design tokens — the machine-readable half of DESIGN-001.
+ * Copy this file to web/src/styles/tokens.css and import it first.
+ * Rule (ADR-008): components NEVER use raw hex — only these variables
+ * (or Tailwind utilities mapped to them in the Tailwind v4 @theme block).
+ */
+
+:root {
+  /* ---- Color: Field Guide Modern palette (DESIGN-001) ---- */
+  --ts-pine-950: #0E2A23; /* deep forest ink — primary text, dark surfaces */
+  --ts-pine-700: #1F5546; /* primary brand — buttons, active, links */
+  --ts-pine-300: #9CC3B4; /* soft brand — focus rings, subtle fills */
+  --ts-moss-100: #EEF3EC; /* app background (light, green-warm, not cream) */
+  --ts-paper-0:  #FBFCFA; /* card / surface */
+  --ts-clay-500: #C4622D; /* accent — XP, highlights, blaze fill. Sparingly. */
+  --ts-sky-600:  #2E6E8E; /* info/water — Ranger identity, info callouts */
+  --ts-sun-400:  #E0A72E; /* caution semantic + badge gold */
+  --ts-danger-600: #A93226; /* risk semantic — scenario feedback, destructive */
+  --ts-ink-500:  #4A5A54; /* secondary text */
+  --ts-line-200: #D8E0DA; /* hairlines / borders */
+
+  /* ---- Typography (ADR-008: @fontsource packages) ---- */
+  --ts-font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  --ts-font-body: "Inter", system-ui, sans-serif;
+  --ts-font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Type scale (rem). DESIGN-001: display sizes only for page/hero titles. */
+  --ts-text-xs: 0.75rem;   /* 12 — labels, chips */
+  --ts-text-sm: 0.875rem;  /* 14 — secondary, table body */
+  --ts-text-base: 1rem;    /* 16 — body */
+  --ts-text-lg: 1.1875rem; /* 19 — lead paragraphs */
+  --ts-text-xl: 1.5rem;    /* 24 — card/section titles (display font) */
+  --ts-text-2xl: 2rem;     /* 32 — page titles (display font) */
+  --ts-text-3xl: 2.5rem;   /* 40 — dashboard hero (display font) */
+  --ts-text-4xl: 3.25rem;  /* 52 — landing hero only (display font) */
+
+  /* ---- Spacing & layout (4px grid) ---- */
+  --ts-space-1: 4px;  --ts-space-2: 8px;   --ts-space-3: 12px;
+  --ts-space-4: 16px; --ts-space-5: 20px;  --ts-space-6: 24px;
+  --ts-space-8: 32px; --ts-space-10: 40px; --ts-space-12: 48px;
+  --ts-space-16: 64px;
+  --ts-container-max: 1120px; /* app pages */
+  --ts-lesson-max: 760px;     /* lesson stage (SPEC-006) */
+
+  /* ---- Shape & elevation ---- */
+  --ts-radius-sm: 10px; /* inputs, chips, small cards */
+  --ts-radius-md: 16px; /* cards, panels */
+  --ts-radius-lg: 24px; /* hero panels, modals */
+  --ts-border: 1px solid var(--ts-line-200); /* hairlines over shadows */
+  --ts-shadow-soft: 0 2px 10px rgba(14, 42, 35, 0.06); /* ambient only */
+  --ts-shadow-raised: 0 6px 24px rgba(14, 42, 35, 0.10); /* modals/popovers */
+
+  /* ---- Motion (DESIGN-004) ---- */
+  --ts-dur-fast: 120ms;    /* hover, press, toggles */
+  --ts-dur-base: 200ms;    /* reveals, fades, chips */
+  --ts-dur-slow: 320ms;    /* interstitials, celebrations */
+  --ts-ease-out: cubic-bezier(0.16, 1, 0.3, 1);      /* entrances */
+  --ts-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);  /* movement */
+
+  /* ---- Focus ---- */
+  --ts-focus-ring: 0 0 0 3px var(--ts-pine-300);
+}
+
+/* ---- Signature: contour motif (DESIGN-001) ----
+ * Topographic contour lines at ~6% opacity, used on hero panels, section
+ * interstitials, and the course map background via .ts-contour. Inline SVG
+ * data-URI so it ships with the stylesheet. 1px lines, pine ink.
+ */
+.ts-contour {
+  background-color: var(--ts-moss-100);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3Cg fill='none' stroke='%230E2A23' stroke-opacity='0.06' stroke-width='1'%3E%3Cpath d='M-20 60 C 80 20, 160 100, 260 70 S 440 30, 460 80'/%3E%3Cpath d='M-20 120 C 90 80, 170 160, 270 128 S 440 92, 460 140'/%3E%3Cpath d='M-20 180 C 100 140, 180 220, 280 186 S 440 152, 460 200'/%3E%3Cpath d='M-20 240 C 90 205, 175 280, 275 246 S 440 212, 460 260'/%3E%3Cpath d='M-20 300 C 80 268, 165 340, 265 306 S 440 272, 460 320'/%3E%3Cpath d='M-20 360 C 90 330, 170 400, 270 366 S 440 332, 460 380'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 420px 420px;
+}
+
+/* ---- Signature: trail-blaze marker (DESIGN-001) ----
+ * Rounded diamond used for list bullets, step indicators, and map pins.
+ * Components use <BlazeMarker/>; this class is the CSS fallback.
+ */
+.ts-blaze {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: var(--ts-clay-500);
+  border-radius: 3px;
+  transform: rotate(45deg);
+}
+.ts-blaze--brand { background: var(--ts-pine-700); }
+.ts-blaze--muted { background: var(--ts-pine-300); }
+
+/* ---- Reduced motion (DESIGN-004: honored globally) ---- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

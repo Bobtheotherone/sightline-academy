@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# Node
+node_modules/
+web/dist/
+web/playwright-report/
+web/test-results/
+
+# Data volumes (SQLite + Chroma live outside git)
+data/
+server/data/
+
+# Env & secrets
+.env
+
+# Crawl output (screenshots are artifacts, reviews are committed)
+qa/crawl-runs/
+artifacts/crawl/*/
+!artifacts/crawl/*/REVIEW.md
+
+# OS noise
+Thumbs.db
+.DS_Store
