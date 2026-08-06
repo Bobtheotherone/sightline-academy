@@ -192,9 +192,10 @@
         },
         {
           "state": "renderer-lab_objective-stability_explorer",
-          "fixture": "mid",
+          "fixture": "grad",
           "param": "m4-l2-stability",
-          "stepId": "m4-l2-s2"
+          "stepId": "m4-l2-s2",
+          "note": "revisit mode (module 4 is locked for the mid fixture)"
         },
         {
           "state": "renderer-checkpoint-structured_response",

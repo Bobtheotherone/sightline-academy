@@ -260,7 +260,8 @@ function Player({ lessonId, data }: { lessonId: string; data: LessonResponse }) 
               <Skeleton className="h-24 w-full" />
             </SkeletonGroup>
           ) : (
-            <div key={currentId} className="ts-stage-in">
+            // data-step-id is the visual-crawl harness contract (STARTER/visual_crawl.py)
+            <div key={currentId} className="ts-stage-in" data-step-id={currentId}>
               <ActivityHost
                 step={step}
                 evidence={entry}

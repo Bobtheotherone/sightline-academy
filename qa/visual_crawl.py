@@ -66,17 +66,47 @@ def drive_state(page: Page, route: str, state: dict) -> None:
     """Push the page into the named state. Extend as screens land."""
     name = state["state"] if isinstance(state, dict) else state
     if name.startswith("renderer-") and "stepId" in state:
-        # Lesson player: advance until the target step is on stage.
+        # Lesson player: reach the target step. Review-mode/frontier fixtures
+        # honor ?step deep links directly; otherwise advance generically:
+        # dismiss the (skippable) section interstitial, press Continue when
+        # enabled, else poke the first enabled activity control on the stage.
         target = state["stepId"]
-        for _ in range(30):
+        page.goto(page.url.split("?")[0] + f"?step={target}")
+        page.wait_for_load_state("networkidle")
+        idle = 0
+        for i in range(60):
             if page.locator(f"[data-step-id='{target}']").count():
+                page.wait_for_timeout(400)  # let reveal/settle motion finish
                 return
+            overlay = page.locator("[aria-label^='Next section']")
+            if overlay.count():
+                overlay.first.click()
+                page.wait_for_timeout(200)
+                idle = 0
+                continue
             btn = page.get_by_role("button", name=re.compile("continue|next", re.I))
-            if not btn.count() or btn.first.is_disabled():
+            if btn.count() and btn.first.is_enabled():
+                btn.first.click()
+                page.wait_for_timeout(300)
+                idle = 0
+                continue
+            stage = page.locator("[data-step-id]")
+            pokes = stage.locator("button:enabled") if stage.count() else None
+            n = pokes.count() if pokes else 0
+            if n:
+                # Cycle instead of always-first: a risky branching choice
+                # re-offers its node, and always-first would loop on it.
+                pokes.nth(i % n).click()
+                page.wait_for_timeout(300)
+                idle = 0
+                continue
+            # Nothing actionable yet — lazy chunks / queries may still be
+            # loading. Give it a few beats before declaring a gate.
+            idle += 1
+            if idle >= 8:
                 raise LookupError(f"SKIP: cannot advance to {target} (gate?)")
-            btn.first.click()
-            page.wait_for_timeout(250)
-        raise LookupError(f"SKIP: step {target} not reached in 30 advances")
+            page.wait_for_timeout(500)
+        raise LookupError(f"SKIP: step {target} not reached in 60 advances")
     if name == "delete-confirm-modal":
         page.get_by_role("button", name=re.compile("delete", re.I)).first.click()
     if name == "invalid-credentials":
