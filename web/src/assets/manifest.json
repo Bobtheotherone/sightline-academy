@@ -15,33 +15,69 @@
     },
     "hero-m1-mindset": {
       "status": "real",
-      "file": "svg/hero-m1-mindset.svg",
-      "alt": "A rider stands at a trail junction, scan line tracing the blazed left route while an unmarked route fades right — choosing the line before riding it."
+      "kind": "raster",
+      "widths": [
+        1200,
+        800,
+        400
+      ],
+      "alt": "Illustration: a rider in full protective gear stands on the ground beside a parked ATV on a forest trail, the machine switched off, looking ahead down the trail.",
+      "note": "SDXL render (seed 42). The rider's raised hand rendered malformed; removed by column-wise flat reconstruction of the background. Photo inpainting and a feathered clone were both tried first and both smeared — flat vector art has hard edges, so blending is always visible and structure must be rebuilt instead."
     },
     "hero-m2-machine": {
       "status": "real",
-      "file": "svg/hero-m2-machine.svg",
-      "alt": "Side view of a utility ATV drawn as a field-guide plate, with callout ticks at the handlebars, rear rack, front tire, and footwells."
+      "kind": "raster",
+      "widths": [
+        1200,
+        800,
+        400
+      ],
+      "alt": "Illustration: a utility ATV stands alone on a dirt trail with no rider, its tyres, racks and handlebars clearly visible.",
+      "note": "SDXL render, retouched and exported as an AVIF/WebP/PNG width ladder."
     },
     "hero-m3-gear": {
       "status": "real",
-      "file": "svg/hero-m3-gear.svg",
-      "alt": "Flat-lay plate of the riding kit: full-face helmet, padded gloves, and over-ankle boots arranged like museum specimens."
+      "kind": "raster",
+      "widths": [
+        1200,
+        800,
+        400
+      ],
+      "alt": "Illustration: riding kit laid out in neat rows on a plain ground — helmets, jackets, gloves and boots arranged like museum specimens.",
+      "note": "SDXL render, retouched and exported as an AVIF/WebP/PNG width ladder."
     },
     "hero-m4-terrain": {
       "status": "real",
-      "file": "svg/hero-m4-terrain.svg",
-      "alt": "A hillside drawn as nested contour rings with a switchback trail climbing to the summit and caution cues marking the steep face."
+      "kind": "raster",
+      "widths": [
+        1200,
+        800,
+        400
+      ],
+      "alt": "Illustration: a narrow dirt trail winds across a forested hillside in long switchbacks, with layered ridgelines receding behind it.",
+      "note": "SDXL render, retouched and exported as an AVIF/WebP/PNG width ladder."
     },
     "hero-m5-environment": {
       "status": "real",
-      "file": "svg/hero-m5-environment.svg",
-      "alt": "A storm front crossing a valley trail, drawn map-style with a cold-front line, rain over the west ridge, a compass rose, and a scale bar."
+      "kind": "raster",
+      "widths": [
+        1200,
+        800,
+        400
+      ],
+      "alt": "Illustration: a heavy bank of storm cloud stands over a forested valley in cold overcast light.",
+      "note": "SDXL render (seed 7). Four seeds first produced a pastel sunset; leading the subject band with the storm instead of appending it fixed it."
     },
     "hero-m6-roads": {
       "status": "real",
-      "file": "svg/hero-m6-roads.svg",
-      "alt": "Bird's-eye view of a trail meeting a paved road at a marked crossing: the rider stopped square at the stop bar with sight lines drawn both ways."
+      "kind": "raster",
+      "widths": [
+        1200,
+        800,
+        400
+      ],
+      "alt": "Illustration: an empty paved road running through forest, receding into the distance.",
+      "note": "SDXL render (seed 2025). The shipped brief — a trail MEETING a road with a machine stopped at the boundary — is a relationship between things and never rendered: with the rider led, no road appeared; with the road led, the machine vanished. VISUAL_ASSETS 6.5. The hero carries the module's subject; the crossing procedure stays in the lesson's vector keylist, where structure can actually be drawn."
     },
     "scene-atv-anatomy": {
       "status": "real",
@@ -850,13 +886,25 @@
     },
     "hero-assessment": {
       "status": "real",
-      "file": "svg/hero-assessment.svg",
-      "alt": "The final ridge: a blazed trail climbing its shouldered face with the summit marker already in sight ahead - everything the course taught, still to be walked."
+      "kind": "raster",
+      "widths": [
+        1200,
+        800,
+        400
+      ],
+      "alt": "Illustration: a forested valley with a trail running through it toward a distant peak, seen from below.",
+      "note": "SDXL render, retouched and exported as an AVIF/WebP/PNG width ladder."
     },
     "hero-graduate": {
       "status": "real",
-      "file": "svg/hero-graduate.svg",
-      "alt": "The summit reached: the whole range the course crossed spread out below, the climbed trail running back down to the right, and one blaze planted at the top beside the cairn."
+      "kind": "raster",
+      "widths": [
+        1200,
+        800,
+        400
+      ],
+      "alt": "Illustration: a wide view over layered mountain ranges receding to the horizon, with a trail running back down through the ridges below.",
+      "note": "SDXL render, retouched and exported as an AVIF/WebP/PNG width ladder."
     },
     "scenario-creek-line": {
       "status": "real",
