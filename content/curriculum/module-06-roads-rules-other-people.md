@@ -136,6 +136,7 @@ required: true
       {"term": "The group crosses as individuals", "detail": "One machine at a time, each making its own stop-and-look. \"Following the leader across\" delegates your traffic judgment to someone who was looking three seconds ago — group gravity's most dangerous form."},
       {"term": "Designated beats convenient", "detail": "Marked crossings exist where sight lines were judged adequate. A convenient crossing point with a blind curve upstream is a bad trade for saved minutes."}
     ]},
+    {"type": "figure", "assetSlot": "scene-crossing", "caption": "Stopped square behind the bar, sight lines swept both ways, minimum time on pavement. Every part of a good crossing is visible from above — which is how you should picture it before you reach one."},
     {"type": "callout", "variant": "tip", "title": "The category-and-authority pattern", "md": "Crossing rules, minimum ages, supervision requirements, helmet mandates, and where ATVs may operate all vary by state, province, and country — and they change. This course gives you the reasoning and the rule-categories; your local OHV/DMV authority gives you the current specifics. Ranger answers legal questions exactly this way, on purpose."}
   ]
 }
@@ -154,6 +155,7 @@ required: true
 ```json payload
 {
   "instructions": "Passengers and loads, real situations. Sort each call.",
+  "assetSlot": "scene-loading-cargo",
   "shuffle": true,
   "categories": [
     {"id": "sound", "label": "Sound practice", "hint": "Consistent with machine design and limits"},

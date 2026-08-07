@@ -43,6 +43,7 @@ required: true
       {"term": "It must be RATED", "detail": "A motorsports safety standard label (e.g., DOT or equivalent regional certification) means the crush behavior was actually tested. A bicycle helmet is built for different impacts; a novelty shell is built for none."},
       {"term": "It crushes ONCE", "detail": "The liner is single-use at real impact energies. A helmet that's taken a serious hit — or bounced hard off concrete from height — has spent some of its one crush. Retire it. Same for aging: manufacturers give a service life (commonly ~5 years of use); liners degrade."}
     ]},
+    {"type": "figure", "assetSlot": "scene-helmet-fit", "caption": "The liner is the mechanism. The shell spreads the hit; the liner crushes to buy milliseconds — which is why fit, fastening, rating, and retirement are all the same rule wearing different clothes."},
     {"type": "callout", "variant": "tip", "title": "Eyes too", "md": "Goggles or a face shield ride with the helmet every time. Trail speed turns dust, brush, and stones into eye hazards, and watering eyes at the wrong moment is a control failure. Anti-fog and a strap that seats on the helmet — not the bare head — are the two features worth insisting on."}
   ]
 }
