@@ -19,6 +19,18 @@ Orphan detection understands DYNAMIC slot resolution. Components legitimately
 build slot names from data (BadgeMedal does `badge-${badgeId}`), so a literal
 grep reports false orphans. Any family prefix that appears inside a template
 literal marks that whole family as reachable.
+
+*** WHAT THIS LINT DOES NOT PROVE ***
+It proves a slot is REFERENCED, not that it RENDERS. A slot named only in a
+comment, in dead code, or behind a condition that is never true still counts as
+wired here. That is not a defect to fix — a static check cannot know what
+paints — but it means a green lint is necessary and NOT sufficient.
+
+The visual crawl (qa/visual_crawl.py, QA-001) is what proves rendering, and it
+is the gate that matters. This was learned the direct way: lesson cards reported
+as wired while the module page showed no thumbnails at all, because the wiring
+landed after the lint ran and the slot names happened to appear in a doc
+comment. Always finish with a crawl, and always look at it.
 """
 from __future__ import annotations
 
@@ -38,7 +50,17 @@ TOKENS = {
     "#0E2A23", "#1F5546", "#9CC3B4", "#EEF3EC", "#FBFCFA", "#C4622D",
     "#2E6E8E", "#E0A72E", "#A93226", "#4A5A54", "#D8E0DA",
 }
-GLYPH_FAMILIES = ("badge-", "act-", "topic-", "section-", "match-", "sort-", "xp-")
+# Families whose slot names are BUILT AT RUNTIME from data, so a literal grep
+# cannot see them. Used only for orphan detection.
+DYNAMIC_FAMILIES = ("badge-", "act-", "topic-", "section-", "match-", "sort-",
+                    "xp-", "lesson-", "level-", "artifact-", "inset-",
+                    "scenario-")
+
+# Families that are small glyphs/icons and get the tight size budget. This is a
+# DIFFERENT question from the one above — a scenario plate is dynamically
+# resolved but is a full 960x540 illustration, not an icon.
+GLYPH_FAMILIES = ("badge-", "act-", "topic-", "section-", "match-", "sort-",
+                  "xp-")
 
 
 SKIP_PARTS = ("node_modules", "dist", "__pycache__")
@@ -85,7 +107,7 @@ def main() -> int:
 
     # Families reachable through template literals, e.g. `badge-${id}`.
     dynamic: set[str] = set()
-    for fam in GLYPH_FAMILIES:
+    for fam in DYNAMIC_FAMILIES:
         if grep(rf"`{re.escape(fam)}\$\{{", literal=False):
             dynamic.add(fam)
 

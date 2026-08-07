@@ -223,7 +223,9 @@ export default function ProgressPage() {
               {progress.recentXp.map((event, i) => (
                 <li
                   key={event.id}
-                  className={`flex items-baseline justify-between gap-4 py-2.5 ${
+                  /* gap-3, not gap-4: the event mark costs the label 24px and
+                   * this row already truncates at 375px. */
+                  className={`flex items-baseline justify-between gap-3 py-2.5 ${
                     i > 0 ? "border-t border-line-200" : ""
                   }`}
                 >

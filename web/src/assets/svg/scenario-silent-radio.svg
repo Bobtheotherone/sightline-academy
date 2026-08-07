@@ -85,43 +85,42 @@
   <ellipse cx="474" cy="486" rx="72" ry="9" fill="#4A5A54" opacity="0.24"/>
   <g transform="translate(474 484) scale(-1.5 1.5)">
   <g stroke-linecap="round" stroke-linejoin="round">
-  <path d="M-5 -20 L20 -27 L28 -7" fill="none" stroke="#0E2A23" stroke-width="9.1"/>
-  <path d="M-5 -20 L20 -27 L28 -7" fill="none" stroke="#4A5A54" stroke-width="7"/>
-  <rect x="21" y="-9" width="18" height="7" rx="2.2" fill="#4A5A54" stroke="#0E2A23" stroke-width="1"/>
-  <path d="M1 -16 L38 -38 L46 -6" fill="none" stroke="#0E2A23" stroke-width="10.1"/>
-  <path d="M1 -16 L38 -38 L46 -6" fill="none" stroke="#0E2A23" stroke-width="8"/>
-  <rect x="38" y="-8.5" width="22" height="8.5" rx="2.6" fill="#0E2A23" stroke="#0E2A23" stroke-width="1"/>
-  <path d="M0 -18 L5 -56" stroke="#0E2A23" stroke-width="21.1" stroke-linecap="round"/>
-  <path d="M0 -18 L5 -56" stroke="#1F5546" stroke-width="19" stroke-linecap="round"/>
-  <path d="M1 -52 L13 -42 L36 -53" fill="none" stroke="#0E2A23" stroke-width="8.3"/>
-  <path d="M1 -52 L13 -42 L36 -53" fill="none" stroke="#4A5A54" stroke-width="6.2"/>
-  <path d="M7 -57 L19 -51 L49 -59" fill="none" stroke="#0E2A23" stroke-width="9.1"/>
-  <path d="M7 -57 L19 -51 L49 -59" fill="none" stroke="#1F5546" stroke-width="7"/>
+  <path d="M1 -14 L26 -28 L40.4 -9" fill="none" stroke="#0E2A23" stroke-width="10.6"/>
+  <path d="M1 -14 L26 -28 L40.4 -9" fill="none" stroke="#4A5A54" stroke-width="8.6"/>
+  <path d="M33.8 -11.6 L34.2 -3.4 Q34.4 0 38 0 L49.6 0 Q52.6 0 51.8 -3.8 L49.2 -11.6 Z" fill="#4A5A54" stroke="#0E2A23" stroke-width="1"/>
+  <path d="M5 -13 L33 -33 L48.4 -10" fill="none" stroke="#0E2A23" stroke-width="9.6"/>
+  <path d="M41.8 -12.6 L42.2 -3.6 Q42.4 0 46 0 L58.6 0 Q61.8 0 61 -4 L58 -12.6 Z" fill="#0E2A23"/>
+  <path d="M-10.4 -54.6 Q2.4 -60.6 15 -50.4 L10.4 -32.6 Q10 -18.6 6 -13.2 Q0.4 -6.4 -6.4 -6.6 Q-13.4 -7 -12.4 -16.4 Q-12 -34 -10.4 -54.6 Z" fill="#1F5546" stroke="#0E2A23" stroke-width="1"/>
+  <path d="M3 -49.6 L20 -41 L36 -50.6" fill="none" stroke="#0E2A23" stroke-width="9.4"/>
+  <path d="M3 -49.6 L20 -41 L36 -50.6" fill="none" stroke="#4A5A54" stroke-width="7.4"/>
+  <path d="M9.6 -53.4 L28 -48 L48 -58" fill="none" stroke="#0E2A23" stroke-width="10.2"/>
+  <path d="M9.6 -53.4 L28 -48 L48 -58" fill="none" stroke="#1F5546" stroke-width="8.2"/>
   <circle cx="51" cy="-59.6" r="4.2" fill="#0E2A23"/>
   <circle cx="39" cy="-54" r="6" fill="#0E2A23"/>
   <path d="M35.5 -61 Q45 -57.5 41 -47" fill="none" stroke="#0E2A23" stroke-width="2.6"/>
-  <circle cx="8" cy="-72" r="15" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1"/>
-  <path d="M19.2 -76.5 Q20.9 -67.5 13.8 -64.2 L8 -64.2 L8 -76.5 Z" fill="#0E2A23"/>
-  <path d="M18.2 -83 Q8 -89.8 -2.2 -84" fill="none" stroke="#1F5546" stroke-width="3.4"/>
+  <circle cx="8" cy="-72" r="13.4" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1"/>
+  <path d="M18 -76 Q19.5 -68 13.2 -65 L8 -65 L8 -76 Z" fill="#0E2A23"/>
+  <path d="M17.1 -81.8 Q8 -87.9 -1.1 -82.7" fill="none" stroke="#1F5546" stroke-width="3.2"/>
   </g>
   </g>
   <ellipse cx="242" cy="482" rx="36" ry="7" fill="#4A5A54" opacity="0.24"/>
   <g transform="translate(242 480) scale(1.3 1.3)">
   <g stroke-linecap="round" stroke-linejoin="round">
-  <path d="M-4 -31 L-17 -4" fill="none" stroke="#4A5A54" stroke-width="7.3"/>
-  <rect x="-24" y="-6.5" width="15" height="6.5" rx="2" fill="#4A5A54"/>
-  <path d="M4 -31 L15 -4" fill="none" stroke="#0E2A23" stroke-width="7.3"/>
-  <rect x="9" y="-6.5" width="15" height="6.5" rx="2" fill="#0E2A23"/>
-  <rect x="-12" y="-70" width="24" height="42" rx="10" fill="#C4622D" stroke="#0E2A23" stroke-width="1.2"/>
-  <path d="M-9 -62 L-16 -42" fill="none" stroke="#0E2A23" stroke-width="8.3"/>
-  <path d="M-9 -62 L-16 -42" fill="none" stroke="#4A5A54" stroke-width="6"/>
-  <circle cx="-16.5" cy="-41" r="3.1" fill="#0E2A23"/>
-  <path d="M9 -62 L16 -42" fill="none" stroke="#0E2A23" stroke-width="9"/>
-  <path d="M9 -62 L16 -42" fill="none" stroke="#C4622D" stroke-width="6.7"/>
-  <circle cx="16.5" cy="-41" r="3.4" fill="#0E2A23"/>
-  <circle cx="2" cy="-85" r="14.6" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.2"/>
-  <path d="M12.9 -89.4 Q14.6 -80.6 7.6 -77.4 L2 -77.4 L2 -89.4 Z" fill="#0E2A23"/>
-  <path d="M11.9 -95.8 Q2 -102.4 -8 -96.8" fill="none" stroke="#C4622D" stroke-width="3.4"/>
+  <path d="M-2 -45 L-11 -28 L-13.6 -8" fill="none" stroke="#0E2A23" stroke-width="10.4"/>
+  <path d="M-2 -45 L-11 -28 L-13.6 -8" fill="none" stroke="#4A5A54" stroke-width="8"/>
+  <path d="M-20.6 -11.4 L-20.2 -3.4 Q-20 0 -16.6 0 L-6.6 0 Q-3.6 0 -4.4 -3.6 L-6.8 -11.4 Z" fill="#4A5A54" stroke="#0E2A23" stroke-width="1.2"/>
+  <path d="M3 -45 L10 -28 L11.6 -7" fill="none" stroke="#0E2A23" stroke-width="8.8"/>
+  <path d="M4.6 -10.4 L5 -3 Q5.2 0 8.6 0 L19.4 0 Q22.4 0 21.6 -3.4 L19 -10.4 Z" fill="#0E2A23"/>
+  <path d="M-13.4 -70.2 Q0 -76.8 13.4 -70.2 Q11.2 -62 9.4 -54.4 Q11 -48 11.4 -42.4 Q0 -38.8 -11.4 -42.4 Q-11 -48 -9.4 -54.4 Q-11.2 -62 -13.4 -70.2 Z" fill="#C4622D" stroke="#0E2A23" stroke-width="1.2"/>
+  <path d="M-10.4 -65.6 L-16.2 -55 L-13.6 -43.4" fill="none" stroke="#0E2A23" stroke-width="8.8"/>
+  <path d="M-10.4 -65.6 L-16.2 -55 L-13.6 -43.4" fill="none" stroke="#4A5A54" stroke-width="6.4"/>
+  <circle cx="-13.4" cy="-41.8" r="3.2" fill="#0E2A23"/>
+  <path d="M11 -66.8 L16.8 -55 L13.8 -43.4" fill="none" stroke="#0E2A23" stroke-width="9.4"/>
+  <path d="M11 -66.8 L16.8 -55 L13.8 -43.4" fill="none" stroke="#C4622D" stroke-width="7"/>
+  <circle cx="13.6" cy="-41.6" r="3.4" fill="#0E2A23"/>
+  <circle cx="2" cy="-85" r="13.4" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.2"/>
+  <path d="M12 -89 Q13.6 -81 7.1 -78 L2 -78 L2 -89 Z" fill="#0E2A23"/>
+  <path d="M11.1 -94.9 Q2 -101 -7.2 -95.8" fill="none" stroke="#C4622D" stroke-width="3.2"/>
   </g>
   </g>
   <rect x="-7.5" y="-7.5" width="15" height="15" rx="3.8" transform="translate(72 68) rotate(45)" fill="#C4622D"/>

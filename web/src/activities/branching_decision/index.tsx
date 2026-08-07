@@ -189,7 +189,7 @@ export default function BranchingDecisionActivity({ step, evidence, onEvidence }
          * the entrance replays on the swap — the plate reads as the ride moving
          * on rather than as a picture quietly substituted. */}
         {plateSlot && (
-          <RiseIn key={plateSlot} className="mt-5 pl-1">
+          <RiseIn key={plateSlot} className="mx-auto mt-5 w-full max-w-lg">
             <SlotArt slot={plateSlot} ratio="16 / 9" />
           </RiseIn>
         )}

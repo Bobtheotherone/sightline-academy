@@ -43,7 +43,9 @@ function Greeting({ progress }: { progress: ProgressResponse | undefined }) {
         <ProgressRing value={ringValue} size={64} label={`Level ${level} — ${levelTitle(level)}`}>
           <span className="font-mono text-sm font-medium">{level}</span>
         </ProgressRing>
-        <LevelEmblem level={level} className="size-11" />
+        {/* 56px, not smaller: below that the denser emblems (the Wayfinder
+         * compass, the Trail Boss range) collapse into a smudge. */}
+        <LevelEmblem level={level} className="size-14" />
         <div>
           <p className="font-display text-lg font-bold">{levelTitle(level)}</p>
           <p className="font-mono text-xs text-ink-500">{xpTotal} XP</p>
