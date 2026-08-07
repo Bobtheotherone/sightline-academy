@@ -356,6 +356,12 @@ unrelated drawings.
   consistently; the boldness budget is spent here and nowhere else.
 - **Illustration style:** flat vector, **4–6 brand colours**, visible 1.5 px
   `pine-950` line work, `paper-0` backgrounds — "field guide plate" energy.
+  *Exception:* a plate that must match an existing complex scene may carry more.
+  `scene-trail-hazards` itself uses 10, so its detail insets match it rather than
+  the count — **clause C4 (one object drawn one way) outranks the colour
+  budget**, because a learner noticing two different machines is a worse failure
+  than a learner never counting hexes. Take the exception only to match a
+  neighbour, never to add richness.
 - **No photography.** Coherence beats stock photos. This applies to diffusion
   output too: it must read as an illustrated plate, never as a photograph.
 - **Every illustration gets alt text describing its teaching content.**

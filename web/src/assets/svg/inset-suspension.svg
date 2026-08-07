@@ -7,7 +7,8 @@
     <path d="M-10 30 C 62 6, 132 48, 202 26 S 300 8, 330 32"/>
   </g>
   <!-- uneven ground: a hollow at the left, a rock lifting the wheel at the right -->
-  <path d="M0 210 Q40 222, 86 226 Q126 228, 160 218 Q196 206, 232 198 Q272 194, 320 204 L320 240 L0 240 Z"
+  <path d="M0 212 Q40 224, 86 228 Q124 230, 154 224 L182 216 Q206 200, 232 197
+           Q258 199, 274 214 L300 222 L320 220 L320 240 L0 240 Z"
         fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
   <g stroke="#4A5A54" stroke-width="1.5" stroke-linecap="round" opacity="0.45">
     <path d="M22 232 H58 M98 234 H134 M270 226 H304"/>
@@ -37,12 +38,12 @@
   </g>
   <!-- travel still in hand: what keeps the tire pressed down instead of skipping -->
   <g fill="none" stroke="#C4622D" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M188 64 L144 172" stroke-width="3.5"/>
-    <path d="M178 70 L188 64 L193 75" stroke-width="3.5"/>
-    <path d="M154 161 L144 172 L139 160" stroke-width="3.5"/>
+    <path d="M190 74 L155 158" stroke-width="3.5"/>
+    <path d="M181 79 L190 74 L194 84" stroke-width="3.5"/>
+    <path d="M164 152 L155 158 L151 148" stroke-width="3.5"/>
   </g>
   <g fill="none" stroke="#D8E0DA" stroke-width="1.5" stroke-dasharray="5 4">
-    <path d="M162 52 L196 66"/>
-    <path d="M118 160 L152 174"/>
+    <path d="M172 67 L206 81"/>
+    <path d="M137 151 L171 165"/>
   </g>
 </svg>

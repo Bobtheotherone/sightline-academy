@@ -525,6 +525,81 @@
       "status": "real",
       "file": "svg/sort-cargo-loose-tools.svg",
       "alt": "Unsecured tools bouncing loose in the front basket — secure them before you go."
+    },
+    "inset-tires": {
+      "status": "real",
+      "file": "svg/inset-tires.svg",
+      "alt": "Close-up of a low-pressure ATV tire under load: the rim stays perfectly round while the carcass squats, bulges at the sidewall and moulds itself over a stone, spreading into a long contact patch instead of the single point a rigid wheel would make."
+    },
+    "inset-handlebars": {
+      "status": "real",
+      "file": "svg/inset-handlebars.svg",
+      "alt": "The handlebar cluster as the rider looks down on it: engine stop switch under the left thumb, brake lever standing off the right grip, and the thumb throttle hinged at the inboard end of that grip — the only control feeding the engine."
+    },
+    "inset-brakes": {
+      "status": "real",
+      "file": "svg/inset-brakes.svg",
+      "alt": "Behind the front wheel: a vented brake disc turning inside the rim with the caliper clamped over its edge, and a hose running up to the master cylinder and lever at the handlebar, so the whole squeeze-to-clamp circuit is visible at once."
+    },
+    "inset-suspension": {
+      "status": "real",
+      "file": "svg/inset-suspension.svg",
+      "alt": "A coil-over shock caught part way through its travel: the frame holds its line, the lower arm swings down, the spring compresses, and the tire stays pressed into a rock — with the stroke still held in reserve marked alongside the shock."
+    },
+    "inset-engine": {
+      "status": "real",
+      "file": "svg/inset-engine.svg",
+      "alt": "The engine mass with the fuel tank sitting on it, marked with the two walkaround stops joined by one check line: the fuel filler cap on top and the oil sight glass on the crankcase."
+    },
+    "inset-footwells": {
+      "status": "real",
+      "file": "svg/inset-footwells.svg",
+      "alt": "An over-the-ankle boot planted flat on the footpeg inside the running board, with the heel guard drawn as the wall standing between that foot and the rear wheel turning just behind it."
+    },
+    "inset-racks": {
+      "status": "real",
+      "file": "svg/inset-racks.svg",
+      "alt": "A rear cargo rack carrying a low, centred case strapped down through both rails, with the posted rack limit tag hanging off the side and the load's centre of gravity marked sitting low and over the middle of the rack."
+    },
+    "inset-chassis": {
+      "status": "real",
+      "file": "svg/inset-chassis.svg",
+      "alt": "The same machine with its bodywork dropped back to a hairline so only the frame tubes remain, and the load path traced through them: rack rail into the backbone, along the backbone, out through the suspension mounts and down into the contact patches."
+    },
+    "inset-crest": {
+      "status": "real",
+      "file": "svg/inset-crest.svg",
+      "alt": "A blind crest read as a cue: the trail's edges converge as it climbs and the surface simply stops at the ridge line. The far side of the valley is visible in the distance, everything between is not, and the sight distance is marked ending at the crest."
+    },
+    "inset-side-slope": {
+      "status": "real",
+      "file": "svg/inset-side-slope.svg",
+      "alt": "Cross-section of an off-camber trail bench cut into a hillside: the far edge sits below the near edge, the surface line is measured against level to show the drop, and every sapling on the slope leans the same way, downhill."
+    },
+    "inset-shadow-rut": {
+      "status": "real",
+      "file": "svg/inset-shadow-rut.svg",
+      "alt": "A tree shadow lying across the trail: straight over flat ground, and kinking down and back out where it crosses each rut. The bend in a line that should have been straight is the only thing that gives a rut away in flat light."
+    },
+    "inset-wet-clay": {
+      "status": "real",
+      "file": "svg/inset-wet-clay.svg",
+      "alt": "The low point of a drainage dip: the trail surface changes colour and goes darker and smoother well before any standing water appears, with runoff arriving from both slopes and a shallow pool collecting at the bottom. The dry-to-damp edge is marked."
+    },
+    "inset-loose-over-hard": {
+      "status": "real",
+      "file": "svg/inset-loose-over-hard.svg",
+      "alt": "Cut through the tread: a thin sheet of loose gravel lying on a hard packed base nothing keys into, a wheel track that has already ploughed the loose layer aside, and the stones thrown clear and piled on the verges. The interface between loose and hard is marked."
+    },
+    "inset-deadfall": {
+      "status": "real",
+      "file": "svg/inset-deadfall.svg",
+      "alt": "A downed limb read as a cue: one horizontal line lying across a stand of vertical trunks, broken into fragments by brush screening it, with the line the eye has to complete across those gaps drawn in."
+    },
+    "inset-soft-edge": {
+      "status": "real",
+      "file": "svg/inset-soft-edge.svg",
+      "alt": "Section through an undercut trail edge: the tread runs on well past the ground beneath it, cracks run parallel to the lip, chunks have already broken away, roots hang in the shadow of the void, and the water that took the toe out is still working at it."
     }
   }
 }

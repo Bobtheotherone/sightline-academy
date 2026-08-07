@@ -40,8 +40,14 @@ def main() -> int:
     added: list[str] = []
     seen: dict[str, str] = {}
 
+    skipped = 0
     for frag_path in sorted(HERE.glob("_frag-*.json")):
         frag = load(frag_path)
+        # Lanes emit either a flat {slot: meta} map or {"slots": {...}} mirroring
+        # manifest.json's own shape. Accept both rather than making a lane redo
+        # a batch over a wrapper key.
+        if "slots" in frag and isinstance(frag["slots"], dict):
+            frag = frag["slots"]
         for slot, meta in frag.items():
             if slot.startswith("$"):
                 continue
@@ -55,7 +61,9 @@ def main() -> int:
             seen[slot] = frag_path.name
 
             if slot in slots:
-                problems.append(f"{slot} already in manifest — skipping")
+                # Idempotent re-run, not an error — the merge is meant to be
+                # safe to run after every batch.
+                skipped += 1
                 continue
 
             f = meta.get("file")
@@ -85,6 +93,7 @@ def main() -> int:
     print(f"manifest slots before : {before}")
     print(f"fragments found       : {len(list(HERE.glob('_frag-*.json')))}")
     print(f"slots to add          : {len(added)}")
+    print(f"already present       : {skipped} (idempotent re-run)")
     print(f"problems              : {len(problems)}")
     for p in problems:
         print(f"   ! {p}")

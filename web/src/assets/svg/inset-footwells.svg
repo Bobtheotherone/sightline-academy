@@ -24,7 +24,7 @@
           fill="#4A5A54" stroke="#0E2A23" stroke-width="1.5"/>
     <path d="M168 96 H212" stroke="#0E2A23" stroke-width="1.5" fill="none"/>
     <path d="M174 68 L204 74 M174 80 L204 86 M174 110 L204 116 M174 122 L204 128"
-          stroke="#C4622D" stroke-width="2.5" fill="none"/>
+          stroke="#9CC3B4" stroke-width="2.5" fill="none"/>
     <rect x="100" y="164" width="116" height="12" rx="5" fill="#9CC3B4" stroke="#0E2A23" stroke-width="1.5"/>
     <!-- footpeg bar carrying the sole -->
     <path d="M88 184 H212" stroke="#0E2A23" stroke-width="9"/>
