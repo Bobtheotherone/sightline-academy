@@ -638,6 +638,51 @@ The rejected landscapes are retained at `D:\imagegen\out\C-050..C-055-scenarios\
 as candidate backdrops for Tier E, where genericness is acceptable. They are not
 registered assets and must not be pressed into curriculum use.
 
+### 6.6 The dividing line, measured twice more
+
+§6.5 was written off one batch. Two later batches confirmed it and sharpened it
+into a rule you can apply *before* generating.
+
+**Confirmation 1 — `hero-m6-roads`.** The brief: a trail *meeting* a paved road,
+machine stopped at the boundary. Eight seeds across two prompt orderings failed
+in both directions:
+
+| Prompt led with | Result |
+| --- | --- |
+| the rider | A rider on a dirt trail. **No road at all**, four seeds. |
+| the road | A convincing paved road. **The machine vanished**, four seeds. |
+
+The model renders *nouns*, never the *relation between them*. Leading a token
+band only changes which noun survives.
+
+**Confirmation 2 — lesson cards.** Four cards were rendered and compared against
+the shipped SVGs at 96 px, the size `LessonRow` actually uses. **Three of the
+four became the same picture** — a white quad on a forest trail — because their
+distinguishing content was structural (an inspection loop, a stop bar, a tipped
+machine beside an intact helmet). The one that succeeded was the helmet: a
+single object, no relation to render.
+
+> **The line: diffusion draws SUBJECTS. Vector draws RELATIONS.**
+>
+> Ask what the asset would lose if you could only show one object with no
+> arrangement. Lose nothing → `diffusion`. Lose the point → `svg-authored`.
+
+This also explains why the two media split cleanly by *slot family* rather than
+by taste:
+
+| Family | Medium | Because |
+| --- | --- | --- |
+| Heroes | `diffusion` | A mood and a subject. No relation to state. |
+| Keylist figures | `svg-authored` | The arrangement **is** the teaching. |
+| Hotspot bases | `svg-authored` | Markers land on exact percentages ([§7.1 A-008](#a-008--scene-atv-anatomy--coordinate-contract)). |
+| Lesson cards | `svg-authored` | Must differentiate 22 lessons at 96 px. |
+| Sort / match icons | `svg-authored` | 40 px. Nothing survives but a silhouette. |
+| Glyphs, badges | `svg-authored` | Tinted at runtime via `currentColor`. |
+
+**A corollary about counts.** Diffusion cannot count either. "A helmet, gloves
+and boots" produced a 30–40 item catalogue on every seed tried. Treat a stated
+quantity exactly like a spatial claim: if the number carries meaning, author it.
+
 ### 6.1 The comparison
 
 | Dimension | `svg-authored` | `diffusion` |

@@ -12,6 +12,20 @@ Usage:
     python qa/visual_crawl.py --base http://localhost:5173 \
         --manifest qa/route-manifest.json --out qa/crawl-runs
 
+PREFER CRAWLING THE PRODUCTION BUILD, not the dev server:
+
+    npm run build && npx vite preview --port 4173   # VITE_API_TARGET=:8000
+    python qa/visual_crawl.py --base http://localhost:4173 ...
+
+Two reasons. It tests the artifact that actually ships. And the dev server has
+a failure mode the build does not: `import.meta.glob(..., {eager: true})` over
+the art directories makes Vite serve every plate as its own module on every
+page load (171 SVG + 81 raster rungs), which under crawl load produced
+net::ERR_INSUFFICIENT_RESOURCES on /assessment — four states lost, reproducibly,
+on clean servers. The same crawl against `vite preview` was clean, because the
+build compiles those globs to a static URL map. A dev-only failure that looks
+exactly like a product failure is the worst kind to debug at 2am.
+
 Requires: pip install playwright && playwright install chromium
 Assumes the API booted with FIXTURES=1 so the three crawl fixtures exist
 (QA-001): fresh@crawl.test / mid@crawl.test / grad@crawl.test (crawl-pass),
