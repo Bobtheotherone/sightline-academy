@@ -556,6 +556,26 @@ This rubric applies to **every tier**, including marketing. A hero image that
 sells excitement by showing an unhelmeted rider mid-jump would contradict the
 curriculum it is advertising.
 
+#### 5.4.1 The calmer-than-the-prose test
+
+For any asset depicting an incident or a hazard, the operative check is not
+"is this acceptable" but:
+
+> **Is the picture calmer than the words it sits beside?**
+
+`scenario-silent-radio` illustrates prose that says the rider is *"holding their
+wrist, pale."* The plate shows a seated figure, helmet on, machine small and
+muted down-trail — it reads closer to a trailside stop than a crash. That is the
+correct direction. **The reverse — art more vivid than the text — is an
+automatic stop**, because the learner came to the picture through the sentence,
+and a picture that escalates is inviting spectacle the curriculum refused.
+
+This test also decides *placement*: the same lane declined to show
+`hero-graduate` ("the summit reached") on the assessment **locked** state,
+because promising a summit to someone with modules left is a reward the learner
+has not earned. Ask what an asset *claims* about the viewer's state, not only
+what it depicts.
+
 ---
 
 ## Part 6 — Medium decision: SVG vs diffusion vs hybrid
