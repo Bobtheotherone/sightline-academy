@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img">
+  <!-- B-029 Level 7 Trail Boss (1400 XP): the full range - back range, massif,
+       foreground bench - with the blazed climb reaching a summit marker. The one
+       gold mark in the level set, and the densest emblem of the seven. -->
+  <circle cx="64" cy="64" r="61" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+    <path d="M6 26 Q38 12 66 20 Q94 28 122 16"/>
+    <path d="M8 40 Q40 26 68 34 Q96 42 120 30"/>
+  </g>
+  <path d="M5.1 48.2 L18 34 L28 46 L40 28 L52 44 L64 22 L80 42 L92 30 L104 44 L112 38 L122.9 48.2 A61 61 0 1 1 5.1 48.2 Z" fill="#9CC3B4" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M5.1 79.8 L26 60 L38 70 L58 42 L74 58 L88 48 L104 70 L122.9 79.8 A61 61 0 0 1 5.1 79.8 Z" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M50 52 L58 42 L66 52 L58 58 Z" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1" stroke-linejoin="round"/>
+  <path d="M20.9 107.1 Q44 92 64 98 Q88 104 107.1 107.1 A61 61 0 0 1 20.9 107.1 Z" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5"/>
+  <path d="M26 100 Q40 86 48 72 Q54 58 58 46" fill="none" stroke="#EEF3EC" stroke-width="2.5" stroke-linecap="round"/>
+  <g fill="#C4622D" stroke="#0E2A23" stroke-width="1.2">
+    <rect x="-5" y="-5" width="10" height="10" rx="2.7" transform="translate(34 92) rotate(45)"/>
+    <rect x="-5.6" y="-5.6" width="11.2" height="11.2" rx="3" transform="translate(49 70) rotate(45)"/>
+  </g>
+  <rect x="54.5" y="14" width="8" height="30" rx="2.5" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+  <path d="M54.5 22 H62.5" stroke="#0E2A23" stroke-width="1"/>
+  <rect x="-7" y="-7" width="14" height="14" rx="3.7" transform="translate(58.5 30) rotate(45)" fill="#E0A72E" stroke="#0E2A23" stroke-width="1.5"/>
+</svg>

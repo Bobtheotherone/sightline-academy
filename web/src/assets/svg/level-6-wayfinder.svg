@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img">
+  <!-- B-028 Level 6 Wayfinder (1000 XP): an eight-point compass rose set over a
+       full nested contour field - the rider now reads ground and bearing. -->
+  <circle cx="64" cy="64" r="61" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+  <g stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round">
+    <path d="M12 74 Q8 40 44 26 Q88 12 112 42 Q126 70 96 98 Q54 120 26 100 Q14 90 12 74 Z" fill="#EEF3EC"/>
+    <path d="M26 72 Q24 46 54 36 Q88 26 102 50 Q112 72 88 90 Q56 106 36 90 Q28 84 26 72 Z" fill="#9CC3B4"/>
+    <path d="M40 70 Q40 54 62 48 Q86 42 94 60 Q100 74 80 84 Q56 94 46 82 Q40 78 40 70 Z" fill="#EEF3EC"/>
+    <path d="M52 68 Q54 60 68 57 Q82 55 86 65 Q88 73 74 78 Q60 82 55 75 Z" fill="#FBFCFA"/>
+  </g>
+  <circle cx="64" cy="64" r="30" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+  <g stroke="#0E2A23" stroke-linecap="round">
+    <path d="M64 31 V25 M97 64 H103 M64 97 V103 M31 64 H25" stroke-width="1.5"/>
+    <path d="M87.3 87.3 L90.4 90.4 M40.7 87.3 L37.6 90.4 M87.3 40.7 L90.4 37.6 M40.7 40.7 L37.6 37.6" stroke-width="1"/>
+  </g>
+  <path d="M76 52 L68.2 64 L76 76 L64 68.2 L52 76 L59.8 64 L52 52 L64 59.8 Z" fill="#9CC3B4" stroke="#0E2A23" stroke-width="1"/>
+  <path d="M64 39 L70 58 L89 64 L70 70 L64 89 L58 70 L39 64 L58 58 Z" fill="#1F5546" stroke="#0E2A23" stroke-width="1.2" stroke-linejoin="round"/>
+  <path d="M64 39 L70 58 L64 64 L58 58 Z" fill="#C4622D" stroke="#0E2A23" stroke-width="1" stroke-linejoin="round"/>
+  <circle cx="64" cy="64" r="3.2" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1"/>
+</svg>

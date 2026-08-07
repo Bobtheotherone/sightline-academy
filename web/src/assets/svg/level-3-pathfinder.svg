@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img">
+  <!-- B-025 Level 3 Pathfinder (250 XP): the trail forks. The blazed branch is
+       chosen and drawn solid; the unblazed branch fades away unmarked. -->
+  <circle cx="64" cy="64" r="61" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+  <path d="M16 100 Q64 94 112 100" fill="none" stroke="#0E2A23" stroke-width="2" stroke-linecap="round"/>
+  <path d="M64 72 Q54 58 46 44" fill="none" stroke="#9CC3B4" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="4 6"/>
+  <rect x="-4.6" y="-4.6" width="9.2" height="9.2" rx="2.4" transform="translate(44 38) rotate(45)" fill="none" stroke="#9CC3B4" stroke-width="1.5"/>
+  <path d="M64 98 V72 Q76 60 88 48" fill="none" stroke="#0E2A23" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="26" y="60" width="13" height="42" rx="3.5" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+  <path d="M26 69 H39" stroke="#0E2A23" stroke-width="1"/>
+  <rect x="-6.4" y="-6.4" width="12.8" height="12.8" rx="3.4" transform="translate(32.5 78) rotate(45)" fill="#C4622D" stroke="#0E2A23" stroke-width="1.5"/>
+  <rect x="-6.4" y="-6.4" width="12.8" height="12.8" rx="3.4" transform="translate(91 44) rotate(45)" fill="#C4622D" stroke="#0E2A23" stroke-width="1.5"/>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" role="img">
+  <!-- B-035 Ride plan (M6): the capstone. A full folded plan sheet, larger than
+       any other artifact page, with six worked sections above the fold and a
+       ruled summary strip below, sealed with the trail blaze. -->
+  <rect width="240" height="160" fill="#FBFCFA"/>
+  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+    <path d="M-6 20 C 44 8, 100 28, 152 18 S 226 10, 246 22"/>
+    <path d="M-6 152 C 44 142, 100 158, 152 150 S 226 142, 246 154"/>
+  </g>
+  <rect x="10" y="9" width="220" height="142" rx="4" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+  <path d="M10 26 V13 a4 4 0 0 1 4 -4 H226 a4 4 0 0 1 4 4 V26 Z" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5"/>
+  <rect x="-4.6" y="-4.6" width="9.2" height="9.2" rx="2.4" transform="translate(216 17.5) rotate(45)" fill="none" stroke="#9CC3B4" stroke-width="1.5"/>
+  <g stroke="#D8E0DA" stroke-width="1.5">
+    <path d="M83 26 V151 M157 26 V151 M10 72 H230 M10 116 H230"/>
+  </g>
+  <g stroke="#D8E0DA" stroke-width="1">
+    <path d="M16 126 H188 M16 136 H188 M16 146 H188"/>
+  </g>
+  <g fill="#1F5546">
+    <rect x="20" y="33" width="24" height="4.5" rx="2.2"/>
+    <rect x="93" y="33" width="24" height="4.5" rx="2.2"/>
+    <rect x="167" y="33" width="24" height="4.5" rx="2.2"/>
+    <rect x="20" y="79" width="24" height="4.5" rx="2.2"/>
+    <rect x="93" y="79" width="24" height="4.5" rx="2.2"/>
+    <rect x="167" y="79" width="24" height="4.5" rx="2.2"/>
+  </g>
+  <g stroke="#4A5A54" stroke-width="1.8" stroke-linecap="round">
+    <path d="M20 47 H74 M20 55 H66 M20 63 H70"/>
+    <path d="M93 47 H148 M93 55 H136 M93 63 H144"/>
+    <path d="M167 47 H221 M167 55 H206 M167 63 H216"/>
+    <path d="M20 93 H74 M20 101 H62 M20 109 H70"/>
+    <path d="M93 93 H148 M93 101 H140 M93 109 H132"/>
+    <path d="M167 93 H221 M167 101 H210 M167 109 H218"/>
+  </g>
+  <g fill="none" stroke="#1F5546" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M62 34.5 L64.4 37 L68.6 31.6"/>
+    <path d="M135 34.5 L137.4 37 L141.6 31.6"/>
+    <path d="M209 34.5 L211.4 37 L215.6 31.6"/>
+    <path d="M62 80.5 L64.4 83 L68.6 77.6"/>
+    <path d="M135 80.5 L137.4 83 L141.6 77.6"/>
+    <path d="M209 80.5 L211.4 83 L215.6 77.6"/>
+  </g>
+  <g stroke="#4A5A54" stroke-linecap="round">
+    <path d="M16 126 H184" stroke-width="2.4"/>
+    <path d="M16 136 H150" stroke-width="2"/>
+    <path d="M16 146 H166" stroke-width="2"/>
+  </g>
+  <circle cx="206" cy="133" r="15" fill="none" stroke="#9CC3B4" stroke-width="1.5"/>
+  <rect x="-9.2" y="-9.2" width="18.4" height="18.4" rx="4.6" transform="translate(206 133) rotate(45)" fill="#C4622D" stroke="#0E2A23" stroke-width="1.5"/>
+</svg>

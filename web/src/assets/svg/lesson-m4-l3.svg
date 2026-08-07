@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" role="img">
+  <!-- B-013 Hazard Decisions: one junction, two routes — the blazed switchback that trades distance for angle, and the short steep line that does not. -->
+  <rect width="320" height="180" fill="#FBFCFA"/>
+  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1"><path d="M-10 30 C 62 12, 128 44, 196 26 S 300 10, 330 30"/><path d="M-10 154 C 66 136, 134 168, 204 150 S 300 134, 330 154"/></g>
+<path d="M14 152 Q64 122 110 98 Q152 76 160 38 Q170 78 214 100 Q262 124 306 152 Z" fill="#9CC3B4" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/><path d="M158 150 L106 132 L172 110 L110 88 L148 62" fill="none" stroke="#0E2A23" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M168 150 L236 60" fill="none" stroke="#0E2A23" stroke-width="4.5" stroke-dasharray="9 9" stroke-linecap="round"/><path d="M206 84 L222 92 M216 70 L232 78" stroke="#0E2A23" stroke-width="2.5" stroke-linecap="round"/><circle cx="163" cy="152" r="6" fill="#0E2A23"/><rect x="-11" y="-11" width="22" height="22" rx="5.28" transform="translate(172 110) rotate(45)" fill="#C4622D" stroke="#0E2A23" stroke-width="1.5"/>
+</svg>

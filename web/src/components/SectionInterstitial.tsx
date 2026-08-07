@@ -1,9 +1,9 @@
 import { useEffect, useRef } from "react";
 import type { SectionId } from "../lib/api";
 import { Button } from "./Button";
-import { BlazeMarker } from "./BlazeMarker";
 import { useEntered } from "../activities/motion";
-import { SECTION_LABELS } from "./StepRail";
+import { Glyph } from "./Glyph";
+import { SECTION_GLYPHS, SECTION_LABELS } from "./StepRail";
 
 /** One-line purpose per section (SPEC-006 §Section transitions). */
 const SECTION_PURPOSE: Record<SectionId, string> = {
@@ -77,8 +77,15 @@ export function SectionInterstitial({
           entered ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
         }`}
       >
-        <BlazeMarker state="active" size="l" />
-        <h2 className="mt-4 font-display text-3xl font-bold text-pine-950">
+        {/* The section's own arc mark (B-055…B-060) inside a clay ring: this
+         * moment gets ONE mark, and the section glyph is more specific than a
+         * generic blaze. The ring keeps the clay accent the blaze carried.
+         * Inside the entered container, so it shares the 320ms fade and the
+         * global reduced-motion collapse. */}
+        <span className="grid size-16 place-items-center rounded-full border border-clay-500/35 bg-paper-0/70 text-pine-950">
+          <Glyph name={SECTION_GLYPHS[section]} size={36} />
+        </span>
+        <h2 className="mt-5 font-display text-3xl font-bold text-pine-950">
           {SECTION_LABELS[section]}
         </h2>
         <p className="mt-2 text-lg text-ink-500">{purpose ?? SECTION_PURPOSE[section]}</p>

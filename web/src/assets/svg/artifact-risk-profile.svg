@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" role="img">
+  <!-- B-030 Risk profile (M1): a ruled notebook page holding four honest entries,
+       the second one blazed in clay as the leak most likely to catch this rider. -->
+  <rect width="240" height="160" fill="#FBFCFA"/>
+  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+    <path d="M-6 22 C 44 10, 100 30, 152 20 S 226 12, 246 24"/>
+    <path d="M-6 148 C 44 138, 100 156, 152 146 S 226 138, 246 150"/>
+  </g>
+  <rect x="18" y="12" width="204" height="136" rx="5" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+  <path d="M18 28 V17 a5 5 0 0 1 5 -5 H217 a5 5 0 0 1 5 5 V28 Z" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5"/>
+  <rect x="-4.6" y="-4.6" width="9.2" height="9.2" rx="2.4" transform="translate(208 20) rotate(45)" fill="none" stroke="#9CC3B4" stroke-width="1.5"/>
+  <g stroke="#D8E0DA" stroke-width="1">
+    <path d="M26 40 H214 M26 64 H214 M26 88 H214 M26 112 H214 M26 136 H214"/>
+    <path d="M44 30 V144"/>
+  </g>
+  <g fill="#1F5546" stroke="#0E2A23" stroke-width="1">
+    <rect x="-3.6" y="-3.6" width="7.2" height="7.2" rx="2" transform="translate(33 36) rotate(45)"/>
+    <rect x="-3.6" y="-3.6" width="7.2" height="7.2" rx="2" transform="translate(33 84) rotate(45)"/>
+    <rect x="-3.6" y="-3.6" width="7.2" height="7.2" rx="2" transform="translate(33 108) rotate(45)"/>
+  </g>
+  <g stroke="#4A5A54" stroke-width="2.5" stroke-linecap="round">
+    <path d="M52 36 H186"/>
+    <path d="M52 84 H172"/>
+    <path d="M52 108 H194"/>
+  </g>
+  <path d="M52 60 H198" stroke="#C4622D" stroke-width="3" stroke-linecap="round"/>
+  <path d="M52 70 H144" stroke="#C4622D" stroke-width="2" stroke-linecap="round"/>
+  <rect x="-6.6" y="-6.6" width="13.2" height="13.2" rx="3.4" transform="translate(33 62) rotate(45)" fill="#C4622D" stroke="#0E2A23" stroke-width="1.5"/>
+</svg>

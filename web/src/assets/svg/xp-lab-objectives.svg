@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" role="img">
+  <!-- B-075 lab_objectives_met: three lab objectives ticked off. -->
+  <g fill="none" stroke="#C4622D" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M1.6 3.6 L3.2 5.2 L6.2 1.8" stroke-width="1.5"/>
+    <path d="M1.6 8.6 L3.2 10.2 L6.2 6.8" stroke-width="1.5"/>
+    <path d="M1.6 13.6 L3.2 15.2 L6.2 11.8" stroke-width="1.5"/>
+    <path d="M8.8 3.8 H14.4 M8.8 8.8 H14.4 M8.8 13.8 H14.4" stroke-width="1.4"/>
+  </g>
+</svg>

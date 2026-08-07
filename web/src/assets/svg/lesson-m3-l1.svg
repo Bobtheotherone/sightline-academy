@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" role="img">
+  <!-- B-008 The Helmet: a cross-sectioned full-face helmet — hard shell outside, crushable liner as the accented band, head space inside. -->
+  <rect width="320" height="180" fill="#FBFCFA"/>
+  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1"><path d="M-10 30 C 62 12, 128 44, 196 26 S 300 10, 330 30"/><path d="M-10 154 C 66 136, 134 168, 204 150 S 300 134, 330 154"/></g>
+<g transform="translate(82 26) scale(1.5)"><path d="M66 2 C90 2, 104 20, 104 44 C104 67, 88 82, 64 82 C50 82, 40 78, 34 70 L12 66 C2 61, 0 50, 6 40 L14 26 C22 10, 42 2, 66 2 Z" fill="#1F5546" stroke="#0E2A23" stroke-width="1" stroke-linejoin="round"/><g transform="translate(54 44) scale(0.78) translate(-54 -44)"><path d="M66 2 C90 2, 104 20, 104 44 C104 67, 88 82, 64 82 C50 82, 40 78, 34 70 L12 66 C2 61, 0 50, 6 40 L14 26 C22 10, 42 2, 66 2 Z" fill="#C4622D" stroke="#0E2A23" stroke-width="1.28" stroke-linejoin="round"/></g><ellipse cx="58" cy="43" rx="25" ry="22" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1"/><path d="M18 40 L56 27 L58 48 L22 57 Z" fill="#2E6E8E" stroke="#0E2A23" stroke-width="1" stroke-linejoin="round"/></g>
+</svg>

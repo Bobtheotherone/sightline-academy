@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" role="img">
+  <!-- B-033 Hazard brief (M4): three hazards written up on the ruled page, each
+       filed under the cue that gives it away - a crest, shadowed ruts, a wet
+       band. The rut cue is blazed as the one that decides the line. -->
+  <rect width="240" height="160" fill="#FBFCFA"/>
+  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+    <path d="M-6 22 C 44 10, 100 30, 152 20 S 226 12, 246 24"/>
+    <path d="M-6 148 C 44 138, 100 156, 152 146 S 226 138, 246 150"/>
+  </g>
+  <rect x="18" y="12" width="204" height="136" rx="5" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+  <path d="M18 28 V17 a5 5 0 0 1 5 -5 H217 a5 5 0 0 1 5 5 V28 Z" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5"/>
+  <rect x="-4.6" y="-4.6" width="9.2" height="9.2" rx="2.4" transform="translate(208 20) rotate(45)" fill="none" stroke="#9CC3B4" stroke-width="1.5"/>
+  <g stroke="#D8E0DA" stroke-width="1">
+    <path d="M26 40 H214 M26 55 H214 M26 70 H214 M26 85 H214 M26 100 H214 M26 115 H214 M26 130 H214"/>
+  </g>
+  <g fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5">
+    <rect x="30" y="35" width="25" height="25" rx="3"/>
+    <rect x="30" y="65" width="25" height="25" rx="3"/>
+    <rect x="30" y="95" width="25" height="25" rx="3"/>
+  </g>
+  <g fill="none" stroke="#0E2A23" stroke-width="1.2" stroke-linecap="round">
+    <path d="M34 54 Q42.5 44 51 54"/>
+    <path d="M36.5 49 Q42.5 42 48.5 49"/>
+    <path d="M39 44.5 Q42.5 41 46 44.5"/>
+  </g>
+  <g stroke="#C4622D" stroke-width="2.4" stroke-linecap="round">
+    <path d="M35 85 L45 70 M42 87 L52 72"/>
+  </g>
+  <rect x="34" y="108" width="17" height="7" rx="2" fill="#9CC3B4" stroke="#0E2A23" stroke-width="1"/>
+  <path d="M34 103 Q38.5 99 43 103 Q47.5 107 51 103" fill="none" stroke="#0E2A23" stroke-width="1.2" stroke-linecap="round"/>
+  <g stroke="#4A5A54" stroke-linecap="round">
+    <path d="M64 40 H198" stroke-width="2.6"/>
+    <path d="M64 55 H162" stroke-width="2"/>
+    <path d="M64 70 H188" stroke-width="2.6"/>
+    <path d="M64 85 H174" stroke-width="2"/>
+    <path d="M64 100 H196" stroke-width="2.6"/>
+    <path d="M64 115 H150" stroke-width="2"/>
+  </g>
+</svg>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" role="img">
+  <!-- B-032 Gear card (M3): a pocket card laid on the ruled page, carrying the
+       five every-ride items head to toe - helmet, eye protection, long sleeves,
+       gloves, over-ankle boots. The helmet is blazed as the non-negotiable. -->
+  <rect width="240" height="160" fill="#FBFCFA"/>
+  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+    <path d="M-6 22 C 44 10, 100 30, 152 20 S 226 12, 246 24"/>
+    <path d="M-6 148 C 44 138, 100 156, 152 146 S 226 138, 246 150"/>
+  </g>
+  <rect x="18" y="12" width="204" height="136" rx="5" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+  <path d="M18 28 V17 a5 5 0 0 1 5 -5 H217 a5 5 0 0 1 5 5 V28 Z" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5"/>
+  <rect x="-4.6" y="-4.6" width="9.2" height="9.2" rx="2.4" transform="translate(208 20) rotate(45)" fill="none" stroke="#9CC3B4" stroke-width="1.5"/>
+  <g stroke="#D8E0DA" stroke-width="1">
+    <path d="M26 40 H214 M26 64 H214 M26 88 H214 M26 112 H214 M26 136 H214"/>
+  </g>
+  <g transform="rotate(-2 120 86)">
+    <rect x="40" y="50" width="168" height="80" rx="7" fill="#EEF3EC"/>
+    <rect x="36" y="46" width="168" height="80" rx="7" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+    <rect x="46" y="56" width="46" height="5" rx="2.5" fill="#1F5546"/>
+    <g stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round">
+      <path d="M49 106 Q49 84 60 84 Q71 84 71 106 Q71 110 67 110 H53 Q49 110 49 106 Z" fill="#1F5546"/>
+      <rect x="52" y="94" width="16" height="7" rx="3.5" fill="#FBFCFA" stroke-width="1.2"/>
+      <rect x="81" y="92" width="10" height="9" rx="3" fill="#FBFCFA"/>
+      <rect x="93" y="92" width="10" height="9" rx="3" fill="#FBFCFA"/>
+      <path d="M91 96.5 H93 M81 96.5 H77 M103 96.5 H107" stroke="#1F5546" stroke-width="2" fill="none"/>
+      <path d="M114 86 H134 L140 92 L136 97 L133 94 V108 H115 V94 L112 97 L108 92 Z" fill="#1F5546"/>
+      <path d="M150 106 V92 Q150 86 156 86 Q163 86 163 92 V106 Z" fill="#4A5A54"/>
+      <path d="M150 94 Q145 92 144 96 Q143 100 149 101" fill="#4A5A54"/>
+      <path d="M154 88 V95 M159 88 V95" stroke="#FBFCFA" stroke-width="1.2" fill="none"/>
+      <rect x="147" y="104" width="18" height="6" rx="2.5" fill="#9CC3B4"/>
+      <path d="M180 104 V88 Q180 84 184 84 H190 V96 H196 Q200 96 200 100 V104 Z" fill="#4A5A54"/>
+      <rect x="177" y="104" width="25" height="6" rx="2.5" fill="#9CC3B4"/>
+      <path d="M183 89 L189 91 M183 94 L189 96" stroke="#FBFCFA" stroke-width="1.2" fill="none"/>
+    </g>
+    <g stroke="#D8E0DA" stroke-width="2" stroke-linecap="round">
+      <path d="M54 118 H66 M86 118 H98 M118 118 H130 M150 118 H162 M182 118 H194"/>
+    </g>
+    <rect x="-5.6" y="-5.6" width="11.2" height="11.2" rx="3" transform="translate(60 70) rotate(45)" fill="#C4622D" stroke="#0E2A23" stroke-width="1.5"/>
+  </g>
+</svg>

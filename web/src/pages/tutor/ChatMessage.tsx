@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { ShieldCheck } from "lucide-react";
 import { Markdown } from "../../activities/Markdown";
 import { Button } from "../../components/Button";
+import { Glyph } from "../../components/Glyph";
 import type { SourceRef } from "../../lib/api";
 
 /** The ranger-hat glyph avatar (flat vector per DESIGN-001). */
@@ -70,6 +71,31 @@ function moduleLabel(moduleRef: string): string {
   return match ? `Module ${match[1]}` : "";
 }
 
+/* Corpus topic marks (VISUAL_ASSETS B-036…B-042). TutorSource carries no
+ * topic field, but every chunk id in content/corpus/ is `<topic>-<slug>` and
+ * its frontmatter `topic:` matches that prefix for all 33 chunks — so the
+ * prefix is the topic. Anything outside the seven renders no glyph. */
+const TOPICS = new Set([
+  "mindset",
+  "machine",
+  "gear",
+  "terrain",
+  "environment",
+  "roads",
+  "general",
+]);
+
+function topicGlyph(chunkId: string): string | null {
+  const prefix = chunkId.split("-")[0];
+  return TOPICS.has(prefix) ? `topic-${prefix}` : null;
+}
+
+/** The leading topic mark on a source chip; nothing for an unknown prefix. */
+function TopicMark({ chunkId }: { chunkId: string }) {
+  const name = topicGlyph(chunkId);
+  return name ? <Glyph name={name} size={16} className="text-pine-700" /> : null;
+}
+
 /** SourceChips row — chunk title + module ref, chip links to /course/:moduleId. */
 export function SourceChips({ sources }: { sources: SourceRef[] }) {
   if (sources.length === 0) return null;
@@ -82,14 +108,16 @@ export function SourceChips({ sources }: { sources: SourceRef[] }) {
             to={`/course/${source.moduleRef}`}
             className="inline-flex items-center gap-1.5 rounded-sm border border-line-200 bg-moss-100 px-2 py-1 text-xs text-pine-950 transition-colors duration-(--ts-dur-fast) hover:border-pine-300 hover:bg-pine-300/25"
           >
+            <TopicMark chunkId={source.chunkId} />
             {source.title}
             <span className="font-mono text-[11px] text-pine-700">{moduleLabel(source.moduleRef)}</span>
           </Link>
         ) : (
           <span
             key={source.chunkId}
-            className="inline-flex items-center rounded-sm border border-line-200 bg-moss-100 px-2 py-1 text-xs text-ink-500"
+            className="inline-flex items-center gap-1.5 rounded-sm border border-line-200 bg-moss-100 px-2 py-1 text-xs text-ink-500"
           >
+            <TopicMark chunkId={source.chunkId} />
             {source.title}
           </span>
         ),

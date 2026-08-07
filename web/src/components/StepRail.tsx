@@ -1,6 +1,17 @@
 import { useMemo } from "react";
 import type { SectionId } from "../lib/api";
 import { BlazeMarker, type BlazeState } from "./BlazeMarker";
+import { Glyph } from "./Glyph";
+
+/** Section arc mark per section (VISUAL_ASSETS B-055…B-060). */
+export const SECTION_GLYPHS: Record<SectionId, string> = {
+  briefing: "section-briefing",
+  learn: "section-learn",
+  try: "section-try",
+  debrief: "section-debrief",
+  journal: "section-journal",
+  checkpoint: "section-checkpoint",
+};
 
 export const SECTION_LABELS: Record<SectionId, string> = {
   briefing: "Briefing",
@@ -21,6 +32,14 @@ interface SectionGroup {
   section: SectionId;
   steps: { step: StepRailStep; index: number }[];
 }
+
+/** Heading tone per group state — the glyph inherits it via currentColor. */
+const GROUP_TONE: Record<BlazeState, string> = {
+  active: "text-pine-950",
+  done: "text-pine-700",
+  todo: "text-ink-500",
+  locked: "text-ink-500",
+};
 
 /**
  * The lesson progress rail (DESIGN-002): section-grouped BlazeMarker dots with
@@ -62,13 +81,29 @@ export function StepRail({
   const reachable = (step: StepRailStep) =>
     step.id === currentId || completedIds.has(step.id);
 
+  /** A group is where you are, behind you, or still ahead. */
+  const groupState = (group: SectionGroup): BlazeState =>
+    group.steps.some(({ step }) => step.id === currentId)
+      ? "active"
+      : group.steps.every(({ step }) => completedIds.has(step.id))
+        ? "done"
+        : "todo";
+
   return (
     <nav aria-label="Lesson steps" className={className}>
       {/* Desktop: vertical, section-grouped */}
       <ol className="hidden flex-col gap-5 lg:flex">
         {groups.map((group, gi) => (
           <li key={`${group.section}-${gi}`}>
-            <p className="ts-eyebrow">{SECTION_LABELS[group.section]}</p>
+            {/* The section mark tints with the group's state off currentColor. */}
+            <p
+              className={`ts-eyebrow flex items-center gap-1.5 ${
+                GROUP_TONE[groupState(group)]
+              }`}
+            >
+              <Glyph name={SECTION_GLYPHS[group.section]} size={16} />
+              {SECTION_LABELS[group.section]}
+            </p>
             <ol className="mt-2 flex flex-col gap-1">
               {group.steps.map(({ step }) => {
                 const state = stateOf(step);
@@ -102,7 +137,10 @@ export function StepRail({
       {/* Mobile: collapsed top bar */}
       <div className="flex items-center justify-between gap-3 lg:hidden">
         <div className="min-w-0">
-          <p className="ts-eyebrow">{current ? SECTION_LABELS[current.section] : "Lesson"}</p>
+          <p className="ts-eyebrow flex items-center gap-1.5 text-pine-950">
+            {current && <Glyph name={SECTION_GLYPHS[current.section]} size={16} />}
+            {current ? SECTION_LABELS[current.section] : "Lesson"}
+          </p>
           <p className="text-sm font-medium text-pine-950">
             Step {currentIndex + 1} of {steps.length}
           </p>

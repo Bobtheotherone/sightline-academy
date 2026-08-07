@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 240" role="img">
+  <!-- B-081 Forbidden state: a staff-only service spur closed by a striped warden
+       barrier beside the warden's post. This route belongs to someone else - the
+       learner's own blazed trail carries on, open, to the left. -->
+  <rect width="360" height="240" fill="#FBFCFA"/>
+  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+    <path d="M-10 42 C 70 20, 160 56, 250 36 S 350 22, 370 44"/>
+    <path d="M-10 232 C 70 214, 160 248, 250 228 S 350 216, 370 236"/>
+  </g>
+  <ellipse cx="180" cy="226" rx="150" ry="8" fill="#EEF3EC"/>
+  <path d="M6 226 L76 226 L104 154 L86 154 Z" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M170 226 L282 226 L254 150 L222 150 Z" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M16 226 H344" stroke="#0E2A23" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M200 96 L250 68 L300 96 Z" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <rect x="210" y="94" width="80" height="58" rx="4" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5"/>
+  <rect x="220" y="106" width="32" height="26" rx="2" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.2"/>
+  <path d="M236 106 V132 M220 119 H252" stroke="#0E2A23" stroke-width="1"/>
+  <path d="M264 108 H280 V122 Q280 130 272 134 Q264 130 264 122 Z" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.2" stroke-linejoin="round"/>
+  <rect x="-4" y="-4" width="8" height="8" rx="2.2" transform="translate(272 118) rotate(45)" fill="#1F5546"/>
+  <rect x="94" y="116" width="13" height="44" rx="3.5" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+  <path d="M94 126 H107" stroke="#0E2A23" stroke-width="1"/>
+  <rect x="-8" y="-8" width="16" height="16" rx="4.2" transform="translate(100.5 130) rotate(45)" fill="#C4622D" stroke="#0E2A23" stroke-width="1.5"/>
+  <rect x="156" y="150" width="15" height="76" rx="4" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+  <path d="M156 160 H171" stroke="#0E2A23" stroke-width="1"/>
+  <rect x="290" y="166" width="13" height="60" rx="4" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+  <path d="M290 176 H303" stroke="#0E2A23" stroke-width="1"/>
+  <rect x="164" y="178" width="134" height="14" rx="4" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+  <g fill="#A93226">
+    <path d="M168 192 L182 178 L192 178 L178 192 Z"/>
+    <path d="M200 192 L214 178 L224 178 L210 192 Z"/>
+    <path d="M232 192 L246 178 L256 178 L242 192 Z"/>
+    <path d="M264 192 L278 178 L288 178 L274 192 Z"/>
+    <path d="M292 192 L296 188 L296 192 Z"/>
+  </g>
+  <rect x="134" y="126" width="40" height="30" rx="3" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+  <path d="M140 150 L168 132" stroke="#A93226" stroke-width="5" stroke-linecap="round"/>
+</svg>

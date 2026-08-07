@@ -600,6 +600,116 @@
       "status": "real",
       "file": "svg/inset-soft-edge.svg",
       "alt": "Section through an undercut trail edge: the tread runs on well past the ground beneath it, cracks run parallel to the lip, chunks have already broken away, roots hang in the shadow of the void, and the water that took the toe out is still working at it."
+    },
+    "lesson-m1-l1": {
+      "status": "real",
+      "file": "svg/lesson-m1-l1.svg",
+      "alt": "Six equal trail-blaze marks set in one row, one of them accented: the handful of decisions behind most ATV crashes drawn as a short, countable list rather than as freak accidents."
+    },
+    "lesson-m1-l2": {
+      "status": "real",
+      "file": "svg/lesson-m1-l2.svg",
+      "alt": "A machine halted on the near bank of a creek at a marked stopping point, the crossing still ahead of it: the moment where pressure to keep up meets a decision that has not been made yet."
+    },
+    "lesson-m1-l3": {
+      "status": "real",
+      "file": "svg/lesson-m1-l3.svg",
+      "alt": "An open field notebook carrying four written entries with one entry marked: a personal risk profile is a short written list of your own habits, not a general warning that applies to everyone equally."
+    },
+    "lesson-m2-l1": {
+      "status": "real",
+      "file": "svg/lesson-m2-l1.svg",
+      "alt": "A utility ATV in side profile with eight callout ticks placed around it, one marked as the start point: the machine is a set of named systems you can learn and check one at a time."
+    },
+    "lesson-m2-l2": {
+      "status": "real",
+      "file": "svg/lesson-m2-l2.svg",
+      "alt": "A handlebar control cluster shown in isolation: thumb throttle above the grip, brake lever under the bar and kill switch inboard, so each control is learned by where the hand finds it."
+    },
+    "lesson-m2-l3": {
+      "status": "real",
+      "file": "svg/lesson-m2-l3.svg",
+      "alt": "A machine ringed by a dotted loop with five inspection stations on it, one marked as the start: the pre-ride check is a fixed circuit walked in the same order every time, not a glance."
+    },
+    "lesson-m2-l4": {
+      "status": "real",
+      "file": "svg/lesson-m2-l4.svg",
+      "alt": "A fully geared rider on a machine with two measurements drawn: reach from shoulder to the marked grip, and seat height down to the ground. Fit is measured, not felt."
+    },
+    "lesson-m3-l1": {
+      "status": "real",
+      "file": "svg/lesson-m3-l1.svg",
+      "alt": "A full-face helmet cut away in profile so the crushable liner shows as a thick band between the hard outer shell and the head space: the liner is the part that does the work in a crash."
+    },
+    "lesson-m3-l2": {
+      "status": "real",
+      "file": "svg/lesson-m3-l2.svg",
+      "alt": "Three columns holding one gear item each, read head to toe: helmet, gloves and over-ankle boots. Gear is a complete set covered top to bottom, not a helmet plus whatever is handy."
+    },
+    "lesson-m3-l3": {
+      "status": "real",
+      "file": "svg/lesson-m3-l3.svg",
+      "alt": "A pocket gear card with five checked rows, one accented: your own gear standard written down as a short checklist you can carry and check against before every ride."
+    },
+    "lesson-m4-l1": {
+      "status": "real",
+      "file": "svg/lesson-m4-l1.svg",
+      "alt": "A trail receding to a marked far point with a scanning arc swept across it from side to side: reading terrain means working the eyes far ahead, near, and out to both edges in a repeating cycle."
+    },
+    "lesson-m4-l2": {
+      "status": "real",
+      "file": "svg/lesson-m4-l2.svg",
+      "alt": "A machine seen from behind with its centre of gravity marked and a plumb line dropped between the wheels: the machine stays up while that line falls inside the rectangle its four contact patches make."
+    },
+    "lesson-m4-l3": {
+      "status": "real",
+      "file": "svg/lesson-m4-l3.svg",
+      "alt": "One junction offering two routes up the same slope: a longer blazed switchback marked as the chosen line, and a short steep shortcut left unmarked. The decision is made at the junction, not on the climb."
+    },
+    "lesson-m4-l4": {
+      "status": "real",
+      "file": "svg/lesson-m4-l4.svg",
+      "alt": "A single trail blaze set on a hillside drawn as nested contour rings: the module's terrain reading closes with one checkpoint, the ground understood as shape and steepness before it is ridden."
+    },
+    "lesson-m5-l1": {
+      "status": "real",
+      "file": "svg/lesson-m5-l1.svg",
+      "alt": "The same marked trail drawn twice side by side, dry on one side and wet on the other: the route does not change with the weather but the traction, braking distance and line choice all do."
+    },
+    "lesson-m5-l2": {
+      "status": "real",
+      "file": "svg/lesson-m5-l2.svg",
+      "alt": "Three pre-ride objects on one line: a map with the destination marked, a phone showing the time you said you would be back, and a small pack. Preparation is decided before the engine starts."
+    },
+    "lesson-m5-l3": {
+      "status": "real",
+      "file": "svg/lesson-m5-l3.svg",
+      "alt": "A machine lying on its side and an undamaged helmet resting intact on the ground beside it: after a spill the gear has already done its job, and what matters next is the calm sequence of stop, assess, communicate."
+    },
+    "lesson-m5-l4": {
+      "status": "real",
+      "file": "svg/lesson-m5-l4.svg",
+      "alt": "A trail blaze set directly on an advancing cold-front line with clear sky behind it: the environment module closes on the habit of reading the sky as a moving edge, not as the weather you set out in."
+    },
+    "lesson-m6-l1": {
+      "status": "real",
+      "file": "svg/lesson-m6-l1.svg",
+      "alt": "A low-pressure knobby tire pressed onto pavement with its contact patch deforming: tires built to flex and bite into loose ground squirm on hard surfaces, which is why pavement handling is unpredictable."
+    },
+    "lesson-m6-l2": {
+      "status": "real",
+      "file": "svg/lesson-m6-l2.svg",
+      "alt": "A trail meeting a paved road from above, with a marked stop bar set back from the edge and the crossing path drawn at a right angle to the road: cross pavement square, at the shortest possible line, after stopping."
+    },
+    "lesson-m6-l3": {
+      "status": "real",
+      "file": "svg/lesson-m6-l3.svg",
+      "alt": "A hiker, a horse and a machine spaced out along one trail with the machine halted at a marked point: engines yield to feet and hooves, and the yielding happens early enough to be obvious."
+    },
+    "lesson-m6-l4": {
+      "status": "real",
+      "file": "svg/lesson-m6-l4.svg",
+      "alt": "A folded ride-plan sheet with all six sections filled in and one accented: the capstone pulls route, terrain, weather, gear, machine check and contact time into one written plan before the ride starts."
     }
   }
 }

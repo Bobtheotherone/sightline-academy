@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img">
+  <!-- B-027 Level 5 Ridge Runner (700 XP): a ridge profile stacked in front of a
+       back range, with the trail running the whole spine and three blazes on it. -->
+  <circle cx="64" cy="64" r="61" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+    <path d="M6 32 Q38 18 66 26 Q94 34 122 22"/>
+    <path d="M8 50 Q40 36 68 44 Q96 52 120 40"/>
+  </g>
+  <path d="M5.1 79.8 L22 56 L34 70 L52 44 L68 62 L84 40 L104 66 L122.9 79.8 A61 61 0 0 1 5.1 79.8 Z" fill="#9CC3B4" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M11.2 94.5 L44 74 L64 60 L86 52 L116.8 94.5 A61 61 0 0 1 11.2 94.5 Z" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M22 96 L46 78 L64 65 L84 56" fill="none" stroke="#EEF3EC" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#C4622D" stroke="#0E2A23" stroke-width="1.2">
+    <rect x="-5.2" y="-5.2" width="10.4" height="10.4" rx="2.8" transform="translate(32 88) rotate(45)"/>
+    <rect x="-5.8" y="-5.8" width="11.6" height="11.6" rx="3.1" transform="translate(55 71) rotate(45)"/>
+    <rect x="-6.8" y="-6.8" width="13.6" height="13.6" rx="3.6" transform="translate(86 50) rotate(45)"/>
+  </g>
+</svg>

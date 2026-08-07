@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 240" role="img">
+  <!-- B-080 Empty instructor: the trailhead register box open on its post, every
+       ruled column still blank - nobody has signed in yet. -->
+  <rect width="360" height="240" fill="#FBFCFA"/>
+  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+    <path d="M-10 44 C 70 22, 160 58, 250 38 S 350 24, 370 46"/>
+    <path d="M-10 230 C 70 212, 160 246, 250 226 S 350 214, 370 234"/>
+  </g>
+  <ellipse cx="180" cy="224" rx="118" ry="8" fill="#EEF3EC"/>
+  <g stroke="#0E2A23" stroke-linejoin="round">
+    <path d="M40 178 L52 216 H28 Z" fill="#9CC3B4" stroke-width="1.5"/>
+    <path d="M40 216 V224" stroke-width="2"/>
+    <path d="M322 172 L336 218 H308 Z" fill="#1F5546" stroke-width="1.5"/>
+    <path d="M322 218 V226" stroke-width="2"/>
+  </g>
+  <path d="M22 224 H338" stroke="#0E2A23" stroke-width="1.5" stroke-linecap="round"/>
+  <rect x="168" y="170" width="24" height="56" rx="4" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+  <path d="M168 180 H192" stroke="#0E2A23" stroke-width="1"/>
+  <rect x="76" y="64" width="208" height="110" rx="6" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5"/>
+  <path d="M66 66 L180 30 L294 66 Z" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <rect x="92" y="78" width="76" height="84" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+  <rect x="192" y="78" width="76" height="84" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+  <path d="M180 80 V160" stroke="#D8E0DA" stroke-width="5"/>
+  <path d="M180 84 V156" stroke="#0E2A23" stroke-width="1" stroke-dasharray="3 4"/>
+  <g stroke="#D8E0DA" stroke-width="1">
+    <path d="M118 84 V158 M144 84 V158 M218 84 V158 M244 84 V158"/>
+    <path d="M96 108 H164 M96 122 H164 M96 136 H164 M96 150 H164"/>
+    <path d="M196 108 H264 M196 122 H264 M196 136 H264 M196 150 H264"/>
+  </g>
+  <g stroke="#0E2A23" stroke-width="1">
+    <path d="M96 94 H164 M196 94 H264"/>
+  </g>
+  <path d="M284 96 Q298 120 295 140" fill="none" stroke="#0E2A23" stroke-width="1.5" stroke-linecap="round"/>
+  <g stroke-linecap="round">
+    <path d="M295 144 V172" stroke="#0E2A23" stroke-width="9"/>
+    <path d="M295 147 V169" stroke="#C4622D" stroke-width="5.5"/>
+  </g>
+  <path d="M290.5 172 H299.5 L295 182 Z" fill="#0E2A23" stroke="#0E2A23" stroke-width="1" stroke-linejoin="round"/>
+</svg>

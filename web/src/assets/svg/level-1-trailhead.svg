@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img">
+  <!-- B-023 Level 1 Trailhead (0 XP): one trailhead post carrying a single blaze.
+       The emptiest emblem in the set - the route has not started yet. -->
+  <circle cx="64" cy="64" r="61" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+  <path d="M28 94 Q64 88 100 94" fill="none" stroke="#0E2A23" stroke-width="2" stroke-linecap="round"/>
+  <rect x="57" y="34" width="14" height="58" rx="4" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+  <path d="M57 44 H71" stroke="#0E2A23" stroke-width="1"/>
+  <rect x="-7.5" y="-7.5" width="15" height="15" rx="4" transform="translate(64 62) rotate(45)" fill="#C4622D" stroke="#0E2A23" stroke-width="1.5"/>
+</svg>

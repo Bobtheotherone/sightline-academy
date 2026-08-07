@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" role="img">
+  <!-- B-031 Inspection log (M2): five T-CLOC zone rows on a ruled page, walked
+       top to bottom in fixed order. Four zones ticked, the fifth still open. -->
+  <rect width="240" height="160" fill="#FBFCFA"/>
+  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+    <path d="M-6 22 C 44 10, 100 30, 152 20 S 226 12, 246 24"/>
+    <path d="M-6 148 C 44 138, 100 156, 152 146 S 226 138, 246 150"/>
+  </g>
+  <rect x="18" y="12" width="204" height="136" rx="5" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+  <path d="M18 28 V17 a5 5 0 0 1 5 -5 H217 a5 5 0 0 1 5 5 V28 Z" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5"/>
+  <rect x="-4.6" y="-4.6" width="9.2" height="9.2" rx="2.4" transform="translate(208 20) rotate(45)" fill="none" stroke="#9CC3B4" stroke-width="1.5"/>
+  <g stroke="#D8E0DA" stroke-width="1">
+    <path d="M26 40 H214 M26 62 H214 M26 84 H214 M26 106 H214 M26 128 H214"/>
+  </g>
+  <g stroke="#9CC3B4" stroke-width="2" stroke-linecap="round">
+    <path d="M36 40 V50 M36 62 V72 M36 84 V94 M36 106 V116"/>
+  </g>
+  <g fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5">
+    <rect x="30" y="28" width="12" height="12" rx="2.5"/>
+    <rect x="30" y="50" width="12" height="12" rx="2.5"/>
+    <rect x="30" y="72" width="12" height="12" rx="2.5"/>
+    <rect x="30" y="94" width="12" height="12" rx="2.5"/>
+  </g>
+  <g fill="none" stroke="#1F5546" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M32.8 34.2 L35.2 36.8 L39.4 31.4"/>
+    <path d="M32.8 56.2 L35.2 58.8 L39.4 53.4"/>
+    <path d="M32.8 78.2 L35.2 80.8 L39.4 75.4"/>
+    <path d="M32.8 100.2 L35.2 102.8 L39.4 97.4"/>
+  </g>
+  <rect x="30" y="116" width="12" height="12" rx="2.5" fill="#FBFCFA" stroke="#C4622D" stroke-width="2"/>
+  <path d="M20 116 L27 122 L20 128 Z" fill="#C4622D"/>
+  <g stroke="#4A5A54" stroke-width="2.5" stroke-linecap="round">
+    <path d="M52 36 H188"/>
+    <path d="M52 58 H166"/>
+    <path d="M52 80 H196"/>
+    <path d="M52 102 H174"/>
+  </g>
+  <path d="M52 124 H182" stroke="#9CC3B4" stroke-width="2.5" stroke-linecap="round"/>
+</svg>
