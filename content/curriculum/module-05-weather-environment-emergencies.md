@@ -43,6 +43,7 @@ required: true
       {"term": "Light — dusk, dawn, shadow", "detail": "Attacks the scan. Depth cues flatten, ruts vanish, and your Module 4 skill quietly loses resolution. Failing light is a schedule instrument: turnaround time exists because of it."},
       {"term": "Dust & visibility", "detail": "Attacks spacing. Following a machine in its dust cone means riding blind at whatever speed the group set. The fix is distance — enough that you see trail, not tailgate."}
     ]},
+    {"type": "figure", "assetSlot": "keylist-four-families", "caption": "Water and light change the trail you're reading; cold, heat, and dust change the rider doing the reading — and a hard day usually hands you one from each side."},
     {"type": "callout", "variant": "tip", "title": "The condition question", "md": "Before every ride, ask one question: **\"What's different today?\"** New rain, first frost, later start, bigger group, heavier load. The answer is the list of adjustments. A ride where the honest answer is \"quite a lot is different\" is a ride that deserves a smaller plan."}
   ]
 }
@@ -137,6 +138,7 @@ required: true
       {"term": "2. The communication plan", "detail": "Someone NOT on the ride knows the plan and the check-in time, and knows what to do if you miss it (who to call, where you said you'd be). Phones die and lose coverage in exactly the terrain ATVs love — the plan can't live only in your pocket. For genuinely remote country, satellite messengers exist; awareness of that option is part of the plan."},
       {"term": "3. The carry kit", "detail": "Awareness-level contents: water and food beyond the plan, first-aid basics you know how to use, tool basics for your machine, a way to make light, a way to stay warm if the ride becomes a wait, and navigation that doesn't need a signal. Sized to remoteness — the mail-run kit and the backcountry kit are different kits."}
     ]},
+    {"type": "figure", "assetSlot": "keylist-before-you-go", "caption": "All three exist in the driveway or they don't exist at all — not one of them can be assembled at the moment you find out you needed it."},
     {"type": "callout", "variant": "story", "title": "The check-in that worked", "md": "Ask around and you'll find a version of this story in every riding community: machine dead in a drainage at dusk, no coverage — and a rider who was warm, fed, and found within hours *because someone in town knew the route and the missed check-in time meant something*. The trio isn't paperwork. It's the difference between \"a long evening\" and a search that starts at midnight with no starting point."}
   ]
 }
@@ -214,6 +216,7 @@ required: true
       {"term": "ASSESS", "detail": "People first, machines a distant second. Who's hurt and how urgently? What are the real resources — people, kit, coverage, daylight? Serious mechanisms (a rider who hit their head, a machine that landed on someone) mean professional help, full stop — the machismo shortcut of \"walking it off\" is how bad days become worse ones."},
       {"term": "COMMUNICATE", "detail": "Early, not as a last resort. Call emergency services the moment the situation might need them — canceling help that's rolling is easy; summoning help you delayed is not. No coverage? This is the moment the communication plan pays: someone knows where you are and when you're due."}
     ]},
+    {"type": "figure", "assetSlot": "keylist-stop-assess-communicate", "caption": "The one list in this course that is genuinely an order — the instinct is to run straight to the person on the ground, and the stage before that is what keeps there from being a second one."},
     {"type": "callout", "variant": "caution", "title": "The boundary, plainly", "md": "Anything beyond scene safety, basic aid you're actually trained in, and getting professional help fast is outside this course — and mostly outside untrained hands. \"Get real training\" isn't a disclaimer here; it's the module's sincere recommendation. Ranger will hold the same line if you ask."}
   ]
 }

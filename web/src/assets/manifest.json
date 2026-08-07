@@ -270,9 +270,10 @@
       "alt": "A seated rider measured against four independent pass-or-fail gates - reach, stance, leverage and machine class - each drawn as a dimension that either fits between the gate posts or does not."
     },
     "keylist-helmet-consequences": {
-      "status": "real",
+      "status": "deferred",
       "file": "svg/keylist-helmet-consequences.svg",
-      "alt": "A helmet cross-section with the crushable liner highlighted as the mechanism, and four causal arrows out to the rules that follow from it: worn and fastened, fitted, rated, and crushable only once."
+      "alt": "A helmet cross-section with the crushable liner highlighted as the mechanism, and four causal arrows out to the rules that follow from it: worn and fastened, fitted, rated, and crushable only once.",
+      "note": "m3-l1-s1 already carries scene-helmet-fit (C-013, wave V1); VISUAL_ASSETS.md 7.3.0 permits one figure per step"
     },
     "keylist-stability-model": {
       "status": "real",
@@ -300,9 +301,10 @@
       "alt": "Three engineering facts - a tire built to deform, a locked rear axle, and a high centre of gravity - with their arrows all converging on the same conclusion at the pavement."
     },
     "keylist-good-crossing": {
-      "status": "real",
+      "status": "deferred",
       "file": "svg/keylist-good-crossing.svg",
-      "alt": "A road crossing broken into four numbered steps: stop completely at the bar, look both ways along the road, cross square to the road and briskly, and cross one machine at a time."
+      "alt": "A road crossing broken into four numbered steps: stop completely at the bar, look both ways along the road, cross square to the road and briskly, and cross one machine at a time.",
+      "note": "m6-l2-s1 already carries scene-crossing (C-011, wave V1); one figure per step"
     },
     "keylist-three-standards": {
       "status": "real",

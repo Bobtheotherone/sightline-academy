@@ -97,6 +97,7 @@ required: true
       {"term": "Wrong-size machine", "detail": "Riders — especially young riders — on machines too large or powerful for them. Fit rules exist because leverage and reach are physical requirements, not suggestions."},
       {"term": "Outrunning your eyes", "detail": "Riding faster than the distance you can see and process — over crests, around brush, into shadow. If you can't see it, you can't choose around it."}
     ]},
+    {"type": "figure", "assetSlot": "keylist-six-decisions", "caption": "Six marks at equal distance from one rider — none of them outranks the others, and every one of them is close enough to reach you on an ordinary ride."},
     {"type": "callout", "variant": "tip", "title": "Why decisions, not skills?", "md": "Skill matters — and hands-on training builds it. But the record says most serious outcomes were shaped by choices any rider could have made differently *regardless of skill level*. Judgment scales instantly; skill takes seasons."}
   ]
 }
@@ -159,6 +160,7 @@ required: true
       {"term": "Familiarity discount", "detail": "\"I've ridden this trail a hundred times\" quietly becomes \"this trail can't surprise me.\" Trails change — washouts, downed limbs, new mud, other people. Your hundredth ride is on a trail you've never seen in today's condition."},
       {"term": "Sunk momentum", "detail": "You're two hours in, the light's going, and the shortcut looks tempting. Tired riders don't get more cautious; they get more committed to finishing. Fatigue is when plans should get *more* conservative, and usually get less."}
     ]},
+    {"type": "figure", "assetSlot": "keylist-three-leaks", "caption": "One reservoir, three separate outlets — judgment does not fail all at once, which is why a rider running low still feels perfectly reasonable to themselves."},
     {"type": "callout", "variant": "tip", "title": "The out-loud rule", "md": "Judgment holds better when it's spoken. \"I'm going around this one\" or \"I'm taking the long way back\" said out loud — even to yourself — turns a vague discomfort into a decision. Groups with one person willing to say it out loud make better calls; be that person."}
   ]
 }

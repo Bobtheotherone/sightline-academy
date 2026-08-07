@@ -212,6 +212,7 @@ required: true
       {"term": "O — Oil & fuel", "detail": "Levels checked, no fresh drips underneath, fuel enough for the ride plus reserve."},
       {"term": "C — Chassis", "detail": "The look-over: cracks, loose fasteners, anything hanging or freshly bent. Load racks secure."}
     ]},
+    {"type": "figure", "assetSlot": "keylist-tcloc", "caption": "Five stations walked as a loop, always from the same starting point — a fixed order is what stops the zone you like least from quietly becoming the one you skip."},
     {"type": "callout", "variant": "caution", "title": "The awareness line", "md": "This course teaches you *what the zones are and what a check is looking for* — enough to do a meaningful walkaround and to know when something needs a qualified mechanic. Your machine's owner's manual gives the exact specs (pressures, fluid points) for your specific model; a hands-on course will put a trainer's eyes on your technique. Use all three."},
     {"type": "callout", "variant": "story", "title": "Why it works", "md": "The walkaround isn't really a mechanical inspection — it's a *change detector*. You saw the machine yesterday; today the ritual makes you see it again. New drip, softer lever, lower tire: changes are the signal, and five minutes of ritual is what makes changes visible."}
   ]
@@ -296,6 +297,7 @@ required: true
       {"term": "Leverage", "detail": "Enough body weight and reach to genuinely shift the machine's balance side to side — the \"invisible control\" from Lesson 2."},
       {"term": "Class", "detail": "Manufacturers label machines by intended rider age/size class, and youth-model rules exist across jurisdictions. The class label is a floor, not a formality."}
     ]},
+    {"type": "figure", "assetSlot": "keylist-fit-checks", "caption": "Four gates measured on the rider, not on the machine — each one passes or it doesn't, because a machine you almost fit is a machine you can't weight-shift when it counts."},
     {"type": "callout", "variant": "caution", "title": "The pattern worth naming plainly", "md": "Young riders on adult-size machines is one of the most consistent threads in serious ATV incident data. A rider who can't reach, weigh-shift, or hold the machine on a slope hasn't got a smaller margin — they've got *no* margin. If you supervise young riders: right-class machine, gear on, appropriate supervision, and a hands-on youth course. Those four move the odds more than anything else you can do."},
     {"type": "text", "md": "Fit isn't only a youth topic. Adults on borrowed machines, tall riders on small quads, anyone whose reach or strength is compromised that day — the same four checks apply every time the rider-machine pairing changes."}
   ]

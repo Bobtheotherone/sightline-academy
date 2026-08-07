@@ -1106,13 +1106,34 @@ the reason recorded, so the decision is visible rather than forgotten.
 | C-008 | `m5-l2-s1` | The before-you-go trio | 3 | **Three artifacts, two on paper one on the rack** — plan, contact, kit. Drawn as objects, laid out in the driveway before the ride. |
 | C-009 | `m5-l3-s1` | Stop — Assess — Communicate | 3 | **A strict sequence** — three numbered stages left to right, each gated by the last. The only keylist in the course that is genuinely ordinal. |
 | C-010 | `m6-l1-s2` | Why the machine itself objects | 3 | **Three engineering facts, one conclusion** — deforming tire, locked rear axle, high CoG, all arrows converging on "pavement". |
-| C-011 | `m6-l2-s1` | Anatomy of a good crossing | 4 | **A plan view with four annotations** — stop, look both ways, square and brisk, individually. **Consumes [A-012](#a-012--scene-crossing)** rather than new art. |
+| C-011 | `m6-l2-s1` | Anatomy of a good crossing | 4 | **A plan view with four annotations** — stop, look both ways, square and brisk, individually. **Consumes [A-012](#a-012--scene-crossing)** rather than new art. ⚠️ See the reconciliation note below. |
 | C-012 | `m6-l3-s1` | The three standards | 3 | **Three commitments** — zero impairment, generous yield, stay-on-trail, drawn as three trail signs at one junction. |
 
 > **C-011 resolves an orphan.** `scene-crossing` (A-012) shipped in Wave 2 and is
 > referenced by nothing. This entry is the `figure` block that makes it earn its
 > place. [C-013](#c-013--helmet-mechanism-diagram) and
 > [C-014](#c-014--load-height-comparison) do the same for the other two orphans.
+
+> **⚠️ Reconciliation — two plates were generated that cannot be wired.**
+> This table specifies C-005 → `m3-l1-s1` and C-011 → `m6-l2-s1`. Wave V1 had
+> already wired `scene-helmet-fit` and `scene-crossing` into *those same two
+> steps*, and [§7.3.0](#7300-the-restraint-rule) permits only one figure per
+> step. The generation batch drew `keylist-helmet-consequences` and
+> `keylist-good-crossing` anyway, because the batch brief was written from this
+> table without re-checking V1's result. Both plates exist, are house-quality,
+> and have **no consumer**.
+>
+> **Resolution:** both are marked `deferred` in `manifest.json` with a reason,
+> not deleted — the art is sound and a future step may earn it. C-011's registry
+> row is retained as the *wiring* record for A-012 (which is what actually
+> renders at `m6-l2-s1`); the drawn plate is a separate, unused artifact.
+>
+> **The lesson, which is the point of recording it:** a batch brief must be
+> generated from the registry's *current* state, not from a reading taken before
+> an earlier wave landed. Two plates of wasted effort is cheap; the same mistake
+> across a 40-asset batch would not be. [§8.3](#83-batch-procedure) step 1 now
+> means "lock the set spec **and re-verify every entry's consumer is still
+> free**".
 
 ##### C-013 · Helmet mechanism diagram
 *(cross-reference target for A-011)*

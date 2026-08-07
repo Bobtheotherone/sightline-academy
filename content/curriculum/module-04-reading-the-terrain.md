@@ -128,6 +128,7 @@ required: true
       {"term": "Why rider position is a control", "detail": "The rider is a third of the system's weight and the only movable part — weight shifted uphill moves the CoG away from the failing edge. This is why fit (leverage!) mattered in Module 2."},
       {"term": "Why loads and passengers change everything", "detail": "Cargo raises and shifts the CoG; a passenger on a single-rider machine raises it AND freezes the movable part. Module 6 makes this concrete."}
     ]},
+    {"type": "figure", "assetSlot": "keylist-stability-model", "caption": "One fact at the center, four familiar rules radiating out of it — learn the middle and the four stop being separate things to remember."},
     {"type": "callout", "variant": "caution", "title": "What this model is", "md": "A concept model for judgment — not an operating chart. Real limits shift with tire pressure, surface, moisture, momentum, and machine design, always in the unfavorable direction from the ideal. The lab that follows builds intuition for the *shape* of the envelope; respect for the real one is what keeps riders off steep and off-camber ground they can't verify. Hands-on courses teach slope technique in person, on chosen ground, for exactly this reason."}
   ]
 }
