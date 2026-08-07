@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img">
+  <!-- Hotspot inset for scene-trail-hazards / dark wet patch. The cue is a change
+       of colour and texture at the low point: the surface goes darker and smoother
+       before there is any standing water. Clay marks that dry-to-damp edge. -->
+  <rect width="320" height="240" fill="#FBFCFA"/>
+  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+    <path d="M-10 32 C 62 8, 132 50, 202 28 S 300 10, 330 34"/>
+  </g>
+  <!-- the drainage dip: ground falling in from both sides -->
+  <path d="M0 76 Q52 96, 92 132 Q126 162, 160 168 Q196 162, 230 130 Q268 94, 320 74
+           L320 240 L0 240 Z"
+        fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <!-- trail surface running through the dip -->
+  <path d="M0 118 Q56 138, 96 172 Q128 198, 160 204 Q194 198, 226 170 Q266 134, 320 114
+           L320 152 Q270 170, 234 202 Q198 232, 160 238 Q120 232, 86 202 Q50 170, 0 156 Z"
+        fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <!-- water finding its way down the slopes into the low point -->
+  <g fill="none" stroke="#2E6E8E" stroke-width="1.5" stroke-linecap="round" opacity="0.75">
+    <path d="M84 130 Q100 154, 118 176 Q130 190, 136 200"/>
+    <path d="M234 126 Q218 150, 200 172 Q190 188, 186 198"/>
+  </g>
+  <!-- the damp band: darker, smoother, and wider than the water in it -->
+  <path d="M104 178 Q130 200, 160 206 Q192 200, 218 176
+           Q226 190, 222 202 Q192 228, 160 232 Q126 228, 100 202 Q96 188, 104 178 Z"
+        fill="#4A5A54"/>
+  <!-- standing water collecting at the very bottom -->
+  <path d="M126 198 Q146 210, 168 208 Q190 205, 200 194 Q206 204, 196 212
+           Q172 224, 146 220 Q126 214, 122 205 Z"
+        fill="#2E6E8E" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M140 206 Q152 210, 164 208 M150 214 Q160 215, 172 212"
+        fill="none" stroke="#FBFCFA" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- the edge where the colour changes -->
+  <path d="M104 178 Q130 200, 160 206 Q192 200, 218 176"
+        fill="none" stroke="#C4622D" stroke-width="3.5" stroke-linecap="round"/>
+  <circle cx="104" cy="178" r="5" fill="#C4622D"/>
+  <circle cx="218" cy="176" r="5" fill="#C4622D"/>
+  <!-- conifers, same device as the base plate -->
+  <g stroke="#0E2A23" stroke-linejoin="round">
+    <path d="M40 96 V74" stroke-width="2"/>
+    <path d="M40 22 L58 80 H22 Z M40 38 L55 92 H25 Z" fill="#1F5546" stroke-width="1.5"/>
+    <path d="M288 90 V70" stroke-width="2"/>
+    <path d="M288 28 L304 78 H272 Z" fill="#1F5546" stroke-width="1.5"/>
+  </g>
+</svg>

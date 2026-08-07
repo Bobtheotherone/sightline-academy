@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img">
+  <!-- Hotspot inset for scene-atv-anatomy / brakes. Behind the front wheel:
+       disc, clay caliper straddling its rim, hose running up to the lever. -->
+  <rect width="320" height="240" fill="#FBFCFA"/>
+  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+    <path d="M-10 40 C 62 16, 132 58, 202 36 S 300 18, 330 42"/>
+    <path d="M-10 82 C 66 58, 136 100, 206 78 S 302 58, 330 82"/>
+  </g>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <!-- tire carcass ring (same wheel, cropped by the plate edge) -->
+    <circle cx="126" cy="152" r="106" fill="none" stroke="#0E2A23" stroke-width="20"/>
+    <circle cx="126" cy="152" r="106" fill="none" stroke="#FBFCFA" stroke-width="3" stroke-dasharray="9 15" opacity="0.55"/>
+    <!-- rim -->
+    <circle cx="126" cy="152" r="82" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+    <!-- brake disc -->
+    <circle cx="126" cy="152" r="58" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5"/>
+    <g fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5">
+      <circle cx="126" cy="110" r="5"/><circle cx="156" cy="122" r="5"/>
+      <circle cx="168" cy="152" r="5"/><circle cx="156" cy="182" r="5"/>
+      <circle cx="126" cy="194" r="5"/><circle cx="96" cy="182" r="5"/>
+      <circle cx="84" cy="152" r="5"/><circle cx="96" cy="122" r="5"/>
+    </g>
+    <!-- hub -->
+    <circle cx="126" cy="152" r="27" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+    <path d="M126 130 V174 M104 152 H148" stroke="#0E2A23" stroke-width="1.5"/>
+    <circle cx="126" cy="152" r="7" fill="#0E2A23"/>
+    <!-- caliper straddling the disc rim, same clay part as the base plate -->
+    <g transform="rotate(-46 172 106)">
+      <rect x="146" y="92" width="52" height="30" rx="7" fill="#C4622D" stroke="#0E2A23" stroke-width="1.5"/>
+      <path d="M158 92 V122 M186 92 V122" stroke="#0E2A23" stroke-width="1.5"/>
+    </g>
+    <!-- mounting bracket back to the knuckle -->
+    <path d="M160 122 L142 136" stroke="#0E2A23" stroke-width="4"/>
+    <!-- hose climbing to the master cylinder at the bar -->
+    <path d="M196 84 Q206 50, 232 38" fill="none" stroke="#0E2A23" stroke-width="3.5"/>
+    <!-- the lever end of the same circuit: bar, grip, perch, blade -->
+    <path d="M232 26 H314" stroke="#0E2A23" stroke-width="7"/>
+    <rect x="278" y="12" width="42" height="28" rx="14" fill="#0E2A23"/>
+    <path d="M292 17 V35 M306 17 V35" stroke="#FBFCFA" stroke-width="1.5"/>
+    <rect x="226" y="26" width="26" height="26" rx="6" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5"/>
+    <path d="M240 52 Q268 70, 314 68 Q320 68, 320 75 Q320 81, 314 81
+             Q264 83, 234 62 Q229 58, 232 53 Q235 48, 240 52 Z"
+          fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5"/>
+  </g>
+</svg>

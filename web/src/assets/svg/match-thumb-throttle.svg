@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" fill="none" stroke="#0E2A23" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- C-100 Thumb throttle: the hand stays closed on the grip and only the thumb works the lever. -->
+  <rect x="3" y="29" width="42" height="6" rx="3" fill="#EEF3EC"/>
+  <rect x="5.5" y="23.75" width="17" height="6.5" rx="2" fill="#9CC3B4" transform="rotate(29.7 14 27)"/>
+  <circle cx="21" cy="31" r="3.2" fill="#EEF3EC"/>
+  <rect x="12" y="18.5" width="14" height="7" rx="3.5" fill="#EEF3EC" transform="rotate(-20 19 22)"/>
+  <rect x="21" y="16" width="23" height="20" rx="7" fill="#EEF3EC"/>
+  <path d="M27 19v14M33 19v14M39 19v14" stroke-width="1.5"/>
+</svg>

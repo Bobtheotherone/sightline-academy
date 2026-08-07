@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img">
+  <!-- Hotspot inset for scene-trail-hazards / blind crest. The cue is that the
+       trail surface converges and then simply stops: the next ridge is far away,
+       and everything between is unseen. Clay is how far the eye actually gets. -->
+  <rect width="320" height="240" fill="#FBFCFA"/>
+  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+    <path d="M-10 32 C 62 8, 132 50, 202 28 S 300 10, 330 34"/>
+    <path d="M-10 64 C 66 42, 136 82, 206 60 S 302 42, 330 64"/>
+  </g>
+  <!-- the far side of the valley: there is ground out there, a long way off -->
+  <path d="M0 120 Q70 96, 140 108 Q210 120, 268 100 Q300 90, 320 94 L320 168 L0 168 Z" fill="#9CC3B4"/>
+  <g stroke="#0E2A23" stroke-linejoin="round">
+    <path d="M292 106 L302 132 H282 Z" fill="#1F5546" stroke-width="1.5"/>
+    <path d="M40 112 L50 138 H30 Z" fill="#1F5546" stroke-width="1.5"/>
+  </g>
+  <!-- near hillside, convex, rising to the crest -->
+  <path d="M0 240 L0 156 Q60 136, 120 116 Q166 102, 202 100 Q250 104, 292 118 L320 126 L320 240 Z"
+        fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <g stroke="#4A5A54" stroke-width="1.5" stroke-linecap="round" opacity="0.4">
+    <path d="M24 190 H70 M240 178 H288 M42 218 H92 M228 208 H278"/>
+  </g>
+  <!-- trail ribbon climbing, narrowing, and ending at the ridge line -->
+  <path d="M86 240 Q128 180, 196 102 L208 104 Q178 180, 150 240 Z"
+        fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <!-- what is on the other side, unseen: the drop the ridge line hides -->
+  <g fill="none" stroke="#D8E0DA" stroke-width="1.5" stroke-dasharray="6 6" stroke-linecap="round">
+    <path d="M204 106 Q224 124, 232 152"/>
+    <path d="M214 106 Q234 126, 242 156"/>
+  </g>
+  <!-- conifer on the near slope, same device as the base plate -->
+  <g stroke="#0E2A23" stroke-linejoin="round">
+    <path d="M40 218 V198" stroke-width="2"/>
+    <path d="M40 148 L58 202 H22 Z M40 164 L55 212 H25 Z" fill="#1F5546" stroke-width="1.5"/>
+  </g>
+  <!-- sight distance: everything you can actually see, and where it stops -->
+  <g fill="none" stroke="#C4622D" stroke-linecap="round">
+    <path d="M116 226 L200 104" stroke-width="3.5"/>
+    <path d="M192 98 L212 110" stroke-width="4"/>
+    <path d="M106 220 L126 232" stroke-width="3"/>
+  </g>
+  <circle cx="116" cy="226" r="6" fill="#C4622D"/>
+</svg>

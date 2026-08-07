@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img">
+  <!-- Hotspot inset for scene-trail-hazards / downed limb. The cue is one
+       horizontal in a stand of verticals. Brush hides parts of it; clay carries
+       the line across the gaps, which is what the eye has to do unaided. -->
+  <rect width="320" height="240" fill="#FBFCFA"/>
+  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+    <path d="M-10 26 C 62 4, 132 44, 202 22 S 300 6, 330 28"/>
+  </g>
+  <!-- forest floor and the tread running through it -->
+  <path d="M0 186 Q80 178, 160 182 Q244 186, 320 176 L320 240 L0 240 Z"
+        fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M46 240 Q92 208, 148 190 Q214 184, 274 196 Q300 202, 320 214 L320 240 Z"
+        fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <!-- receding trunks -->
+  <g stroke="#4A5A54" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.55">
+    <path d="M52 182 V44"/>
+    <path d="M132 180 V56"/>
+    <path d="M212 182 V48"/>
+    <path d="M288 178 V60"/>
+  </g>
+  <!-- standing trunks: the vertical texture -->
+  <g stroke="#0E2A23" stroke-linecap="round" fill="none">
+    <path d="M22 184 V14" stroke-width="9"/>
+    <path d="M66 180 V34" stroke-width="5"/>
+    <path d="M106 184 V6" stroke-width="11"/>
+    <path d="M154 181 V44" stroke-width="5"/>
+    <path d="M186 180 V22" stroke-width="7"/>
+    <path d="M242 184 V10" stroke-width="10"/>
+    <path d="M304 180 V30" stroke-width="6"/>
+  </g>
+  <!-- the limb, lying across every one of them -->
+  <path d="M8 150 L312 116" stroke="#0E2A23" stroke-width="10" stroke-linecap="round" fill="none"/>
+  <g stroke="#0E2A23" stroke-width="4.5" fill="none" stroke-linecap="round">
+    <path d="M96 141 L80 122"/>
+    <path d="M164 133 L182 116"/>
+    <path d="M258 122 L246 102"/>
+  </g>
+  <!-- brush screening it in two places: the horizontal breaks into fragments -->
+  <g stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round">
+    <path d="M44 174 Q26 138, 58 120 Q94 102, 110 128 Q124 152, 92 168 Q58 184, 44 174 Z" fill="#9CC3B4"/>
+    <path d="M198 162 Q182 126, 216 108 Q252 92, 266 120 Q278 144, 244 158 Q212 172, 198 162 Z" fill="#9CC3B4"/>
+    <path d="M128 182 Q120 162, 142 156 Q162 152, 168 168 Q172 180, 152 186 Q134 190, 128 182 Z" fill="#9CC3B4"/>
+  </g>
+  <!-- the fragments of the limb that survive the screening -->
+  <path d="M114 136 L192 127 M270 120 L312 116 M8 150 L38 147"
+        fill="none" stroke="#0E2A23" stroke-width="10" stroke-linecap="round"/>
+  <!-- the line the eye has to complete across the brush -->
+  <g fill="none" stroke="#C4622D" stroke-width="3" stroke-dasharray="7 8" stroke-linecap="round">
+    <path d="M42 147 L110 139"/>
+    <path d="M196 126 L266 118"/>
+  </g>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" fill="none" stroke="#0E2A23" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- C-102 Rear brake: an over-ankle boot with its toe down on the pedal pad, the arm swept back to its pivot. -->
+  <circle cx="7" cy="38" r="3" fill="#EEF3EC"/>
+  <path d="M6.4 36.2L26 29.4l1.4 3.8L7.8 40z" fill="#EEF3EC"/>
+  <g transform="rotate(-8 33 28.5)">
+    <rect x="25" y="25" width="16" height="7" rx="2" fill="#9CC3B4"/>
+    <path d="M29 27v3M33 27v3M37 27v3" stroke-width="1.5"/>
+  </g>
+  <path d="M8.5 4H20v11.5l8 2.8c3.8 1.3 5.6 3.2 5 5-.4 1.2-1.7 1.7-3.6 1.7H11c-1.6 0-2.5-1-2.5-2.6z" fill="#9CC3B4"/>
+  <path d="M9.5 25h7v4.5h-5.5a1.5 1.5 0 0 1-1.5-1.5z" fill="#9CC3B4"/>
+  <path d="M10 7.5h9" stroke-width="1.5"/>
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 400" role="img">
+  <!-- C-002 The three leaks: one judgment reservoir, its level fallen, draining through three separate mechanisms of equal size - group gravity, familiarity, sunk momentum. -->
+  <rect width="720" height="400" fill="#FBFCFA"/>
+  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+    <path d="M-10 46 C 120 20, 300 68, 470 42 S 690 18, 730 46"/>
+    <path d="M-10 358 C 130 336, 320 380, 500 354 S 700 334, 730 358"/>
+  </g>
+  <rect x="246" y="48" width="228" height="140" rx="20" fill="#FBFCFA"/>
+  <path d="M248 104 H472 V168 A18 18 0 0 1 454 186 H266 A18 18 0 0 1 248 168 Z" fill="#9CC3B4"/>
+  <rect x="246" y="48" width="228" height="140" rx="20" fill="none" stroke="#0E2A23" stroke-width="1.5"/>
+  <g stroke="#0E2A23" stroke-width="1.5" stroke-linecap="round"><path d="M234 62 H246 M234 83 H246 M234 104 H246 M234 125 H246 M234 146 H246 M234 167 H246"/><path d="M228 62 V167" stroke-width="1.5"/></g>
+  <path d="M252 68 H468" stroke="#0E2A23" stroke-width="1.6" stroke-dasharray="7 6" stroke-opacity="0.6"/>
+  <path d="M452.0 74.0 L452.0 93.0" fill="none" stroke="#0E2A23" stroke-width="1.8" stroke-linecap="round"/><path d="M-7 -4.9 L0 0 L-7 4.9" transform="translate(452.0 96.0) rotate(90.0)" fill="none" stroke="#0E2A23" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M226 104 H472" stroke="#C4622D" stroke-width="4" stroke-linecap="round"/>
+  <g fill="#0E2A23"><rect x="283" y="184" width="14" height="12" rx="2"/><rect x="353" y="184" width="14" height="12" rx="2"/><rect x="423" y="184" width="14" height="12" rx="2"/></g>
+  <g fill="none" stroke="#9CC3B4" stroke-width="9" stroke-linecap="round"><path d="M290 196 C 290 228, 180 232, 148 262 L148 274"/><path d="M360 196 V274"/><path d="M430 196 C 430 228, 540 232, 572 262 L572 274"/></g>
+  <g fill="#9CC3B4"><ellipse cx="148" cy="282" rx="34" ry="7"/><ellipse cx="360" cy="282" rx="34" ry="7"/><ellipse cx="572" cy="282" rx="34" ry="7"/></g>
+  <g><g fill="#0E2A23"><circle cx="104" cy="330" r="7.5"/><circle cx="126" cy="330" r="7.5"/><circle cx="148" cy="330" r="7.5"/></g><circle cx="192" cy="330" r="7.5" fill="#FBFCFA" stroke="#0E2A23" stroke-width="2.2"/><path d="M184.0 330.0 L165.0 330.0" fill="none" stroke="#0E2A23" stroke-width="2.4" stroke-linecap="round"/><path d="M-8 -5.6 L0 0 L-8 5.6" transform="translate(162.0 330.0) rotate(180.0)" fill="none" stroke="#0E2A23" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <g><rect x="-9.5" y="-9.5" width="19" height="19" rx="4.75" transform="translate(330 330) rotate(45)" fill="#0E2A23"/><rect x="-9.5" y="-9.5" width="19" height="19" rx="4.75" transform="translate(360 330) rotate(45)" fill="#0E2A23"/><rect x="-9.5" y="-9.5" width="19" height="19" rx="4.8" transform="translate(390 330) rotate(45)" fill="none" stroke="#0E2A23" stroke-width="2" stroke-dasharray="4 4"/><path d="M322.0 304.0 L395.0 304.0" fill="none" stroke="#0E2A23" stroke-width="2" stroke-linecap="round" stroke-dasharray="5 5"/><path d="M-7 -4.9 L0 0 L-7 4.9" transform="translate(398.0 304.0) rotate(0.0)" fill="none" stroke="#0E2A23" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <g><path d="M524 338 H620" fill="none" stroke="#0E2A23" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M556 338 A16 16 0 0 1 588 338" fill="none" stroke="#0E2A23" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M572 314 V306 M549 326 l-6 -5 M595 326 l6 -5" fill="none" stroke="#0E2A23" stroke-width="1.8" stroke-linecap="round"/><path d="M572.0 298.0 L572.0 309.0" fill="none" stroke="#0E2A23" stroke-width="2" stroke-linecap="round"/><path d="M-7 -4.9 L0 0 L-7 4.9" transform="translate(572.0 312.0) rotate(90.0)" fill="none" stroke="#0E2A23" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M526.0 306.0 L617.0 306.0" fill="none" stroke="#0E2A23" stroke-width="2.6" stroke-linecap="round"/><path d="M-8 -5.6 L0 0 L-8 5.6" transform="translate(620.0 306.0) rotate(0.0)" fill="none" stroke="#0E2A23" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></g>
+</svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <!-- B-037 machine: a spoked wheel and hub. -->
+  <circle cx="12" cy="12" r="8"/>
+  <circle cx="12" cy="12" r="2.75"/>
+  <path d="M12 9.25V4M12 14.75V20M9.25 12H4M14.75 12H20"/>
+</svg>

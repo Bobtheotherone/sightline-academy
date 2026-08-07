@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <!-- B-052 reflection: a thought arc rising over the trail line. -->
+  <path d="M8.5 12.5a5.75 5.75 0 0 1 11.5 0"/>
+  <circle cx="6.3" cy="15.6" r=".95"/>
+  <circle cx="4" cy="18.2" r=".7"/>
+  <path d="M3 20.5h18"/>
+</svg>

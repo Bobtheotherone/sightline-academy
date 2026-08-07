@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" fill="none" stroke="#0E2A23" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- C-108 Water and food: a part-full bottle beside a ration bar pushed up out of its wrapper. -->
+  <rect x="9.5" y="4" width="9" height="6" rx="1.5" fill="#9CC3B4"/>
+  <path d="M10 10v2.8c0 2.6-3 3.2-3 6.2V39a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4V19c0-3-3-3.6-3-6.2V10z" fill="#EEF3EC"/>
+  <path d="M7 27v12a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4V27z" fill="#9CC3B4"/>
+  <g transform="rotate(10 34 24)">
+    <rect x="28" y="5" width="12" height="15" rx="1" fill="#9CC3B4"/>
+    <path d="M28 10h12M28 15h12" stroke-width="1.5"/>
+    <rect x="26.5" y="18" width="15" height="24" rx="2.5" fill="#EEF3EC"/>
+    <path d="M34 18v24" stroke-width="1.5"/>
+  </g>
+</svg>

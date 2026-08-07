@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img">
+  <!-- Hotspot inset for scene-trail-hazards / gravel over hardpack. Cut through
+       the tread: a thin loose sheet lying on a base nothing keys into, a wheel
+       track that has already swept it aside, and the stones thrown to the verge. -->
+  <rect width="320" height="240" fill="#FBFCFA"/>
+  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+    <path d="M-10 30 C 62 6, 132 48, 202 26 S 300 8, 330 32"/>
+  </g>
+  <!-- hard base: dense, closed, no key -->
+  <path d="M0 144 Q80 138, 160 140 Q240 142, 320 136 L320 240 L0 240 Z" fill="#9CC3B4"/>
+  <g stroke="#0E2A23" stroke-width="1.5" stroke-linecap="round" opacity="0.55">
+    <path d="M22 168 H50 M74 166 H104 M126 168 H154 M180 168 H208 M234 166 H262 M284 164 H312"/>
+    <path d="M36 192 H64 M90 192 H118 M144 194 H172 M196 192 H224 M250 190 H278"/>
+    <path d="M24 216 H52 M76 218 H106 M132 218 H160 M186 216 H214 M242 214 H272"/>
+  </g>
+  <!-- the loose sheet lying on top of it -->
+  <path d="M0 122 Q80 116, 160 118 Q240 120, 320 114 L320 138 Q240 144, 160 142 Q80 140, 0 146 Z"
+        fill="#D8E0DA" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <g fill="#0E2A23">
+    <circle cx="22" cy="130" r="3.2"/><circle cx="40" cy="126" r="2.6"/>
+    <circle cx="58" cy="132" r="3.4"/><circle cx="78" cy="125" r="2.8"/>
+    <circle cx="96" cy="131" r="3"/><circle cx="114" cy="124" r="3.4"/>
+    <circle cx="206" cy="127" r="3.2"/><circle cx="224" cy="133" r="2.8"/>
+    <circle cx="242" cy="125" r="3.4"/><circle cx="260" cy="131" r="3"/>
+    <circle cx="278" cy="124" r="2.8"/><circle cx="296" cy="130" r="3.4"/>
+    <circle cx="32" cy="118" r="2.4"/><circle cx="88" cy="117" r="2.4"/>
+    <circle cx="250" cy="116" r="2.4"/><circle cx="304" cy="115" r="2.4"/>
+  </g>
+  <!-- a wheel track has already ploughed the loose sheet aside -->
+  <path d="M132 120 Q128 132, 138 138 L176 139 Q186 133, 182 120 Z" fill="#9CC3B4" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M118 122 Q128 112, 136 120 M196 120 Q186 111, 178 119" fill="#D8E0DA" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <g fill="#0E2A23">
+    <circle cx="126" cy="115" r="2.6"/><circle cx="188" cy="114" r="2.6"/>
+  </g>
+  <!-- verge shoulders either side of the tread -->
+  <path d="M0 84 Q28 90, 50 104 Q62 112, 66 124 L0 126 Z" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M320 80 Q292 88, 270 102 Q258 110, 254 122 L320 122 Z" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <!-- stones thrown clear of the tread, piling on those shoulders -->
+  <g fill="#0E2A23">
+    <circle cx="14" cy="90" r="4"/><circle cx="30" cy="96" r="3.2"/>
+    <circle cx="44" cy="106" r="3.8"/><circle cx="56" cy="116" r="3"/>
+    <circle cx="24" cy="104" r="2.6"/><circle cx="38" cy="116" r="3.4"/>
+    <circle cx="10" cy="104" r="2.8"/><circle cx="52" cy="102" r="2.4"/>
+    <circle cx="306" cy="88" r="4"/><circle cx="290" cy="94" r="3.2"/>
+    <circle cx="276" cy="104" r="3.8"/><circle cx="264" cy="114" r="3"/>
+    <circle cx="296" cy="102" r="2.6"/><circle cx="282" cy="114" r="3.4"/>
+    <circle cx="312" cy="102" r="2.8"/><circle cx="268" cy="100" r="2.4"/>
+  </g>
+  <!-- the interface: everything above it can roll, nothing below it will grip -->
+  <path d="M0 145 Q80 139, 160 141 Q240 143, 320 137" fill="none" stroke="#C4622D" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="8" cy="145" r="5.5" fill="#C4622D"/>
+  <circle cx="312" cy="137" r="5.5" fill="#C4622D"/>
+</svg>

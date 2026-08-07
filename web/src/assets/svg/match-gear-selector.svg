@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" fill="none" stroke="#0E2A23" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- C-104 Gear selector: a routed gate plate, lever seated at the bottom of the deep leg, two chevrons for low range. -->
+  <rect x="5" y="8" width="38" height="32" rx="5" fill="#EEF3EC"/>
+  <path d="M12 16v6h13M25 16v17" stroke="#0E2A23" stroke-width="9"/>
+  <path d="M12 16v6h13M25 16v17" stroke="#EEF3EC" stroke-width="6"/>
+  <circle cx="25" cy="33" r="5" fill="#9CC3B4"/>
+  <path d="M33 19.5l3.8 3.8 3.8-3.8M33 26.5l3.8 3.8 3.8-3.8"/>
+</svg>

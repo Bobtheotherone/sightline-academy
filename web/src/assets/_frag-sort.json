@@ -1,0 +1,132 @@
+{
+  "sort-gear-helmet": {
+    "status": "real",
+    "file": "svg/sort-gear-helmet.svg",
+    "alt": "A rated full-face helmet with the chin strap fastened through its buckle."
+  },
+  "sort-gear-eyes": {
+    "status": "real",
+    "file": "svg/sort-gear-eyes.svg",
+    "alt": "Riding goggles on a head strap — eye protection for every ride."
+  },
+  "sort-gear-boots": {
+    "status": "real",
+    "file": "svg/sort-gear-boots.svg",
+    "alt": "A riding boot whose shaft stands well above the ankle line."
+  },
+  "sort-gear-gloves": {
+    "status": "real",
+    "file": "svg/sort-gear-gloves.svg",
+    "alt": "A riding glove with a fastened cuff — hands covered on every ride."
+  },
+  "sort-gear-longs": {
+    "status": "real",
+    "file": "svg/sort-gear-longs.svg",
+    "alt": "A long-sleeved jersey and full-length trousers — arms and legs covered."
+  },
+  "sort-gear-chest": {
+    "status": "real",
+    "file": "svg/sort-gear-chest.svg",
+    "alt": "A chest and roost protector — body armour added when conditions call for it."
+  },
+  "sort-gear-hiviz": {
+    "status": "real",
+    "file": "svg/sort-gear-hiviz.svg",
+    "alt": "A high-visibility whip flag on its mast — being seen when conditions hide you."
+  },
+  "sort-gear-layers": {
+    "status": "real",
+    "file": "svg/sort-gear-layers.svg",
+    "alt": "Weather layers stacked with the outer shell on top of the insulation."
+  },
+  "sort-gear-loose": {
+    "status": "real",
+    "file": "svg/sort-gear-loose.svg",
+    "alt": "A loose scarf trailing into a turning wheel — never worn on the machine."
+  },
+  "sort-gear-flipflops": {
+    "status": "real",
+    "file": "svg/sort-gear-flipflops.svg",
+    "alt": "A flip-flop sandal — footwear that never goes on the machine."
+  },
+  "sort-gear-headphones": {
+    "status": "real",
+    "file": "svg/sort-gear-headphones.svg",
+    "alt": "Headphones sealing both ears — hearing shut off, never on the machine."
+  },
+  "sort-cond-dust": {
+    "status": "real",
+    "file": "svg/sort-cond-dust.svg",
+    "alt": "A machine riding into a dust cone with the trail ahead lost from view."
+  },
+  "sort-cond-wet-roots": {
+    "status": "real",
+    "file": "svg/sort-cond-wet-roots.svg",
+    "alt": "A band of wet roots crossing the trail — slow down and add space."
+  },
+  "sort-cond-frost": {
+    "status": "real",
+    "file": "svg/sort-cond-frost.svg",
+    "alt": "Frost still lying in shade after sun-up — slow down and add space."
+  },
+  "sort-cond-fading-light": {
+    "status": "real",
+    "file": "svg/sort-cond-fading-light.svg",
+    "alt": "A clock against a sun already setting on the horizon — change the route or the schedule."
+  },
+  "sort-cond-storm": {
+    "status": "real",
+    "file": "svg/sort-cond-storm.svg",
+    "alt": "A weather front line with rain falling behind it — change the route or the schedule."
+  },
+  "sort-cond-swollen-creek": {
+    "status": "real",
+    "file": "svg/sort-cond-swollen-creek.svg",
+    "alt": "A creek running high and fast between its banks, well over its normal level — change the route."
+  },
+  "sort-cond-cold-hands": {
+    "status": "real",
+    "file": "svg/sort-cond-cold-hands.svg",
+    "alt": "A hand gone cold and stiff on the brake lever — stop and tend the rider."
+  },
+  "sort-cond-heat": {
+    "status": "real",
+    "file": "svg/sort-cond-heat.svg",
+    "alt": "Hard sun and a water bottle already empty — stop and tend the rider."
+  },
+  "sort-cargo-kid-behind": {
+    "status": "real",
+    "file": "svg/sort-cargo-kid-behind.svg",
+    "alt": "A second person carried behind the operator on a single-seat machine — never done."
+  },
+  "sort-cargo-two-up": {
+    "status": "real",
+    "file": "svg/sort-cargo-two-up.svg",
+    "alt": "A purpose-built two-seat machine carrying two geared riders in their own seats."
+  },
+  "sort-cargo-rack-limits": {
+    "status": "real",
+    "file": "svg/sort-cargo-rack-limits.svg",
+    "alt": "A low load strapped down on the rack, inside its posted weight limit."
+  },
+  "sort-cargo-heavy-high": {
+    "status": "real",
+    "file": "svg/sort-cargo-heavy-high.svg",
+    "alt": "A tall load riding high on the rack, lifting the machine's centre of gravity — check it first."
+  },
+  "sort-cargo-towing": {
+    "status": "real",
+    "file": "svg/sort-cargo-towing.svg",
+    "alt": "A machine towing a small trailer — check the hitch and the load before you go."
+  },
+  "sort-cargo-lap": {
+    "status": "real",
+    "file": "svg/sort-cargo-lap.svg",
+    "alt": "A small child riding on the operator's lap, over the controls — never done."
+  },
+  "sort-cargo-loose-tools": {
+    "status": "real",
+    "file": "svg/sort-cargo-loose-tools.svg",
+    "alt": "Unsecured tools bouncing loose in the front basket — secure them before you go."
+  }
+}

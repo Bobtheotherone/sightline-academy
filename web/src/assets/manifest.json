@@ -134,6 +134,395 @@
       "status": "real",
       "file": "svg/cert-seal.svg",
       "alt": "Circular certificate seal: rope border, pine ring, and a clay trail blaze bearing a summit line at the center."
+    },
+    "act-content": {
+      "status": "real",
+      "file": "svg/act-content.svg",
+      "alt": "",
+      "note": "Stacked text lines with a short last line - a screen of reading."
+    },
+    "act-prediction-reveal": {
+      "status": "real",
+      "file": "svg/act-prediction-reveal.svg",
+      "alt": "",
+      "note": "A cover lifted clear of the card beneath it, revealing what was hidden."
+    },
+    "act-multiple-choice": {
+      "status": "real",
+      "file": "svg/act-multiple-choice.svg",
+      "alt": "",
+      "note": "Three option rows, the first marked with a tick."
+    },
+    "act-sort-categorize": {
+      "status": "real",
+      "file": "svg/act-sort-categorize.svg",
+      "alt": "",
+      "note": "Items dropping down a splitting chute into two bins."
+    },
+    "act-match": {
+      "status": "real",
+      "file": "svg/act-match.svg",
+      "alt": "",
+      "note": "Two columns of items with one pair joined by a connecting line."
+    },
+    "act-hotspot-list": {
+      "status": "real",
+      "file": "svg/act-hotspot-list.svg",
+      "alt": "",
+      "note": "A picture frame with a pulsing point of interest at its centre."
+    },
+    "act-branching-decision": {
+      "status": "real",
+      "file": "svg/act-branching-decision.svg",
+      "alt": "",
+      "note": "A trail that forks, then forks again - three outcomes."
+    },
+    "act-structured-response": {
+      "status": "real",
+      "file": "svg/act-structured-response.svg",
+      "alt": "",
+      "note": "A ruled writing box with a pen resting on the first line."
+    },
+    "act-journal-builder": {
+      "status": "real",
+      "file": "svg/act-journal-builder.svg",
+      "alt": "",
+      "note": "A field notebook with a plus - adding a page to the journal."
+    },
+    "act-reflection": {
+      "status": "real",
+      "file": "svg/act-reflection.svg",
+      "alt": "",
+      "note": "A thought arc rising over the trail line - looking back at the ride."
+    },
+    "act-lab-objective": {
+      "status": "real",
+      "file": "svg/act-lab-objective.svg",
+      "alt": "",
+      "note": "A slider control set over a wedge - a lab you adjust and observe."
+    },
+    "act-checkpoint": {
+      "status": "real",
+      "file": "svg/act-checkpoint.svg",
+      "alt": "",
+      "note": "A pennant flag on a post - the checkpoint at the end of a lesson."
+    },
+    "topic-mindset": {
+      "status": "real",
+      "file": "svg/topic-mindset.svg",
+      "alt": "",
+      "note": "An eye above a forking trail - judgment applied at a decision point."
+    },
+    "topic-machine": {
+      "status": "real",
+      "file": "svg/topic-machine.svg",
+      "alt": "",
+      "note": "A spoked wheel with its hub - the machine and its upkeep."
+    },
+    "topic-gear": {
+      "status": "real",
+      "file": "svg/topic-gear.svg",
+      "alt": "",
+      "note": "A full-face helmet seen head on - the riding kit."
+    },
+    "topic-terrain": {
+      "status": "real",
+      "file": "svg/topic-terrain.svg",
+      "alt": "",
+      "note": "Three nested contour arcs rising to a summit - reading the ground."
+    },
+    "topic-environment": {
+      "status": "real",
+      "file": "svg/topic-environment.svg",
+      "alt": "",
+      "note": "A cloud crossing a ridge line - weather over the terrain."
+    },
+    "topic-roads": {
+      "status": "real",
+      "file": "svg/topic-roads.svg",
+      "alt": "",
+      "note": "A crossroads seen from above - the trail meeting a road."
+    },
+    "topic-general": {
+      "status": "real",
+      "file": "svg/topic-general.svg",
+      "alt": "",
+      "note": "An open field guide with a compass needle standing in the gutter - general knowledge beyond the course."
+    },
+    "keylist-tcloc": {
+      "status": "real",
+      "file": "svg/keylist-tcloc.svg",
+      "alt": "Five T-CLOC inspection zones drawn as stations around a machine and walked as an ordered loop, numbered one to five from the marked start station and returning to it."
+    },
+    "keylist-six-decisions": {
+      "status": "real",
+      "file": "svg/keylist-six-decisions.svg",
+      "alt": "Six risk decisions - bare head, pavement, extra rider, impairment, wrong-size machine and outrunning your eyes - drawn as six equal marks at equal distance around one geared rider, each touching the rider: a set with no single villain."
+    },
+    "keylist-three-leaks": {
+      "status": "real",
+      "file": "svg/keylist-three-leaks.svg",
+      "alt": "A judgment reservoir with its level fallen, draining through three separate outlets of equal size: group gravity pulling the last rider along, familiarity discounting a repeated trail, and sunk momentum pushing on into failing light."
+    },
+    "keylist-fit-checks": {
+      "status": "real",
+      "file": "svg/keylist-fit-checks.svg",
+      "alt": "A seated rider measured against four independent pass-or-fail gates - reach, stance, leverage and machine class - each drawn as a dimension that either fits between the gate posts or does not."
+    },
+    "keylist-helmet-consequences": {
+      "status": "real",
+      "file": "svg/keylist-helmet-consequences.svg",
+      "alt": "A helmet cross-section with the crushable liner highlighted as the mechanism, and four causal arrows out to the rules that follow from it: worn and fastened, fitted, rated, and crushable only once."
+    },
+    "keylist-stability-model": {
+      "status": "real",
+      "file": "svg/keylist-stability-model.svg",
+      "alt": "One stability model at centre - centre of gravity held over the support base between the tires - with four applications around it: climbing slopes, side-hills, rider position as a control, and loads carried high."
+    },
+    "keylist-four-families": {
+      "status": "real",
+      "file": "svg/keylist-four-families.svg",
+      "alt": "The four weather families split by what they degrade: water and light acting on the trail being read on the left, cold-and-heat and dust acting on the rider doing the reading on the right."
+    },
+    "keylist-before-you-go": {
+      "status": "real",
+      "file": "svg/keylist-before-you-go.svg",
+      "alt": "The three before-you-go artifacts laid out before the ride: a ride plan with the route and turnaround marked, a communication plan naming who is told and when, and the carry kit strapped to the machine's rack."
+    },
+    "keylist-stop-assess-communicate": {
+      "status": "real",
+      "file": "svg/keylist-stop-assess-communicate.svg",
+      "alt": "Stop, assess and communicate drawn as a strict three-stage sequence numbered one to three, each stage passing through a gate that only the previous stage opens."
+    },
+    "keylist-pavement-physics": {
+      "status": "real",
+      "file": "svg/keylist-pavement-physics.svg",
+      "alt": "Three engineering facts - a tire built to deform, a locked rear axle, and a high centre of gravity - with their arrows all converging on the same conclusion at the pavement."
+    },
+    "keylist-good-crossing": {
+      "status": "real",
+      "file": "svg/keylist-good-crossing.svg",
+      "alt": "A road crossing broken into four numbered steps: stop completely at the bar, look both ways along the road, cross square to the road and briskly, and cross one machine at a time."
+    },
+    "keylist-three-standards": {
+      "status": "real",
+      "file": "svg/keylist-three-standards.svg",
+      "alt": "Three standards posted as signs at one trail junction - zero impairment, yielding generously to others, and staying on designated trail - applying to whichever branch is taken."
+    },
+    "match-thumb-throttle": {
+      "status": "real",
+      "file": "svg/match-thumb-throttle.svg",
+      "alt": "Thumb throttle: the hand stays closed around the grip while the thumb alone works a small lever on the bar."
+    },
+    "match-front-brake": {
+      "status": "real",
+      "file": "svg/match-front-brake.svg",
+      "alt": "Front brake: a hand lever hinged at a perch beside the grip and swept out in front of the handlebar."
+    },
+    "match-rear-brake": {
+      "status": "real",
+      "file": "svg/match-rear-brake.svg",
+      "alt": "Rear brake: an over-the-ankle boot with its toe down on the foot pedal pad, the pedal arm swept back to its pivot."
+    },
+    "match-stop-switch": {
+      "status": "real",
+      "file": "svg/match-stop-switch.svg",
+      "alt": "Engine stop switch: a proud rocker in a raised bezel, thrown to the side marked by a bold stop bar so it can be found by feel."
+    },
+    "match-gear-selector": {
+      "status": "real",
+      "file": "svg/match-gear-selector.svg",
+      "alt": "Gear selector: a routed gate plate with the lever seated at the bottom of the deep leg, chevrons marking the low range."
+    },
+    "match-body-position": {
+      "status": "real",
+      "file": "svg/match-body-position.svg",
+      "alt": "Body position, the invisible control: a helmeted rider standing on the footboards with weight moved forward over the bars, the direction of the lean marked in clay."
+    },
+    "match-turnaround-time": {
+      "status": "real",
+      "file": "svg/match-turnaround-time.svg",
+      "alt": "Turnaround time: a clock face above a U-turn arrow — the hour you head back, fixed before you leave."
+    },
+    "match-off-ride-contact": {
+      "status": "real",
+      "file": "svg/match-off-ride-contact.svg",
+      "alt": "Off-ride contact: someone at home at a lit window with a phone, waiting on the check-in — a person who is not on the ride."
+    },
+    "match-water-food": {
+      "status": "real",
+      "file": "svg/match-water-food.svg",
+      "alt": "Water and food beyond the plan: a part-full bottle beside a ration bar pushed up out of its wrapper."
+    },
+    "match-nav": {
+      "status": "real",
+      "file": "svg/match-nav.svg",
+      "alt": "Signal-free navigation: a folded paper map with a compass laid across its corner — neither needs a phone or a signal."
+    },
+    "match-warmth": {
+      "status": "real",
+      "file": "svg/match-warmth.svg",
+      "alt": "Warmth for an unplanned wait: a quilted insulating layer folded down into a stack, collar showing."
+    },
+    "section-briefing": {
+      "status": "real",
+      "file": "svg/section-briefing.svg",
+      "alt": "Briefing section: a trailhead post with its board pointing the way out."
+    },
+    "section-learn": {
+      "status": "real",
+      "file": "svg/section-learn.svg",
+      "alt": "Learn section: the field guide open on its spine."
+    },
+    "section-try": {
+      "status": "real",
+      "file": "svg/section-try.svg",
+      "alt": "Try section: a boot sole pressed into the trail."
+    },
+    "section-debrief": {
+      "status": "real",
+      "file": "svg/section-debrief.svg",
+      "alt": "Debrief section: a backward glance, the arc turning to look down the trail already ridden."
+    },
+    "section-journal": {
+      "status": "real",
+      "file": "svg/section-journal.svg",
+      "alt": "Journal section: a pen set to the ruled line."
+    },
+    "section-checkpoint": {
+      "status": "real",
+      "file": "svg/section-checkpoint.svg",
+      "alt": "Checkpoint section: the trail blaze on its post, the mark you ride to."
+    },
+    "sort-gear-helmet": {
+      "status": "real",
+      "file": "svg/sort-gear-helmet.svg",
+      "alt": "A rated full-face helmet with the chin strap fastened through its buckle."
+    },
+    "sort-gear-eyes": {
+      "status": "real",
+      "file": "svg/sort-gear-eyes.svg",
+      "alt": "Riding goggles on a head strap — eye protection for every ride."
+    },
+    "sort-gear-boots": {
+      "status": "real",
+      "file": "svg/sort-gear-boots.svg",
+      "alt": "A riding boot whose shaft stands well above the ankle line."
+    },
+    "sort-gear-gloves": {
+      "status": "real",
+      "file": "svg/sort-gear-gloves.svg",
+      "alt": "A riding glove with a fastened cuff — hands covered on every ride."
+    },
+    "sort-gear-longs": {
+      "status": "real",
+      "file": "svg/sort-gear-longs.svg",
+      "alt": "A long-sleeved jersey and full-length trousers — arms and legs covered."
+    },
+    "sort-gear-chest": {
+      "status": "real",
+      "file": "svg/sort-gear-chest.svg",
+      "alt": "A chest and roost protector — body armour added when conditions call for it."
+    },
+    "sort-gear-hiviz": {
+      "status": "real",
+      "file": "svg/sort-gear-hiviz.svg",
+      "alt": "A high-visibility whip flag on its mast — being seen when conditions hide you."
+    },
+    "sort-gear-layers": {
+      "status": "real",
+      "file": "svg/sort-gear-layers.svg",
+      "alt": "Weather layers stacked with the outer shell on top of the insulation."
+    },
+    "sort-gear-loose": {
+      "status": "real",
+      "file": "svg/sort-gear-loose.svg",
+      "alt": "A loose scarf trailing into a turning wheel — never worn on the machine."
+    },
+    "sort-gear-flipflops": {
+      "status": "real",
+      "file": "svg/sort-gear-flipflops.svg",
+      "alt": "A flip-flop sandal — footwear that never goes on the machine."
+    },
+    "sort-gear-headphones": {
+      "status": "real",
+      "file": "svg/sort-gear-headphones.svg",
+      "alt": "Headphones sealing both ears — hearing shut off, never on the machine."
+    },
+    "sort-cond-dust": {
+      "status": "real",
+      "file": "svg/sort-cond-dust.svg",
+      "alt": "A machine riding into a dust cone with the trail ahead lost from view."
+    },
+    "sort-cond-wet-roots": {
+      "status": "real",
+      "file": "svg/sort-cond-wet-roots.svg",
+      "alt": "A band of wet roots crossing the trail — slow down and add space."
+    },
+    "sort-cond-frost": {
+      "status": "real",
+      "file": "svg/sort-cond-frost.svg",
+      "alt": "Frost still lying in shade after sun-up — slow down and add space."
+    },
+    "sort-cond-fading-light": {
+      "status": "real",
+      "file": "svg/sort-cond-fading-light.svg",
+      "alt": "A clock against a sun already setting on the horizon — change the route or the schedule."
+    },
+    "sort-cond-storm": {
+      "status": "real",
+      "file": "svg/sort-cond-storm.svg",
+      "alt": "A weather front line with rain falling behind it — change the route or the schedule."
+    },
+    "sort-cond-swollen-creek": {
+      "status": "real",
+      "file": "svg/sort-cond-swollen-creek.svg",
+      "alt": "A creek running high and fast between its banks, well over its normal level — change the route."
+    },
+    "sort-cond-cold-hands": {
+      "status": "real",
+      "file": "svg/sort-cond-cold-hands.svg",
+      "alt": "A hand gone cold and stiff on the brake lever — stop and tend the rider."
+    },
+    "sort-cond-heat": {
+      "status": "real",
+      "file": "svg/sort-cond-heat.svg",
+      "alt": "Hard sun and a water bottle already empty — stop and tend the rider."
+    },
+    "sort-cargo-kid-behind": {
+      "status": "real",
+      "file": "svg/sort-cargo-kid-behind.svg",
+      "alt": "A second person carried behind the operator on a single-seat machine — never done."
+    },
+    "sort-cargo-two-up": {
+      "status": "real",
+      "file": "svg/sort-cargo-two-up.svg",
+      "alt": "A purpose-built two-seat machine carrying two geared riders in their own seats."
+    },
+    "sort-cargo-rack-limits": {
+      "status": "real",
+      "file": "svg/sort-cargo-rack-limits.svg",
+      "alt": "A low load strapped down on the rack, inside its posted weight limit."
+    },
+    "sort-cargo-heavy-high": {
+      "status": "real",
+      "file": "svg/sort-cargo-heavy-high.svg",
+      "alt": "A tall load riding high on the rack, lifting the machine's centre of gravity — check it first."
+    },
+    "sort-cargo-towing": {
+      "status": "real",
+      "file": "svg/sort-cargo-towing.svg",
+      "alt": "A machine towing a small trailer — check the hitch and the load before you go."
+    },
+    "sort-cargo-lap": {
+      "status": "real",
+      "file": "svg/sort-cargo-lap.svg",
+      "alt": "A small child riding on the operator's lap, over the controls — never done."
+    },
+    "sort-cargo-loose-tools": {
+      "status": "real",
+      "file": "svg/sort-cargo-loose-tools.svg",
+      "alt": "Unsecured tools bouncing loose in the front basket — secure them before you go."
     }
   }
 }

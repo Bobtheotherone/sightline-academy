@@ -1,0 +1,62 @@
+{
+  "keylist-tcloc": {
+    "status": "real",
+    "file": "svg/keylist-tcloc.svg",
+    "alt": "Five T-CLOC inspection zones drawn as stations around a machine and walked as an ordered loop, numbered one to five from the marked start station and returning to it."
+  },
+  "keylist-six-decisions": {
+    "status": "real",
+    "file": "svg/keylist-six-decisions.svg",
+    "alt": "Six risk decisions - bare head, pavement, extra rider, impairment, wrong-size machine and outrunning your eyes - drawn as six equal marks at equal distance around one geared rider, each touching the rider: a set with no single villain."
+  },
+  "keylist-three-leaks": {
+    "status": "real",
+    "file": "svg/keylist-three-leaks.svg",
+    "alt": "A judgment reservoir with its level fallen, draining through three separate outlets of equal size: group gravity pulling the last rider along, familiarity discounting a repeated trail, and sunk momentum pushing on into failing light."
+  },
+  "keylist-fit-checks": {
+    "status": "real",
+    "file": "svg/keylist-fit-checks.svg",
+    "alt": "A seated rider measured against four independent pass-or-fail gates - reach, stance, leverage and machine class - each drawn as a dimension that either fits between the gate posts or does not."
+  },
+  "keylist-helmet-consequences": {
+    "status": "real",
+    "file": "svg/keylist-helmet-consequences.svg",
+    "alt": "A helmet cross-section with the crushable liner highlighted as the mechanism, and four causal arrows out to the rules that follow from it: worn and fastened, fitted, rated, and crushable only once."
+  },
+  "keylist-stability-model": {
+    "status": "real",
+    "file": "svg/keylist-stability-model.svg",
+    "alt": "One stability model at centre - centre of gravity held over the support base between the tires - with four applications around it: climbing slopes, side-hills, rider position as a control, and loads carried high."
+  },
+  "keylist-four-families": {
+    "status": "real",
+    "file": "svg/keylist-four-families.svg",
+    "alt": "The four weather families split by what they degrade: water and light acting on the trail being read on the left, cold-and-heat and dust acting on the rider doing the reading on the right."
+  },
+  "keylist-before-you-go": {
+    "status": "real",
+    "file": "svg/keylist-before-you-go.svg",
+    "alt": "The three before-you-go artifacts laid out before the ride: a ride plan with the route and turnaround marked, a communication plan naming who is told and when, and the carry kit strapped to the machine's rack."
+  },
+  "keylist-stop-assess-communicate": {
+    "status": "real",
+    "file": "svg/keylist-stop-assess-communicate.svg",
+    "alt": "Stop, assess and communicate drawn as a strict three-stage sequence numbered one to three, each stage passing through a gate that only the previous stage opens."
+  },
+  "keylist-pavement-physics": {
+    "status": "real",
+    "file": "svg/keylist-pavement-physics.svg",
+    "alt": "Three engineering facts - a tire built to deform, a locked rear axle, and a high centre of gravity - with their arrows all converging on the same conclusion at the pavement."
+  },
+  "keylist-good-crossing": {
+    "status": "real",
+    "file": "svg/keylist-good-crossing.svg",
+    "alt": "A road crossing broken into four numbered steps: stop completely at the bar, look both ways along the road, cross square to the road and briskly, and cross one machine at a time."
+  },
+  "keylist-three-standards": {
+    "status": "real",
+    "file": "svg/keylist-three-standards.svg",
+    "alt": "Three standards posted as signs at one trail junction - zero impairment, yielding generously to others, and staying on designated trail - applying to whichever branch is taken."
+  }
+}

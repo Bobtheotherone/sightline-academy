@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img">
+  <!-- Hotspot inset for scene-trail-hazards / shadowed ruts. A tree shadow lies
+       across the trail: straight over flat ground, kinked where it drops into a
+       rut. Clay marks the kink, which is the only thing that gives the rut away. -->
+  <rect width="320" height="240" fill="#FBFCFA"/>
+  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+    <path d="M-10 28 C 62 4, 132 46, 202 24 S 300 6, 330 30"/>
+  </g>
+  <!-- mid-morning sun, light from the left, same device as the base plate -->
+  <circle cx="36" cy="34" r="14" fill="#E0A72E" stroke="#0E2A23" stroke-width="1.5"/>
+  <!-- verges either side of the tread -->
+  <path d="M0 66 Q52 80, 84 110 Q108 134, 118 240 L0 240 Z"
+        fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M320 60 Q268 76, 244 112 Q226 140, 224 240 L320 240 Z"
+        fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <g stroke="#4A5A54" stroke-width="1.5" stroke-linecap="round" opacity="0.4">
+    <path d="M24 138 H58 M36 176 H74 M18 212 H56 M262 148 H298 M270 186 H306 M256 220 H294"/>
+  </g>
+  <g stroke="#0E2A23" stroke-linejoin="round">
+    <path d="M62 74 V56" stroke-width="2"/>
+    <path d="M62 20 L78 60 H46 Z" fill="#1F5546" stroke-width="1.5"/>
+    <path d="M282 70 V52" stroke-width="2"/>
+    <path d="M282 16 L298 56 H266 Z" fill="#1F5546" stroke-width="1.5"/>
+  </g>
+  <!-- the ruts, running with the trail, near-invisible in open light -->
+  <g stroke="#D8E0DA" stroke-width="1.5" fill="none" stroke-linecap="round">
+    <path d="M142 100 Q137 160, 142 232"/>
+    <path d="M156 100 Q152 160, 158 232"/>
+    <path d="M190 98 Q191 158, 192 232"/>
+    <path d="M204 98 Q206 158, 208 232"/>
+  </g>
+  <!-- shadow band thrown across the trail, diving into each rut and back out -->
+  <path d="M104 122 L138 128 L148 152 L160 132 L186 137 L196 162 L208 141 L240 148
+           L232 190 L202 184 L194 206 L182 180 L156 175 L146 196 L136 172 L96 164 Z"
+        fill="#4A5A54"/>
+  <!-- rut floors, visible only where the light crosses them -->
+  <g stroke="#0E2A23" stroke-width="2.5" fill="none" stroke-linecap="round">
+    <path d="M148 152 L146 196"/>
+    <path d="M196 162 L194 206"/>
+  </g>
+  <!-- the tell: a bend in a line that should have been straight -->
+  <g fill="none" stroke="#C4622D" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M138 128 L148 152 L160 132"/>
+    <path d="M186 137 L196 162 L208 141"/>
+  </g>
+  <path d="M104 122 L240 148" fill="none" stroke="#C4622D" stroke-width="1.5" stroke-dasharray="5 6" opacity="0.7"/>
+</svg>

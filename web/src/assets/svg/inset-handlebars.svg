@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img">
+  <!-- Hotspot inset for scene-atv-anatomy / handlebars. The bar cluster as the
+       rider looks down on it: engine stop switch under the left thumb, brake lever
+       under the right fingers, and the clay thumb throttle that feeds the engine. -->
+  <rect width="320" height="240" fill="#FBFCFA"/>
+  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+    <path d="M-10 36 C 62 12, 132 54, 202 32 S 300 14, 330 38"/>
+    <path d="M-10 196 C 66 172, 136 214, 206 192 S 302 172, 330 196"/>
+  </g>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <!-- front cowl and stem, so the bars are clearly on the machine -->
+    <path d="M118 226 L134 176 L188 172 L196 226 Z" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5"/>
+    <circle cx="150" cy="198" r="9" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+    <path d="M158 176 V148" stroke="#0E2A23" stroke-width="10"/>
+    <rect x="130" y="126" width="58" height="26" rx="6" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5"/>
+    <!-- crossbar -->
+    <path d="M26 108 H292" stroke="#0E2A23" stroke-width="8"/>
+    <rect x="134" y="94" width="50" height="28" rx="6" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5"/>
+    <circle cx="146" cy="108" r="3.5" fill="#0E2A23"/>
+    <circle cx="172" cy="108" r="3.5" fill="#0E2A23"/>
+    <!-- grips -->
+    <rect x="20" y="92" width="76" height="32" rx="16" fill="#0E2A23"/>
+    <path d="M36 98 V118 M52 98 V118 M68 98 V118 M84 98 V118" stroke="#FBFCFA" stroke-width="1.5"/>
+    <rect x="222" y="92" width="76" height="32" rx="16" fill="#0E2A23"/>
+    <path d="M238 98 V118 M254 98 V118 M270 98 V118 M286 98 V118" stroke="#FBFCFA" stroke-width="1.5"/>
+    <!-- LEFT: engine stop switch, right under the thumb -->
+    <rect x="98" y="66" width="46" height="42" rx="7" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5"/>
+    <rect x="108" y="74" width="26" height="14" rx="3" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+    <path d="M106 98 H136" stroke="#FBFCFA" stroke-width="3.5"/>
+    <!-- RIGHT: brake lever blade, standing off the grip -->
+    <rect x="196" y="112" width="28" height="24" rx="6" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5"/>
+    <path d="M212 136 Q248 156, 300 154 Q307 154, 307 161 Q307 168, 300 168
+             Q242 170, 206 148 Q200 144, 203 138 Q206 132, 212 136 Z"
+          fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5"/>
+    <path d="M198 134 Q180 158, 178 190" fill="none" stroke="#0E2A23" stroke-width="3"/>
+  </g>
+  <!-- RIGHT: the thumb throttle, hinged on the grip and lying along it -->
+  <g stroke-linejoin="round">
+    <rect x="200" y="62" width="26" height="34" rx="6" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5"/>
+    <path d="M222 66 L272 56 Q284 54, 286 64 Q288 76, 276 78 L226 88 Q218 90, 217 81 Q216 70, 222 66 Z"
+          fill="#C4622D" stroke="#0E2A23" stroke-width="1.5"/>
+    <path d="M236 64 L240 84 M252 61 L256 81 M268 58 L272 78" fill="none" stroke="#0E2A23" stroke-width="1.5" opacity="0.5"/>
+    <circle cx="222" cy="79" r="5" fill="#0E2A23"/>
+  </g>
+</svg>

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img">
+  <!-- Hotspot inset for scene-trail-hazards / undercut soft edge. Section through
+       the bank: the surface runs on past the ground beneath it. Water has taken
+       the toe out, the roots hang in air, and the danger mark is the void. -->
+  <rect width="320" height="240" fill="#FBFCFA"/>
+  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+    <path d="M-10 28 C 62 4, 132 46, 202 24 S 300 6, 330 30"/>
+  </g>
+  <!-- far bank across the water -->
+  <path d="M238 152 Q278 142, 320 148 L320 196 L238 196 Z" fill="#9CC3B4"/>
+  <g stroke="#0E2A23" stroke-linejoin="round">
+    <path d="M292 152 L302 128 L312 152 Z" fill="#1F5546" stroke-width="1.5"/>
+  </g>
+  <!-- the bank in section: solid ground that stops well short of the lip -->
+  <path d="M0 116 L214 110 L232 130 Q220 142, 202 152 Q180 164, 170 180 Q164 190, 164 196 L0 196 Z"
+        fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <g stroke="#4A5A54" stroke-width="1.5" stroke-linecap="round" opacity="0.4">
+    <path d="M20 150 H56 M80 154 H112 M28 178 H62 M96 180 H128"/>
+  </g>
+  <!-- trail surface, running out over nothing -->
+  <path d="M0 96 L230 90 L232 112 L0 118 Z" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <g stroke="#0E2A23" stroke-width="1.5" fill="none" stroke-linecap="round">
+    <path d="M148 91 Q152 100, 148 116"/>
+    <path d="M178 90 Q182 99, 178 115"/>
+    <path d="M116 92 Q120 100, 116 117"/>
+  </g>
+  <!-- lip already breaking away -->
+  <path d="M230 90 L246 98 L228 108 Z" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M244 126 L256 134 L240 142 Z" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M212 168 L224 174 L210 182 Z" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <!-- roots that were holding this bank together, now hanging in air -->
+  <g fill="none" stroke="#4A5A54" stroke-width="2.5" stroke-linecap="round">
+    <path d="M196 112 Q204 136, 198 164"/>
+    <path d="M212 112 Q226 132, 228 160 Q229 174, 220 184"/>
+    <path d="M226 114 Q240 128, 244 150"/>
+    <path d="M180 113 Q186 130, 180 150"/>
+  </g>
+  <g fill="none" stroke="#4A5A54" stroke-width="1.5" stroke-linecap="round">
+    <path d="M198 164 L212 174 M228 160 L240 166 M180 150 L170 158"/>
+  </g>
+  <!-- the void under the lip: air where the ground should be -->
+  <g fill="none" stroke="#A93226" stroke-linecap="round">
+    <path d="M232 130 Q220 142, 202 152 Q180 164, 170 180 Q164 190, 164 196" stroke-width="3.5"/>
+    <path d="M232 130 V196" stroke-width="2" stroke-dasharray="6 6"/>
+    <g stroke-width="1.5" opacity="0.75">
+      <path d="M186 176 L206 152"/>
+      <path d="M198 190 L224 156"/>
+      <path d="M214 192 L230 168"/>
+      <path d="M172 190 L188 170"/>
+    </g>
+  </g>
+  <!-- water, still working at the toe -->
+  <path d="M0 196 Q70 192, 152 194 Q236 196, 320 190 L320 240 L0 240 Z"
+        fill="#2E6E8E" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <g fill="none" stroke="#FBFCFA" stroke-width="1.5" stroke-linecap="round">
+    <path d="M36 218 Q58 212, 82 218 M120 226 Q144 220, 168 226 M212 216 Q236 210, 260 216"/>
+  </g>
+  <path d="M62 208 H176" fill="none" stroke="#FBFCFA" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M164 202 L178 208 L164 214" fill="none" stroke="#FBFCFA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

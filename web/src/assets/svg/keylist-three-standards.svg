@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 400" role="img">
+  <!-- C-012 The three standards posted at one junction: zero impairment, generous yielding and staying on designated trail apply on whichever branch you take. -->
+  <rect width="720" height="400" fill="#FBFCFA"/>
+  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+    <path d="M-10 46 C 120 20, 300 68, 470 42 S 690 18, 730 46"/>
+    <path d="M-10 358 C 130 336, 320 380, 500 354 S 700 334, 730 358"/>
+  </g>
+  <path d="M360 400 V296 M360 296 L132 208 M360 296 V196 M360 296 L588 208" fill="none" stroke="#0E2A23" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M360 400 V296 M360 296 L132 208 M360 296 V196 M360 296 L588 208" fill="none" stroke="#EEF3EC" stroke-width="31" stroke-linecap="round" stroke-linejoin="round"/>
+  <g stroke="#1F5546" stroke-width="1.5" stroke-linecap="round" fill="none"><path d="M232 320 l3 -7 l3 7 M266 352 l3 -7 l3 7 M474 324 l3 -7 l3 7 M506 356 l3 -7 l3 7 M104 272 l3 -7 l3 7 M614 276 l3 -7 l3 7 M170 300 l3 -7 l3 7 M548 304 l3 -7 l3 7"/></g>
+  <g stroke="#0E2A23" stroke-width="5" stroke-linecap="round"><path d="M128 182 V214 M360 166 V200 M592 182 V214"/></g>
+  <rect x="62" y="74" width="132" height="108" rx="9" fill="#FBFCFA" stroke="#0E2A23" stroke-width="2"/>
+  <rect x="286" y="58" width="148" height="108" rx="9" fill="#FBFCFA" stroke="#0E2A23" stroke-width="2"/>
+  <rect x="526" y="74" width="132" height="108" rx="9" fill="#FBFCFA" stroke="#0E2A23" stroke-width="2"/>
+  <g><path d="M120 96 h16 v14 q10 6 10 19 v25 a6 6 0 0 1 -6 6 h-24 a6 6 0 0 1 -6 -6 v-25 q0 -13 10 -19 z" fill="none" stroke="#0E2A23" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M110 122 h36" fill="none" stroke="#0E2A23" stroke-width="1.6"/><circle cx="128" cy="128" r="40" fill="none" stroke="#A93226" stroke-width="4.5"/><path d="M100 100 L156 156" fill="none" stroke="#A93226" stroke-width="4.5" stroke-linecap="round"/></g>
+  <g><circle cx="312" cy="78" r="7.5" fill="none" stroke="#0E2A23" stroke-width="2.4"/><path d="M312 86 V110 M312 110 l-8 22 M312 110 l8 22 M312 92 l-10 12 M312 92 l10 10" fill="none" stroke="#0E2A23" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><g transform="translate(378 104)" fill="#0E2A23"><ellipse cx="0" cy="6" rx="23" ry="11"/><path d="M10 4 L20 -14 L31 -19 L29 3 Z"/><path d="M27 -21 L45 -25 L47 -16 L31 -9 Z"/><path d="M28 -23 L31 -33 L36 -23 Z"/><path d="M-21 1 C-32 5 -32 19 -27 26 L-22 23 C-26 16 -25 9 -18 6 Z"/><rect x="-18" y="12" width="6" height="24" rx="2"/><rect x="-9" y="12" width="6" height="24" rx="2"/><rect x="8" y="12" width="6" height="24" rx="2"/><rect x="17" y="12" width="6" height="24" rx="2"/></g><path d="M292 134 q34 26 68 26 q34 0 68 -26" fill="none" stroke="#1F5546" stroke-width="3.2" stroke-linecap="round"/><path d="M-9 -6.3 L0 0 L-9 6.3" transform="translate(429.0 133.0) rotate(-50.0)" fill="none" stroke="#1F5546" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <g><path d="M540 170 C 556 134, 582 110, 646 92" fill="none" stroke="#0E2A23" stroke-width="5" stroke-linecap="round"/><path d="M-9 -6.3 L0 0 L-9 6.3" transform="translate(646.0 92.0) rotate(-16.0)" fill="none" stroke="#0E2A23" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M572 124 C 592 130, 608 138, 622 148" fill="none" stroke="#A93226" stroke-width="3" stroke-dasharray="6 5" stroke-linecap="round"/><path d="M625 149 L643 167 M643 149 L625 167" fill="none" stroke="#A93226" stroke-width="3.4" stroke-linecap="round"/></g>
+  <rect x="-11" y="-11" width="22" height="22" rx="5.5" transform="translate(360 296) rotate(45)" fill="#C4622D" stroke="#0E2A23" stroke-width="1.5"/>
+</svg>

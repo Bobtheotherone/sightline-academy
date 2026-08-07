@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img">
+  <!-- Hotspot inset for scene-atv-anatomy / frame & chassis. The same machine with
+       its bodywork dropped back to a hairline so only the tube skeleton is left.
+       Clay traces the load path: rack, backbone, mounts, contact patches. -->
+  <rect width="320" height="240" fill="#FBFCFA"/>
+  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+    <path d="M-10 30 C 62 6, 132 48, 202 26 S 300 8, 330 32"/>
+  </g>
+  <!-- ghost of the machine so the zoom is obviously the same one -->
+  <g fill="none" stroke="#D8E0DA" stroke-width="2.5" stroke-linejoin="round">
+    <circle cx="68" cy="170" r="44"/>
+    <circle cx="252" cy="170" r="46"/>
+    <path d="M22 158 Q26 118, 68 114 Q110 118, 114 158"/>
+    <path d="M206 158 Q210 114, 254 110 Q298 114, 302 158"/>
+    <path d="M112 118 L130 70 L160 62 L160 116 Z"/>
+    <path d="M152 76 L188 42 L212 48"/>
+    <path d="M166 112 Q166 92, 186 90 L248 84 Q262 83, 262 96 L262 112 Q214 118, 166 112 Z"/>
+    <path d="M40 194 L200 188"/>
+  </g>
+  <!-- frame tube skeleton -->
+  <g stroke="#0E2A23" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M96 152 L256 116" stroke-width="8"/>
+    <path d="M100 168 L238 160" stroke-width="5"/>
+    <path d="M96 152 L100 168" stroke-width="5"/>
+    <path d="M238 160 L256 116" stroke-width="5"/>
+    <path d="M140 142 L146 164" stroke-width="4"/>
+    <path d="M196 130 L200 162" stroke-width="4"/>
+    <path d="M96 152 L74 104 L44 112" stroke-width="5"/>
+    <path d="M74 104 L108 146" stroke-width="4"/>
+    <path d="M256 116 L286 100" stroke-width="5"/>
+    <path d="M256 116 L232 158" stroke-width="4"/>
+    <path d="M96 152 L62 172" stroke-width="5"/>
+    <path d="M100 168 L146 164" stroke-width="4"/>
+    <path d="M238 160 L256 172" stroke-width="5"/>
+  </g>
+  <g fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5">
+    <circle cx="96" cy="152" r="6"/>
+    <circle cx="256" cy="116" r="6"/>
+    <circle cx="238" cy="160" r="6"/>
+    <circle cx="146" cy="164" r="6"/>
+  </g>
+  <!-- load path: rack rail into the backbone, out through the mounts, to the ground -->
+  <g fill="none" stroke="#C4622D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M286 100 L256 116 L96 152 L62 172"/>
+    <path d="M256 116 L232 158 L256 172"/>
+  </g>
+  <g fill="none" stroke="#C4622D" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="6 6">
+    <path d="M62 172 L66 208"/>
+    <path d="M256 172 L252 210"/>
+  </g>
+  <g fill="#C4622D">
+    <circle cx="66" cy="212" r="6"/>
+    <circle cx="252" cy="214" r="6"/>
+  </g>
+</svg>

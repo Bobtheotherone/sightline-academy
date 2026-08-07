@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img">
+  <!-- Hotspot inset for scene-atv-anatomy / tires. Zoom on the front wheel: the
+       rim stays perfectly round while the low-pressure carcass squats, bulges at
+       the sidewall and swallows a stone. Clay is the contact patch that buys. -->
+  <rect width="320" height="240" fill="#FBFCFA"/>
+  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+    <path d="M-10 40 C 62 16, 132 58, 202 36 S 300 18, 330 42"/>
+    <path d="M-10 80 C 66 56, 136 98, 206 76 S 302 56, 330 80"/>
+  </g>
+  <!-- ground, with a stone lying on it -->
+  <path d="M0 158 H320 V240 H0 Z" fill="#EEF3EC"/>
+  <path d="M0 158 H320" stroke="#0E2A23" stroke-width="1.5"/>
+  <path d="M120 158 Q124 148, 138 147 Q152 148, 156 158 Z" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <g stroke="#4A5A54" stroke-width="1.5" stroke-linecap="round" opacity="0.5">
+    <path d="M24 182 H62 M244 180 H286 M40 206 H86 M228 208 H272"/>
+  </g>
+  <!-- rigid-wheel ghost: a hard tire would touch at one point, right here -->
+  <path d="M114 158 Q156 184, 198 158" fill="none" stroke="#4A5A54" stroke-width="1.5" stroke-dasharray="5 5" stroke-linecap="round"/>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <!-- carcass: round on top, squatting and bulging where it is loaded -->
+    <path d="M76 90 A80 80 0 0 1 236 90
+             C250 116, 246 142, 208 158
+             L158 158 Q154 145, 138 143 Q122 145, 118 158
+             L104 158 C66 142, 62 116, 76 90 Z" fill="#0E2A23"/>
+    <!-- tread ring, same device as the base plate -->
+    <path d="M89 90 A67 67 0 0 1 223 90
+             C235 114, 231 134, 200 147
+             L162 147 Q157 131, 138 129 Q119 131, 114 147
+             C81 134, 77 114, 89 90 Z"
+          fill="none" stroke="#FBFCFA" stroke-width="3" stroke-dasharray="9 15" opacity="0.55"/>
+    <!-- rim and hub: the part that cannot deform -->
+    <circle cx="156" cy="90" r="38" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+    <path d="M156 58 V122 M124 90 H188" stroke="#0E2A23" stroke-width="1.5"/>
+    <circle cx="156" cy="90" r="9" fill="#0E2A23"/>
+    <!-- sidewall flex -->
+    <path d="M62 118 L78 120 M60 138 L78 136 M250 118 L234 120 M252 138 L234 136"
+          stroke="#4A5A54" stroke-width="1.5"/>
+  </g>
+  <!-- the contact patch: long, wrapped over the stone, and the whole point -->
+  <path d="M104 158 L118 158 Q122 146, 138 143 Q154 146, 158 158 L208 158"
+        fill="none" stroke="#C4622D" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M104 176 H208 M104 170 V182 M208 170 V182"
+        fill="none" stroke="#C4622D" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

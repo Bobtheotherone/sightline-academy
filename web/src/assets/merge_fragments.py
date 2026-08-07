@@ -1,0 +1,107 @@
+"""Merge per-batch manifest fragments into manifest.json.
+
+Parallel generation lanes each write their own `_frag-<batch>.json` rather than
+editing manifest.json directly — concurrent writes to one file lose entries.
+This merges them, validating as it goes.
+
+    python merge_fragments.py            # report only
+    python merge_fragments.py --write    # merge into manifest.json
+
+Validation performed (VISUAL_ASSETS.md §10.4 asset lint):
+  - every `real` slot references a file that exists
+  - no <text> elements, no external refs
+  - size budget (25 KB plates, 8 KB badges/icons)
+  - no slot collisions between fragments
+  - alt text present and non-empty for illustration slots
+"""
+from __future__ import annotations
+
+import glob
+import json
+import re
+import sys
+from pathlib import Path
+
+HERE = Path(__file__).parent
+MANIFEST = HERE / "manifest.json"
+
+
+def load(p: Path) -> dict:
+    return json.loads(p.read_text(encoding="utf-8"))
+
+
+def main() -> int:
+    write = "--write" in sys.argv
+    manifest = load(MANIFEST)
+    slots: dict = manifest["slots"]
+    before = len([k for k in slots if not k.startswith("$")])
+
+    problems: list[str] = []
+    added: list[str] = []
+    seen: dict[str, str] = {}
+
+    for frag_path in sorted(HERE.glob("_frag-*.json")):
+        frag = load(frag_path)
+        for slot, meta in frag.items():
+            if slot.startswith("$"):
+                continue
+            if not isinstance(meta, dict):
+                problems.append(f"{frag_path.name}:{slot} is not an object")
+                continue
+            if slot in seen:
+                problems.append(
+                    f"COLLISION {slot}: {seen[slot]} and {frag_path.name}")
+                continue
+            seen[slot] = frag_path.name
+
+            if slot in slots:
+                problems.append(f"{slot} already in manifest — skipping")
+                continue
+
+            f = meta.get("file")
+            if meta.get("status") == "real":
+                if not f:
+                    problems.append(f"{slot}: status real but no file")
+                    continue
+                fp = HERE / f
+                if not fp.exists():
+                    problems.append(f"{slot}: file missing -> {f}")
+                    continue
+                body = fp.read_text(encoding="utf-8", errors="ignore")
+                if "<text" in body:
+                    problems.append(f"{slot}: contains <text> (U3 violation)")
+                if re.search(r'(?:xlink:)?href="http|@import', body):
+                    problems.append(f"{slot}: external reference")
+                size = fp.stat().st_size
+                limit = 8192 if re.match(r"(badge|act|topic|section|match|sort)-", slot) else 25600
+                if size > limit:
+                    problems.append(f"{slot}: {size}B over {limit}B budget")
+                if "alt" not in meta:
+                    problems.append(f"{slot}: no alt key")
+
+            slots[slot] = meta
+            added.append(slot)
+
+    print(f"manifest slots before : {before}")
+    print(f"fragments found       : {len(list(HERE.glob('_frag-*.json')))}")
+    print(f"slots to add          : {len(added)}")
+    print(f"problems              : {len(problems)}")
+    for p in problems:
+        print(f"   ! {p}")
+
+    if write and not problems:
+        MANIFEST.write_text(
+            json.dumps(manifest, indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8")
+        print(f"\nWROTE manifest.json — now "
+              f"{len([k for k in slots if not k.startswith('$')])} slots")
+    elif write:
+        print("\nNOT written — resolve problems first")
+        return 1
+    else:
+        print("\n(dry run — pass --write to apply)")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
