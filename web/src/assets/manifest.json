@@ -710,6 +710,176 @@
       "status": "real",
       "file": "svg/lesson-m6-l4.svg",
       "alt": "A folded ride-plan sheet with all six sections filled in and one accented: the capstone pulls route, terrain, weather, gear, machine check and contact time into one written plan before the ride starts."
+    },
+    "level-1-trailhead": {
+      "status": "real",
+      "file": "svg/level-1-trailhead.svg",
+      "alt": "Level 1, Trailhead: a single trailhead post carrying one blaze on otherwise empty ground - the route has not started yet."
+    },
+    "level-2-greenhorn": {
+      "status": "real",
+      "file": "svg/level-2-greenhorn.svg",
+      "alt": "Level 2, Greenhorn: the trailhead post with the first blazed trail segment leaving it toward a marker not yet reached."
+    },
+    "level-3-pathfinder": {
+      "status": "real",
+      "file": "svg/level-3-pathfinder.svg",
+      "alt": "Level 3, Pathfinder: a blazed post standing at a fork, one branch chosen and blazed while the other fades away unmarked - the route is now a decision."
+    },
+    "level-4-trailhand": {
+      "status": "real",
+      "file": "svg/level-4-trailhand.svg",
+      "alt": "Level 4, Trailhand: a worked trail carrying three blazes across two contour terraces - the ground itself has become legible, not just the path."
+    },
+    "level-5-ridge-runner": {
+      "status": "real",
+      "file": "svg/level-5-ridge-runner.svg",
+      "alt": "Level 5, Ridge Runner: a ridge profile stacked in front of a back range, with the blazed trail running the whole spine from the low ground to the peak."
+    },
+    "level-6-wayfinder": {
+      "status": "real",
+      "file": "svg/level-6-wayfinder.svg",
+      "alt": "Level 6, Wayfinder: a graduated eight-point compass card set on a nested contour field - this rider reads both the ground and the bearing."
+    },
+    "level-7-trail-boss": {
+      "status": "real",
+      "file": "svg/level-7-trail-boss.svg",
+      "alt": "Level 7, Trail Boss: three ranges deep with a foreground bench, the blazed climb reaching a summit marker at the top - the fullest emblem in the ladder."
+    },
+    "artifact-risk-profile": {
+      "status": "real",
+      "file": "svg/artifact-risk-profile.svg",
+      "alt": "Risk profile artifact: a ruled notebook page holding four honest entries about your own riding, the second marked with a trail blaze as the leak most likely to catch you."
+    },
+    "artifact-inspection-log": {
+      "status": "real",
+      "file": "svg/artifact-inspection-log.svg",
+      "alt": "Inspection log artifact: five T-CLOC zone rows walked top to bottom in fixed order, four zones ticked and the fifth still open with the marker sitting against it."
+    },
+    "artifact-gear-card": {
+      "status": "real",
+      "file": "svg/artifact-gear-card.svg",
+      "alt": "Gear card artifact: a pocket card laid on the ruled page carrying the five every-ride items head to toe - full-face helmet, eye protection, long sleeves, gloves, over-ankle boots - with the helmet blazed as the non-negotiable."
+    },
+    "artifact-hazard-brief": {
+      "status": "real",
+      "file": "svg/artifact-hazard-brief.svg",
+      "alt": "Hazard brief artifact: three hazards written up on the ruled page, each filed under the cue that gives it away - a crest, shadowed ruts, a wet band - with the rut cue blazed as the one that decides the line."
+    },
+    "artifact-readiness-plan": {
+      "status": "real",
+      "file": "svg/artifact-readiness-plan.svg",
+      "alt": "Readiness plan artifact: the three things that make a ride recoverable - who you told, the return time you committed to, and the kit list leaving with you - with the clock hand blazed on the time."
+    },
+    "artifact-ride-plan": {
+      "status": "real",
+      "file": "svg/artifact-ride-plan.svg",
+      "alt": "Ride plan artifact: the capstone. A full folded plan sheet, larger and more complete than any other artifact page, with six worked sections above the fold, a ruled summary strip below, and the trail blaze sealing it."
+    },
+    "xp-step-complete": {
+      "status": "real",
+      "file": "svg/xp-step-complete.svg",
+      "alt": "One trail blaze: a step completed."
+    },
+    "xp-lesson-complete": {
+      "status": "real",
+      "file": "svg/xp-lesson-complete.svg",
+      "alt": "A trail blaze inside a closed ring: a whole lesson finished."
+    },
+    "xp-checkpoint-first-try": {
+      "status": "real",
+      "file": "svg/xp-checkpoint-first-try.svg",
+      "alt": "A checkpoint pennant marked clean: the checkpoint passed on the first try."
+    },
+    "xp-module-complete": {
+      "status": "real",
+      "file": "svg/xp-module-complete.svg",
+      "alt": "The badge frame, a blaze diamond earned: a module completed."
+    },
+    "xp-journal-artifact": {
+      "status": "real",
+      "file": "svg/xp-journal-artifact.svg",
+      "alt": "A written notebook page: a journal artifact completed."
+    },
+    "xp-scenario-best-path": {
+      "status": "real",
+      "file": "svg/xp-scenario-best-path.svg",
+      "alt": "A fork with the better line taken and blazed: the best path found in a scenario."
+    },
+    "xp-lab-objectives": {
+      "status": "real",
+      "file": "svg/xp-lab-objectives.svg",
+      "alt": "Three objectives ticked off: every lab objective met."
+    },
+    "xp-capstone": {
+      "status": "real",
+      "file": "svg/xp-capstone.svg",
+      "alt": "The ride-plan sheet folded into three panels: the capstone completed."
+    },
+    "xp-final-assessment": {
+      "status": "real",
+      "file": "svg/xp-final-assessment.svg",
+      "alt": "A summit marker standing over the range: the final assessment passed."
+    },
+    "xp-tutor-first": {
+      "status": "real",
+      "file": "svg/xp-tutor-first.svg",
+      "alt": "Ranger's campaign hat: the first question asked of the tutor."
+    },
+    "empty-progress": {
+      "status": "real",
+      "file": "svg/empty-progress.svg",
+      "alt": "A trail odometer standing at zero, every counter drum still blank, with a blazed trail rising away beside it - no miles recorded yet, and the first one waiting."
+    },
+    "empty-instructor": {
+      "status": "real",
+      "file": "svg/empty-instructor.svg",
+      "alt": "A trailhead register box open on its post, the ruled columns of the ledger still blank and the pencil hanging unused - no learner has signed in yet."
+    },
+    "state-403": {
+      "status": "real",
+      "file": "svg/state-403.svg",
+      "alt": "A staff-only service spur closed by a striped warden barrier beside the warden's post, while the learner's own blazed trail carries on open to the left - this route belongs to someone else, not to you later."
+    },
+    "hero-assessment": {
+      "status": "real",
+      "file": "svg/hero-assessment.svg",
+      "alt": "The final ridge: a blazed trail climbing its shouldered face with the summit marker already in sight ahead - everything the course taught, still to be walked."
+    },
+    "hero-graduate": {
+      "status": "real",
+      "file": "svg/hero-graduate.svg",
+      "alt": "The summit reached: the whole range the course crossed spread out below, the climbed trail running back down to the right, and one blaze planted at the top beside the cairn."
+    },
+    "scenario-creek-line": {
+      "status": "real",
+      "file": "svg/scenario-creek-line.svg",
+      "alt": "Late afternoon at a creek crossing. The water runs fast and opaque - a broken, streaked surface with rocks throwing standing waves - so its depth and bottom cannot be read, and both banks are undercut. Two riders in full gear are stopped on the near bank where the trail ends at the water, the lead rider's arm raised; two more riders are already across on the far bank."
+    },
+    "scenario-creek-pressure": {
+      "status": "real",
+      "file": "svg/scenario-creek-pressure.svg",
+      "alt": "The same crossing with the light going. Two riders are together on the far bank, one of them off his machine and pointing at a sun that is nearly down. One rider is still stopped alone on the near bank, small in open ground with his shadow stretching away and the fast opaque water between him and the group."
+    },
+    "scenario-shortcut-slope": {
+      "status": "real",
+      "file": "svg/scenario-shortcut-slope.svg",
+      "alt": "A hillside junction offering two ways down to the same valley. On the left a made trail descends in long shallow switchback zigzags; on the right a steep grassy shortcut drops almost straight down on worn tire tracks, with an off-camber traverse crossing its middle where the surface visibly tilts sideways. Contour lines are widely spaced on the left and bunched on the right: the same drop, far less distance."
+    },
+    "scenario-offcamber-wet": {
+      "status": "real",
+      "file": "svg/scenario-offcamber-wet.svg",
+      "alt": "A short off-camber stretch of switchback. The trail is benched into a hillside that rises above it and falls away below it into treetops far down, and over one stretch the outside of the tread rolls over toward the drop. A spring seep runs out of a notch in the cut bank and crosses the tilted section as a dark wet band. A rider in full gear approaches slowly on the level part of the trail before it, machine level."
+    },
+    "scenario-silent-radio": {
+      "status": "real",
+      "file": "svg/scenario-silent-radio.svg",
+      "alt": "A quad lying on its side at the outside of a bend on a forest climb, drawn muted and low in contrast so the people are the subject. The rider is sitting up on the ground beside it in full gear with the helmet still on, calmly supporting one wrist with the other hand. A second rider in full gear is walking over to them. No injury is shown."
+    },
+    "scenario-one-bar": {
+      "status": "real",
+      "file": "svg/scenario-one-bar.svg",
+      "alt": "Dusk in a quiet clearing. Two riders in full gear sit on the ground beside an upright, switched-off quad. One holds a phone up checking for a signal; the other is wearing a spare layer taken from the pack that lies open on the ground beside them, with a second rolled layer still to hand. The carry kit is doing its job."
     }
   }
 }

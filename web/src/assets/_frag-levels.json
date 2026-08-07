@@ -1,0 +1,145 @@
+{
+  "level-1-trailhead": {
+    "status": "real",
+    "file": "svg/level-1-trailhead.svg",
+    "alt": "Level 1, Trailhead: a single trailhead post carrying one blaze on otherwise empty ground - the route has not started yet."
+  },
+  "level-2-greenhorn": {
+    "status": "real",
+    "file": "svg/level-2-greenhorn.svg",
+    "alt": "Level 2, Greenhorn: the trailhead post with the first blazed trail segment leaving it toward a marker not yet reached."
+  },
+  "level-3-pathfinder": {
+    "status": "real",
+    "file": "svg/level-3-pathfinder.svg",
+    "alt": "Level 3, Pathfinder: a blazed post standing at a fork, one branch chosen and blazed while the other fades away unmarked - the route is now a decision."
+  },
+  "level-4-trailhand": {
+    "status": "real",
+    "file": "svg/level-4-trailhand.svg",
+    "alt": "Level 4, Trailhand: a worked trail carrying three blazes across two contour terraces - the ground itself has become legible, not just the path."
+  },
+  "level-5-ridge-runner": {
+    "status": "real",
+    "file": "svg/level-5-ridge-runner.svg",
+    "alt": "Level 5, Ridge Runner: a ridge profile stacked in front of a back range, with the blazed trail running the whole spine from the low ground to the peak."
+  },
+  "level-6-wayfinder": {
+    "status": "real",
+    "file": "svg/level-6-wayfinder.svg",
+    "alt": "Level 6, Wayfinder: a graduated eight-point compass card set on a nested contour field - this rider reads both the ground and the bearing."
+  },
+  "level-7-trail-boss": {
+    "status": "real",
+    "file": "svg/level-7-trail-boss.svg",
+    "alt": "Level 7, Trail Boss: three ranges deep with a foreground bench, the blazed climb reaching a summit marker at the top - the fullest emblem in the ladder."
+  },
+
+  "artifact-risk-profile": {
+    "status": "real",
+    "file": "svg/artifact-risk-profile.svg",
+    "alt": "Risk profile artifact: a ruled notebook page holding four honest entries about your own riding, the second marked with a trail blaze as the leak most likely to catch you."
+  },
+  "artifact-inspection-log": {
+    "status": "real",
+    "file": "svg/artifact-inspection-log.svg",
+    "alt": "Inspection log artifact: five T-CLOC zone rows walked top to bottom in fixed order, four zones ticked and the fifth still open with the marker sitting against it."
+  },
+  "artifact-gear-card": {
+    "status": "real",
+    "file": "svg/artifact-gear-card.svg",
+    "alt": "Gear card artifact: a pocket card laid on the ruled page carrying the five every-ride items head to toe - full-face helmet, eye protection, long sleeves, gloves, over-ankle boots - with the helmet blazed as the non-negotiable."
+  },
+  "artifact-hazard-brief": {
+    "status": "real",
+    "file": "svg/artifact-hazard-brief.svg",
+    "alt": "Hazard brief artifact: three hazards written up on the ruled page, each filed under the cue that gives it away - a crest, shadowed ruts, a wet band - with the rut cue blazed as the one that decides the line."
+  },
+  "artifact-readiness-plan": {
+    "status": "real",
+    "file": "svg/artifact-readiness-plan.svg",
+    "alt": "Readiness plan artifact: the three things that make a ride recoverable - who you told, the return time you committed to, and the kit list leaving with you - with the clock hand blazed on the time."
+  },
+  "artifact-ride-plan": {
+    "status": "real",
+    "file": "svg/artifact-ride-plan.svg",
+    "alt": "Ride plan artifact: the capstone. A full folded plan sheet, larger and more complete than any other artifact page, with six worked sections above the fold, a ruled summary strip below, and the trail blaze sealing it."
+  },
+
+  "xp-step-complete": {
+    "status": "real",
+    "file": "svg/xp-step-complete.svg",
+    "alt": "One trail blaze: a step completed."
+  },
+  "xp-lesson-complete": {
+    "status": "real",
+    "file": "svg/xp-lesson-complete.svg",
+    "alt": "A trail blaze inside a closed ring: a whole lesson finished."
+  },
+  "xp-checkpoint-first-try": {
+    "status": "real",
+    "file": "svg/xp-checkpoint-first-try.svg",
+    "alt": "A checkpoint pennant marked clean: the checkpoint passed on the first try."
+  },
+  "xp-module-complete": {
+    "status": "real",
+    "file": "svg/xp-module-complete.svg",
+    "alt": "The badge frame, a blaze diamond earned: a module completed."
+  },
+  "xp-journal-artifact": {
+    "status": "real",
+    "file": "svg/xp-journal-artifact.svg",
+    "alt": "A written notebook page: a journal artifact completed."
+  },
+  "xp-scenario-best-path": {
+    "status": "real",
+    "file": "svg/xp-scenario-best-path.svg",
+    "alt": "A fork with the better line taken and blazed: the best path found in a scenario."
+  },
+  "xp-lab-objectives": {
+    "status": "real",
+    "file": "svg/xp-lab-objectives.svg",
+    "alt": "Three objectives ticked off: every lab objective met."
+  },
+  "xp-capstone": {
+    "status": "real",
+    "file": "svg/xp-capstone.svg",
+    "alt": "The ride-plan sheet folded into three panels: the capstone completed."
+  },
+  "xp-final-assessment": {
+    "status": "real",
+    "file": "svg/xp-final-assessment.svg",
+    "alt": "A summit marker standing over the range: the final assessment passed."
+  },
+  "xp-tutor-first": {
+    "status": "real",
+    "file": "svg/xp-tutor-first.svg",
+    "alt": "Ranger's campaign hat: the first question asked of the tutor."
+  },
+
+  "empty-progress": {
+    "status": "real",
+    "file": "svg/empty-progress.svg",
+    "alt": "A trail odometer standing at zero, every counter drum still blank, with a blazed trail rising away beside it - no miles recorded yet, and the first one waiting."
+  },
+  "empty-instructor": {
+    "status": "real",
+    "file": "svg/empty-instructor.svg",
+    "alt": "A trailhead register box open on its post, the ruled columns of the ledger still blank and the pencil hanging unused - no learner has signed in yet."
+  },
+  "state-403": {
+    "status": "real",
+    "file": "svg/state-403.svg",
+    "alt": "A staff-only service spur closed by a striped warden barrier beside the warden's post, while the learner's own blazed trail carries on open to the left - this route belongs to someone else, not to you later."
+  },
+  "hero-assessment": {
+    "status": "real",
+    "file": "svg/hero-assessment.svg",
+    "alt": "The final ridge: a blazed trail climbing its shouldered face with the summit marker already in sight ahead - everything the course taught, still to be walked."
+  },
+  "hero-graduate": {
+    "status": "real",
+    "file": "svg/hero-graduate.svg",
+    "alt": "The summit reached: the whole range the course crossed spread out below, the climbed trail running back down to the right, and one blaze planted at the top beside the cairn."
+  }
+}

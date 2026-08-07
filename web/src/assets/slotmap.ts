@@ -1,6 +1,7 @@
 /**
- * slotmap — binds curriculum item ids to illustration slots (VISUAL_ASSETS §7.3,
- * C-070…C-110) so the sort and match renderers can show per-item art.
+ * slotmap — binds curriculum item ids to illustration slots (VISUAL_ASSETS §7.2
+ * B-001…B-022, §7.3 C-070…C-134) so the sort, match, hotspot and lesson-list
+ * renderers can show per-item art.
  *
  * Why the mapping lives in code and not in the payloads: the curriculum
  * (`content/curriculum/*.md`) is the teaching source of truth and does not name
@@ -97,6 +98,63 @@ export const MATCH_PAIR_SLOT: Record<string, string> = {
 };
 
 // ---------------------------------------------------------------------------
+// C-120 … C-134 · Hotspot detail insets (15)
+// ---------------------------------------------------------------------------
+
+/**
+ * `${stepId}:${hotspotId}` → slot name, for the `hotspot_list` detail panel.
+ *
+ * The base scene answers *where*; the inset answers *what you are looking at*
+ * (VISUAL_ASSETS §7.3, SET-C-HOTSPOT-INSET). Hotspot ids are only unique inside
+ * their step, hence the compound key — same shape as the maps above.
+ */
+export const HOTSPOT_INSET_SLOT: Record<string, string> = {
+  // m2-l1-s2 · scene-atv-anatomy (C-120…C-127)
+  "m2-l1-s2:tires": "inset-tires",
+  "m2-l1-s2:handlebars": "inset-handlebars",
+  "m2-l1-s2:brakes": "inset-brakes",
+  "m2-l1-s2:suspension": "inset-suspension",
+  "m2-l1-s2:engine": "inset-engine",
+  "m2-l1-s2:footwells": "inset-footwells",
+  "m2-l1-s2:racks": "inset-racks",
+  "m2-l1-s2:chassis": "inset-chassis",
+
+  // m4-l1-s2 · scene-trail-hazards (C-128…C-134)
+  "m4-l1-s2:crest": "inset-crest",
+  "m4-l1-s2:side_slope": "inset-side-slope",
+  "m4-l1-s2:shadow_rut": "inset-shadow-rut",
+  "m4-l1-s2:wet_clay": "inset-wet-clay",
+  "m4-l1-s2:loose_over_hard": "inset-loose-over-hard",
+  "m4-l1-s2:deadfall": "inset-deadfall",
+  "m4-l1-s2:soft_edge": "inset-soft-edge",
+};
+
+// ---------------------------------------------------------------------------
+// B-001 … B-022 · Lesson cards (22)
+// ---------------------------------------------------------------------------
+
+/**
+ * A lesson id carries a trailing name (`m2-l3-walkaround`, `m6-l4-ride-plan`);
+ * its card slot is the module/lesson stem alone — `lesson-m2-l3`. One rule
+ * beats twenty-two hand-copied rows, so the mapping is derived rather than
+ * tabulated and the manifest stays the sole authority on which cards exist: an
+ * unproduced stem resolves to `undefined` and `LessonRow` draws no thumbnail.
+ *
+ * The produced set, for the record and so the asset lint can see this wiring
+ * (§10.4 resolves `family-${…}` template slots only for the glyph prefixes, and
+ * `lesson-` is not one of them) — verified equal to the manifest's `lesson-*`
+ * keys and to the stems of all 22 authored lesson ids:
+ *
+ *   lesson-m1-l1  lesson-m1-l2  lesson-m1-l3
+ *   lesson-m2-l1  lesson-m2-l2  lesson-m2-l3  lesson-m2-l4
+ *   lesson-m3-l1  lesson-m3-l2  lesson-m3-l3
+ *   lesson-m4-l1  lesson-m4-l2  lesson-m4-l3  lesson-m4-l4
+ *   lesson-m5-l1  lesson-m5-l2  lesson-m5-l3  lesson-m5-l4
+ *   lesson-m6-l1  lesson-m6-l2  lesson-m6-l3  lesson-m6-l4
+ */
+const LESSON_STEM = /^(m\d+-l\d+)(?:-|$)/;
+
+// ---------------------------------------------------------------------------
 // Resolution
 // ---------------------------------------------------------------------------
 
@@ -115,4 +173,22 @@ export function sortItemIconUrl(stepId: string, itemId: string): string | undefi
 /** Icon URL for a `match` pair's left-column term, or undefined when unmapped. */
 export function matchPairIconUrl(stepId: string, pairId: string): string | undefined {
   return slotIconUrl(MATCH_PAIR_SLOT[`${stepId}:${pairId}`]);
+}
+
+/**
+ * Slot name for a hotspot's detail inset, or undefined when it has no produced
+ * plate. Returns the *slot* rather than a URL because the panel presents it
+ * through `SlotArt`, which carries the manifest's teaching alt text — but the
+ * caller still needs to know whether art exists so an unmapped hotspot renders
+ * exactly as it did before the insets landed, with no placeholder frame.
+ */
+export function hotspotInsetSlot(stepId: string, hotspotId: string): string | undefined {
+  const slot = HOTSPOT_INSET_SLOT[`${stepId}:${hotspotId}`];
+  return slot && slotIconUrl(slot) ? slot : undefined;
+}
+
+/** Card-art URL for a lesson id, or undefined when its card has not been made. */
+export function lessonCardUrl(lessonId: string): string | undefined {
+  const stem = LESSON_STEM.exec(lessonId)?.[1];
+  return stem ? slotIconUrl(`lesson-${stem}`) : undefined;
 }

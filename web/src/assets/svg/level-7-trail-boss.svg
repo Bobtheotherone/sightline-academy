@@ -7,6 +7,7 @@
     <path d="M6 26 Q38 12 66 20 Q94 28 122 16"/>
     <path d="M8 40 Q40 26 68 34 Q96 42 120 30"/>
   </g>
+  <path d="M11.2 33.5 L26 22 L36 32 L48 15 L62 29 L76 13 L92 30 L102 22 L116.8 33.5 A61 61 0 1 1 11.2 33.5 Z" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
   <path d="M5.1 48.2 L18 34 L28 46 L40 28 L52 44 L64 22 L80 42 L92 30 L104 44 L112 38 L122.9 48.2 A61 61 0 1 1 5.1 48.2 Z" fill="#9CC3B4" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
   <path d="M5.1 79.8 L26 60 L38 70 L58 42 L74 58 L88 48 L104 70 L122.9 79.8 A61 61 0 0 1 5.1 79.8 Z" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
   <path d="M50 52 L58 42 L66 52 L58 58 Z" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1" stroke-linejoin="round"/>
@@ -16,7 +17,7 @@
     <rect x="-5" y="-5" width="10" height="10" rx="2.7" transform="translate(34 92) rotate(45)"/>
     <rect x="-5.6" y="-5.6" width="11.2" height="11.2" rx="3" transform="translate(49 70) rotate(45)"/>
   </g>
-  <rect x="54.5" y="14" width="8" height="30" rx="2.5" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
-  <path d="M54.5 22 H62.5" stroke="#0E2A23" stroke-width="1"/>
-  <rect x="-7" y="-7" width="14" height="14" rx="3.7" transform="translate(58.5 30) rotate(45)" fill="#E0A72E" stroke="#0E2A23" stroke-width="1.5"/>
+  <rect x="54" y="12" width="9" height="32" rx="2.8" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+  <path d="M54 21 H63" stroke="#0E2A23" stroke-width="1"/>
+  <rect x="-8" y="-8" width="16" height="16" rx="4.2" transform="translate(58.5 28) rotate(45)" fill="#E0A72E" stroke="#0E2A23" stroke-width="1.5"/>
 </svg>

@@ -18,11 +18,12 @@
     <rect x="36" y="46" width="168" height="80" rx="7" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
     <rect x="46" y="56" width="46" height="5" rx="2.5" fill="#1F5546"/>
     <g stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round">
-      <path d="M49 106 Q49 84 60 84 Q71 84 71 106 Q71 110 67 110 H53 Q49 110 49 106 Z" fill="#1F5546"/>
-      <rect x="52" y="94" width="16" height="7" rx="3.5" fill="#FBFCFA" stroke-width="1.2"/>
-      <rect x="81" y="92" width="10" height="9" rx="3" fill="#FBFCFA"/>
-      <rect x="93" y="92" width="10" height="9" rx="3" fill="#FBFCFA"/>
-      <path d="M91 96.5 H93 M81 96.5 H77 M103 96.5 H107" stroke="#1F5546" stroke-width="2" fill="none"/>
+      <path d="M48 106 Q48 82 60 82 Q72 82 72 106 Q72 110 68 110 H52 Q48 110 48 106 Z" fill="#1F5546"/>
+      <rect x="51" y="90" width="18" height="9" rx="4.5" fill="#FBFCFA" stroke-width="1.2"/>
+      <path d="M54.5 105 H58.5 M61.5 105 H65.5" stroke="#FBFCFA" stroke-width="1.6" fill="none"/>
+      <rect x="80" y="89" width="11" height="10" rx="3" fill="#FBFCFA"/>
+      <rect x="93" y="89" width="11" height="10" rx="3" fill="#FBFCFA"/>
+      <path d="M91 94 H93 M80 94 H76 M104 94 H108" stroke="#1F5546" stroke-width="2.2" fill="none"/>
       <path d="M114 86 H134 L140 92 L136 97 L133 94 V108 H115 V94 L112 97 L108 92 Z" fill="#1F5546"/>
       <path d="M150 106 V92 Q150 86 156 86 Q163 86 163 92 V106 Z" fill="#4A5A54"/>
       <path d="M150 94 Q145 92 144 96 Q143 100 149 101" fill="#4A5A54"/>
@@ -35,6 +36,6 @@
     <g stroke="#D8E0DA" stroke-width="2" stroke-linecap="round">
       <path d="M54 118 H66 M86 118 H98 M118 118 H130 M150 118 H162 M182 118 H194"/>
     </g>
-    <rect x="-5.6" y="-5.6" width="11.2" height="11.2" rx="3" transform="translate(60 70) rotate(45)" fill="#C4622D" stroke="#0E2A23" stroke-width="1.5"/>
+    <rect x="-5.6" y="-5.6" width="11.2" height="11.2" rx="3" transform="translate(60 73) rotate(45)" fill="#C4622D" stroke="#0E2A23" stroke-width="1.5"/>
   </g>
 </svg>

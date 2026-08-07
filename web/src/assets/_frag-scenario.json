@@ -1,0 +1,32 @@
+{
+  "scenario-creek-line": {
+    "status": "real",
+    "file": "svg/scenario-creek-line.svg",
+    "alt": "Late afternoon at a creek crossing. The water runs fast and opaque - a broken, streaked surface with rocks throwing standing waves - so its depth and bottom cannot be read, and both banks are undercut. Two riders in full gear are stopped on the near bank where the trail ends at the water, the lead rider's arm raised; two more riders are already across on the far bank."
+  },
+  "scenario-creek-pressure": {
+    "status": "real",
+    "file": "svg/scenario-creek-pressure.svg",
+    "alt": "The same crossing with the light going. Two riders are together on the far bank, one of them off his machine and pointing at a sun that is nearly down. One rider is still stopped alone on the near bank, small in open ground with his shadow stretching away and the fast opaque water between him and the group."
+  },
+  "scenario-shortcut-slope": {
+    "status": "real",
+    "file": "svg/scenario-shortcut-slope.svg",
+    "alt": "A hillside junction offering two ways down to the same valley. On the left a made trail descends in long shallow switchback zigzags; on the right a steep grassy shortcut drops almost straight down on worn tire tracks, with an off-camber traverse crossing its middle where the surface visibly tilts sideways. Contour lines are widely spaced on the left and bunched on the right: the same drop, far less distance."
+  },
+  "scenario-offcamber-wet": {
+    "status": "real",
+    "file": "svg/scenario-offcamber-wet.svg",
+    "alt": "A short off-camber stretch of switchback. The trail is benched into a hillside that rises above it and falls away below it into treetops far down, and over one stretch the outside of the tread rolls over toward the drop. A spring seep runs out of a notch in the cut bank and crosses the tilted section as a dark wet band. A rider in full gear approaches slowly on the level part of the trail before it, machine level."
+  },
+  "scenario-silent-radio": {
+    "status": "real",
+    "file": "svg/scenario-silent-radio.svg",
+    "alt": "A quad lying on its side at the outside of a bend on a forest climb, drawn muted and low in contrast so the people are the subject. The rider is sitting up on the ground beside it in full gear with the helmet still on, calmly supporting one wrist with the other hand. A second rider in full gear is walking over to them. No injury is shown."
+  },
+  "scenario-one-bar": {
+    "status": "real",
+    "file": "svg/scenario-one-bar.svg",
+    "alt": "Dusk in a quiet clearing. Two riders in full gear sit on the ground beside an upright, switched-off quad. One holds a phone up checking for a signal; the other is wearing a spare layer taken from the pack that lies open on the ground beside them, with a second rolled layer still to hand. The carry kit is doing its job."
+  }
+}

@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" role="img">
   <!-- B-070 lesson_complete: a blaze ringed - a whole lesson closed around it. -->
   <circle cx="8" cy="8" r="6.5" fill="none" stroke="#C4622D" stroke-width="1.5"/>
-  <rect x="-2.5" y="-2.5" width="5" height="5" rx="1.4" transform="translate(8 8) rotate(45)" fill="#C4622D"/>
+  <rect x="-2.7" y="-2.7" width="5.4" height="5.4" rx="0.9" transform="translate(8 8) rotate(45)" fill="#C4622D"/>
 </svg>

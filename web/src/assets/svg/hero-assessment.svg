@@ -1,39 +1,37 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 270" role="img">
-  <!-- B-082 Assessment hero: the final ridge. The blazed trail climbs the near
-       face and the summit marker is already in sight ahead - everything the
-       course taught, still to be walked. -->
+  <!-- B-082 Assessment hero: the final ridge. The blazed trail climbs its
+       shouldered face and the summit marker is already in sight ahead -
+       everything the course taught, still to be walked. -->
   <rect width="480" height="270" fill="#FBFCFA"/>
   <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
     <path d="M-10 40 C 100 16, 220 56, 330 34 S 460 20, 490 42"/>
     <path d="M-10 72 C 100 50, 220 88, 330 66 S 460 52, 490 74"/>
   </g>
-  <path d="M-4 158 L40 116 L72 144 L108 110 L150 148 L186 124 L226 158 Z" fill="#9CC3B4" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
-  <path d="M-4 274 L-4 232 L70 210 L150 178 L232 146 L306 116 L372 96 L410 84 L436 108 L470 152 L484 190 L484 274 Z" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
-  <path d="M386 104 L410 84 L432 106 L410 118 Z" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.2" stroke-linejoin="round"/>
-  <g stroke="#0E2A23" stroke-linejoin="round">
-    <path d="M264 138 L274 162 H254 Z" fill="#9CC3B4" stroke-width="1.5"/>
-    <path d="M196 176 L206 200 H186 Z" fill="#9CC3B4" stroke-width="1.5"/>
+  <path d="M-4 162 L34 120 L66 148 L104 108 L142 152 L180 126 L232 176 L268 214 L-4 214 Z" fill="#9CC3B4" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M-4 274 L-4 238 L52 222 L96 202 L128 208 L176 186 L214 190 L252 166 L300 146 L336 132 L364 110 L394 92 L414 82 L432 100 L452 130 L470 168 L484 206 L484 274 Z" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M394 104 L414 82 L434 106 L414 114 Z" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.2" stroke-linejoin="round"/>
+  <g stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round">
+    <path d="M250 168 L260 192 H240 Z" fill="#9CC3B4"/>
+    <path d="M196 194 L206 218 H186 Z" fill="#9CC3B4"/>
   </g>
-  <path d="M40 262 Q120 236 180 206 Q250 172 320 138 Q368 114 400 98" fill="none" stroke="#C4622D" stroke-width="3" stroke-dasharray="1 9" stroke-linecap="round"/>
+  <path d="M40 264 Q110 244 170 220 Q240 194 300 168 Q360 140 404 100" fill="none" stroke="#C4622D" stroke-width="3" stroke-dasharray="1 9" stroke-linecap="round"/>
   <g fill="#C4622D" stroke="#0E2A23" stroke-width="1.2">
-    <rect x="-6" y="-6" width="12" height="12" rx="3.2" transform="translate(120 232) rotate(45)"/>
-    <rect x="-6" y="-6" width="12" height="12" rx="3.2" transform="translate(215 188) rotate(45)"/>
-    <rect x="-6" y="-6" width="12" height="12" rx="3.2" transform="translate(330 132) rotate(45)"/>
+    <rect x="-6" y="-6" width="12" height="12" rx="3.2" transform="translate(107 243) rotate(45)"/>
+    <rect x="-6" y="-6" width="12" height="12" rx="3.2" transform="translate(237 194) rotate(45)"/>
+    <rect x="-6" y="-6" width="12" height="12" rx="3.2" transform="translate(356 137) rotate(45)"/>
   </g>
-  <path d="M-4 274 L-4 250 Q100 234 200 248 Q300 262 484 240 L484 274 Z" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5"/>
-  <g stroke="#0E2A23" stroke-linejoin="round">
-    <path d="M44 212 L58 252 H30 Z" fill="#1F5546" stroke-width="1.5"/>
-    <path d="M44 252 V260" stroke-width="2.5"/>
-    <path d="M74 226 L84 254 H64 Z" fill="#1F5546" stroke-width="1.5"/>
-    <path d="M74 254 V260" stroke-width="2.5"/>
-    <path d="M436 218 L448 250 H424 Z" fill="#1F5546" stroke-width="1.5"/>
-    <path d="M436 250 V258" stroke-width="2.5"/>
-  </g>
+  <path d="M-4 274 L-4 244 Q90 226 190 240 Q290 254 484 232 L484 274 Z" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5"/>
   <g fill="none" stroke="#0E2A23" stroke-width="1.5" stroke-linecap="round">
-    <path d="M140 258 Q220 250 300 256"/>
-    <path d="M330 248 Q390 244 450 250"/>
+    <path d="M36 258 Q150 248 264 258"/>
+    <path d="M300 252 Q384 246 462 252"/>
   </g>
-  <rect x="404" y="40" width="11" height="46" rx="3" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
-  <path d="M404 50 H415" stroke="#0E2A23" stroke-width="1"/>
-  <rect x="-10.5" y="-10.5" width="21" height="21" rx="5.4" transform="translate(409.5 60) rotate(45)" fill="#C4622D" stroke="#0E2A23" stroke-width="1.5"/>
+  <g stroke="#0E2A23" stroke-linejoin="round">
+    <path d="M44 214 L58 252 H30 Z" fill="#1F5546" stroke-width="1.5"/>
+    <path d="M44 252 V260" stroke-width="2.5"/>
+    <path d="M76 228 L86 256 H66 Z" fill="#1F5546" stroke-width="1.5"/>
+    <path d="M76 256 V262" stroke-width="2.5"/>
+  </g>
+  <rect x="408" y="40" width="11" height="46" rx="3" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+  <path d="M408 50 H419" stroke="#0E2A23" stroke-width="1"/>
+  <rect x="-10.5" y="-10.5" width="21" height="21" rx="5.4" transform="translate(413.5 60) rotate(45)" fill="#C4622D" stroke="#0E2A23" stroke-width="1.5"/>
 </svg>
