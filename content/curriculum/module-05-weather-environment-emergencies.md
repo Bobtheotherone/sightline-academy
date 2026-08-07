@@ -216,7 +216,7 @@ required: true
       {"term": "ASSESS", "detail": "People first, machines a distant second. Who's hurt and how urgently? What are the real resources — people, kit, coverage, daylight? Serious mechanisms (a rider who hit their head, a machine that landed on someone) mean professional help, full stop — the machismo shortcut of \"walking it off\" is how bad days become worse ones."},
       {"term": "COMMUNICATE", "detail": "Early, not as a last resort. Call emergency services the moment the situation might need them — canceling help that's rolling is easy; summoning help you delayed is not. No coverage? This is the moment the communication plan pays: someone knows where you are and when you're due."}
     ]},
-    {"type": "figure", "assetSlot": "keylist-stop-assess-communicate", "caption": "The one list in this course that is genuinely an order — the instinct is to run straight to the person on the ground, and the stage before that is what keeps there from being a second one."},
+    {"type": "figure", "assetSlot": "keylist-stop-assess-communicate", "caption": "The one list in this course that is genuinely an order — the instinct is to run straight to the person on the ground, and the stage before that is what keeps one hurt rider from becoming two."},
     {"type": "callout", "variant": "caution", "title": "The boundary, plainly", "md": "Anything beyond scene safety, basic aid you're actually trained in, and getting professional help fast is outside this course — and mostly outside untrained hands. \"Get real training\" isn't a disclaimer here; it's the module's sincere recommendation. Ranger will hold the same line if you ask."}
   ]
 }

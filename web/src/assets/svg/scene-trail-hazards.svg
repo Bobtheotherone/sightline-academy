@@ -74,6 +74,7 @@
     <path d="M452 148 L472 212 H432 Z M452 165 L468 226 H436 Z" fill="#1F5546" stroke-width="1.5"/>
     <path d="M478 190 L490 226 H466 Z" fill="#9CC3B4" stroke-width="1.5"/>
   </g>
-  <!-- plate blaze -->
-  <rect x="-5" y="-5" width="10" height="10" rx="2.5" transform="translate(30 274) rotate(45)" fill="#C4622D"/>
+  <!-- No plate blaze on a hotspot base. A clay rounded diamond at 45 degrees is
+       this activity's INTERACTIVE marker for an unvisited waypoint; a decorative
+       twin reads as an extra waypoint that does not respond to a tap. -->
 </svg>
