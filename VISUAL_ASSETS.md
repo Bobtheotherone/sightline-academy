@@ -562,13 +562,55 @@ selectable / animated / recoloured at runtime?
         │
         ├── YES ──▶ svg-authored        (or lab-owned if fully interactive)
         │
-        └── NO ──▶ Does it need scene richness, depth, or atmosphere
-                   that would take 300+ hand-authored SVG paths?
+        └── NO ──▶ Does the asset make a SPATIAL CLAIM?   ◀── see §6.5
+                   (a junction, a comparison, a specific
+                    staging, a this-not-that relationship)
                         │
-                        ├── YES ──▶ diffusion
+                        ├── YES ──▶ svg-authored
                         │
-                        └── NO ──▶ svg-authored (cheaper, smaller, editable)
+                        └── NO ──▶ Does it need scene richness, depth, or
+                                   atmosphere that would take 300+ hand-
+                                   authored SVG paths?
+                                        │
+                                        ├── YES ──▶ diffusion
+                                        │
+                                        └── NO ──▶ svg-authored
 ```
+
+### 6.5 The spatial-claim rule (learned the expensive way)
+
+> **Diffusion renders beautiful generic scenes in the house style. It does not
+> honour a specific spatial claim.**
+
+C-050…C-055 were originally specced `diffusion`. Twenty-four candidates were
+generated at house settings and **all six entries failed**, in a consistent and
+instructive way:
+
+| Asked for | Got (all 4 seeds) |
+| --- | --- |
+| A trail **junction**: gentle switchbacks left, steep shortcut right, off-camber traverse midway | One beautiful winding trail. No junction, no comparison, no traverse. |
+| A machine **lying on its side**, rider seated on the ground holding a wrist | A rider riding normally, upright, in every seed |
+| Riders **stopped on the near bank** of a fast opaque creek, two already across | A landscape. Two seeds put people in **boats**. |
+
+The output was not bad art — several plates were genuinely lovely flat-vector
+landscapes. It was **the wrong picture, drawn well**, which is the most
+expensive failure mode because it survives a thumbnail triage.
+
+**The rule:** if the asset's teaching value depends on *this thing being here
+and that thing being there*, the medium is `svg-authored`. Scene richness is not
+the deciding question — **spatial specificity is**. A single-subject hero (one
+rider, one machine, side profile, "make it look good") is exactly what diffusion
+excels at, which is why the `hero-atv-rider` smoke test succeeded and this batch
+did not.
+
+**Corollary for safety-critical assets:** anything governed by [§5.4](#54-the-safety-clause)
+should default to `svg-authored` regardless. When the requirement is *what must
+NOT appear* — no blood, no drama, helmet on — you need absolute control, not a
+sampler.
+
+The rejected landscapes are retained at `D:\imagegen\out\C-050..C-055-scenarios\`
+as candidate backdrops for Tier E, where genericness is acceptable. They are not
+registered assets and must not be pressed into curriculum use.
 
 ### 6.1 The comparison
 
@@ -1155,9 +1197,16 @@ mechanism**, not restate the question. 640 × 360. `svg-authored`.
 #### C-050 … C-055 · Branching scenario moments (6)
 
 **Set spec — `SET-C-SCENARIO`:** the "field report" card at the head of each
-`branching_decision`, plus one plate per decision node. **`diffusion`** — these
-are atmospheric scenes and are exactly what the smoke-test pipeline is best at.
-960 × 540. Sober, never dramatic (SF6).
+`branching_decision`, plus one plate per decision node. 960 × 540. Sober, never
+dramatic (SF6).
+
+> **Medium changed `diffusion` → `svg-authored` on 2026-08-06.** All six were
+> generated at house settings across 24 candidates and all six failed: every
+> entry here makes a **spatial claim** (a junction, a downed machine, riders
+> stopped on one bank) and diffusion will not honour one. See
+> [§6.5](#65-the-spatial-claim-rule-learned-the-expensive-way). C-054 and C-055
+> additionally fall under [§5.4](#54-the-safety-clause), which now defaults to
+> `svg-authored` on its own.
 
 | ID | Step / node | Scene |
 | --- | --- | --- |
@@ -1765,6 +1814,8 @@ here **before** diagnosing a new problem.
 | F10 | Colour separation refused | Two regions stay one colour across all seeds | Re-spec structurally, or move to `svg-authored` |
 | F11 | Model gated | `GatedRepoError 401` | Use SDXL; FLUX needs a HF token |
 | F12 | Broken package metadata | `Invalid version: None` on import | A stale `*.dist-info` without `METADATA` — remove it and reinstall. Caused by installing while another process holds the DLLs |
+| F13 | **Spatial claim ignored** | A beautiful, coherent image that is simply *the wrong picture* — no junction where a junction was asked for, an upright machine where a downed one was asked for | Not a prompt bug. Re-spec to `svg-authored` per [§6.5](#65-the-spatial-claim-rule-learned-the-expensive-way). Survives thumbnail triage, so catch it by checking the entry's `Acceptance` clauses explicitly rather than asking "does this look good" |
+| F14 | compel dual-encoder padding crash | `AttributeError: 'EmbeddingsProviderMulti' object has no attribute 'empty_z'` from `pad_conditioning_tensors_to_same_length` | Only fires when prompt and negative land in a **different** number of 77-token windows — so a hand-tuned prompt of similar length to its negative hides the bug. Pad manually with the encoding of `""`; see `gen_batch.py:pad_pair` |
 
 ## Appendix D — Coordinate contracts (consolidated)
 
