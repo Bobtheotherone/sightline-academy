@@ -1,6 +1,11 @@
 /* match renderer (SPEC-007 §5): two-column tap-to-connect with drawn SVG
  * connector lines. A wrong pairing flashes danger, clears, and teaches with
  * the term's explanation; solved pairs lock with a settled pine connector.
+ *
+ * Term icons (VISUAL_ASSETS C-100…C-110) sit on the LEFT column only — the
+ * left column is the thing, the right is what it does, and art on both sides
+ * would compete with the connector. Mapped by step+pair id in
+ * src/assets/slotmap.ts; decorative, so alt="" and aria-hidden.
  */
 import {
   useEffect,
@@ -13,6 +18,7 @@ import type { ActivityProps, MatchPayload, MatchesValue } from "../types";
 import { FeedbackStrip } from "../../components/FeedbackStrip";
 import { BlazeMarker } from "../../components/BlazeMarker";
 import { Markdown } from "../Markdown";
+import { matchPairIconUrl } from "../../assets/slotmap";
 
 function shuffled<T>(list: T[]): T[] {
   const out = [...list];
@@ -184,7 +190,10 @@ export default function MatchActivity({ step, evidence, onEvidence }: ActivityPr
           )}
         </svg>
 
-        <div className="grid grid-cols-[1fr_minmax(40px,72px)_1fr] items-start">
+        {/* minmax(0,…) on both content columns: a bare 1fr floors at
+         * min-content, so a wide term row (icon + long word) used to steal
+         * width from the description column at phone widths. */}
+        <div className="grid grid-cols-[minmax(0,1fr)_minmax(40px,72px)_minmax(0,1fr)] items-start">
           {/* Left column: terms */}
           <ol className="flex flex-col gap-2" aria-label="Terms">
             {leftOrder.map((id) => {
@@ -197,6 +206,7 @@ export default function MatchActivity({ step, evidence, onEvidence }: ActivityPr
                   : flashing && miss?.leftId === id
                     ? "missed"
                     : "idle";
+              const icon = matchPairIconUrl(step.id, id);
               return (
                 <li key={id}>
                   <button
@@ -211,6 +221,13 @@ export default function MatchActivity({ step, evidence, onEvidence }: ActivityPr
                       <BlazeMarker state="done" size="s" />
                     ) : (
                       <BlazeMarker state={leftSel === id ? "active" : "todo"} size="s" />
+                    )}
+                    {/* Two columns share the width here, so under sm the term
+                     * cell is ~128px — an icon would leave the term itself
+                     * ~40px and shove the description column into one-word
+                     * lines. Decorative art yields to the words. */}
+                    {icon && (
+                      <img src={icon} alt="" aria-hidden className="hidden size-10 shrink-0 sm:block" />
                     )}
                     <span className="min-w-0 flex-1 font-medium">{pair.left}</span>
                   </button>

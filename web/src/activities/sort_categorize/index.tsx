@@ -3,6 +3,12 @@
  * gentle shake, item returns to the tray, its explanation teaches in a
  * FeedbackStrip. Correct drop: settle scale + blaze check draw (DESIGN-004
  * moment 1). "n of m sorted" progress; complete when all placed correctly.
+ *
+ * Item icons (VISUAL_ASSETS C-070…C-095) lead the label in both the tray and
+ * the placed state, mapped by step+item id in src/assets/slotmap.ts. They are
+ * decorative — the label carries the meaning — so alt="" and aria-hidden, and
+ * they are never recoloured by selection or drag: the danger/caution accents
+ * inside the art are doing the sort's own teaching work.
  */
 import { useMemo, useState, type DragEvent } from "react";
 import { GripVertical } from "lucide-react";
@@ -10,6 +16,7 @@ import type { ActivityProps, ClassificationValue, SortCategorizePayload } from "
 import { FeedbackStrip } from "../../components/FeedbackStrip";
 import { Markdown } from "../Markdown";
 import { BlazeCheckDraw } from "../motion";
+import { sortItemIconUrl } from "../../assets/slotmap";
 
 function shuffled<T>(list: T[]): T[] {
   const out = [...list];
@@ -114,17 +121,24 @@ export default function SortCategorizeActivity({ step, evidence, onEvidence }: A
               <span className="text-sm font-semibold text-pine-950">{category.label}</span>
               {category.hint && <span className="mt-0.5 text-xs text-ink-500">{category.hint}</span>}
               <span className="mt-2.5 flex flex-col gap-1.5">
-                {placedHere.map((item) => (
-                  <span
-                    key={item.id}
-                    className={`flex items-center gap-2 rounded-sm border border-pine-300 bg-paper-0 px-2.5 py-1.5 text-sm text-pine-950 ${
-                      justPlacedId === item.id ? "ts-act-settle" : ""
-                    }`}
-                  >
-                    <BlazeCheckDraw />
-                    {item.label}
-                  </span>
-                ))}
+                {placedHere.map((item) => {
+                  const icon = sortItemIconUrl(step.id, item.id);
+                  return (
+                    <span
+                      key={item.id}
+                      className={`flex items-center gap-2 rounded-sm border border-pine-300 bg-paper-0 px-2.5 py-1.5 text-sm text-pine-950 ${
+                        justPlacedId === item.id ? "ts-act-settle" : ""
+                      }`}
+                    >
+                      <BlazeCheckDraw />
+                      {/* One step down from the tray's 40px: the placed chip
+                       * is a summary line inside a narrow column, and it
+                       * already carries the settled check. */}
+                      {icon && <img src={icon} alt="" aria-hidden className="size-8 shrink-0" />}
+                      <span className="min-w-0">{item.label}</span>
+                    </span>
+                  );
+                })}
               </span>
             </button>
           );
@@ -162,6 +176,7 @@ export default function SortCategorizeActivity({ step, evidence, onEvidence }: A
               const item = itemById(id);
               if (!item) return null;
               const isSelected = selectedId === id;
+              const icon = sortItemIconUrl(step.id, id);
               return (
                 <li key={id} className={shakingId === id ? "ts-act-shake" : ""} onAnimationEnd={() => setShakingId((s) => (s === id ? null : s))}>
                   <button
@@ -180,7 +195,13 @@ export default function SortCategorizeActivity({ step, evidence, onEvidence }: A
                     }`}
                   >
                     <GripVertical className="size-4 shrink-0 text-ink-500/60" strokeWidth={1.5} aria-hidden />
-                    {item.label}
+                    {icon && (
+                      <img src={icon} alt="" aria-hidden className="size-10 shrink-0 select-none" draggable={false} />
+                    )}
+                    {/* text-left: a <button> centres its text by UA default,
+                     * which only showed once icons made the cards wide enough
+                     * to wrap at phone widths. */}
+                    <span className="min-w-0 text-left">{item.label}</span>
                   </button>
                 </li>
               );

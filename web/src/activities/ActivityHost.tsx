@@ -17,6 +17,7 @@ import type { ActivityProps, StepPayloadBase } from "./types";
 import { BlazeMarker } from "../components/BlazeMarker";
 import { Card } from "../components/Card";
 import { EmptyState } from "../components/EmptyState";
+import { Glyph, hasGlyph } from "../components/Glyph";
 import { Skeleton, SkeletonGroup } from "../components/Skeleton";
 import { SlotArt } from "../components/SlotArt";
 import { SECTION_LABELS } from "../components/StepRail";
@@ -41,6 +42,9 @@ const REGISTRY: Partial<Record<RendererType, LazyExoticComponent<ActivityCompone
   journal_builder: lazy(() => import("./journal_builder")),
   lab_objective: lazy(() => import("./lab_objective")),
 };
+
+/** Activity-type mark (VISUAL_ASSETS B-043…B-054): renderer -> slot name. */
+const rendererGlyph = (renderer: string) => `act-${renderer.replace(/_/g, "-")}`;
 
 /** Designed "content unavailable" state — never a blank screen (SPEC-007). */
 export function ActivityUnavailable({ renderer }: { renderer: string }) {
@@ -80,7 +84,18 @@ export function ActivityHost({ step, evidence, onEvidence, prefill }: ActivityPr
             </span>
           )}
         </div>
-        <h2 className="mt-1.5 font-display text-2xl font-bold text-pine-950">{step.title}</h2>
+        <div className="mt-1.5 flex items-start gap-3">
+          {/* What KIND of step this is, at a glance. The tile gives a 1.5px
+           * stroke mark enough presence to sit beside 24px display type —
+           * bare, it reads as a smudge rather than an icon. No mark for a
+           * renderer we have no art for: an empty tile is worse than none. */}
+          {hasGlyph(rendererGlyph(step.renderer)) && (
+            <span className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-sm border border-line-200 bg-paper-0 text-ink-500">
+              <Glyph name={rendererGlyph(step.renderer)} size={20} />
+            </span>
+          )}
+          <h2 className="font-display text-2xl font-bold text-pine-950">{step.title}</h2>
+        </div>
         {base.instructions && <p className="mt-2 text-ink-500">{base.instructions}</p>}
       </header>
 
