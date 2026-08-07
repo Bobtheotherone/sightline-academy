@@ -1048,6 +1048,40 @@ the app ships an inline SVG data-URI favicon; this set replaces it properly.
 
 - **Acceptance:** B-063 checked at actual 16 px in a real browser tab, not zoomed. Maskable icons verified against the 40 % safe zone.
 
+**Status: produced.** Delivered to `web/public/`, wired in `web/index.html` plus
+`site.webmanifest`. These are static files served from the origin root, **not
+`SlotArt` slots** — deliberately absent from `manifest.json`, since nothing
+resolves them at runtime and the §10.4 lint would report all eight as orphaned.
+
+The mark is the blaze with a `paper-0` **sightline cut through it**. Four
+candidates were rendered and compared at true 16 px before choosing:
+
+| Candidate | Verdict at 16 px |
+| --- | --- |
+| Bare tile + blaze | Reads, but is only "an orange diamond" |
+| Blaze over a `pine-300` horizon | **Fails** — the horizon becomes a muddy smear; works at 180, dies at 16 |
+| Blaze alone, no tile | No tile presence, and it duplicates the hotspot activity's own interactive marker |
+| **Blaze + `paper-0` cut** ✔ | The only one whose *second* element survives — `paper-0` on `clay-500` is a large enough contrast jump to hold one device pixel |
+
+Three geometries ship, because a single file is wrong on two platforms:
+
+- `favicon.*` — rounded tile, **transparent outside the corner radius**. Rendered
+  on an opaque page it bakes white corner pixels that halo on a dark tab strip.
+- `apple-touch-icon` — **square, opaque, no pre-rounding.** iOS applies its own
+  superellipse mask; a pre-rounded icon is rounded twice and shows corner fringe.
+- `icon-192/512` — **maskable**: ground bleeds to the edge, mark inside the 80 %
+  safe circle. Verify by circle-cropping the PNG, not by eye.
+
+Two defects were caught by measuring rather than looking, and both are general:
+
+1. **Chromium bakes LCD subpixel antialiasing into any text-bearing PNG.**
+   `og-default` measured 912 pixels of >40 RGB channel spread on a two-colour
+   card — visible as red/blue fringes. `-webkit-font-smoothing` does not reach
+   SVG `<text>`. The fix is the Part 1 supersample: render ×3, Lanczos down.
+   After: **0 pixels**. Any future `render-html` asset must do this.
+2. `mask-icon` was authored with a **sharp** diamond while every other instance
+   of the mark is rounded — clause C4, one object drawn two ways. Rounded.
+
 #### B-069 … B-078 · XP event marks (10)
 
 **Set spec — `SET-B-XP`:** 16 × 16 glyphs, `clay-500`, consumed by the Recent-XP
@@ -1606,6 +1640,48 @@ generating it together is what produces coherence (clause C4). Generating
 | **V9** | E-001…E-009 marketing (diffusion) | 9 | The tier the local pipeline was proven on. |
 | **V10** | E-010…E-024 OG cards (`render-html`) | 15 | Depends on V9 art for insets. |
 | **V11** | B-061…B-068 icons, F-001…F-012 print | 20 | Platform polish; F items need print proofs. |
+
+### 8.2.1 The consumer audit — run this BEFORE briefing any wave
+
+This registry specifies **259 rows**. That is a catalogue of what a course like
+this *could* show, written before the product was fully wired. It is not a work
+order, and treating it as one produces assets nothing renders.
+
+After V1–V11 the manifest holds **172 slots (169 real), and every consumer that
+requests art gets real art — zero missing slots, zero placeholders rendering
+anywhere.** So run this audit and let it, not the row count, decide the work:
+
+```
+for every candidate row:
+  1. Name the exact consumer — file and line. No consumer, no asset.
+  2. Is that consumer FREE?
+       occupied by an existing slot        -> SKIP (duplicate)
+       occupied by a DESIGN spec           -> SKIP (displacing spec'd rendering
+                                              with decoration is a design change,
+                                              not an asset)
+       the surface does not exist yet      -> SKIP (building art plus the surface
+                                              to hold it is inventing scope)
+  3. Does NON_GOALS bar it?
+  4. Does the asset CLAIM something untrue? (see 5.4.1)
+```
+
+Applied to everything outstanding, the honest result was **8 assets, not 87**:
+
+| Rows | Disposition |
+| --- | --- |
+| B-061…B-068 icons | **BUILD** — consumer verified free and genuinely learner-visible |
+| C-020…C-038 callout vignettes (19) | SKIP — `CalloutCard` renders the DESIGN-002 3 px bar + semantic icon. That consumer is occupied by a spec, and these callouts carry the most careful prose in the course (§5.4.1) |
+| D-012…D-016 state art (5) | SKIP — no such surfaces. Offline is an `OfflineBanner`, which is the *correct smaller* design; there is no 500 / rate-limit / timeout page |
+| D-017…D-022 tutor art (6) | SKIP — occupied: `GroundingLabel` (DESIGN-002 dot + exact label), hat-glyph Ranger avatar, `TypingBubble` |
+| E-001…E-003 marketing hero (3) | SKIP — occupied, the landing page already renders `hero-landing` |
+| E-004…E-009 social cards (6) | SKIP — NON_GOALS §2 bars sharing feeds |
+| F-003, F-004 guilloche + watermark | **REFUSE** — guilloche and watermarks are anti-counterfeiting ornament from government credentials. This certificate is explicitly *not* a licence and ships a disclaimer saying so. The art would contradict the copy. Same test as §5.4.1: ask what an asset **claims**, not what it depicts |
+| F-009…F-011 email art (3) | SKIP — NON_GOALS §2 bars email infrastructure |
+
+> **The count in this document is a ceiling, not a target.** A registry row is a
+> hypothesis that art would help *somewhere*; the audit is what tests it. The
+> governing rule is NON_GOALS' own: *every hour spent must move a learner-visible
+> or tutor-visible outcome.* Shipping 87 unrendered files would move none.
 
 ### 8.3 Batch procedure
 
