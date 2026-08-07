@@ -3,8 +3,15 @@
   "slots": {
     "hero-landing": {
       "status": "real",
-      "file": "svg/hero-landing.svg",
-      "alt": "A helmeted rider seated on a utility ATV on a blazed trail, drawn as a flat field-guide plate with contour lines and waypoint blazes."
+      "kind": "raster",
+      "widths": [
+        1600,
+        1200,
+        800,
+        400
+      ],
+      "alt": "Illustration: a rider in a full-face helmet, gloves and over-the-ankle boots sits upright on a four-wheeled ATV on a level dirt trail, with pines and mountains behind.",
+      "note": "SDXL render (seed 1234), retouched and exported as a 4-width AVIF/WebP/PNG ladder."
     },
     "hero-m1-mindset": {
       "status": "real",

@@ -34,7 +34,16 @@ function Hero() {
             </Link>
           </div>
         </div>
-        <SlotArt slot="hero-landing" variant="dark" ratio="4 / 3" className="lg:justify-self-end lg:w-full" />
+        {/* 3:2 matches the render's own framing — 4:3 would crop 14% off the
+            sides of a wide illustration. priority: this is the LCP image. */}
+        <SlotArt
+          slot="hero-landing"
+          variant="dark"
+          ratio="3 / 2"
+          priority
+          sizes="(min-width: 1024px) 46vw, 92vw"
+          className="lg:justify-self-end lg:w-full"
+        />
       </div>
     </ContourPanel>
   );

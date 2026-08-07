@@ -115,6 +115,31 @@ def main() -> int:
         status = meta.get("status")
         if status != "real":
             continue
+        # Raster slots carry a width ladder instead of a single file. Check the
+        # ladder is actually on disk in every format the component will offer:
+        # a missing rung is invisible in dev (the browser silently falls back a
+        # format) and only shows up as a 404 in someone else's network tab.
+        if meta.get("kind") == "raster":
+            widths = meta.get("widths") or []
+            if not widths:
+                problems.append(f"{slot}: kind raster but no widths")
+                continue
+            for w in widths:
+                png = HERE / "raster" / f"{slot}-{w}w.png"
+                if not png.exists():
+                    problems.append(f"{slot}: missing raster rung {png.name}")
+            for ext in ("webp", "avif"):
+                missing = [w for w in widths
+                           if not (HERE / "raster" / f"{slot}-{w}w.{ext}").exists()]
+                if missing and len(missing) != len(widths):
+                    problems.append(f"{slot}: partial {ext} ladder, missing {missing}")
+            if not meta.get("alt"):
+                problems.append(f"{slot}: no alt text")
+            reachable = any(slot.startswith(d) for d in dynamic) or bool(grep(slot))
+            if not reachable:
+                orphans.append(slot)
+            continue
+
         f = meta.get("file")
         if not f:
             problems.append(f"{slot}: status real but no file")
