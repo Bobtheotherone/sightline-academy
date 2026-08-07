@@ -2,13 +2,16 @@
  * illustrated scene. Markers sit at payload x/y percentages over the scene's
  * asset slot (SlotArt frame until real art lands), pulse until visited
  * (reduced motion → static ring via the global rule), and open a side panel on
- * desktop / bottom sheet on mobile. A list fallback below the scene mirrors
- * every hotspot as buttons for accessibility. Complete when all are visited.
+ * desktop / bottom sheet on mobile. Both surfaces render the same `detail()`
+ * body, so the C-120…C-134 inset plate lands in each of them once. A list
+ * fallback below the scene mirrors every hotspot as buttons for accessibility.
+ * Complete when all are visited.
  */
 import { useState } from "react";
 import { MapPin, MoveRight } from "lucide-react";
 import type { ActivityProps, Hotspot, HotspotListPayload, HotspotsValue } from "../types";
 import { SlotArt } from "../../components/SlotArt";
+import { hotspotInsetSlot } from "../../assets/slotmap";
 import { BlazeMarker } from "../../components/BlazeMarker";
 import { FeedbackStrip } from "../../components/FeedbackStrip";
 import { Markdown } from "../Markdown";
@@ -51,35 +54,48 @@ export default function HotspotListActivity({ step, evidence, onEvidence }: Acti
     });
   };
 
-  const detail = (hotspot: Hotspot, index: number) => (
-    <div className="flex flex-col gap-3">
-      <div className="flex items-center gap-2.5">
-        <span className="relative grid size-7 shrink-0 place-items-center">
-          <span className="absolute size-5 rotate-45 rounded-[4px] bg-pine-700" />
-          <span className="relative font-mono text-xs font-medium text-paper-0">{index + 1}</span>
-        </span>
-        <h3 className="font-display text-lg font-bold text-pine-950">{hotspot.label}</h3>
-      </div>
-      <p className="text-sm leading-relaxed text-pine-950">
-        <Markdown inline md={hotspot.description} />
-      </p>
-      {hotspot.detail && (
-        <div className="rounded-sm border border-line-200 bg-moss-100/60 px-3.5 py-3 text-sm text-ink-500">
-          <Markdown md={hotspot.detail} />
+  const detail = (hotspot: Hotspot, index: number) => {
+    /* C-120…C-134: the scene shows *where* the waypoint is, the inset shows
+     * *what you are looking at* — a zoom in the same drawing conventions.
+     * Authored 320x240, so present it at 4:3; the base scene's 5:3 is a
+     * coordinate contract and is set independently below. An unmapped hotspot
+     * gets `undefined` here and the panel renders exactly as it did before.
+     *
+     * The 15rem cap is the desktop panel's own inner width: it makes the plate
+     * the same size on both surfaces, and stops the bottom sheet from spending
+     * half its 75dvh on the picture and pushing the field note out of view. */
+    const insetSlot = hotspotInsetSlot(step.id, hotspot.id);
+    return (
+      <div className="flex flex-col gap-3">
+        <div className="flex items-center gap-2.5">
+          <span className="relative grid size-7 shrink-0 place-items-center">
+            <span className="absolute size-5 rotate-45 rounded-[4px] bg-pine-700" />
+            <span className="relative font-mono text-xs font-medium text-paper-0">{index + 1}</span>
+          </span>
+          <h3 className="font-display text-lg font-bold text-pine-950">{hotspot.label}</h3>
         </div>
-      )}
-      {nextUnvisited && (
-        <button
-          type="button"
-          onClick={() => visit(nextUnvisited)}
-          className="inline-flex min-h-11 items-center gap-2 self-start rounded-sm px-1 text-sm font-medium text-pine-700 transition-colors duration-(--ts-dur-fast) hover:text-pine-950"
-        >
-          Next waypoint: {nextUnvisited.label}
-          <MoveRight className="size-4" strokeWidth={1.5} aria-hidden />
-        </button>
-      )}
-    </div>
-  );
+        {insetSlot && <SlotArt slot={insetSlot} ratio="4 / 3" className="w-full max-w-60" />}
+        <p className="text-sm leading-relaxed text-pine-950">
+          <Markdown inline md={hotspot.description} />
+        </p>
+        {hotspot.detail && (
+          <div className="rounded-sm border border-line-200 bg-moss-100/60 px-3.5 py-3 text-sm text-ink-500">
+            <Markdown md={hotspot.detail} />
+          </div>
+        )}
+        {nextUnvisited && (
+          <button
+            type="button"
+            onClick={() => visit(nextUnvisited)}
+            className="inline-flex min-h-11 items-center gap-2 self-start rounded-sm px-1 text-sm font-medium text-pine-700 transition-colors duration-(--ts-dur-fast) hover:text-pine-950"
+          >
+            Next waypoint: {nextUnvisited.label}
+            <MoveRight className="size-4" strokeWidth={1.5} aria-hidden />
+          </button>
+        )}
+      </div>
+    );
+  };
 
   return (
     <div className="flex flex-col gap-4">

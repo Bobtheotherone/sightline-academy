@@ -10,6 +10,7 @@ import { BadgeMedal } from "../../components/BadgeMedal";
 import { Button, LinkButton } from "../../components/Button";
 import { Card } from "../../components/Card";
 import { ContourPanel } from "../../components/ContourPanel";
+import { SlotArt } from "../../components/SlotArt";
 import { RiseIn } from "../../activities/motion";
 
 interface WeakModule {
@@ -116,52 +117,59 @@ export default function ResultsView({
       <div className="mx-auto flex w-full max-w-lesson flex-1 flex-col gap-8 px-6 py-10">
         <RiseIn>
           <ContourPanel variant="dark" className="overflow-hidden rounded-lg">
-            <div className="flex flex-col items-start gap-6 p-8 sm:flex-row sm:items-center md:p-10">
-              <BadgeMedal
-                badgeId="b-graduate"
-                name="Sightline Safety Academy Graduate"
-                earned
-                size="l"
-                className="shrink-0 [&_figcaption_span]:text-paper-0"
-              />
-              <div className="min-w-0">
-                <p className="ts-eyebrow text-sun-400!">Final assessment — passed</p>
-                <h1 className="mt-1 font-display text-3xl font-extrabold text-paper-0">
-                  You've earned your sightline
-                </h1>
-                <div className="mt-2 text-paper-0/85">
-                  <ScoreLine result={result} />
-                </div>
-                <p className="mt-3 max-w-lg text-sm text-paper-0/80">
-                  Six modules, twenty questions, one standard — and you cleared it. Your
-                  certificate is issued and verifiable
-                  {result.certificateCode ? (
-                    <>
-                      {" "}under code{" "}
-                      <span className="font-mono text-sun-400">{result.certificateCode}</span>
-                    </>
-                  ) : null}
-                  .
-                </p>
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <LinkButton
-                    to="/certificate"
-                    variant="accent"
-                    size="l"
-                    iconLeft={<Award className="size-4" strokeWidth={1.5} aria-hidden />}
-                  >
-                    View your certificate
-                  </LinkButton>
-                  <LinkButton
-                    to="/dashboard"
-                    variant="ghost"
-                    size="l"
-                    className="text-paper-0! hover:bg-paper-0/10!"
-                  >
-                    Back to your dashboard
-                  </LinkButton>
+            <div className="flex flex-col gap-7 p-8 md:p-10">
+              <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center">
+                <BadgeMedal
+                  badgeId="b-graduate"
+                  name="Sightline Safety Academy Graduate"
+                  earned
+                  size="l"
+                  className="shrink-0 [&_figcaption_span]:text-paper-0"
+                />
+                <div className="min-w-0">
+                  <p className="ts-eyebrow text-sun-400!">Final assessment — passed</p>
+                  <h1 className="mt-1 font-display text-3xl font-extrabold text-paper-0">
+                    You've earned your sightline
+                  </h1>
+                  <div className="mt-2 text-paper-0/85">
+                    <ScoreLine result={result} />
+                  </div>
+                  <p className="mt-3 max-w-lg text-sm text-paper-0/80">
+                    Six modules, twenty questions, one standard — and you cleared it. Your
+                    certificate is issued and verifiable
+                    {result.certificateCode ? (
+                      <>
+                        {" "}under code{" "}
+                        <span className="font-mono text-sun-400">{result.certificateCode}</span>
+                      </>
+                    ) : null}
+                    .
+                  </p>
+                  <div className="mt-6 flex flex-wrap gap-3">
+                    <LinkButton
+                      to="/certificate"
+                      variant="accent"
+                      size="l"
+                      iconLeft={<Award className="size-4" strokeWidth={1.5} aria-hidden />}
+                    >
+                      View your certificate
+                    </LinkButton>
+                    <LinkButton
+                      to="/dashboard"
+                      variant="ghost"
+                      size="l"
+                      className="text-paper-0! hover:bg-paper-0/10!"
+                    >
+                      Back to your dashboard
+                    </LinkButton>
+                  </div>
                 </div>
               </div>
+              {/* The summit reached, with the whole range the course crossed
+               * below it (VISUAL_ASSETS §7.2 B-083). The medal says what was
+               * awarded; the plate says what was climbed — so it closes the
+               * panel rather than competing with the headline above it. */}
+              <SlotArt slot="hero-graduate" variant="dark" ratio="16 / 9" />
             </div>
           </ContourPanel>
         </RiseIn>

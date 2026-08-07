@@ -12,6 +12,7 @@ import { Card } from "../components/Card";
 import { ContourPanel } from "../components/ContourPanel";
 import { Button, LinkButton } from "../components/Button";
 import { BlazeMarker } from "../components/BlazeMarker";
+import { SlotArt } from "../components/SlotArt";
 import { Skeleton, SkeletonGroup } from "../components/Skeleton";
 import AttemptFlow from "./assessment/AttemptFlow";
 
@@ -140,7 +141,10 @@ function IntroState({ onStart, ready }: { onStart: () => void; ready: boolean })
       )}
       <FactsGrid />
       <ContourPanel variant="dark" className="mt-8 overflow-hidden rounded-lg">
-        <div className="flex flex-wrap items-center justify-between gap-6 p-8">
+        {/* Same composition as the dashboard's Continue hero: the words and the
+         * CTA on the left, the plate on the right. The ridge with the marker
+         * already in sight is what this moment is (VISUAL_ASSETS §7.2 B-082). */}
+        <div className="grid items-center gap-8 p-8 md:grid-cols-[1.4fr_1fr]">
           <div className="max-w-xl">
             <p className="ts-eyebrow text-sun-400!">All six modules complete</p>
             <h2 className="mt-2 font-display text-2xl font-bold text-paper-0">
@@ -150,16 +154,24 @@ function IntroState({ onStart, ready }: { onStart: () => void; ready: boolean })
               Answer at your own pace, review everything before you submit, and see exactly where
               each answer landed afterward.
             </p>
+            <div className="mt-6">
+              <Button
+                variant="accent"
+                size="l"
+                onClick={onStart}
+                loading={!ready}
+                iconRight={<ArrowRight className="size-4" strokeWidth={2} aria-hidden />}
+              >
+                Start the assessment
+              </Button>
+            </div>
           </div>
-          <Button
-            variant="accent"
-            size="l"
-            onClick={onStart}
-            loading={!ready}
-            iconRight={<ArrowRight className="size-4" strokeWidth={2} aria-hidden />}
-          >
-            Start the assessment
-          </Button>
+          <SlotArt
+            slot="hero-assessment"
+            variant="dark"
+            ratio="16 / 9"
+            className="hidden md:block"
+          />
         </div>
       </ContourPanel>
     </>

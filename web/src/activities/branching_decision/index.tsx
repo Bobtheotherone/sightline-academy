@@ -4,6 +4,10 @@
  * also experiences the better line. The path renders as a breadcrumb trail;
  * the debrief compares the learner's route with the strongest one. Evidence
  * decision_path completes on debrief acknowledge.
+ *
+ * Scenarios that have art (VISUAL_ASSETS §7.3 C-050…C-055) carry one plate in
+ * the field-report card, showing the moment the learner is standing in — see
+ * ./plates.
  */
 import { useMemo, useState } from "react";
 import { FileText, RotateCcw } from "lucide-react";
@@ -19,8 +23,10 @@ import { Button } from "../../components/Button";
 import { Card } from "../../components/Card";
 import { FeedbackStrip, type FeedbackTone } from "../../components/FeedbackStrip";
 import { BlazeMarker } from "../../components/BlazeMarker";
+import { SlotArt } from "../../components/SlotArt";
 import { Markdown } from "../Markdown";
 import { RiseIn } from "../motion";
+import { scenarioPlateSlot } from "./plates";
 
 const QUALITY_TONE: Record<ChoiceQuality, FeedbackTone> = {
   best: "positive",
@@ -128,12 +134,22 @@ export default function BranchingDecisionActivity({ step, evidence, onEvidence }
   /** The choice awaiting its Continue/Try-again acknowledgement. */
   const [pending, setPending] = useState<{ node: BranchNode; choice: BranchChoice } | null>(null);
 
-  const { nodeId: currentNodeId } = useMemo(() => replay(payload, path), [payload, path]);
+  const { nodeId: currentNodeId, last } = useMemo(() => replay(payload, path), [payload, path]);
   const currentNode = currentNodeId
     ? payload.nodes.find((n) => n.id === currentNodeId)
     : undefined;
   const strongest = useMemo(() => strongestRoute(payload), [payload]);
   const atTerminal = !done && path.length > 0 && !pending && currentNodeId === null;
+
+  /* Which moment the plate shows. While a choice's feedback is up, the scene
+   * the learner is reading about is still the one they just decided in — so the
+   * picture changes when the decision does, one beat per beat. At the debrief
+   * (no current node) it holds on the last node rather than rewinding to the
+   * opening shot, and "ride it again" resets the path and so the plate too. */
+  const plateSlot = scenarioPlateSlot(
+    step.id,
+    pending?.node.id ?? currentNodeId ?? last?.node.id ?? payload.startNode,
+  );
 
   const choose = (node: BranchNode, choice: BranchChoice) => {
     const nextPath = [...path, { nodeId: node.id, choiceId: choice.id }];
@@ -169,6 +185,14 @@ export default function BranchingDecisionActivity({ step, evidence, onEvidence }
             <Markdown md={payload.scenario} className="mt-2 text-base text-pine-950" />
           </div>
         </div>
+        {/* The scene, where the learner currently stands in it. Keyed by slot so
+         * the entrance replays on the swap — the plate reads as the ride moving
+         * on rather than as a picture quietly substituted. */}
+        {plateSlot && (
+          <RiseIn key={plateSlot} className="mt-5 pl-1">
+            <SlotArt slot={plateSlot} ratio="16 / 9" />
+          </RiseIn>
+        )}
       </Card>
 
       {/* The running trail hands off to the debrief's route comparison. */}

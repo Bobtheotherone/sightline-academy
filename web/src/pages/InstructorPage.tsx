@@ -9,11 +9,14 @@ import { EmptyState } from "../components/EmptyState";
 import { SlotArt } from "../components/SlotArt";
 import { Skeleton, SkeletonGroup } from "../components/Skeleton";
 
+/* 403, not "locked": the art is the staff-only spur closed off beside the
+ * learner's own trail, which carries on open (VISUAL_ASSETS §7.2 B-081).
+ * `state-locked` would promise this opens later — it never does. */
 function Forbidden() {
   return (
     <div className="mx-auto w-full max-w-2xl px-6 py-16">
       <EmptyState
-        art={<SlotArt slot="state-locked" ratio="5 / 3" />}
+        art={<SlotArt slot="state-403" ratio="5 / 3" />}
         heading="This area is for course staff"
         body="The instructor view holds aggregate course analytics. Your own progress lives on your dashboard."
         action={<LinkButton to="/dashboard">Back to your dashboard</LinkButton>}
@@ -68,6 +71,7 @@ function Overview() {
     return (
       <Card padding="l">
         <EmptyState
+          art={<SlotArt slot="empty-instructor" ratio="5 / 3" />}
           heading="No learner data yet"
           body="Stats appear once the first learners register and start Module 1."
         />

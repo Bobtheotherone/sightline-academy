@@ -261,6 +261,7 @@ export default function ModulePage() {
                 title={lesson.title}
                 minutes={lesson.estimatedMinutes}
                 status={statuses[i]}
+                lessonId={lesson.id}
                 to={statuses[i] === "locked" ? undefined : `/learn/${lesson.id}`}
               />
             </li>

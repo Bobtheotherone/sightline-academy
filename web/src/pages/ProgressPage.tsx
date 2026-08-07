@@ -2,19 +2,96 @@
  * levelProgress + XP total (mono), the BadgeMedal shelf (unearned embossed),
  * per-module completion bars, and the recent XP feed. Empty-XP copy is
  * DESIGN-005 verbatim.
+ *
+ * Also the home of the two progress-art bindings shared with the dashboard —
+ * `LevelEmblem` (VISUAL_ASSETS §7.2 B-023…B-029) and `XpMark` (B-069…B-078) —
+ * because /progress is the surface that presents both at full size and the
+ * dashboard shows the same two things in miniature.
  */
 import { useQuery } from "@tanstack/react-query";
 import { api, ApiError } from "../lib/api";
 import { useSession } from "../lib/session";
 import { BADGE_FACTS, LEVEL_THRESHOLDS, levelTitle } from "../lib/modules";
+import { slotIconUrl } from "../assets/slotmap";
 import { BadgeMedal } from "../components/BadgeMedal";
 import { Card } from "../components/Card";
 import { Button, LinkButton } from "../components/Button";
 import { EmptyState } from "../components/EmptyState";
 import { shortDate } from "../components/JournalCard";
 import { ProgressBar, ProgressRing } from "../components/Progress";
+import { SlotArt } from "../components/SlotArt";
 import { Skeleton, SkeletonGroup } from "../components/Skeleton";
 import { Tooltip } from "../components/Tooltip";
+
+/**
+ * B-023 … B-029 · level emblems, keyed by the level NUMBER the API serves
+ * (`GET /progress`.level, `UserOut.level`). Slot names follow
+ * `level-${n}-${slug}` from SPEC-009 §Levels, written out rather than derived
+ * from LEVEL_TITLES so the seven produced slots are literal in the source —
+ * the manifest stays the sole authority on which emblems exist and the asset
+ * lint can see this wiring (§10.4 resolves `family-${…}` for glyph prefixes
+ * only, and `level-` is not one of them). Verified equal to the manifest's
+ * `level-*` keys and to the seven SPEC-009 titles in order.
+ */
+const LEVEL_SLOT: Record<number, string> = {
+  1: "level-1-trailhead",
+  2: "level-2-greenhorn",
+  3: "level-3-pathfinder",
+  4: "level-4-trailhand",
+  5: "level-5-ridge-runner",
+  6: "level-6-wayfinder",
+  7: "level-7-trail-boss",
+};
+
+/**
+ * The level's emblem, or nothing at all when that level has no produced art —
+ * a level number outside the ladder (a future eighth rank) must leave the ring
+ * exactly as it was rather than draw a gap. Decorative: it sits beside the
+ * ring's own "Level 7 — Trail Boss" label and the level title heading, so the
+ * name is already spoken once.
+ */
+export function LevelEmblem({ level, className = "" }: { level: number; className?: string }) {
+  const src = slotIconUrl(LEVEL_SLOT[level]);
+  if (!src) return null;
+  return <img src={src} alt="" aria-hidden className={`shrink-0 ${className}`} />;
+}
+
+/**
+ * B-069 … B-078 · XP event marks, keyed by `XpEvent.event` (the SPEC-009 rule
+ * name). Five rules do not hyphenate straight across — the slot names are the
+ * short forms the registry gives them — so the mapping is tabulated, not
+ * derived. An event with no entry (a rule added server-side after this build)
+ * renders no mark and the row reads exactly as it did before the marks landed.
+ */
+const XP_SLOT: Record<string, string> = {
+  step_complete: "xp-step-complete",
+  lesson_complete: "xp-lesson-complete",
+  checkpoint_first_try: "xp-checkpoint-first-try",
+  module_complete: "xp-module-complete",
+  journal_artifact_complete: "xp-journal-artifact",
+  scenario_best_path: "xp-scenario-best-path",
+  lab_objectives_met: "xp-lab-objectives",
+  capstone_complete: "xp-capstone",
+  final_assessment_passed: "xp-final-assessment",
+  tutor_first_question: "xp-tutor-first",
+};
+
+/**
+ * The 16px mark leading an XP row: what kind of progress this was. Decorative —
+ * the row's own label says the same thing in words. Inline rather than a flex
+ * child so it rides the label's own baseline (align-middle centres it on the
+ * x-height) and the row's mono "+25" stays baseline-aligned with the text.
+ * An unmapped event keeps the empty 16px box so every label in the feed starts
+ * on one left edge, but draws nothing in it.
+ */
+export function XpMark({ event }: { event: string }) {
+  const src = slotIconUrl(XP_SLOT[event]);
+  return (
+    <span className="mr-2 inline-block size-4 align-middle" aria-hidden>
+      {src && <img src={src} alt="" className="block size-4" />}
+    </span>
+  );
+}
 
 export default function ProgressPage() {
   const { user } = useSession();
@@ -79,6 +156,7 @@ export default function ProgressPage() {
             <span className="text-xs text-ink-500">level</span>
           </span>
         </ProgressRing>
+        <LevelEmblem level={level} className="size-22 sm:size-24" />
         <div>
           <h2 className="font-display text-2xl font-bold">{levelTitle(level)}</h2>
           <p className="mt-1 font-mono text-sm text-ink-500">
@@ -150,6 +228,7 @@ export default function ProgressPage() {
                   }`}
                 >
                   <span className="min-w-0 flex-1 truncate text-sm text-pine-950">
+                    <XpMark event={event.event} />
                     {event.label}
                   </span>
                   <span className="shrink-0 font-mono text-xs text-ink-500">
@@ -165,6 +244,7 @@ export default function ProgressPage() {
         ) : (
           <Card padding="l" className="mt-4">
             <EmptyState
+              art={<SlotArt slot="empty-progress" ratio="3 / 2" />}
               heading="No miles on the odometer yet"
               body="Complete your first lesson to start earning XP."
               action={<LinkButton to="/course">Go to the course</LinkButton>}

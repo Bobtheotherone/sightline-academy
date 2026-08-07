@@ -19,6 +19,11 @@ import { LinkButton } from "../components/Button";
 import { SlotArt } from "../components/SlotArt";
 import { Skeleton, SkeletonGroup } from "../components/Skeleton";
 import { ContinueCard, GraduateHero } from "./dashboard/heroes";
+/* The level emblem (B-023…B-029) and XP event marks (B-069…B-078) are bound
+ * once on /progress — the surface that shows both at full size — and reused
+ * here at greeting/peek scale so the two surfaces name a level and an XP rule
+ * with the same picture. */
+import { LevelEmblem, XpMark } from "./ProgressPage";
 
 function Greeting({ progress }: { progress: ProgressResponse | undefined }) {
   const { user } = useSession();
@@ -38,6 +43,7 @@ function Greeting({ progress }: { progress: ProgressResponse | undefined }) {
         <ProgressRing value={ringValue} size={64} label={`Level ${level} — ${levelTitle(level)}`}>
           <span className="font-mono text-sm font-medium">{level}</span>
         </ProgressRing>
+        <LevelEmblem level={level} className="size-11" />
         <div>
           <p className="font-display text-lg font-bold">{levelTitle(level)}</p>
           <p className="font-mono text-xs text-ink-500">{xpTotal} XP</p>
@@ -219,8 +225,13 @@ function RecentXp({ progress }: { progress: ProgressResponse | undefined }) {
           <ul className="flex flex-col gap-2">
             {events.map((event) => (
               <li key={event.id} className="flex items-baseline justify-between gap-3">
-                {/* Full reflow, never a mid-word ellipsis (crawl pass-2 P2). */}
-                <span className="min-w-0 text-sm leading-snug text-pine-950">{event.label}</span>
+                {/* Full reflow, never a mid-word ellipsis (crawl pass-2 P2).
+                 * The event mark leads line one; pl-6/-indent-6 hangs it in the
+                 * margin so wrapped lines stay flush with the label above. */}
+                <span className="min-w-0 pl-6 -indent-6 text-sm leading-snug text-pine-950">
+                  <XpMark event={event.event} />
+                  {event.label}
+                </span>
                 <span className="shrink-0 font-mono text-xs font-medium text-clay-500">
                   +{event.xp}
                 </span>

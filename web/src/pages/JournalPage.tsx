@@ -89,6 +89,7 @@ export default function JournalPage() {
                 <JournalCard
                   key={artifact.artifactType}
                   to={`/journal/${artifact.artifactType}`}
+                  artifactType={artifact.artifactType}
                   eyebrow={facts?.name ?? artifact.artifactType}
                   title={artifact.title || facts?.name || artifact.artifactType}
                   excerpt={excerptOf(artifact)}

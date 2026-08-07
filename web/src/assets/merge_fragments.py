@@ -38,6 +38,7 @@ def main() -> int:
 
     problems: list[str] = []
     added: list[str] = []
+    resynced: list[str] = []
     seen: dict[str, str] = {}
 
     skipped = 0
@@ -62,8 +63,24 @@ def main() -> int:
 
             if slot in slots:
                 # Idempotent re-run, not an error — the merge is meant to be
-                # safe to run after every batch.
-                skipped += 1
+                # safe to run after every batch. But a lane that iterates after
+                # an early merge leaves the manifest holding STALE metadata
+                # (this bit us: a lesson card's alt still described art that had
+                # since been redrawn). Detect drift and re-sync it.
+                cur = slots[slot]
+                drift = [k for k in ("file", "alt", "status", "note")
+                         if meta.get(k) is not None and cur.get(k) != meta.get(k)]
+                if drift:
+                    # A lane never demotes a slot the integrator deferred.
+                    if cur.get("status") == "deferred" and "status" in drift:
+                        drift.remove("status")
+                        meta = {**meta, "status": "deferred",
+                                "note": cur.get("note", "")}
+                    if drift:
+                        resynced.append(f"{slot}: {', '.join(drift)}")
+                        slots[slot] = {**cur, **meta}
+                else:
+                    skipped += 1
                 continue
 
             f = meta.get("file")
@@ -94,11 +111,14 @@ def main() -> int:
     print(f"fragments found       : {len(list(HERE.glob('_frag-*.json')))}")
     print(f"slots to add          : {len(added)}")
     print(f"already present       : {skipped} (idempotent re-run)")
+    print(f"re-synced (drift)     : {len(resynced)}")
+    for r in resynced:
+        print(f"   ~ {r}")
     print(f"problems              : {len(problems)}")
     for p in problems:
         print(f"   ! {p}")
 
-    if write and not problems:
+    if write and not problems and (added or resynced):
         MANIFEST.write_text(
             json.dumps(manifest, indent=2, ensure_ascii=False) + "\n",
             encoding="utf-8")

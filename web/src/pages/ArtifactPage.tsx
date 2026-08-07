@@ -15,7 +15,7 @@ import { ArtifactPreview, type ArtifactPreviewEntry } from "../components/Artifa
 import { Card } from "../components/Card";
 import { Button, LinkButton } from "../components/Button";
 import { EmptyState } from "../components/EmptyState";
-import { shortDate } from "../components/JournalCard";
+import { artifactCoverUrl, shortDate } from "../components/JournalCard";
 import { SlotArt } from "../components/SlotArt";
 import { Skeleton, SkeletonGroup } from "../components/Skeleton";
 
@@ -101,6 +101,7 @@ export default function ArtifactPage() {
 
   const editHref =
     lessonId && step ? `/learn/${lessonId}?step=${step.id}&edit=1` : undefined;
+  const cover = artifactCoverUrl(artifactType);
 
   return (
     <div className="mx-auto w-full max-w-3xl flex-1 px-6 py-10">
@@ -113,12 +114,24 @@ export default function ArtifactPage() {
       </Link>
 
       <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <p className="ts-eyebrow">
-            Built in Module {facts.moduleOrder} · {facts.moduleTitle}
-          </p>
-          <h1 className="mt-1 font-display text-3xl font-extrabold">{facts.name}</h1>
-          <p className="mt-2 max-w-xl text-ink-500">{facts.blurb}</p>
+        <div className="flex items-start gap-5">
+          {/* B-030…B-035 cover — decorative: the eyebrow and title beside it
+           * name this artifact and the module it came out of. */}
+          {cover && (
+            <img
+              src={cover}
+              alt=""
+              aria-hidden
+              className="hidden w-36 shrink-0 rounded-sm border border-line-200 bg-paper-0 sm:block"
+            />
+          )}
+          <div>
+            <p className="ts-eyebrow">
+              Built in Module {facts.moduleOrder} · {facts.moduleTitle}
+            </p>
+            <h1 className="mt-1 font-display text-3xl font-extrabold">{facts.name}</h1>
+            <p className="mt-2 max-w-xl text-ink-500">{facts.blurb}</p>
+          </div>
         </div>
         {artifact && (
           <div className="flex flex-wrap gap-3">
