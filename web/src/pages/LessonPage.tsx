@@ -7,7 +7,7 @@
  * live in LessonCompleteView. A locked module's lesson renders the DESIGN-005
  * locked composition from the module_locked envelope.
  */
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
 import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -34,6 +34,7 @@ import { SectionInterstitial } from "../components/SectionInterstitial";
 import { Skeleton, SkeletonGroup } from "../components/Skeleton";
 import { SlotArt } from "../components/SlotArt";
 import { StepRail } from "../components/StepRail";
+import { useEntered, useReducedMotion } from "../activities/motion";
 import { useEvidenceSaver, type EvidenceEntry } from "./lesson/useEvidenceSaver";
 import { LessonCompleteView } from "./lesson/LessonCompleteView";
 
@@ -97,10 +98,52 @@ function resolveInitialStep(
   return (firstIncomplete ?? steps[0]).id;
 }
 
-const STAGE_FADE = `
-@keyframes ts-stage-in { from { opacity: 0; } to { opacity: 1; } }
-.ts-stage-in { animation: ts-stage-in var(--ts-dur-fast) var(--ts-ease-out); }
-`;
+/** Sticky chrome earns its shadow once the page has moved (DESIGN-004). */
+function useScrolled(): boolean {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 0);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return scrolled;
+}
+
+/**
+ * Step advance (DESIGN-004 §Choreography): 240ms crossfade with an 8px
+ * directional slide — forward rises into place, back descends. Keyed on the
+ * step id so every advance remounts and replays it; reduced motion paints the
+ * settled state on the first frame. data-step-id is the visual-crawl harness
+ * contract (STARTER/visual_crawl.py).
+ */
+function StageStep({
+  stepId,
+  direction,
+  children,
+}: {
+  stepId: string;
+  direction: "forward" | "back";
+  children: ReactNode;
+}) {
+  const reduced = useReducedMotion();
+  const entered = useEntered();
+  const shown = reduced || entered;
+  return (
+    <div
+      data-step-id={stepId}
+      className={`transition-[opacity,translate] duration-(--ts-dur-base) ease-(--ts-ease-out) ${
+        shown
+          ? "translate-y-0 opacity-100"
+          : direction === "back"
+            ? "-translate-y-2 opacity-0"
+            : "translate-y-2 opacity-0"
+      }`}
+    >
+      {children}
+    </div>
+  );
+}
 
 function Player({ lessonId, data }: { lessonId: string; data: LessonResponse }) {
   const navigate = useNavigate();
@@ -127,6 +170,8 @@ function Player({ lessonId, data }: { lessonId: string; data: LessonResponse }) 
     null,
   );
   const [view, setView] = useState<"steps" | "complete">("steps");
+  const [direction, setDirection] = useState<"forward" | "back">("forward");
+  const scrolled = useScrolled();
   /** True when the lesson was already complete on open — review mode (R2.5). */
   const reviewMode = data.lesson.complete;
 
@@ -140,6 +185,12 @@ function Player({ lessonId, data }: { lessonId: string; data: LessonResponse }) 
   const isLast = index === steps.length - 1;
   const allRequiredComplete = steps.every((s) => !s.required || evidence[s.id]?.complete);
   const canContinue = Boolean(entry?.complete) || !step.required || step.renderer === "content";
+
+  /** Every step change goes through here so the stage knows which way it moved. */
+  const goTo = (id: string) => {
+    setDirection(steps.findIndex((s) => s.id === id) < index ? "back" : "forward");
+    setCurrentId(id);
+  };
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
@@ -191,9 +242,10 @@ function Player({ lessonId, data }: { lessonId: string; data: LessonResponse }) 
     }
     const next = steps[index + 1];
     if (next.section !== step.section && !evidence[next.id]?.complete) {
+      setDirection("forward");
       setInterstitial({ section: next.section, nextId: next.id });
     } else {
-      setCurrentId(next.id);
+      goTo(next.id);
     }
   };
 
@@ -216,7 +268,6 @@ function Player({ lessonId, data }: { lessonId: string; data: LessonResponse }) 
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
-      <style>{STAGE_FADE}</style>
       {interstitial && (
         <SectionInterstitial
           section={interstitial.section}
@@ -245,47 +296,49 @@ function Player({ lessonId, data }: { lessonId: string; data: LessonResponse }) 
               steps={steps}
               currentId={currentId}
               completedIds={completedIds}
-              onSelect={(id) => setCurrentId(id)}
+              onSelect={goTo}
               className="lg:mt-5"
             />
           </div>
         </aside>
 
-        {/* Stage — cross-fades 120ms on step advance (DESIGN-004) */}
+        {/* Stage — an elevated sheet over the ground wash (DESIGN-003 v2); the
+         * 760px column is kept, the dressing lives inside it. */}
         <div className="mx-auto w-full max-w-lesson pb-4">
-          {needsPrefill && journalQuery.isLoading ? (
-            <SkeletonGroup label="Gathering your prior artifacts" className="flex flex-col gap-4">
-              <Skeleton className="h-8 w-2/3" />
-              <Skeleton className="h-40 w-full" />
-              <Skeleton className="h-24 w-full" />
-            </SkeletonGroup>
-          ) : (
-            // data-step-id is the visual-crawl harness contract (STARTER/visual_crawl.py)
-            <div key={currentId} className="ts-stage-in" data-step-id={currentId}>
-              <ActivityHost
-                step={step}
-                evidence={entry}
-                onEvidence={onEvidence}
-                prefill={prefill}
-              />
-            </div>
-          )}
+          <div className="rounded-lg bg-paper-50 p-5 shadow-1 sm:p-7">
+            {needsPrefill && journalQuery.isLoading ? (
+              <SkeletonGroup label="Gathering your prior artifacts" className="flex flex-col gap-4">
+                <Skeleton className="h-8 w-2/3" />
+                <Skeleton className="h-40 w-full" />
+                <Skeleton className="h-24 w-full" />
+              </SkeletonGroup>
+            ) : (
+              <StageStep key={currentId} stepId={currentId} direction={direction}>
+                <ActivityHost
+                  step={step}
+                  evidence={entry}
+                  onEvidence={onEvidence}
+                  prefill={prefill}
+                />
+              </StageStep>
+            )}
+          </div>
         </div>
       </div>
 
-      {/* Sticky footer — Continue is never a mute dead button (SPEC-006). */}
-      <footer className="sticky bottom-16 z-20 border-t border-line-200 bg-paper-0 lg:bottom-0">
-        <div className="mx-auto flex w-full max-w-page items-center justify-between gap-4 px-6 py-3 lg:px-12">
-          <Button
-            variant="ghost"
-            disabled={index === 0}
-            onClick={() => setCurrentId(steps[index - 1].id)}
-            iconLeft={<ArrowLeft className="size-4" strokeWidth={1.5} aria-hidden />}
-          >
-            Back
-          </Button>
+      {/* Sticky footer — Continue is never a mute dead button (SPEC-006);
+       * translucent + blurred, and it earns its shadow once scrolled. */}
+      <footer
+        className={`sticky bottom-16 z-20 border-t border-line-200 bg-paper-0/85 backdrop-blur-chrome transition-shadow duration-(--ts-dur-fast) ease-(--ts-ease-out) lg:bottom-0 ${
+          scrolled ? "shadow-2" : ""
+        }`}
+      >
+        {/* Phones give the reason its own row above the controls: squeezed into
+         * the middle column it wrapped to three lines and left Back/Continue
+         * drifting against it. Tablet up returns to one row. */}
+        <div className="mx-auto grid w-full max-w-page grid-cols-2 items-center gap-x-4 gap-y-1 px-6 py-2.5 sm:grid-cols-[auto_1fr_auto] sm:py-3 lg:px-12">
           <p
-            className={`min-w-0 text-center text-xs sm:text-sm ${saveError ? "font-medium text-danger-600" : "text-ink-500"}`}
+            className={`col-span-2 min-w-0 text-center text-xs leading-snug sm:order-2 sm:col-span-1 sm:text-sm ${saveError ? "font-medium text-danger-600" : "text-ink-500"}`}
             aria-live="polite"
           >
             {saveError
@@ -295,6 +348,16 @@ function Player({ lessonId, data }: { lessonId: string; data: LessonResponse }) 
                 : `Step ${index + 1} of ${steps.length}`}
           </p>
           <Button
+            variant="ghost"
+            className="justify-self-start sm:order-1"
+            disabled={index === 0}
+            onClick={() => goTo(steps[index - 1].id)}
+            iconLeft={<ArrowLeft className="size-4" strokeWidth={1.5} aria-hidden />}
+          >
+            Back
+          </Button>
+          <Button
+            className="justify-self-end sm:order-3"
             disabled={!canContinue || (isLast && !allRequiredComplete && !reviewMode)}
             onClick={advance}
             iconRight={<ArrowRight className="size-4" strokeWidth={1.5} aria-hidden />}

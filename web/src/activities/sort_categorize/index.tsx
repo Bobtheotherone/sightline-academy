@@ -112,7 +112,7 @@ export default function SortCategorizeActivity({ step, evidence, onEvidence }: A
                   ? `Place "${itemById(selectedId ?? "")?.label ?? "item"}" in ${category.label}`
                   : category.label
               }
-              className={`flex min-h-36 cursor-pointer flex-col rounded-md border-2 border-dashed p-3 text-left transition-colors duration-(--ts-dur-fast) ${
+              className={`flex min-h-28 cursor-pointer flex-col rounded-md border-2 border-dashed p-3 text-left transition-colors duration-(--ts-dur-fast) sm:min-h-36 ${
                 dragOverZone === category.id || targetable
                   ? "border-pine-700 bg-pine-300/10"
                   : "border-line-200 bg-moss-100/60"
@@ -120,7 +120,24 @@ export default function SortCategorizeActivity({ step, evidence, onEvidence }: A
             >
               <span className="text-sm font-semibold text-pine-950">{category.label}</span>
               {category.hint && <span className="mt-0.5 text-xs text-ink-500">{category.hint}</span>}
-              <span className="mt-2.5 flex flex-col gap-1.5">
+              {/* An empty column is a drop target, not a void: the blaze
+               * outline sits in the space the first card will land in. */}
+              {placedHere.length === 0 && (
+                <span className="mt-2.5 flex flex-1 flex-col items-center justify-center gap-2 py-1">
+                  <span
+                    aria-hidden
+                    className={`size-5 rotate-45 rounded-[4px] border-2 border-dashed transition-colors duration-(--ts-dur-fast) ${
+                      dragOverZone === category.id || targetable
+                        ? "border-pine-700"
+                        : "border-line-200"
+                    }`}
+                  />
+                  <span className="text-xs font-medium text-ink-500">
+                    {targetable ? "Drop it here" : "Drop here"}
+                  </span>
+                </span>
+              )}
+              <span className="mt-2.5 flex flex-col gap-1.5 empty:mt-0">
                 {placedHere.map((item) => {
                   const icon = sortItemIconUrl(step.id, item.id);
                   return (

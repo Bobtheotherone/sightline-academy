@@ -1,6 +1,8 @@
-import { lazy, Suspense, useRef, useState, type RefObject } from "react";
+import { lazy, Suspense, useEffect, useRef, useState, type RefObject } from "react";
 import { matchPath, NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Map, NotebookPen, TrendingUp, Compass, LogOut, UserRound, BarChart3 } from "lucide-react";
+import { AppFooter } from "./AppFooter";
+import { BlazeMarker } from "./BlazeMarker";
 import { Logo } from "./Logo";
 import { OfflineBanner } from "./OfflineBanner";
 import { Popover } from "./Popover";
@@ -22,9 +24,23 @@ const NAV = [
 ];
 
 function topLinkClass(isActive: boolean) {
-  return `rounded-sm px-3 py-2 text-sm font-medium transition-colors duration-(--ts-dur-fast) ${
-    isActive ? "bg-pine-300/30 text-pine-950" : "text-ink-500 hover:bg-moss-100 hover:text-pine-950"
+  return `rounded-pill px-3.5 py-2 text-sm font-medium transition-colors duration-(--ts-dur-fast) ${
+    isActive
+      ? "bg-pine-100 text-pine-950"
+      : "text-ink-500 hover:bg-moss-100 hover:text-pine-950"
   }`;
+}
+
+/** Sticky chrome earns its shadow once the page has moved (DESIGN-004). */
+function useScrolled(): boolean {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 0);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return scrolled;
 }
 
 function UserMenu() {
@@ -130,11 +146,16 @@ function RangerSlideOver({
 export function AppShell() {
   const [rangerOpen, setRangerOpen] = useState(false);
   const rangerButtonRef = useRef<HTMLButtonElement>(null);
+  const scrolled = useScrolled();
 
   return (
-    <div className="flex min-h-screen flex-col pb-16 lg:pb-0">
+    <div className="flex min-h-screen flex-col">
       <OfflineBanner />
-      <header className="sticky top-0 z-30 border-b border-line-200 bg-paper-0">
+      <header
+        className={`sticky top-0 z-30 border-b border-line-200 bg-paper-0/85 backdrop-blur-chrome transition-shadow duration-(--ts-dur-fast) ease-(--ts-ease-out) ${
+          scrolled ? "shadow-2" : ""
+        }`}
+      >
         <div className="mx-auto flex h-16 max-w-page items-center justify-between gap-4 px-6 lg:px-12">
           <Logo to="/dashboard" />
           <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
@@ -166,10 +187,15 @@ export function AppShell() {
         <Outlet />
       </main>
 
+      {/* The tab-bar clearance is paid INSIDE the footer, not below it: on the
+       * shell wrapper it left every mobile route ending on bare ground under
+       * the footer band (DESIGN-006 §Depth — no route ends mid-air). */}
+      <AppFooter variant="app" className="pb-16 lg:pb-0" />
+
       {/* Bottom tab bar < 1024px (DESIGN-003 §Responsive) */}
       <nav
         aria-label="Primary"
-        className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-4 border-t border-line-200 bg-paper-0 lg:hidden"
+        className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-4 border-t border-line-200 bg-paper-0/85 backdrop-blur-chrome lg:hidden"
       >
         {NAV.map(({ to, label, icon: Icon }) => (
           <NavLink
@@ -181,8 +207,21 @@ export function AppShell() {
               }`
             }
           >
-            <Icon className="size-5" strokeWidth={1.5} aria-hidden />
-            {label}
+            {({ isActive }) => (
+              <>
+                <span
+                  className={`grid place-items-center rounded-pill px-4 py-0.5 transition-colors duration-(--ts-dur-fast) ${
+                    isActive ? "bg-pine-100" : ""
+                  }`}
+                >
+                  <Icon className="size-5" strokeWidth={1.5} aria-hidden />
+                </span>
+                {label}
+                <span className="grid h-3 place-items-center">
+                  {isActive && <BlazeMarker state="active" size="s" />}
+                </span>
+              </>
+            )}
           </NavLink>
         ))}
       </nav>

@@ -163,6 +163,17 @@ export function levelTitle(level: number): string {
   return LEVEL_TITLES[Math.min(Math.max(level - 1, 0), LEVEL_TITLES.length - 1)];
 }
 
+/** Fraction of the way from the current level's floor to the next threshold
+ * (0..1; 1 at the top of the ladder). Mirrors the server's ring math so the
+ * level ring can paint truthfully before /progress resolves. */
+export function levelProgressFor(xpTotal: number): number {
+  const level = levelFor(xpTotal);
+  const floor = LEVEL_THRESHOLDS[level - 1] ?? 0;
+  const ceiling = LEVEL_THRESHOLDS[level];
+  if (ceiling === undefined) return 1;
+  return Math.min(1, Math.max(0, (xpTotal - floor) / (ceiling - floor)));
+}
+
 export const ARTIFACT_FACTS: Record<
   ArtifactType,
   { name: string; moduleId: string; moduleTitle: string; moduleOrder: number; blurb: string }

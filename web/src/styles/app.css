@@ -14,14 +14,24 @@
 @theme inline {
   --color-*: initial;
   --color-pine-950: var(--ts-pine-950);
+  --color-pine-800: var(--ts-pine-800);
   --color-pine-700: var(--ts-pine-700);
+  --color-pine-500: var(--ts-pine-500);
   --color-pine-300: var(--ts-pine-300);
+  --color-pine-100: var(--ts-pine-100);
   --color-moss-100: var(--ts-moss-100);
+  --color-moss-50: var(--ts-moss-50);
   --color-paper-0: var(--ts-paper-0);
+  --color-paper-50: var(--ts-paper-50);
+  --color-clay-600: var(--ts-clay-600);
   --color-clay-500: var(--ts-clay-500);
+  --color-clay-100: var(--ts-clay-100);
   --color-sky-600: var(--ts-sky-600);
+  --color-sky-100: var(--ts-sky-100);
   --color-sun-400: var(--ts-sun-400);
+  --color-sun-100: var(--ts-sun-100);
   --color-danger-600: var(--ts-danger-600);
+  --color-danger-100: var(--ts-danger-100);
   --color-ink-500: var(--ts-ink-500);
   --color-line-200: var(--ts-line-200);
 
@@ -43,36 +53,61 @@
   --text-xl--line-height: 1.2;
   --text-2xl: var(--ts-text-2xl);
   --text-2xl--line-height: 1.15;
+  --text-2xl--letter-spacing: var(--ts-tracking-display);
   --text-3xl: var(--ts-text-3xl);
   --text-3xl--line-height: 1.15;
+  --text-3xl--letter-spacing: var(--ts-tracking-display);
   --text-4xl: var(--ts-text-4xl);
   --text-4xl--line-height: 1.1;
+  --text-4xl--letter-spacing: var(--ts-tracking-display);
+
+  --tracking-display: var(--ts-tracking-display);
 
   --radius-*: initial;
   --radius-sm: var(--ts-radius-sm);
   --radius-md: var(--ts-radius-md);
   --radius-lg: var(--ts-radius-lg);
+  --radius-xl: var(--ts-radius-xl);
+  --radius-pill: var(--ts-radius-pill);
 
+  /* Elevation is real in v2: three forest-tinted levels + the CTA glow. */
   --shadow-*: initial;
+  --shadow-1: var(--ts-shadow-1);
+  --shadow-2: var(--ts-shadow-2);
+  --shadow-3: var(--ts-shadow-3);
+  --shadow-glow-clay: var(--ts-shadow-glow-clay);
   --shadow-soft: var(--ts-shadow-soft);
   --shadow-raised: var(--ts-shadow-raised);
 
+  --blur-chrome: var(--ts-blur-chrome);
+
   --ease-out: var(--ts-ease-out);
   --ease-in-out: var(--ts-ease-in-out);
+  --ease-spring: var(--ts-ease-spring);
 
   --container-page: var(--ts-container-max);
+  --container-wide: var(--ts-container-wide);
   --container-lesson: var(--ts-lesson-max);
 }
 
-/* Motion tokens exposed for duration-(--ts-dur-*) / arbitrary use. tokens.css
- * already defines them on :root; nothing extra needed here. */
+/* Durations stay on :root in tokens.css and are consumed with the arbitrary
+ * custom-property syntax — duration-(--ts-dur-fast|base|slow|epic|micro) —
+ * plus delay-(--ts-stagger). Nothing extra is needed here. */
 
 @layer base {
   html {
     font-family: var(--ts-font-body);
+    /* Own a background so body's ground wash paints in body's box instead of
+     * propagating to the canvas (which would stretch the stops unpredictably). */
+    background-color: var(--ts-moss-100);
   }
   body {
+    /* Layered color replaces flat color (DESIGN-001): the page breathes
+     * lighter at the top. moss-100 stays as the fallback fill. */
     background-color: var(--ts-moss-100);
+    background-image: var(--ts-ground);
+    background-repeat: no-repeat;
+    min-height: 100vh;
     color: var(--ts-pine-950);
     font-family: var(--ts-font-body);
     font-size: var(--ts-text-base);
@@ -86,15 +121,24 @@
     letter-spacing: -0.01em;
     line-height: 1.15;
   }
-  /* Focus ring: 2px pine-300, offset 2 — everywhere (DESIGN-004). */
+  /* Focus ring: 2px, offset 2 — everywhere (DESIGN-004), in the one brand step
+   * that stays visible on paper and on pine-950 alike (see --ts-focus-ring-color). */
   :focus-visible {
-    outline: 2px solid var(--ts-pine-300);
+    outline: 2px solid var(--ts-focus-ring-color);
     outline-offset: 2px;
   }
   ::selection {
     background-color: var(--ts-pine-300);
     color: var(--ts-pine-950);
   }
+}
+
+/* The app ground wash (DESIGN-001): moss-50 → moss-100, top to bottom. On body
+ * by default; this utility puts the same wash on any band or panel. */
+@utility ts-ground {
+  background-color: var(--ts-moss-100);
+  background-image: var(--ts-ground);
+  background-repeat: no-repeat;
 }
 
 /* ALL-CAPS eyebrow label (DESIGN-001 §Typography). */
@@ -123,16 +167,120 @@
     background-position: -200% 0;
   }
 }
-.ts-skeleton {
-  background: linear-gradient(
-    90deg,
-    var(--ts-line-200) 30%,
-    var(--ts-paper-0) 50%,
-    var(--ts-line-200) 70%
-  );
-  background-size: 200% 100%;
-  animation: ts-shimmer 1.6s var(--ts-ease-in-out) infinite;
-  border-radius: var(--ts-radius-sm);
+/* In `components`, not unlayered: an unlayered rule outranks every layered
+ * Tailwind utility, so the class's own radius-sm silently beat the
+ * `rounded-none` / `rounded-full` / `rounded-[3px]` each placeholder was
+ * authored with — every skeleton in the app rendered at one radius. */
+@layer components {
+  .ts-skeleton {
+    background: linear-gradient(
+      90deg,
+      var(--ts-line-200) 30%,
+      var(--ts-paper-0) 50%,
+      var(--ts-line-200) 70%
+    );
+    background-size: 200% 100%;
+    animation: ts-shimmer 1.6s var(--ts-ease-in-out) infinite;
+    border-radius: var(--ts-radius-sm);
+  }
+  /* The global kill-switch only zeroes the duration, which parks the gradient on
+   * its `to` frame and washes half of every placeholder out to paper-0. Drop the
+   * sweep entirely and settle on the flat tint so the silhouette survives. */
+  @media (prefers-reduced-motion: reduce) {
+    .ts-skeleton {
+      background: var(--ts-line-200);
+      animation: none;
+    }
+  }
+}
+
+/* ---- Shared keyframes (DESIGN-004 §Performance: keyframes live in the
+ * stylesheet, never in per-component <style> tags). The global reduced-motion
+ * rule in tokens.css collapses every one of these. ---- */
+
+/* Activity micro-motion: wrong-answer shake, correct-drop settle, check draw. */
+@keyframes ts-act-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20%,
+  60% {
+    transform: translateX(-4px);
+  }
+  40%,
+  80% {
+    transform: translateX(4px);
+  }
+}
+@keyframes ts-act-settle {
+  from {
+    transform: scale(1.03);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes ts-act-draw {
+  from {
+    stroke-dashoffset: 24;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.ts-act-shake {
+  animation: ts-act-shake 300ms var(--ts-ease-in-out);
+}
+.ts-act-settle {
+  animation: ts-act-settle 200ms var(--ts-ease-spring);
+}
+.ts-act-draw {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  animation: ts-act-draw 150ms var(--ts-ease-out) 80ms forwards;
+}
+
+/* Hotspot marker ring (activities/hotspot_list). */
+@keyframes ts-hotspot-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.65;
+  }
+  70%,
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+.ts-hotspot-ring {
+  animation: ts-hotspot-pulse 2.2s var(--ts-ease-in-out) infinite;
+}
+
+/* Section interstitial contour travel (DESIGN-004 moment 7 — no entry delay). */
+@keyframes ts-interstitial-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-48px, -32px, 0);
+  }
+}
+.ts-interstitial-drift {
+  animation: ts-interstitial-drift 1800ms var(--ts-ease-out) forwards;
+}
+
+/* Lesson stage crossfade on step advance. */
+@keyframes ts-stage-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.ts-stage-in {
+  animation: ts-stage-in var(--ts-dur-base) var(--ts-ease-out);
 }
 
 /* ---- Print (SPEC-009 §Certificate) ----

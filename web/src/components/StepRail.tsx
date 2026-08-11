@@ -81,6 +81,12 @@ export function StepRail({
   const reachable = (step: StepRailStep) =>
     step.id === currentId || completedIds.has(step.id);
 
+  /** How far the spine has filled: completed steps over the group's length. */
+  const groupFill = (group: SectionGroup) => {
+    const done = group.steps.filter(({ step }) => completedIds.has(step.id)).length;
+    return (done / group.steps.length) * 100;
+  };
+
   /** A group is where you are, behind you, or still ahead. */
   const groupState = (group: SectionGroup): BlazeState =>
     group.steps.some(({ step }) => step.id === currentId)
@@ -104,32 +110,49 @@ export function StepRail({
               <Glyph name={SECTION_GLYPHS[group.section]} size={16} />
               {SECTION_LABELS[group.section]}
             </p>
-            <ol className="mt-2 flex flex-col gap-1">
-              {group.steps.map(({ step }) => {
-                const state = stateOf(step);
-                const canGo = reachable(step) && Boolean(onSelect);
-                return (
-                  <li key={step.id}>
-                    <button
-                      type="button"
-                      disabled={!canGo}
-                      onClick={() => onSelect?.(step.id)}
-                      aria-current={step.id === currentId ? "step" : undefined}
-                      className={`flex w-full items-center gap-2.5 rounded-sm px-2 py-1.5 text-left text-sm transition-colors duration-(--ts-dur-fast) ${
-                        step.id === currentId
-                          ? "bg-pine-300/20 font-medium text-pine-950"
-                          : canGo
-                            ? "text-ink-500 hover:bg-moss-100 hover:text-pine-950"
-                            : "text-ink-500/60"
-                      }`}
-                    >
-                      <BlazeMarker state={state} size="s" />
-                      <span className="min-w-0 truncate">{step.title}</span>
-                    </button>
-                  </li>
-                );
-              })}
-            </ol>
+            {/* The section spine: a hairline through the blaze column whose
+             * filled portion grows as the group's steps complete. */}
+            <div className="relative mt-2">
+              <span
+                aria-hidden
+                className="absolute top-2 bottom-2 left-[13px] w-0.5 -translate-x-1/2 rounded-full bg-line-200"
+              >
+                <span
+                  className="block w-full rounded-full bg-pine-700 transition-[height] duration-(--ts-dur-slow) ease-(--ts-ease-out)"
+                  style={{ height: `${groupFill(group)}%` }}
+                />
+              </span>
+              <ol className="relative flex flex-col gap-1">
+                {group.steps.map(({ step }) => {
+                  const state = stateOf(step);
+                  const canGo = reachable(step) && Boolean(onSelect);
+                  return (
+                    <li key={step.id}>
+                      <button
+                        type="button"
+                        disabled={!canGo}
+                        onClick={() => onSelect?.(step.id)}
+                        aria-current={step.id === currentId ? "step" : undefined}
+                        className={`flex w-full items-center gap-2.5 rounded-sm px-2 py-1.5 text-left text-sm transition-colors duration-(--ts-dur-fast) ${
+                          step.id === currentId
+                            ? "bg-pine-300/20 font-medium text-pine-950"
+                            : canGo
+                              ? "text-ink-500 hover:bg-moss-100 hover:text-pine-950"
+                              : "text-ink-500/60"
+                        }`}
+                      >
+                        <BlazeMarker
+                          state={state}
+                          size="s"
+                          current={step.id === currentId}
+                        />
+                        <span className="min-w-0 truncate">{step.title}</span>
+                      </button>
+                    </li>
+                  );
+                })}
+              </ol>
+            </div>
           </li>
         ))}
       </ol>
@@ -158,7 +181,11 @@ export function StepRail({
                   aria-label={`${step.title}${completedIds.has(step.id) ? " (completed)" : step.id === currentId ? " (current)" : ""}`}
                   className="grid size-6 place-items-center rounded-sm"
                 >
-                  <BlazeMarker state={stateOf(step)} size="s" />
+                  <BlazeMarker
+                    state={stateOf(step)}
+                    size="s"
+                    current={step.id === currentId}
+                  />
                 </button>
               </li>
             );

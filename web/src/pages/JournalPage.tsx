@@ -5,10 +5,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { api, ApiError, type ArtifactOut } from "../lib/api";
 import { ARTIFACT_FACTS } from "../lib/modules";
+import { CountUp, Reveal } from "../activities/motion";
 import { Card } from "../components/Card";
 import { Button, LinkButton } from "../components/Button";
 import { EmptyState } from "../components/EmptyState";
-import { JournalCard } from "../components/JournalCard";
+import { JournalCard, shortDate } from "../components/JournalCard";
 import { SlotArt } from "../components/SlotArt";
 import { Skeleton, SkeletonGroup } from "../components/Skeleton";
 
@@ -38,13 +39,45 @@ export default function JournalPage() {
         (ARTIFACT_FACTS[b.artifactType]?.moduleOrder ?? 9),
     );
 
+  const lastUpdated = artifacts.reduce<string>(
+    (latest, a) => (latest === "" || a.updatedAt > latest ? a.updatedAt : latest),
+    "",
+  );
+  const totalArtifacts = Object.keys(ARTIFACT_FACTS).length;
+
   return (
     <div className="mx-auto w-full max-w-page flex-1 px-6 py-10 lg:px-12">
-      <p className="ts-eyebrow">Field Journal</p>
-      <h1 className="mt-1 font-display text-3xl font-extrabold">Your journal</h1>
-      <p className="mt-2 max-w-xl text-ink-500">
-        Everything you build in the course lives here — one artifact per module, yours to keep.
-      </p>
+      {/* Header band: what this is on the left, the state of the collection in
+       * mono on the right (DESIGN-003 v2 §Journal). */}
+      <Reveal index={0} className="flex flex-wrap items-end justify-between gap-x-10 gap-y-6">
+        <div>
+          <p className="ts-eyebrow">Field Journal</p>
+          <h1 className="mt-1 font-display text-3xl font-extrabold">Your journal</h1>
+          <p className="mt-2 max-w-xl text-ink-500">
+            Everything you build in the course lives here — one artifact per module, yours to keep.
+          </p>
+        </div>
+        {/* The cluster renders in every state — an empty collection is a
+         * number, not a reason to blank half the band. */}
+        <dl className="flex flex-wrap gap-x-10 gap-y-6">
+          <div className="flex min-w-24 flex-col-reverse">
+            <dt className="ts-eyebrow mt-1.5">Artifacts</dt>
+            <dd className="text-pine-950">
+              <CountUp
+                value={artifacts.length}
+                suffix={`/${totalArtifacts}`}
+                className="text-2xl leading-none font-medium"
+              />
+            </dd>
+          </div>
+          <div className="flex min-w-24 flex-col-reverse">
+            <dt className="ts-eyebrow mt-1.5">Last updated</dt>
+            <dd className="font-mono text-2xl leading-none font-medium text-pine-950">
+              {lastUpdated ? shortDate(lastUpdated) : "—"}
+            </dd>
+          </div>
+        </dl>
+      </Reveal>
 
       <div className="mt-8">
         {query.isLoading && (
@@ -57,7 +90,10 @@ export default function JournalPage() {
         )}
 
         {emptyish && (
-          <Card padding="l" className="ts-ruled">
+          /* No rules under this one: the ruled pitch registers to the journal
+           * card's 32px text rhythm, and centred empty-state type would sit
+           * across the lines instead of on them. */
+          <Card padding="l">
             <EmptyState
               art={<SlotArt slot="empty-journal" ratio="5 / 3" />}
               heading="Your field journal is empty"
@@ -82,20 +118,26 @@ export default function JournalPage() {
         )}
 
         {artifacts.length > 0 && (
-          <div className="columns-1 gap-5 md:columns-2 [&>*]:mb-5">
-            {artifacts.map((artifact) => {
+          /* A grid, not columns: reading order runs across the row (m1, m2 /
+           * m3, m4) and row-mates share a height instead of ending ragged. */
+          <div className="grid gap-5 md:grid-cols-2">
+            {artifacts.map((artifact, i) => {
               const facts = ARTIFACT_FACTS[artifact.artifactType];
               return (
-                <JournalCard
-                  key={artifact.artifactType}
-                  to={`/journal/${artifact.artifactType}`}
-                  artifactType={artifact.artifactType}
-                  eyebrow={facts?.name ?? artifact.artifactType}
-                  title={artifact.title || facts?.name || artifact.artifactType}
-                  excerpt={excerptOf(artifact)}
-                  status={artifact.status}
-                  updatedAt={artifact.updatedAt}
-                />
+                <Reveal key={artifact.artifactType} index={i} className="h-full">
+                  {/* Height chain to the ruled block: row-mates end on the same
+                   * edge and the paper runs the full card. */}
+                  <JournalCard
+                    className="h-full [&>*]:flex [&>*]:h-full [&>*]:flex-col [&_.ts-ruled]:flex-1"
+                    to={`/journal/${artifact.artifactType}`}
+                    artifactType={artifact.artifactType}
+                    eyebrow={facts?.name ?? artifact.artifactType}
+                    title={artifact.title || facts?.name || artifact.artifactType}
+                    excerpt={excerptOf(artifact)}
+                    status={artifact.status}
+                    updatedAt={artifact.updatedAt}
+                  />
+                </Reveal>
               );
             })}
           </div>

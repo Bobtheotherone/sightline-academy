@@ -8,6 +8,7 @@ import { CloudOff, Compass, Info, MoreVertical, SendHorizonal } from "lucide-rea
 import { api, ApiError, type SourceRef, type TutorAskResponse } from "../../lib/api";
 import { useApiError } from "../../lib/useApiError";
 import { Button } from "../../components/Button";
+import { Card } from "../../components/Card";
 import { EmptyState } from "../../components/EmptyState";
 import { Modal } from "../../components/Modal";
 import { Popover } from "../../components/Popover";
@@ -51,6 +52,33 @@ function OfflineBadge() {
       <CloudOff className="size-3.5 text-sun-400 brightness-75" strokeWidth={2} aria-hidden />
       Ranger is in offline mode
     </span>
+  );
+}
+
+/** Loading mirrors the settled conversation (DESIGN-005 §Loading): alternating
+ * turns with the avatar, answer card and source-chip geometry already in place,
+ * so the column carries the same density it will hand off to. */
+function ConversationSkeleton({ className = "" }: { className?: string }) {
+  return (
+    <SkeletonGroup label="Loading your conversation" className={`flex flex-col gap-6 ${className}`}>
+      {[0, 1, 2].map((i) => (
+        <div key={i} className="flex flex-col gap-4">
+          <Skeleton
+            className={`h-12 rounded-md rounded-br-[4px] self-end ${i === 1 ? "w-2/5" : "w-3/5"}`}
+          />
+          <div className="flex w-[92%] items-start gap-2.5 self-start">
+            <Skeleton className="mt-1 size-8 shrink-0 rounded-full" />
+            <div className="flex min-w-0 flex-1 flex-col gap-2">
+              <Skeleton className={`w-full rounded-md rounded-bl-[4px] ${i === 1 ? "h-24" : "h-32"}`} />
+              <div className="flex gap-2">
+                <Skeleton className="h-6 w-40 rounded-sm" />
+                <Skeleton className="h-6 w-28 rounded-sm" />
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </SkeletonGroup>
   );
 }
 
@@ -115,6 +143,7 @@ export default function TutorChat({
   const [confirmOpen, setConfirmOpen] = useState(false);
   const seq = useRef(0);
   const listRef = useRef<HTMLDivElement>(null);
+  const composerRef = useRef<HTMLTextAreaElement>(null);
   const queryClient = useQueryClient();
   const onApiError = useApiError();
 
@@ -215,6 +244,12 @@ export default function TutorChat({
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
+    // The CTA stays in its live treatment (aria-disabled, not disabled) so the
+    // tutor's primary action never reads dead — an empty ask just asks for text.
+    if (!message.trim()) {
+      composerRef.current?.focus();
+      return;
+    }
     send(message);
   };
 
@@ -234,21 +269,38 @@ export default function TutorChat({
   const isEmpty = !historyQuery.isPending && history.length === 0 && liveTurns.length === 0;
 
   useEffect(() => {
-    listRef.current?.scrollTo({ top: listRef.current.scrollHeight });
-  }, [history.length, turns]);
+    const list = listRef.current;
+    if (!list) return;
+    if (list.scrollHeight > list.clientHeight) {
+      list.scrollTo({ top: list.scrollHeight });
+      return;
+    }
+    // Below lg the page column flows in the document (no internal scroller), so
+    // the page itself has to follow the conversation down.
+    if (variant === "page" && history.length + turns.length > 0) {
+      window.scrollTo({ top: document.documentElement.scrollHeight });
+    }
+  }, [history.length, turns, variant]);
 
+  // Suggestion chips are pill buttons in v2 (DESIGN-002): raised, hover lifts.
   const promptButton =
-    "rounded-sm border border-line-200 bg-paper-0 px-3 py-2 text-left text-sm text-pine-950 transition-colors duration-(--ts-dur-fast) hover:border-pine-300 hover:bg-moss-100 disabled:opacity-55";
+    "rounded-pill border border-line-200 bg-paper-50 px-4 py-2 text-left text-sm text-pine-950 shadow-1 transition-all duration-(--ts-dur-fast) ease-(--ts-ease-out) hover:-translate-y-[2px] hover:border-pine-300 hover:shadow-2 disabled:opacity-55";
 
   return (
     <div className={`flex min-h-0 flex-col ${variant === "slideOver" ? "h-full" : ""} ${className}`}>
       {variant === "page" ? (
-        <header className="flex flex-wrap items-center gap-2.5 border-b border-line-200 pb-4">
+        <header className="flex flex-wrap items-center gap-x-2.5 gap-y-2 border-b border-line-200 pb-4">
           <Compass className="size-5 text-sky-600" strokeWidth={1.5} aria-hidden />
           <h1 className="font-display text-lg font-bold">Ranger</h1>
           <span className="hidden text-sm text-ink-500 sm:inline">Your safety tutor</span>
-          {offline && <OfflineBadge />}
-          <div className="ml-auto flex items-center gap-1">
+          {/* Below sm the badge takes the second row on its own — the actions
+              stay on the title row instead of orphaning one there. */}
+          {offline && (
+            <span className="order-last flex w-full sm:order-none sm:w-auto">
+              <OfflineBadge />
+            </span>
+          )}
+          <div className="ml-auto flex shrink-0 items-center gap-1">
             <LegendPopover />
             <OverflowMenu onClear={() => setConfirmOpen(true)} />
           </div>
@@ -268,35 +320,44 @@ export default function TutorChat({
 
       <div
         ref={listRef}
-        className={`flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto py-5 ${variant === "slideOver" ? "px-4" : ""}`}
+        className={`flex flex-col gap-4 py-5 ${
+          variant === "slideOver"
+            ? "min-h-0 flex-1 overflow-y-auto px-4"
+            : "lg:min-h-0 lg:flex-1 lg:overflow-y-auto"
+        }`}
       >
         {historyQuery.isPending ? (
-          <SkeletonGroup label="Loading your conversation" className="flex flex-col gap-4">
-            <Skeleton className="h-16 w-3/5 self-end rounded-md" />
-            <Skeleton className="h-28 w-4/5 self-start rounded-md" />
-          </SkeletonGroup>
+          <ConversationSkeleton className="flex-1" />
         ) : isEmpty ? (
+          /* The first run lands on a sheet, not on the page's bare contour
+             wash: the plate paints its own paper ground, which on the texture
+             reads as a lighter rectangle floating behind the art (DESIGN-006
+             "art is staged, not boxed"). Every other empty surface in the app
+             already stages inside a Card; the tutor page was one of two that
+             didn't. The card's own padding is EmptyState's. */
           <div className="my-auto">
-            <EmptyState
-              art={<SlotArt slot="empty-tutor" ratio="5 / 3" />}
-              heading="Meet Ranger"
-              body={MEET_RANGER_BODY}
-              action={
-                <div className="flex max-w-md flex-col gap-2">
-                  {(suggestedQuery.data?.prompts ?? []).map((prompt) => (
-                    <button
-                      key={prompt}
-                      type="button"
-                      disabled={ask.isPending}
-                      onClick={() => send(prompt)}
-                      className={promptButton}
-                    >
-                      {prompt}
-                    </button>
-                  ))}
-                </div>
-              }
-            />
+            <Card padding="none" className="rounded-lg">
+              <EmptyState
+                art={<SlotArt slot="empty-tutor" ratio="5 / 3" className="shadow-1" />}
+                heading="Meet Ranger"
+                body={MEET_RANGER_BODY}
+                action={
+                  <div className="flex max-w-lg flex-wrap justify-center gap-2">
+                    {(suggestedQuery.data?.prompts ?? []).map((prompt) => (
+                      <button
+                        key={prompt}
+                        type="button"
+                        disabled={ask.isPending}
+                        onClick={() => send(prompt)}
+                        className={promptButton}
+                      >
+                        {prompt}
+                      </button>
+                    ))}
+                  </div>
+                }
+              />
+            </Card>
           </div>
         ) : (
           <>
@@ -363,9 +424,32 @@ export default function TutorChat({
         )}
       </div>
 
-      <div className={`border-t border-line-200 pt-3 ${variant === "slideOver" ? "px-4 pb-4" : ""}`}>
+      {/* Composer: sticky translucent chrome (DESIGN-003 §Tutor) so the
+          conversation scrolls under it instead of ending in a hard edge. On the
+          page it is a raised band — rounded top, shadow-2 — so the contour
+          ground reads as continuous behind it rather than sliced by a slab; it
+          clears the mobile tab bar until lg retires it.
+
+          The band is offset 56px (the tab bar's minimum row height) and pays
+          the difference back as bottom padding: the visible content sits where
+          a 64px offset would put it, but the chrome runs past the bar's top
+          edge instead of stopping short of it, so no strip of transcript can
+          show between the two whatever the bar's real height turns out to be. */}
+      <div
+        className={`sticky z-10 border-t border-line-200 bg-paper-0/85 pt-3 backdrop-blur-chrome ${
+          variant === "slideOver"
+            ? "bottom-0 px-4 pb-4"
+            : "bottom-14 rounded-t-lg px-4 pb-7 shadow-2 lg:bottom-0 lg:pb-5"
+        }`}
+      >
         {!isEmpty && suggestions.length > 0 && (
-          <div className="mb-3 flex flex-wrap gap-2">
+          /* Below sm the strip is one horizontally-scrollable row: wrapped, each
+             pill claimed a full-width line and the dock grew past 44% of a phone
+             screen, guillotining Ranger's answer at ~5 lines. The negative margin
+             lets it scroll edge to edge under the band's padding; the -my/py pair
+             keeps the box the same height while leaving the pills' hover lift and
+             shadow room inside the scroller. From sm it wraps exactly as before. */
+          <div className="mb-3 flex flex-wrap gap-2 max-sm:-mx-4 max-sm:-my-1 max-sm:flex-nowrap max-sm:overflow-x-auto max-sm:px-4 max-sm:py-1 max-sm:[scrollbar-width:none] max-sm:[&::-webkit-scrollbar]:hidden max-sm:[&>button]:shrink-0 max-sm:[&>button]:whitespace-nowrap">
             {suggestions.map((prompt) => (
               <button
                 key={prompt}
@@ -379,13 +463,17 @@ export default function TutorChat({
             ))}
           </div>
         )}
-        <form onSubmit={submit} className="flex items-end gap-3">
-          <div className="flex-1">
+        {/* Below sm the CTA takes its own row: side by side it squeezed the
+            field to ~180px, where the placeholder wrapped past the two rows the
+            box is tall and got sliced by its bottom edge. */}
+        <form onSubmit={submit} className="flex flex-col gap-3 sm:flex-row sm:items-end">
+          <div className="sm:flex-1">
             <label htmlFor={`tutor-composer-${variant}`} className="sr-only">
               Ask Ranger a question
             </label>
             <textarea
               id={`tutor-composer-${variant}`}
+              ref={composerRef}
               rows={2}
               maxLength={2000}
               placeholder={
@@ -402,17 +490,26 @@ export default function TutorChat({
                   send(message);
                 }
               }}
-              className="w-full resize-none rounded-sm border border-line-200 bg-paper-0 px-3 py-2.5 text-base placeholder:text-ink-500/70 transition-colors duration-(--ts-dur-fast) hover:border-pine-300 focus:border-pine-700 disabled:opacity-55"
+              className="max-h-40 min-h-[4.375rem] w-full resize-none field-sizing-content rounded-sm border border-line-200 bg-paper-0 px-3 py-2.5 text-base placeholder:text-ink-500/70 transition-colors duration-(--ts-dur-fast) hover:border-pine-300 focus:border-pine-700 disabled:opacity-55"
             />
-            <p className="mt-1 text-right font-mono text-xs text-ink-500">{message.length}/2000</p>
+            {/* Below sm the counter earns its 24px row only once there is
+                something to count — the dock already owns too much of the
+                screen for an idle 0/2000 to cost the transcript a line. */}
+            <p
+              className={`mt-1 text-right font-mono text-xs text-ink-500 ${
+                message.length === 0 ? "max-sm:hidden" : ""
+              }`}
+            >
+              {message.length}/2000
+            </p>
           </div>
           <Button
             type="submit"
             size="l"
             loading={ask.isPending}
-            disabled={message.trim().length === 0}
+            aria-disabled={message.trim().length === 0}
             iconLeft={<SendHorizonal className="size-4" strokeWidth={1.5} aria-hidden />}
-            className="mb-6"
+            className="w-full sm:mb-6 sm:w-auto"
           >
             Ask
           </Button>

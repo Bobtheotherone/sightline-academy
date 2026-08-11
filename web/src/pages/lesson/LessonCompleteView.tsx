@@ -15,30 +15,98 @@ import { Card } from "../../components/Card";
 import { ContourPanel } from "../../components/ContourPanel";
 import { LinkButton } from "../../components/Button";
 import { StatusStitch } from "../../components/JournalCard";
+import { SlotArt } from "../../components/SlotArt";
 import { XpChip } from "../../components/XpChip";
-import { RiseIn } from "../../activities/motion";
+import { Reveal } from "../../activities/motion";
 
-/* `rewards` accumulates the XP events this mount saw, so a lesson finished
+/** The badge ceremony owns the first beat (DESIGN-004 §Ceremonies 3, `epic`);
+ * the XP chips pick their stagger up after it, not over it. */
+const CEREMONY_MS = 700;
+
+/** The art's left seam is a dissolve, not a cut — its other three edges run off
+ * the panel, which clips them (DESIGN-006 Finish, "art is staged, not boxed").
+ * The black here is an alpha channel, not a color, so it is not a token.
+ *
+ * This is a 90deg gradient, so it can only soften the X axis: the bottom edge
+ * has to be a real overrun. `h-full` on the SlotArt below is therefore
+ * load-bearing — SlotArt sets `aspect-ratio` inline, which on an
+ * `absolute inset-0` box wins over the bottom inset and leaves the art short of
+ * the panel floor with a hard horizontal cut this mask cannot reach. */
+const ART_FADE = "linear-gradient(90deg, rgb(0 0 0 / 0) 0%, rgb(0 0 0 / 0.55) 24%, rgb(0 0 0) 54%)";
+
+/* The earned moment: the lesson's name and its itemized XP on the dark panel,
+ * with the module's hero art filling the right edge to edge, top to bottom (the
+ * landing hero's composition). It is the top of the screen's depth hierarchy — the
+ * checkpoint and artifact cards below sit a step down on shadow-1, so the
+ * ceremony never reads as three identical flat cards.
+ *
+ * `rewards` accumulates the XP events this mount saw, so a lesson finished
  * across two sittings has only the latest sitting's events to show. The
  * heading says "just now" rather than "this lesson" so the number is never a
  * claim it can't back up; the running total lives on /progress. */
-function XpItemized({ rewards }: { rewards: SessionRewards }) {
+function CompleteBanner({
+  lesson,
+  rewards,
+  startDelay = 0,
+}: {
+  lesson: LessonSummary;
+  rewards: SessionRewards;
+  startDelay?: number;
+}) {
+  const facts = MODULE_FACTS.find((m) => m.id === lesson.moduleId);
   const total = rewards.xp.reduce((sum, e) => sum + e.xp, 0);
   return (
-    <Card padding="m">
-      <div className="flex items-baseline justify-between gap-3">
-        <h2 className="font-display text-lg font-bold">XP earned</h2>
-        <span className="font-mono text-sm text-ink-500">+{total} XP just now</span>
+    <ContourPanel
+      variant="dark"
+      drift
+      glow="sun"
+      glowClassName="-top-[25%] -right-[8%] size-[70%]"
+      className="rounded-lg"
+    >
+      <div className="grid items-center gap-6 p-7 sm:grid-cols-[1.45fr_1fr] sm:gap-5 sm:py-8 sm:pr-0 sm:pl-9">
+        <div className="min-w-0">
+          <p className="ts-eyebrow text-sun-400!">Lesson complete</p>
+          <h1 className="mt-2 font-display text-2xl font-extrabold text-paper-0">{lesson.title}</h1>
+          {rewards.xp.length > 0 && (
+            <>
+              <div className="mt-6 flex items-baseline justify-between gap-3 border-b border-paper-0/15 pb-2">
+                <h2 className="font-display text-base font-bold text-paper-0">XP earned</h2>
+                <span className="font-mono text-sm text-pine-300">+{total} XP just now</span>
+              </div>
+              <ul className="mt-3 flex flex-col gap-2.5">
+                {rewards.xp.map((event, i) => (
+                  <li key={event.id} className="flex items-center justify-between gap-3">
+                    <span className="min-w-0 line-clamp-2 text-sm text-paper-0/85">
+                      {event.label}
+                    </span>
+                    <XpChip
+                      xp={event.xp}
+                      delay={startDelay + i * 60}
+                      className="shrink-0 whitespace-nowrap"
+                    />
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </div>
+        {facts && (
+          <div
+            className="relative hidden self-stretch sm:-my-8 sm:block"
+            style={{ maskImage: ART_FADE, WebkitMaskImage: ART_FADE }}
+          >
+            <SlotArt
+              slot={facts.heroSlot}
+              variant="dark"
+              ratio="4 / 3"
+              bleed
+              sizes="(min-width: 640px) 34vw, 100vw"
+              className="absolute inset-0 h-full w-full"
+            />
+          </div>
+        )}
       </div>
-      <ul className="mt-4 flex flex-col gap-2.5">
-        {rewards.xp.map((event, i) => (
-          <li key={event.id} className="flex items-center justify-between gap-3">
-            <span className="min-w-0 truncate text-sm text-pine-950">{event.label}</span>
-            <XpChip xp={event.xp} delay={i * 60} />
-          </li>
-        ))}
-      </ul>
-    </Card>
+    </ContourPanel>
   );
 }
 
@@ -121,7 +189,9 @@ function ModuleCompleteMoment({ moduleId, rewards }: { moduleId: string; rewards
     <ContourPanel variant="dark" className="overflow-hidden rounded-lg">
       <div className="flex flex-col gap-6 p-8">
         <div className="flex flex-wrap items-center gap-6">
-          {badge && <BadgeMedal badgeId={facts.badgeId} name={badge.name} earned size="l" />}
+          {badge && (
+            <BadgeMedal badgeId={facts.badgeId} name={badge.name} earned ceremony size="l" />
+          )}
           <div className="min-w-0 flex-1">
             <p className="ts-eyebrow text-sun-400!">Module {facts.order} complete</p>
             <h2 className="mt-1 font-display text-2xl font-bold text-paper-0">{facts.title}</h2>
@@ -192,62 +262,72 @@ export function LessonCompleteView({
     queryFn: () => api.module(lesson.moduleId),
   });
   const nextLesson = moduleQuery.data?.lessons.find((l) => l.order === lesson.order + 1);
+  const hasRecap =
+    steps.some((s) => s.renderer === "checkpoint" && evidence[s.id]?.complete) ||
+    steps.some((s) => s.renderer === "journal_builder" && evidence[s.id]?.complete);
 
   return (
-    <div className="mx-auto flex w-full max-w-lesson flex-col gap-5 px-6 py-10">
-      <RiseIn>
-        <header className="text-center">
-          <p className="ts-eyebrow">Lesson complete</p>
-          <h1 className="mt-2 font-display text-3xl font-extrabold text-pine-950">
-            {lesson.title}
-          </h1>
-        </header>
-      </RiseIn>
+    <div className="mx-auto flex w-full max-w-lesson flex-col gap-5 px-6 py-8 sm:py-10">
+      <Reveal index={0}>
+        <CompleteBanner
+          lesson={lesson}
+          rewards={rewards}
+          startDelay={rewards.moduleComplete ? CEREMONY_MS : 0}
+        />
+      </Reveal>
 
-      {rewards.xp.length > 0 && (
-        <RiseIn delay={80}>
-          <XpItemized rewards={rewards} />
-        </RiseIn>
+      {hasRecap && (
+        <Reveal index={1}>
+          <div className="flex flex-col gap-5">
+            <CheckpointResult steps={steps} evidence={evidence} />
+            <ArtifactBuilt steps={steps} evidence={evidence} />
+          </div>
+        </Reveal>
       )}
 
-      <RiseIn delay={140}>
-        <div className="flex flex-col gap-5">
-          <CheckpointResult steps={steps} evidence={evidence} />
-          <ArtifactBuilt steps={steps} evidence={evidence} />
-        </div>
-      </RiseIn>
-
-      <RiseIn delay={200}>
+      <Reveal index={2}>
         {rewards.moduleComplete ? (
           <ModuleCompleteMoment moduleId={lesson.moduleId} rewards={rewards} />
         ) : (
-          <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
-            {nextLesson ? (
-              <LinkButton
-                to={`/learn/${nextLesson.id}`}
-                size="l"
-                iconRight={<ArrowRight className="size-4" strokeWidth={2} aria-hidden />}
-              >
-                Next lesson — {nextLesson.title}
-              </LinkButton>
-            ) : (
-              <LinkButton
-                to={`/course/${lesson.moduleId}`}
-                size="l"
-                iconRight={<ArrowRight className="size-4" strokeWidth={2} aria-hidden />}
-              >
-                Back to the module
-              </LinkButton>
-            )}
-            <LinkButton to={`/course/${lesson.moduleId}`} variant="ghost">
-              Module overview
-            </LinkButton>
-          </div>
+          /* The onward step is a composed band, not two buttons floating over
+           * bare ground at the end of the page. */
+          <Card padding="m" className="flex flex-wrap items-center justify-between gap-4">
+            <div className="min-w-0 max-w-sm">
+              <p className="ts-eyebrow">Next on the trail</p>
+              <p className="mt-1 text-sm text-ink-500">
+                {nextLesson
+                  ? "Momentum is the whole trick — the next lesson picks up exactly where this one set you down."
+                  : "That's every lesson in this module. The overview shows what you earned and what's still open."}
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-3">
+              {nextLesson ? (
+                <LinkButton
+                  to={`/learn/${nextLesson.id}`}
+                  iconRight={<ArrowRight className="size-4" strokeWidth={2} aria-hidden />}
+                >
+                  Next lesson — {nextLesson.title}
+                </LinkButton>
+              ) : (
+                <LinkButton
+                  to={`/course/${lesson.moduleId}`}
+                  iconRight={<ArrowRight className="size-4" strokeWidth={2} aria-hidden />}
+                >
+                  Back to the module
+                </LinkButton>
+              )}
+              {nextLesson && (
+                <LinkButton to={`/course/${lesson.moduleId}`} variant="ghost">
+                  Module overview
+                </LinkButton>
+              )}
+            </div>
+          </Card>
         )}
-      </RiseIn>
+      </Reveal>
 
       {rewards.moduleComplete && (
-        <RiseIn delay={260}>
+        <Reveal index={3}>
           <div className="flex justify-center">
             <Link
               to="/course"
@@ -256,7 +336,7 @@ export function LessonCompleteView({
               Back to the course map
             </Link>
           </div>
-        </RiseIn>
+        </Reveal>
       )}
     </div>
   );

@@ -6,9 +6,26 @@
 import { Link } from "react-router-dom";
 import { ShieldCheck } from "lucide-react";
 import { Markdown } from "../../activities/Markdown";
+import { useEntered, useReducedMotion } from "../../activities/motion";
 import { Button } from "../../components/Button";
 import { Glyph } from "../../components/Glyph";
 import type { SourceRef } from "../../lib/api";
+
+/** Ranger's bubble surface: raised paper, no hairline — elevation carries it. */
+const BUBBLE = "rounded-md rounded-bl-[4px] bg-paper-50 shadow-1";
+
+/**
+ * The v2 message entrance (DESIGN-004 §6): 8px rise + fade, once, when the
+ * bubble mounts — messages are keyed by id, so a settled one never replays it.
+ * Reduced motion paints the settled state on the first frame.
+ */
+function useMessageRise(): string {
+  const reduced = useReducedMotion();
+  const entered = useEntered();
+  return `transition-[opacity,translate] duration-(--ts-dur-base) ease-(--ts-ease-out) ${
+    reduced || entered ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
+  }`;
+}
 
 /** The ranger-hat glyph avatar (flat vector per DESIGN-001). */
 export function RangerAvatar() {
@@ -158,7 +175,7 @@ export function TypingBubble() {
     <div className="flex items-start gap-2.5 self-start">
       <RangerAvatar />
       <div
-        className="flex items-center gap-1.5 rounded-md rounded-bl-[4px] border border-line-200 bg-paper-0 px-4 py-3.5"
+        className={`flex items-center gap-1.5 px-4 py-3.5 ${BUBBLE}`}
         role="status"
         aria-label="Ranger is thinking"
       >
@@ -200,9 +217,11 @@ export function ChatMessage({
   errorMessage,
   onRetry,
 }: ChatMessageProps) {
+  const rise = useMessageRise();
+
   if (role === "user") {
     return (
-      <div className="group flex max-w-[85%] flex-col items-end gap-1 self-end">
+      <div className={`group flex max-w-[85%] flex-col items-end gap-1 self-end ${rise}`}>
         <div className="rounded-md rounded-br-[4px] bg-pine-300/30 px-4 py-3 text-sm whitespace-pre-wrap">
           {markdown}
         </div>
@@ -215,9 +234,9 @@ export function ChatMessage({
 
   if (failed) {
     return (
-      <div className="flex max-w-[92%] items-start gap-2.5 self-start">
+      <div className={`flex max-w-[92%] items-start gap-2.5 self-start ${rise}`}>
         <RangerAvatar />
-        <div className="rounded-md rounded-bl-[4px] border border-line-200 bg-paper-0 p-4">
+        <div className={`p-4 ${BUBBLE}`}>
           <p className="text-sm">{errorMessage}</p>
           {onRetry && (
             <Button variant="secondary" size="s" className="mt-3" onClick={onRetry}>
@@ -230,10 +249,10 @@ export function ChatMessage({
   }
 
   return (
-    <div className="group flex w-full max-w-[92%] items-start gap-2.5 self-start">
+    <div className={`group flex w-full max-w-[92%] items-start gap-2.5 self-start ${rise}`}>
       <RangerAvatar />
       <div className="flex min-w-0 flex-col gap-1">
-        <div className="rounded-md rounded-bl-[4px] border border-line-200 bg-paper-0 p-4">
+        <div className={`p-4 ${BUBBLE}`}>
           {triageCategory ? (
             <TriageEyebrow category={triageCategory} />
           ) : (

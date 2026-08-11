@@ -1,31 +1,178 @@
-/* Shared micro-motion for activity renderers (DESIGN-004). Keyframes live in a
- * single <style> mounted once by ActivityHost; the global reduced-motion rule
- * in tokens.css collapses all of these to ~0ms automatically.
+/* Shared motion primitives (DESIGN-004 v2). Keyframes live in app.css — this
+ * module owns the JS-driven half: the reduced-motion check, the product-wide
+ * entrance `Reveal`, `CountUp`, and the activity micro-motion helpers.
  */
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
-const KEYFRAMES = `
-@keyframes ts-act-shake {
-  0%, 100% { transform: translateX(0); }
-  20%, 60% { transform: translateX(-4px); }
-  40%, 80% { transform: translateX(4px); }
-}
-@keyframes ts-act-settle {
-  from { transform: scale(1.03); }
-  to { transform: scale(1); }
-}
-@keyframes ts-act-draw {
-  from { stroke-dashoffset: 24; }
-  to { stroke-dashoffset: 0; }
-}
-.ts-act-shake { animation: ts-act-shake 300ms var(--ts-ease-in-out); }
-.ts-act-settle { animation: ts-act-settle 200ms cubic-bezier(0.34, 1.4, 0.64, 1); }
-.ts-act-draw { stroke-dasharray: 24; stroke-dashoffset: 24; animation: ts-act-draw 120ms var(--ts-ease-out) 80ms forwards; }
-`;
+const REDUCE_QUERY = "(prefers-reduced-motion: reduce)";
 
-/** Mounted once by ActivityHost so every renderer can use the ts-act-* classes. */
+function prefersReduced(): boolean {
+  return (
+    typeof window !== "undefined" &&
+    typeof window.matchMedia === "function" &&
+    window.matchMedia(REDUCE_QUERY).matches
+  );
+}
+
+/**
+ * True when the OS asks for reduced motion. The CSS kill-switch only zeroes
+ * durations — anything JS-driven must jump to its end state (DESIGN-004 §6).
+ */
+export function useReducedMotion(): boolean {
+  const [reduced, setReduced] = useState(prefersReduced);
+  useEffect(() => {
+    if (typeof window.matchMedia !== "function") return;
+    const mq = window.matchMedia(REDUCE_QUERY);
+    const onChange = () => setReduced(mq.matches);
+    onChange();
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+  return reduced;
+}
+
+/**
+ * Fires once when the node reaches ~10% inside the viewport. Without an
+ * observer (or with motion off) it reports visible immediately — content is
+ * never gated behind an animation that cannot run.
+ */
+function useInView<T extends HTMLElement>(enabled: boolean) {
+  const ref = useRef<T | null>(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    if (!enabled || inView) return;
+    const el = ref.current;
+    if (!el || typeof IntersectionObserver !== "function") {
+      setInView(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setInView(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "0px 0px -10% 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [enabled, inView]);
+  return [ref, inView] as const;
+}
+
+/**
+ * The product-wide entrance (DESIGN-004 §Choreography): rise 12px + fade at
+ * `slow`, 60ms per sibling via `index`, IntersectionObserver-driven below the
+ * fold, once — never re-hidden. Reduced motion renders the end state on the
+ * first paint. Transform and opacity only.
+ */
+export function Reveal({
+  index = 0,
+  delay,
+  className = "",
+  children,
+}: {
+  /** Sibling position — sets the 60ms stagger. */
+  index?: number;
+  /** Explicit delay in ms; overrides the index stagger. */
+  delay?: number;
+  className?: string;
+  children: ReactNode;
+}) {
+  const reduced = useReducedMotion();
+  const [ref, inView] = useInView<HTMLDivElement>(!reduced);
+  const shown = reduced || inView;
+  return (
+    <div
+      ref={ref}
+      style={reduced ? undefined : { transitionDelay: `${delay ?? index * 60}ms` }}
+      className={`transition-[opacity,translate] duration-(--ts-dur-slow) ease-(--ts-ease-out) ${
+        shown ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
+      } ${className}`}
+    >
+      {children}
+    </div>
+  );
+}
+
+/**
+ * Numbers are a feature (DESIGN-001): mono, tabular, counting to `value` over
+ * 600ms the first time it is revealed. Reduced motion prints the value. The
+ * animating digits are hidden from assistive tech; the final value is not.
+ */
+export function CountUp({
+  value,
+  duration = 600,
+  delay = 0,
+  prefix = "",
+  suffix = "",
+  format,
+  className = "",
+}: {
+  value: number;
+  /** Count duration in ms (DESIGN-004 default: 600). */
+  duration?: number;
+  /** Start delay in ms — parents stagger siblings by 60ms steps. */
+  delay?: number;
+  prefix?: string;
+  suffix?: string;
+  /** Custom numeral rendering, e.g. thousands separators. */
+  format?: (n: number) => string;
+  className?: string;
+}) {
+  const reduced = useReducedMotion();
+  const [ref, inView] = useInView<HTMLSpanElement>(!reduced);
+  const [display, setDisplay] = useState(() => (prefersReduced() ? value : 0));
+
+  useEffect(() => {
+    if (reduced) {
+      setDisplay(value);
+      return;
+    }
+    if (!inView) return;
+    let raf = 0;
+    let start: number | null = null;
+    const tick = (now: number) => {
+      if (start === null) start = now;
+      const t = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      setDisplay(Math.round(eased * value));
+      if (t < 1) raf = window.requestAnimationFrame(tick);
+    };
+    const timer = window.setTimeout(() => {
+      raf = window.requestAnimationFrame(tick);
+    }, delay);
+    return () => {
+      window.clearTimeout(timer);
+      window.cancelAnimationFrame(raf);
+    };
+  }, [reduced, inView, value, duration, delay]);
+
+  const render = format ?? ((n: number) => String(n));
+  return (
+    <span ref={ref} className={`font-mono tabular-nums ${className}`}>
+      <span aria-hidden>
+        {prefix}
+        {render(display)}
+        {suffix}
+      </span>
+      <span className="sr-only">
+        {prefix}
+        {render(value)}
+        {suffix}
+      </span>
+    </span>
+  );
+}
+
+/**
+ * No-op shim: the ts-act-* keyframes now live in app.css (DESIGN-004
+ * §Performance — keyframes belong to the stylesheet, not to <style> tags).
+ * ActivityHost still mounts this, so the export stays.
+ */
 export function ActivityMotionStyles() {
-  return <style>{KEYFRAMES}</style>;
+  return null;
 }
 
 /**
@@ -96,7 +243,7 @@ export function Unmask({
 
 /**
  * The correct-drop check: blaze diamond with the check stroke drawing in over
- * 120ms (DESIGN-004 moment 1).
+ * 150ms (DESIGN-004 moment 1).
  */
 export function BlazeCheckDraw({ className = "" }: { className?: string }) {
   return (

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Medal } from "lucide-react";
 import manifest from "../assets/manifest.json";
 
@@ -35,6 +36,7 @@ export function BadgeMedal({
   earned,
   detail,
   size = "m",
+  ceremony = false,
   className = "",
 }: {
   badgeId: string;
@@ -43,10 +45,26 @@ export function BadgeMedal({
   /** Small line under the name (trigger copy or award date). */
   detail?: string;
   size?: BadgeMedalSize;
+  /**
+   * The earn ceremony (DESIGN-004 §Ceremonies 3): spring scale 0.85→1 with one
+   * shine sweep across the medal, once. Off on the shelf — earn time only.
+   */
+  ceremony?: boolean;
   className?: string;
 }) {
   const s = SIZE[size];
   const art = badgeArt(badgeId);
+  // idle → run on the next frame → done, at which point the sweep unmounts.
+  const [sweep, setSweep] = useState<"idle" | "run" | "done">(ceremony ? "idle" : "done");
+  useEffect(() => {
+    if (!ceremony) return;
+    const frame = requestAnimationFrame(() => setSweep("run"));
+    const end = window.setTimeout(() => setSweep("done"), 800);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.clearTimeout(end);
+    };
+  }, [ceremony]);
   return (
     <figure
       className={`flex flex-col items-center gap-2.5 text-center ${className}`}
@@ -54,7 +72,16 @@ export function BadgeMedal({
       aria-label={`${name} badge — ${earned ? "earned" : "not earned yet"}${detail ? `. ${detail}` : ""}`}
       data-badge-slot={`badge-${badgeId}`}
     >
-      <span className={`relative grid ${s.frame} place-items-center`} aria-hidden>
+      <span
+        className={`relative grid ${s.frame} place-items-center ${
+          ceremony
+            ? `transition-transform duration-(--ts-dur-epic) ease-spring ${
+                sweep === "idle" ? "scale-[0.85]" : "scale-100"
+              }`
+            : ""
+        }`}
+        aria-hidden
+      >
         {/* Blaze-shaped frame */}
         <span
           className={`absolute inset-1 rotate-45 rounded-[22%] border-2 ${
@@ -84,6 +111,16 @@ export function BadgeMedal({
             />
           )}
         </span>
+        {/* One shine sweep, clipped to the medal, removed once it has crossed. */}
+        {sweep !== "done" && (
+          <span className="pointer-events-none absolute -inset-2 overflow-hidden">
+            <span
+              className={`absolute inset-y-0 w-1/2 -skew-x-12 bg-linear-to-r from-transparent via-paper-0/70 to-transparent transition-transform duration-(--ts-dur-epic) ease-(--ts-ease-in-out) ${
+                sweep === "run" ? "translate-x-[220%]" : "-translate-x-[160%]"
+              }`}
+            />
+          </span>
+        )}
       </span>
       <figcaption className="flex flex-col gap-0.5">
         <span

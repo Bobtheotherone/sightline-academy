@@ -27,7 +27,7 @@ export function ArtifactPreview({
   return (
     <aside
       aria-label={`Artifact preview: ${title}`}
-      className={`overflow-hidden rounded-md border border-line-200 bg-paper-0 ${className}`}
+      className={`overflow-hidden rounded-md border border-line-200 bg-paper-0 shadow-1 ${className}`}
     >
       <div className="flex items-center justify-between gap-3 border-b border-line-200 px-5 py-3">
         <p className="ts-eyebrow">{eyebrow}</p>
@@ -41,16 +41,20 @@ export function ArtifactPreview({
           {status === "complete" ? "Complete" : "Draft"}
         </span>
       </div>
-      <div className="ts-ruled px-5 pb-6 pt-4">
+      {/* Rules shifted +6px so baselines sit ON the lines. Label and value are
+       * both leading-8 and the gaps are whole rules, so the block height stays
+       * a multiple of 32px and pb-5 closes the sheet before the next rule would
+       * be drawn — no empty ruled band trails the last entry. */}
+      <div className="ts-ruled px-5 pb-5 pt-3" style={{ backgroundPosition: "0 6px" }}>
         <h3 className="font-display text-xl font-bold leading-8 text-pine-950">{title}</h3>
-        <dl className="mt-4 flex flex-col gap-4">
+        <dl className="mt-8 flex flex-col gap-8">
           {entries.map((entry) => {
             const filled = Array.isArray(entry.value)
               ? entry.value.length > 0
               : entry.value.trim().length > 0;
             return (
               <div key={entry.id}>
-                <dt className="ts-eyebrow">{entry.label}</dt>
+                <dt className="ts-eyebrow leading-8">{entry.label}</dt>
                 {filled ? (
                   Array.isArray(entry.value) ? (
                     <dd className="text-base leading-8 text-pine-950">

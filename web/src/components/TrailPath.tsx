@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 interface Point {
   x: number;
@@ -20,28 +20,46 @@ function segmentPath(a: Point, b: Point, index: number, bow: number, width: numb
   return `M ${a.x} ${a.y} C ${mx} ${c1y}, ${mx} ${c2y}, ${b.x} ${b.y}`;
 }
 
+/** Segment draw (DESIGN-004 §Progress draws): 600ms each, 120ms apart. */
+const DRAW_MS = 600;
+const DRAW_STAGGER_MS = 120;
+
+function prefersReducedMotion(): boolean {
+  return (
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+}
+
 /**
  * TrailPath — the winding trail-map connective path (DESIGN-003 §Course map).
  * Mount inside a `relative` container that holds `[data-trail-anchor]`
  * elements (one per waypoint, in trail order); the path is measured through
  * their centers and re-measured on resize. `traversed[i]` blazes the segment
  * leaving waypoint i in pine-300; untraveled trail stays a dotted hairline.
+ *
+ * Traversed segments draw themselves in once the geometry is measured, in trail
+ * order; a resize re-measures without re-drawing.
  */
 export function TrailPath({
   traversed,
   bow = 44,
+  animateDraw = true,
   className = "",
 }: {
   /** Per-segment traversed flags (length = waypoints - 1; missing = false). */
   traversed: boolean[];
   /** Sideways bow amplitude (px) for near-vertical segments. */
   bow?: number;
+  /** Draw the traversed segments on mount; false renders them final. */
+  animateDraw?: boolean;
   className?: string;
 }) {
   const svgRef = useRef<SVGSVGElement>(null);
   const [layout, setLayout] = useState<{ w: number; h: number; points: Point[] } | null>(
     null,
   );
+  const [drawn, setDrawn] = useState(() => !animateDraw || prefersReducedMotion());
 
   useLayoutEffect(() => {
     const svg = svgRef.current;
@@ -70,6 +88,14 @@ export function TrailPath({
       window.removeEventListener("resize", measure);
     };
   }, [traversed.length]);
+
+  // The paths only exist once the anchors are measured, so the draw starts on
+  // the frame after that first geometry paint.
+  useEffect(() => {
+    if (drawn || !layout) return;
+    const id = requestAnimationFrame(() => setDrawn(true));
+    return () => cancelAnimationFrame(id);
+  }, [drawn, layout]);
 
   if (!layout || layout.points.length < 2) {
     return <svg ref={svgRef} className={`absolute inset-0 ${className}`} aria-hidden />;
@@ -101,17 +127,24 @@ export function TrailPath({
           strokeDasharray="2 10"
         />
       ))}
-      {/* Traversed segments blaze solid pine-300 */}
+      {/* Traversed segments blaze solid pine-300, drawing in trail order */}
       {segments.map((seg, i) =>
         seg.done ? (
           <path
             key={`done-${i}`}
             d={seg.d}
+            pathLength={1}
             fill="none"
             stroke="var(--ts-pine-300)"
             strokeWidth={4}
             strokeLinecap="round"
-            style={{ transition: "stroke-dashoffset var(--ts-dur-slow) var(--ts-ease-out)" }}
+            strokeDasharray={1}
+            strokeDashoffset={drawn ? 0 : 1}
+            style={{
+              transition: `stroke-dashoffset ${DRAW_MS}ms var(--ts-ease-in-out) ${
+                i * DRAW_STAGGER_MS
+              }ms`,
+            }}
           />
         ) : null,
       )}

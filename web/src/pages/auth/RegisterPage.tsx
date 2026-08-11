@@ -2,6 +2,7 @@ import { useState, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AlertCircle } from "lucide-react";
 import { AuthLayout } from "./AuthLayout";
+import { Reveal } from "../../activities/motion";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { PasswordInput } from "../../components/PasswordInput";
@@ -81,17 +82,19 @@ export default function RegisterPage() {
             {INLINE_COPY.rateLimited}
           </p>
         )}
-        <Input
-          label="Display name"
-          autoComplete="nickname"
-          hint="What Ranger and your certificate call you."
-          maxLength={40}
-          value={displayName}
-          error={errors.displayName}
-          onChange={(e) => setDisplayName(e.target.value)}
-          onBlur={() => blurCheck("displayName")}
-        />
-        <div className="flex flex-col gap-1.5">
+        <Reveal index={0}>
+          <Input
+            label="Display name"
+            autoComplete="nickname"
+            hint="What Ranger and your certificate call you."
+            maxLength={40}
+            value={displayName}
+            error={errors.displayName}
+            onChange={(e) => setDisplayName(e.target.value)}
+            onBlur={() => blurCheck("displayName")}
+          />
+        </Reveal>
+        <Reveal index={1} className="flex flex-col gap-1.5">
           <Input
             label="Email"
             type="email"
@@ -117,19 +120,23 @@ export default function RegisterPage() {
               — your trail is waiting.
             </p>
           )}
-        </div>
-        <PasswordInput
-          label="Password"
-          autoComplete="new-password"
-          showStrength
-          value={password}
-          error={errors.password}
-          onChange={(e) => setPassword(e.target.value)}
-          onBlur={() => blurCheck("password")}
-        />
-        <Button type="submit" size="l" loading={register.isPending} className="w-full">
-          Start the course
-        </Button>
+        </Reveal>
+        <Reveal index={2}>
+          <PasswordInput
+            label="Password"
+            autoComplete="new-password"
+            showStrength
+            value={password}
+            error={errors.password}
+            onChange={(e) => setPassword(e.target.value)}
+            onBlur={() => blurCheck("password")}
+          />
+        </Reveal>
+        <Reveal index={3}>
+          <Button type="submit" size="l" loading={register.isPending} className="w-full">
+            Start the course
+          </Button>
+        </Reveal>
         <p className="text-center text-sm text-ink-500">
           Already riding with us?{" "}
           <Link to="/login" className="rounded-sm font-medium text-pine-700 hover:underline">

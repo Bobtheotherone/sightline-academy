@@ -31,7 +31,17 @@ export default function HotspotListActivity({ step, evidence, onEvidence }: Acti
   const prior = (evidence?.value ?? null) as HotspotsValue | null;
 
   const [visited, setVisited] = useState<string[]>(() => prior?.visited ?? []);
-  const [openId, setOpenId] = useState<string | null>(null);
+  /* Resume/revisit opens on the last waypoint this rider read: a finished
+   * activity must never greet them with its own empty prompt. The sheet stays
+   * shut on mount — only a tap opens it — so mobile still lands on the scene. */
+  const [openId, setOpenId] = useState<string | null>(() => {
+    const seen = prior?.visited ?? [];
+    for (let i = seen.length - 1; i >= 0; i--) {
+      if (payload.hotspots.some((h) => h.id === seen[i])) return seen[i];
+    }
+    return null;
+  });
+  const [sheetOpen, setSheetOpen] = useState(false);
   const [revisit] = useState(Boolean(evidence?.complete));
 
   const total = payload.hotspots.length;
@@ -44,6 +54,7 @@ export default function HotspotListActivity({ step, evidence, onEvidence }: Acti
 
   const visit = (hotspot: Hotspot) => {
     setOpenId(hotspot.id);
+    setSheetOpen(true);
     if (visited.includes(hotspot.id)) return;
     const next = [...visited, hotspot.id];
     setVisited(next);
@@ -101,7 +112,7 @@ export default function HotspotListActivity({ step, evidence, onEvidence }: Acti
     <div className="flex flex-col gap-4">
       <style>{MARKER_KEYFRAMES}</style>
 
-      <div className="grid items-start gap-5 lg:grid-cols-[minmax(0,1fr)_280px]">
+      <div className="grid items-stretch gap-5 lg:grid-cols-[minmax(0,1fr)_280px]">
         {/* Scene with positioned markers. Hotspot bases are authored on a
          * 500x300 canvas (assets/manifest.json) — the frame must stay 5:3 so
          * the payload's percent coordinates land on the drawn features. */}
@@ -149,9 +160,11 @@ export default function HotspotListActivity({ step, evidence, onEvidence }: Acti
         </figure>
 
         {/* Desktop side panel */}
+        {/* Stretches to the scene's height so the two-column band has no void
+         * under the right card. */}
         <aside
           aria-label="Waypoint details"
-          className="hidden rounded-md border border-line-200 bg-paper-0 p-5 lg:sticky lg:top-6 lg:block"
+          className="hidden rounded-md border border-line-200 bg-paper-0 p-5 lg:flex lg:flex-col"
         >
           {open ? (
             detail(open, openIndex)
@@ -211,7 +224,11 @@ export default function HotspotListActivity({ step, evidence, onEvidence }: Acti
       )}
 
       {/* Mobile bottom sheet */}
-      <BottomSheet open={Boolean(open)} onClose={() => setOpenId(null)} title={open?.label ?? "Waypoint"}>
+      <BottomSheet
+        open={sheetOpen && Boolean(open)}
+        onClose={() => setSheetOpen(false)}
+        title={open?.label ?? "Waypoint"}
+      >
         {open && detail(open, openIndex)}
       </BottomSheet>
     </div>

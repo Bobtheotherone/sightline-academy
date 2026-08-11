@@ -1,4 +1,12 @@
-import { forwardRef, useId, type InputHTMLAttributes, type ReactNode } from "react";
+import {
+  forwardRef,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  type InputHTMLAttributes,
+  type ReactNode,
+} from "react";
 import { AlertCircle } from "lucide-react";
 
 /** Shared field chrome: label, hint, error, char counter (DESIGN-002). */
@@ -47,11 +55,28 @@ export function FieldShell({
 }
 
 export const inputClass = (hasError: boolean) =>
-  `h-10 w-full rounded-sm border bg-paper-0 px-3 text-base text-pine-950 placeholder:text-ink-500/70 transition-colors duration-(--ts-dur-fast) ${
+  `h-10 w-full rounded-sm border bg-paper-50 px-3 text-base text-pine-950 placeholder:text-ink-500/70 transition-colors duration-(--ts-dur-fast) ease-(--ts-ease-out) ${
     hasError
       ? "border-danger-600"
       : "border-line-200 hover:border-pine-300 focus:border-pine-700"
   }`;
+
+/**
+ * Error shake (DESIGN-004): ±4px, once, when a field goes from valid to invalid
+ * — i.e. on submit-with-error, never while typing into an already-bad field.
+ */
+export function useErrorShake(hasError: boolean) {
+  const [shaking, setShaking] = useState(false);
+  const prev = useRef(hasError);
+  useEffect(() => {
+    if (hasError && !prev.current) setShaking(true);
+    prev.current = hasError;
+  }, [hasError]);
+  return {
+    className: shaking ? "ts-act-shake" : "",
+    onAnimationEnd: () => setShaking(false),
+  };
+}
 
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "id"> {
   label: string;
@@ -65,6 +90,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   ref,
 ) {
   const id = useId();
+  const shake = useErrorShake(Boolean(error));
   const counter =
     showCounter && maxLength
       ? { value: String(value ?? "").length, max: maxLength }
@@ -78,7 +104,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         maxLength={maxLength}
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? `${id}-error` : hint ? `${id}-hint` : undefined}
-        className={`${inputClass(Boolean(error))} ${className}`}
+        onAnimationEnd={shake.onAnimationEnd}
+        className={`${inputClass(Boolean(error))} ${shake.className} ${className}`}
         {...rest}
       />
     </FieldShell>

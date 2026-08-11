@@ -23,9 +23,50 @@
  * present those at ratio "5 / 3" so percent coordinates stay exact. They are
  * svg-authored for exactly this reason and must never become raster.
  */
+import { createContext, useContext, type CSSProperties, type ReactNode } from "react";
 import manifest from "../assets/manifest.json";
 import { ContourPanel } from "./ContourPanel";
 import { BlazeMarker } from "./BlazeMarker";
+
+const StagedArtContext = createContext(false);
+
+/**
+ * Marks a composition surface: every SlotArt inside loses the plate chrome —
+ * hairline and paper ground — and stages itself instead. DESIGN-001 retires
+ * the boxed-plate composition outside diagram/figure contexts and DESIGN-006
+ * asks for art that is staged, not boxed; this lets a surface say that once
+ * for art it does not build itself.
+ *
+ * It is not `bleed`: the authored plates paint their own paper ground edge to
+ * edge, so the corner clip has to stay or the art reads as a hard-cornered
+ * white rectangle dropped on the page. What goes is the frame around it — and,
+ * per STAGE_FADE below, the hard edge of the ground the plate brought with it.
+ */
+export function StagedArt({ children }: { children: ReactNode }) {
+  return <StagedArtContext.Provider value={true}>{children}</StagedArtContext.Provider>;
+}
+
+/**
+ * Dropping the frame is not enough on a bare wash: the authored plate paints
+ * paper-0 edge to edge, so on the contour ground it still reads as a near-white
+ * rectangle with a hard tonal edge (DESIGN-006 "art is staged, not boxed").
+ * Staged plates therefore dissolve their own ground into whatever they sit on —
+ * invisible where that ground is already paper, decisive on the wash.
+ *
+ * One single-layer mask per axis, the vertical on the plate box and the
+ * horizontal on the image inside it, so the two intersect by nesting. A single
+ * two-layer `mask-image` with `mask-composite: intersect` would be tidier, but
+ * how the bottom layer composites against an empty backdrop is exactly the part
+ * implementations read differently, and losing that bet erases the art.
+ */
+const STAGE_FADE_Y: CSSProperties = {
+  maskImage: "linear-gradient(to bottom, transparent, black 9%, black 91%, transparent)",
+  maskRepeat: "no-repeat",
+};
+const STAGE_FADE_X: CSSProperties = {
+  maskImage: "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
+  maskRepeat: "no-repeat",
+};
 
 interface SlotMeta {
   status: string;
@@ -68,6 +109,9 @@ export function SlotArt({
   className = "",
   sizes = "(min-width: 1024px) 50vw, 100vw",
   priority = false,
+  bleed = false,
+  scrim = false,
+  children,
 }: {
   /** Slot name from DESIGN-002 §Illustration slots (e.g. "hero-landing"). */
   slot: string;
@@ -79,11 +123,40 @@ export function SlotArt({
   sizes?: string;
   /** Raster only: set on the LCP image so it is not lazy-loaded. */
   priority?: boolean;
+  /** Stage the art as a composition: no frame, no clipping (DESIGN-003). */
+  bleed?: boolean;
+  /** Lay --ts-grad-scrim over the art so type can sit on it. */
+  scrim?: boolean;
+  /** Rendered above the scrim — the text-over-art header slot. */
+  children?: ReactNode;
 }) {
+  const inStagedSurface = useContext(StagedArtContext);
   const meta = SLOTS[slot];
-  const frame = `block overflow-hidden rounded-md border bg-paper-0 ${
-    variant === "dark" ? "border-paper-0/15" : "border-line-200"
-  } ${className}`;
+  const staged = scrim || Boolean(children);
+  const unframed = bleed || inStagedSurface;
+  const fadeY = inStagedSurface ? STAGE_FADE_Y : undefined;
+  const fadeX = inStagedSurface ? STAGE_FADE_X : undefined;
+  const frame = bleed
+    ? `block ${staged ? "relative" : ""} ${className}`
+    : `block overflow-hidden rounded-md ${staged ? "relative" : ""} ${
+        unframed
+          ? ""
+          : `border bg-paper-0 ${variant === "dark" ? "border-paper-0/15" : "border-line-200"}`
+      } ${className}`;
+  // A <span> stays inline-safe for the plain plate; staged art carries headings.
+  const Box = children ? "div" : "span";
+  const stage = staged ? (
+    <>
+      {scrim && (
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{ backgroundImage: "var(--ts-grad-scrim)" }}
+        />
+      )}
+      {children && <span className="absolute inset-0 flex flex-col justify-end">{children}</span>}
+    </>
+  ) : null;
 
   if (meta?.status === "real" && meta.kind === "raster" && meta.widths?.length) {
     const widths = meta.widths;
@@ -94,7 +167,7 @@ export function SlotArt({
       RASTER_URLS[`../assets/raster/${slot}-${widths[widths.length - 1]}w.png`];
     if (fallback) {
       return (
-        <span style={{ aspectRatio: ratio }} className={frame}>
+        <Box style={{ aspectRatio: ratio, ...fadeY }} className={frame}>
           <picture>
             {avif && <source type="image/avif" srcSet={avif} sizes={sizes} />}
             {webp && <source type="image/webp" srcSet={webp} sizes={sizes} />}
@@ -107,10 +180,12 @@ export function SlotArt({
               // fetchPriority is a valid img attribute; React 18 passes it through.
               fetchPriority={priority ? "high" : undefined}
               decoding="async"
+              style={fadeX}
               className="h-full w-full object-cover"
             />
           </picture>
-        </span>
+          {stage}
+        </Box>
       );
     }
   }
@@ -120,13 +195,15 @@ export function SlotArt({
 
   if (src) {
     return (
-      <span style={{ aspectRatio: ratio }} className={frame}>
+      <Box style={{ aspectRatio: ratio, ...fadeY }} className={frame}>
         <img
           src={src}
           alt={meta?.alt ?? `Illustration plate: ${slot}`}
+          style={fadeX}
           className="h-full w-full object-contain"
         />
-      </span>
+        {stage}
+      </Box>
     );
   }
 
@@ -134,8 +211,8 @@ export function SlotArt({
     <ContourPanel
       variant={variant}
       style={{ aspectRatio: ratio }}
-      className={`flex items-center justify-center overflow-hidden rounded-md border ${
-        variant === "dark" ? "border-paper-0/15" : "border-line-200"
+      className={`flex items-center justify-center rounded-md ${bleed ? "" : "overflow-hidden"} ${
+        unframed ? "" : `border ${variant === "dark" ? "border-paper-0/15" : "border-line-200"}`
       } ${className}`}
       role="img"
       aria-label={`Illustration plate: ${slot}`}
@@ -150,6 +227,7 @@ export function SlotArt({
           {slot}
         </span>
       </span>
+      {stage}
     </ContourPanel>
   );
 }

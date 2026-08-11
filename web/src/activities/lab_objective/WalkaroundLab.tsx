@@ -16,6 +16,12 @@ import { BottomSheet } from "../sheet";
 import type { LabComponentProps } from "./index";
 import { WALKAROUND_ZONES, type WalkaroundZone } from "./walkaroundZones";
 
+/* The drawing is inset inside a 4:3 plate so the placed labels have somewhere
+ * to live that isn't on top of the machine. Both axes scale by the same factor
+ * (the plate and the drawing share 4:3), so one mapping serves for x and y. */
+const MACHINE_SCALE = 0.72;
+const toScene = (v: number) => (100 * (1 - MACHINE_SCALE)) / 2 + MACHINE_SCALE * v;
+
 export function WalkaroundLab({ payload, met, meet, revisit }: LabComponentProps) {
   const config = payload.config as { zones?: string[] };
   const zones = (config.zones ?? [])
@@ -135,63 +141,111 @@ export function WalkaroundLab({ payload, met, meet, revisit }: LabComponentProps
       <div className="grid items-start gap-5 lg:grid-cols-[minmax(0,1fr)_320px]">
         {/* Scene */}
         <figure className="min-w-0">
-          <div className="relative overflow-hidden rounded-md border border-line-200 bg-paper-0">
-            <AtvTopDown />
-            {zones.map((zone) => {
-              const isPlaced = placed.has(zone.id);
-              const targetable = stage === 1 && (Boolean(selectedId) || dragOverId === zone.id);
-              return (
+          <div className="relative aspect-[4/3] overflow-hidden rounded-md border border-line-200 bg-paper-0">
+            {/* The machine, inset so the labels have a margin to park in.
+             * Unplaced regions are compact round targets on the drawing; once
+             * placed, the region keeps only its blaze and the name parks out in
+             * the margin, joined back by a leader line. */}
+            <div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+              style={{ width: `${MACHINE_SCALE * 100}%` }}
+            >
+              <AtvTopDown />
+              {zones
+                .filter((zone) => !placed.has(zone.id))
+                .map((zone) => {
+                  const targetable = Boolean(selectedId) || dragOverId === zone.id;
+                  return (
+                    <button
+                      key={zone.id}
+                      type="button"
+                      onClick={() => selectedId && attempt(selectedId, zone.id)}
+                      onDragOver={(e) => {
+                        e.preventDefault();
+                        setDragOverId(zone.id);
+                      }}
+                      onDragLeave={() => setDragOverId((z) => (z === zone.id ? null : z))}
+                      onDrop={(e) => onDrop(e, zone.id)}
+                      aria-label={
+                        selectedId
+                          ? `Place "${zones.find((z) => z.id === selectedId)?.name}" on the ${zone.regionName.toLowerCase()}`
+                          : `Drop region: ${zone.regionName.toLowerCase()}`
+                      }
+                      style={{ left: `${zone.x}%`, top: `${zone.y}%` }}
+                      className={`absolute grid size-9 -translate-x-1/2 -translate-y-1/2 cursor-pointer place-items-center rounded-full border-2 border-dashed font-mono text-sm transition-all duration-(--ts-dur-fast) lg:size-10 ${
+                        targetable
+                          ? "scale-110 border-pine-700 bg-pine-300/35 text-pine-700"
+                          : "border-pine-300 bg-paper-0/70 text-ink-500 hover:border-pine-700 hover:bg-pine-300/15"
+                      }`}
+                    >
+                      <span aria-hidden>?</span>
+                    </button>
+                  );
+                })}
+            </div>
+
+            {/* Leader lines: each parked label back to the region it annotates. */}
+            <svg
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+              aria-hidden
+              className="pointer-events-none absolute inset-0 size-full"
+            >
+              {zones
+                .filter((zone) => placed.has(zone.id))
+                .map((zone) => (
+                  <line
+                    key={zone.id}
+                    x1={toScene(zone.x)}
+                    y1={toScene(zone.y)}
+                    x2={zone.labelX}
+                    y2={zone.labelY}
+                    stroke="var(--ts-pine-700)"
+                    strokeWidth="1"
+                    strokeOpacity="0.5"
+                    vectorEffect="non-scaling-stroke"
+                  />
+                ))}
+            </svg>
+
+            {/* The blaze the drop earned, drawn on the region it belongs to. */}
+            {zones
+              .filter((zone) => placed.has(zone.id))
+              .map((zone) => (
+                <span
+                  key={zone.id}
+                  aria-hidden
+                  style={{ left: `${toScene(zone.x)}%`, top: `${toScene(zone.y)}%` }}
+                  className="absolute -translate-x-1/2 -translate-y-1/2"
+                >
+                  <BlazeCheckDraw />
+                </span>
+              ))}
+
+            {/* Placed labels, parked clear of the drawing. */}
+            {zones
+              .filter((zone) => placed.has(zone.id))
+              .map((zone) => (
                 <button
                   key={zone.id}
                   type="button"
-                  onClick={() =>
-                    stage === 1
-                      ? selectedId && attempt(selectedId, zone.id)
-                      : openCard(zones.indexOf(zone))
-                  }
-                  onDragOver={(e) => {
-                    if (stage !== 1) return;
-                    e.preventDefault();
-                    setDragOverId(zone.id);
-                  }}
-                  onDragLeave={() => setDragOverId((z) => (z === zone.id ? null : z))}
-                  onDrop={(e) => stage === 1 && onDrop(e, zone.id)}
+                  onClick={() => stage === 2 && openCard(zones.indexOf(zone))}
                   aria-label={
                     stage === 1
-                      ? isPlaced
-                        ? `${zone.regionName}: ${zone.name} placed`
-                        : selectedId
-                          ? `Place "${zones.find((z) => z.id === selectedId)?.name}" on the ${zone.regionName.toLowerCase()}`
-                          : `Drop region: ${zone.regionName.toLowerCase()}`
+                      ? `${zone.regionName}: ${zone.name} placed`
                       : `Review ${zone.name}`
                   }
-                  style={{ left: `${zone.x}%`, top: `${zone.y}%` }}
-                  className={`absolute flex min-h-9 w-14 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center gap-1.5 rounded-sm border-2 px-1.5 py-1 text-xs font-semibold transition-all duration-(--ts-dur-fast) lg:min-h-11 lg:w-24 ${
-                    isPlaced
-                      ? `border-pine-700 bg-paper-0/95 text-pine-950 ${
-                          justPlacedId === zone.id ? "ts-act-settle" : ""
-                        }`
-                      : targetable
-                        ? "border-pine-700 border-dashed bg-pine-300/25 text-pine-700"
-                        : "border-pine-300 border-dashed bg-paper-0/60 text-ink-500 hover:border-pine-700 hover:bg-pine-300/15"
-                  }`}
+                  style={{ left: `${zone.labelX}%`, top: `${zone.labelY}%` }}
+                  className={`absolute flex min-h-9 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-sm border-2 border-pine-700 bg-paper-0 px-1.5 py-1 text-center text-xs leading-tight font-semibold text-pine-950 shadow-soft transition-colors duration-(--ts-dur-fast) lg:min-h-11 lg:w-20 ${
+                    stage === 2 ? "cursor-pointer hover:bg-pine-300/20" : ""
+                  } ${justPlacedId === zone.id ? "ts-act-settle" : ""}`}
                 >
-                  {isPlaced ? (
-                    <>
-                      <BlazeCheckDraw />
-                      <span className="min-w-0 leading-tight max-lg:hidden">{zone.name}</span>
-                      <span className="font-mono lg:hidden" aria-hidden>
-                        {zone.letter}
-                      </span>
-                    </>
-                  ) : (
-                    <span aria-hidden className="font-mono text-sm text-inherit">
-                      ?
-                    </span>
-                  )}
+                  <span className="min-w-0 max-lg:hidden">{zone.name}</span>
+                  <span className="font-mono text-sm lg:hidden" aria-hidden>
+                    {zone.letter}
+                  </span>
                 </button>
-              );
-            })}
+              ))}
           </div>
           <figcaption className="mt-2 flex flex-wrap items-baseline justify-between gap-2">
             <span className="text-sm italic text-ink-500">

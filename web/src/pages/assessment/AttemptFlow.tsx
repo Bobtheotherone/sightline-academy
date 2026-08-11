@@ -3,7 +3,7 @@
  * order and option order shuffled per attempt; blaze progress rail; a review
  * screen before submit (SPEC-006). Results render in ResultsView.
  */
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ArrowLeft, ArrowRight, ClipboardCheck, Send } from "lucide-react";
 import {
@@ -19,10 +19,37 @@ import { Button } from "../../components/Button";
 import { Card } from "../../components/Card";
 import { KnowledgeOption } from "../../components/KnowledgeOption";
 import { ProgressBar } from "../../components/Progress";
-import { RiseIn } from "../../activities/motion";
+import { RiseIn, useEntered } from "../../activities/motion";
 import ResultsView from "./ResultsView";
 
 const MARKERS = ["A", "B", "C", "D", "E", "F"];
+
+/** Question advance (DESIGN-004): 240ms crossfade + 8px directional slide —
+ * forward rises into place, back descends. Keyed by question id to replay. */
+function StepFade({
+  dir,
+  className = "",
+  children,
+}: {
+  dir: 1 | -1;
+  className?: string;
+  children: ReactNode;
+}) {
+  const entered = useEntered();
+  return (
+    <div
+      className={`transition-[opacity,translate] duration-(--ts-dur-base) ease-(--ts-ease-out) ${
+        entered
+          ? "translate-y-0 opacity-100"
+          : dir > 0
+            ? "translate-y-2 opacity-0"
+            : "-translate-y-2 opacity-0"
+      } ${className}`}
+    >
+      {children}
+    </div>
+  );
+}
 
 interface Slot {
   question: AssessmentBankQuestion;
@@ -58,7 +85,14 @@ function QuestionRail({
   onJump: (i: number) => void;
 }) {
   return (
-    <div className="flex flex-wrap gap-1" role="group" aria-label="Jump to a question">
+    // The dots share the ProgressBar's track: one equal column per question, so
+    // both readings of the same value end on the same right edge (DESIGN-006).
+    <div
+      className="grid w-full place-items-center"
+      style={{ gridTemplateColumns: `repeat(${slots.length}, minmax(0, 1fr))` }}
+      role="group"
+      aria-label="Jump to a question"
+    >
       {slots.map((slot, i) => {
         const answered = Boolean(answers[slot.question.id]);
         const current = i === index;
@@ -69,7 +103,7 @@ function QuestionRail({
             onClick={() => onJump(i)}
             aria-label={`Question ${i + 1}${answered ? " — answered" : ""}${current ? " — current" : ""}`}
             aria-current={current ? "step" : undefined}
-            className="grid size-7 place-items-center rounded-sm transition-colors duration-(--ts-dur-fast) hover:bg-moss-100"
+            className="grid h-7 w-full min-w-0 place-items-center rounded-sm transition-colors duration-(--ts-dur-fast) hover:bg-moss-100"
           >
             <span
               className={`size-2.5 rotate-45 rounded-[3px] transition-colors duration-(--ts-dur-fast) ${
@@ -94,6 +128,7 @@ export default function AttemptFlow({
   const [slots, setSlots] = useState<Slot[]>(() => deal(bank));
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [index, setIndex] = useState(0);
+  const [dir, setDir] = useState<1 | -1>(1);
   const [reviewing, setReviewing] = useState(false);
   const [result, setResult] = useState<AssessmentResult | null>(null);
   const queryClient = useQueryClient();
@@ -130,6 +165,7 @@ export default function AttemptFlow({
   const total = slots.length;
   const answered = slots.filter((s) => answers[s.question.id]).length;
   const jump = (i: number) => {
+    setDir(i < index ? -1 : 1);
     setIndex(i);
     setReviewing(false);
     window.scrollTo({ top: 0 });
@@ -157,72 +193,85 @@ export default function AttemptFlow({
   if (reviewing) {
     const unanswered = total - answered;
     return (
-      <div className="mx-auto w-full max-w-lesson flex-1 px-6 py-10">
-        {header}
-        <RiseIn className="mt-6">
-          <div className="flex items-start gap-3">
-            <ClipboardCheck className="mt-1 size-6 shrink-0 text-pine-700" strokeWidth={1.5} aria-hidden />
-            <div>
-              <h1 className="font-display text-2xl font-bold">Review before you submit</h1>
-              <p className="mt-1 text-sm text-ink-500">
-                Nothing is scored until you submit. Tap any row to change an answer.
-              </p>
-            </div>
-          </div>
-          <Card padding="none" className="mt-6 overflow-hidden">
-            <ol>
-              {slots.map((slot, i) => {
-                const chosen = slot.options.find((o) => o.id === answers[slot.question.id]);
-                return (
-                  <li key={slot.question.id} className={i > 0 ? "border-t border-line-200" : ""}>
-                    <button
-                      type="button"
-                      onClick={() => jump(i)}
-                      className="grid w-full grid-cols-[2rem_1fr] items-baseline gap-x-3 px-5 py-3 text-left transition-colors duration-(--ts-dur-fast) hover:bg-moss-100"
-                    >
-                      <span className="font-mono text-xs text-ink-500">{i + 1}.</span>
-                      <span className="min-w-0">
-                        <span className="block text-sm font-medium text-pine-950">
-                          {slot.question.prompt}
-                        </span>
-                        {chosen ? (
-                          <span className="mt-0.5 block text-sm text-ink-500">{chosen.text}</span>
-                        ) : (
-                          <span className="mt-0.5 block text-sm font-medium text-clay-500">
-                            Not answered yet
+      <div className="ts-contour flex-1">
+        <div className="mx-auto w-full max-w-lesson px-6 py-10">
+          <div className="rounded-lg bg-paper-50 p-5 shadow-1 sm:p-7">
+            {header}
+            <RiseIn className="mt-6">
+              <div className="flex items-start gap-3">
+                <ClipboardCheck
+                  className="mt-1 size-6 shrink-0 text-pine-700"
+                  strokeWidth={1.5}
+                  aria-hidden
+                />
+                <div>
+                  <h1 className="font-display text-2xl font-bold">Review before you submit</h1>
+                  <p className="mt-1 text-sm text-ink-500">
+                    Nothing is scored until you submit. Tap any row to change an answer.
+                  </p>
+                </div>
+              </div>
+              <Card padding="none" bordered className="mt-6 overflow-hidden">
+                <ol>
+                  {slots.map((slot, i) => {
+                    const chosen = slot.options.find((o) => o.id === answers[slot.question.id]);
+                    return (
+                      <li
+                        key={slot.question.id}
+                        className={i > 0 ? "border-t border-line-200" : ""}
+                      >
+                        <button
+                          type="button"
+                          onClick={() => jump(i)}
+                          className="grid w-full grid-cols-[2rem_1fr] items-baseline gap-x-3 px-5 py-3 text-left transition-colors duration-(--ts-dur-fast) hover:bg-moss-100"
+                        >
+                          <span className="font-mono text-xs text-ink-500">{i + 1}.</span>
+                          <span className="min-w-0">
+                            <span className="block text-sm font-medium text-pine-950">
+                              {slot.question.prompt}
+                            </span>
+                            {chosen ? (
+                              <span className="mt-0.5 block text-sm text-ink-500">
+                                {chosen.text}
+                              </span>
+                            ) : (
+                              <span className="mt-0.5 block text-sm font-medium text-clay-500">
+                                Not answered yet
+                              </span>
+                            )}
                           </span>
-                        )}
-                      </span>
-                    </button>
-                  </li>
-                );
-              })}
-            </ol>
-          </Card>
-          <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
-            <Button variant="secondary" onClick={() => setReviewing(false)}>
-              <ArrowLeft className="size-4" strokeWidth={2} aria-hidden />
-              Back to the questions
-            </Button>
-            <div className="flex flex-col items-end gap-1.5">
-              <Button
-                size="l"
-                disabled={unanswered > 0}
-                loading={submit.isPending}
-                onClick={() => submit.mutate()}
-                iconLeft={<Send className="size-4" strokeWidth={1.5} aria-hidden />}
-              >
-                Submit for scoring
-              </Button>
-              {unanswered > 0 && (
-                <p className="text-xs text-ink-500">
-                  Answer the remaining {unanswered === 1 ? "question" : `${unanswered} questions`}{" "}
-                  to submit.
-                </p>
-              )}
-            </div>
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ol>
+              </Card>
+              <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
+                <Button variant="secondary" onClick={() => setReviewing(false)}>
+                  <ArrowLeft className="size-4" strokeWidth={2} aria-hidden />
+                  Back to the questions
+                </Button>
+                <div className="flex flex-col items-end gap-1.5">
+                  <Button
+                    size="l"
+                    disabled={unanswered > 0}
+                    loading={submit.isPending}
+                    onClick={() => submit.mutate()}
+                    iconLeft={<Send className="size-4" strokeWidth={1.5} aria-hidden />}
+                  >
+                    Submit for scoring
+                  </Button>
+                  {unanswered > 0 && (
+                    <p className="text-xs text-ink-500">
+                      Answer the remaining{" "}
+                      {unanswered === 1 ? "question" : `${unanswered} questions`} to submit.
+                    </p>
+                  )}
+                </div>
+              </div>
+            </RiseIn>
           </div>
-        </RiseIn>
+        </div>
       </div>
     );
   }
@@ -233,66 +282,76 @@ export default function AttemptFlow({
   const last = index === total - 1;
 
   return (
-    <div className="mx-auto w-full max-w-lesson flex-1 px-6 py-10">
-      {header}
-      <div className="mt-4 flex flex-col gap-3">
-        <ProgressBar
-          value={(answered / total) * 100}
-          label={`${answered} of ${total} questions answered`}
-        />
-        <QuestionRail slots={slots} answers={answers} index={index} onJump={jump} />
-      </div>
-
-      <RiseIn key={slot.question.id} className="mt-6">
-        {moduleFacts && (
-          <p className="ts-eyebrow">
-            Module {moduleFacts.order} · {moduleFacts.title}
-          </p>
-        )}
-        <p className="mt-2 text-lg font-medium text-pine-950">{slot.question.prompt}</p>
-        <div className="mt-4 flex flex-col gap-2" role="group" aria-label={slot.question.prompt}>
-          {slot.options.map((option, i) => (
-            <KnowledgeOption
-              key={option.id}
-              state={option.id === chosenId ? "selected" : "idle"}
-              marker={MARKERS[i] ?? String(i + 1)}
-              text={option.text}
-              onSelect={() =>
-                setAnswers((prev) => ({ ...prev, [slot.question.id]: option.id }))
-              }
+    // Ground wash → stage → option cards: the attempt sits on the same elevated
+    // sheet as the lesson player it is testing (DESIGN-003 §Lesson player).
+    <div className="ts-contour flex-1">
+      <div className="mx-auto w-full max-w-lesson px-6 py-10">
+        <div className="rounded-lg bg-paper-50 p-5 shadow-1 sm:p-7">
+          {header}
+          <div className="mt-4 flex flex-col gap-3">
+            <ProgressBar
+              value={(answered / total) * 100}
+              label={`${answered} of ${total} questions answered`}
             />
-          ))}
-        </div>
-      </RiseIn>
+            <QuestionRail slots={slots} answers={answers} index={index} onJump={jump} />
+          </div>
 
-      <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-line-200 pt-5">
-        <Button
-          variant="ghost"
-          disabled={index === 0}
-          onClick={() => jump(index - 1)}
-          iconLeft={<ArrowLeft className="size-4" strokeWidth={2} aria-hidden />}
-        >
-          Back
-        </Button>
-        <div className="flex flex-col items-end gap-1.5">
-          {last ? (
-            <Button size="l" onClick={() => setReviewing(true)}>
-              Review your answers
-              <ClipboardCheck className="ml-2 size-4" strokeWidth={1.5} aria-hidden />
-            </Button>
-          ) : (
-            <Button
-              size="l"
-              disabled={!chosenId}
-              onClick={() => jump(index + 1)}
-              iconRight={<ArrowRight className="size-4" strokeWidth={2} aria-hidden />}
+          <StepFade key={slot.question.id} dir={dir} className="mt-6">
+            {moduleFacts && (
+              <p className="ts-eyebrow">
+                Module {moduleFacts.order} · {moduleFacts.title}
+              </p>
+            )}
+            <p className="mt-2 text-lg font-medium text-pine-950">{slot.question.prompt}</p>
+            <div
+              className="mt-4 flex flex-col gap-2"
+              role="group"
+              aria-label={slot.question.prompt}
             >
-              Next question
+              {slot.options.map((option, i) => (
+                <KnowledgeOption
+                  key={option.id}
+                  state={option.id === chosenId ? "selected" : "idle"}
+                  marker={MARKERS[i] ?? String(i + 1)}
+                  text={option.text}
+                  onSelect={() =>
+                    setAnswers((prev) => ({ ...prev, [slot.question.id]: option.id }))
+                  }
+                />
+              ))}
+            </div>
+          </StepFade>
+
+          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-line-200 pt-5">
+            <Button
+              variant="ghost"
+              disabled={index === 0}
+              onClick={() => jump(index - 1)}
+              iconLeft={<ArrowLeft className="size-4" strokeWidth={2} aria-hidden />}
+            >
+              Back
             </Button>
-          )}
-          {!chosenId && !last && (
-            <p className="text-xs text-ink-500">Choose an answer to continue.</p>
-          )}
+            <div className="flex flex-col items-end gap-1.5">
+              {last ? (
+                <Button size="l" onClick={() => setReviewing(true)}>
+                  Review your answers
+                  <ClipboardCheck className="ml-2 size-4" strokeWidth={1.5} aria-hidden />
+                </Button>
+              ) : (
+                <Button
+                  size="l"
+                  disabled={!chosenId}
+                  onClick={() => jump(index + 1)}
+                  iconRight={<ArrowRight className="size-4" strokeWidth={2} aria-hidden />}
+                >
+                  Next question
+                </Button>
+              )}
+              {!chosenId && !last && (
+                <p className="text-xs text-ink-500">Choose an answer to continue.</p>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </div>

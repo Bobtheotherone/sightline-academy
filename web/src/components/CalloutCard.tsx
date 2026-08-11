@@ -5,15 +5,39 @@ export type CalloutKind = "tip" | "caution" | "story" | "risk";
 
 const KIND: Record<
   CalloutKind,
-  { bar: string; text: string; icon: typeof Lightbulb; role: string }
+  { bar: string; ground: string; text: string; icon: typeof Lightbulb; role: string }
 > = {
-  tip: { bar: "bg-pine-700", text: "text-pine-700", icon: Lightbulb, role: "Tip" },
-  caution: { bar: "bg-sun-400", text: "text-sun-400", icon: AlertTriangle, role: "Caution" },
-  story: { bar: "bg-sky-600", text: "text-sky-600", icon: BookOpen, role: "Field story" },
-  risk: { bar: "bg-danger-600", text: "text-danger-600", icon: OctagonAlert, role: "Risk" },
+  tip: {
+    bar: "bg-pine-700",
+    ground: "bg-pine-100",
+    text: "text-pine-700",
+    icon: Lightbulb,
+    role: "Tip",
+  },
+  caution: {
+    bar: "bg-sun-400",
+    ground: "bg-sun-100",
+    text: "text-sun-400",
+    icon: AlertTriangle,
+    role: "Caution",
+  },
+  story: {
+    bar: "bg-sky-600",
+    ground: "bg-sky-100",
+    text: "text-sky-600",
+    icon: BookOpen,
+    role: "Field story",
+  },
+  risk: {
+    bar: "bg-danger-600",
+    ground: "bg-danger-100",
+    text: "text-danger-600",
+    icon: OctagonAlert,
+    role: "Risk",
+  },
 };
 
-/** Semantic callout with the 3px left bar (DESIGN-002). */
+/** Semantic callout: 3px left bar over a low-intensity tinted ground (DESIGN-002 v2). */
 export function CalloutCard({
   kind,
   title,
@@ -29,7 +53,7 @@ export function CalloutCard({
   const Icon = k.icon;
   return (
     <aside
-      className={`relative overflow-hidden rounded-md border border-line-200 bg-paper-0 p-5 ${className}`}
+      className={`relative overflow-hidden rounded-md ${k.ground} p-5 ${className}`}
       aria-label={`${k.role}: ${title}`}
     >
       <span className={`absolute inset-y-0 left-0 w-[3px] ${k.bar}`} aria-hidden />

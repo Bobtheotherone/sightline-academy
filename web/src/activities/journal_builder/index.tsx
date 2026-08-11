@@ -146,8 +146,9 @@ export default function JournalBuilderActivity({
           })}
         </div>
 
-        {/* Live preview */}
-        <div className="lg:sticky lg:top-6">
+        {/* Live preview — sticky so it tracks the form instead of stranding the
+         * lower fields beside a void (the LessonPage step-rail pattern). */}
+        <div className="self-start lg:sticky lg:top-24">
           <ArtifactPreview
             eyebrow={`Field journal — ${artifactName}`}
             title={payload.title}

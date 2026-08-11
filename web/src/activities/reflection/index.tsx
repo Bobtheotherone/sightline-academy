@@ -1,6 +1,9 @@
 /* reflection renderer (SPEC-007 §10): a low-stakes think prompt. Calm and
- * spacious, explicitly "For you — not graded". One chip tap or a short line of
- * text completes; both are welcome together.
+ * spacious; the "not graded" reassurance appears once — here only when the
+ * step's own instructions line didn't already carry it. Everything sits on one
+ * left axis with the label and textarea; mixed centring made the eye reset
+ * mid-card. One chip tap or a short line of text completes; both are welcome
+ * together.
  */
 import { useMemo, useState } from "react";
 import { Feather } from "lucide-react";
@@ -10,6 +13,7 @@ import { Textarea } from "../../components/Textarea";
 import { Markdown } from "../Markdown";
 
 const MIN_TEXT = 3;
+const SAYS_UNGRADED = /not graded/i;
 
 export default function ReflectionActivity({ step, evidence, onEvidence }: ActivityProps) {
   const payload = step.payload as ReflectionPayload;
@@ -35,35 +39,39 @@ export default function ReflectionActivity({ step, evidence, onEvidence }: Activ
   };
 
   return (
-    <div className="mx-auto flex w-full max-w-xl flex-col items-center gap-6 py-6 text-center">
-      <p className="inline-flex items-center gap-2 text-sm font-medium text-ink-500">
-        <Feather className="size-4 text-sky-600" strokeWidth={1.5} aria-hidden />
-        For you — not graded
-      </p>
+    <div className="flex w-full max-w-2xl flex-col gap-6 py-4">
+      {/* SPEC-007 §10's "for you, not graded" reassurance, unless the step's own
+       * instructions line already said it — printing it twice, 60px apart, was
+       * the copy reading as filler. */}
+      {!SAYS_UNGRADED.test(payload.instructions ?? "") && (
+        <p className="-mb-3 inline-flex items-center gap-2 text-sm font-medium text-ink-500">
+          <Feather className="size-4 text-sky-600" strokeWidth={1.5} aria-hidden />
+          For you — not graded
+        </p>
+      )}
 
       <p className="text-lg leading-relaxed text-pine-950">
         <Markdown inline md={payload.prompt} />
       </p>
 
       {chipOptions.length > 0 && (
-        <div className="flex justify-center">
-          <SelectChips
-            label="Pick the one that rings true"
-            options={chipOptions}
-            value={chip}
-            onChange={(id) => {
-              setChip(id);
-              emit(id, text);
-            }}
-          />
-        </div>
+        <SelectChips
+          label="Pick the one that rings true"
+          options={chipOptions}
+          value={chip}
+          onChange={(id) => {
+            setChip(id);
+            emit(id, text);
+          }}
+        />
       )}
 
       {payload.allowText && (
-        <div className="w-full text-left">
+        <div className="w-full">
           {chipOptions.length > 0 && (
-            <p className="mb-2 text-center text-sm text-ink-500">
-              — or put it in your own words —
+            <p className="mb-2 flex items-center gap-3 text-sm text-ink-500">
+              <span aria-hidden className="h-px w-6 bg-line-200" />
+              or put it in your own words
             </p>
           )}
           <Textarea

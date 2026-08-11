@@ -11,6 +11,7 @@ import { ArrowLeft, PenLine, Printer } from "lucide-react";
 import { api, type ArtifactType, type SectionId } from "../lib/api";
 import type { JournalBuilderPayload } from "../activities/types";
 import { ARTIFACT_FACTS } from "../lib/modules";
+import { Reveal } from "../activities/motion";
 import { ArtifactPreview, type ArtifactPreviewEntry } from "../components/ArtifactPreview";
 import { Card } from "../components/Card";
 import { Button, LinkButton } from "../components/Button";
@@ -113,7 +114,7 @@ export default function ArtifactPage() {
         Field Journal
       </Link>
 
-      <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
+      <Reveal index={0} className="mt-6 flex flex-wrap items-end justify-between gap-4">
         <div className="flex items-start gap-5">
           {/* B-030…B-035 cover — decorative: the eyebrow and title beside it
            * name this artifact and the module it came out of. */}
@@ -154,7 +155,7 @@ export default function ArtifactPage() {
             )}
           </div>
         )}
-      </div>
+      </Reveal>
 
       <div className="mt-8">
         {journalQuery.isLoading || stepLoading ? (
@@ -163,20 +164,26 @@ export default function ArtifactPage() {
             <Skeleton className="h-64 w-full" />
           </SkeletonGroup>
         ) : artifact ? (
-          <>
+          <Reveal index={1}>
+            {/* The sheet is the object on the desk: shadow-2 lifts it off the
+             * ground wash (DESIGN-003 v2 §Journal detail). Print strips the
+             * shadow via .ts-print-sheet's own rules. */}
             <ArtifactPreview
               eyebrow={`Field journal — ${facts.name}`}
               title={artifact.title || facts.name}
               entries={entries}
               status={artifact.status}
-              className={artifactType === "ride_plan" ? "ts-print-sheet" : undefined}
+              className={`shadow-2 ${artifactType === "ride_plan" ? "ts-print-sheet" : ""}`}
             />
             <p className="mt-3 text-right font-mono text-xs text-ink-500">
               Last updated {shortDate(artifact.updatedAt)}
             </p>
-          </>
+          </Reveal>
         ) : (
-          <Card padding="l" className="ts-ruled">
+          /* No rules here: the ruled pitch registers to the journal card's
+           * 32px rhythm, and centred empty-state type would sit across the
+           * lines instead of on them. */
+          <Card padding="l">
             <EmptyState
               art={<SlotArt slot="empty-journal" ratio="5 / 3" />}
               heading={`You haven't built your ${facts.name.toLowerCase()} yet`}

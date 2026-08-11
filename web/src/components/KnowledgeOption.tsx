@@ -1,14 +1,15 @@
 import type { ReactNode } from "react";
 import { AlertTriangle } from "lucide-react";
 import { BlazeMarker } from "./BlazeMarker";
+import { BlazeCheckDraw } from "../activities/motion";
 
 export type KnowledgeOptionState = "idle" | "selected" | "best" | "not-best";
 
 const CARD: Record<KnowledgeOptionState, string> = {
-  idle: "border-line-200 bg-paper-0",
-  selected: "border-pine-700 bg-paper-0",
-  best: "border-pine-700 bg-pine-300/15",
-  "not-best": "border-sun-400 bg-sun-400/10",
+  idle: "border-line-200 bg-paper-50",
+  selected: "border-pine-700 bg-paper-50",
+  best: "border-pine-700 bg-pine-100",
+  "not-best": "border-sun-400 bg-sun-100",
 };
 
 /**
@@ -65,6 +66,7 @@ export function KnowledgeOption({
           {marker}
         </span>
         <span className="min-w-0 flex-1 text-base text-pine-950">{text}</span>
+        {state === "selected" && <BlazeCheckDraw className="mt-0.5" />}
         {state === "best" && <BlazeMarker state="done" size="m" className="mt-1" label="Best answer" />}
         {state === "not-best" && (
           <AlertTriangle

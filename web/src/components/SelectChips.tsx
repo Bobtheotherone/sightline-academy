@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { BlazeMarker } from "./BlazeMarker";
+
 export interface ChipOption {
   id: string;
   label: string;
@@ -24,14 +27,16 @@ interface MultiProps extends BaseProps {
 
 export type SelectChipsProps = SingleProps | MultiProps;
 
-/** Tappable chip group — journal options, reflection chips, reason chips. */
+/** Tappable pill group — journal options, reflection chips, reason chips. */
 export function SelectChips(props: SelectChipsProps) {
   const { options, label, disabled } = props;
+  const [settling, setSettling] = useState<string | null>(null);
 
   const isSelected = (id: string) =>
     props.multiple ? props.value.includes(id) : props.value === id;
 
   const toggle = (id: string) => {
+    setSettling(id);
     if (props.multiple) {
       props.onChange(
         props.value.includes(id)
@@ -54,12 +59,14 @@ export function SelectChips(props: SelectChipsProps) {
             disabled={disabled}
             aria-pressed={selected}
             onClick={() => toggle(opt.id)}
-            className={`min-h-[44px] rounded-sm border px-3.5 py-2 text-sm font-medium transition-all duration-(--ts-dur-fast) active:scale-[0.98] disabled:pointer-events-none disabled:opacity-55 ${
+            onAnimationEnd={() => setSettling((s) => (s === opt.id ? null : s))}
+            className={`inline-flex min-h-[44px] items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-all duration-(--ts-dur-fast) ease-(--ts-ease-out) active:scale-[0.97] active:duration-(--ts-dur-micro) disabled:pointer-events-none disabled:opacity-55 ${
               selected
-                ? "border-pine-700 bg-pine-700 text-paper-0"
-                : "border-line-200 bg-paper-0 text-pine-950 hover:border-pine-300 hover:bg-moss-100"
-            }`}
+                ? "border-pine-700 bg-pine-100 text-pine-950"
+                : "border-line-200 bg-paper-50 text-pine-950 hover:border-pine-300 hover:bg-moss-100"
+            } ${settling === opt.id && selected ? "ts-act-settle" : ""}`}
           >
+            {selected && <BlazeMarker state="active" size="s" />}
             {opt.label}
           </button>
         );

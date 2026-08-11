@@ -1,7 +1,12 @@
 /* T-CLOC zone data for the walkaround lab. The awareness-card copy quotes and
  * condenses the authored Module 2 curriculum (m2-l3-s1 keylist, m2-l1-s2
- * waypoint descriptions) — no new safety claims are introduced here. Region
- * x/y are percentages of the top-down scene box in WalkaroundLab.
+ * waypoint descriptions) — no new safety claims are introduced here.
+ *
+ * Two coordinate spaces, and they are not the same one. `x`/`y` are percentages
+ * of the INSET machine drawing — the drop region on the ATV itself. `labelX`/
+ * `labelY` are percentages of the whole scene box: where the placed label parks,
+ * out in the plate's free margin, joined back to its region by a leader line.
+ * Centring the chip on the anchor buried the machine under its own labels.
  */
 
 export interface WalkaroundZone {
@@ -11,9 +16,12 @@ export interface WalkaroundZone {
   label: string;
   /** Short name for placed chips and cards. */
   name: string;
-  /** Drop region center, % of the scene box. */
+  /** Drop region center, % of the inset machine drawing. */
   x: number;
   y: number;
+  /** Placed-label park position, % of the whole scene box. */
+  labelX: number;
+  labelY: number;
   /** Where the region sits on the machine (for tap-to-assign + screen readers). */
   regionName: string;
   /** Positional nudge after a wrong drop — navigation help, not new content. */
@@ -32,6 +40,8 @@ export const WALKAROUND_ZONES: Record<string, WalkaroundZone> = {
     name: "Tires & wheels",
     x: 19,
     y: 32,
+    labelX: 11,
+    labelY: 40,
     regionName: "Front-left wheel",
     hint: "Tires & wheels live at the corners — where the machine meets the ground.",
     looking:
@@ -45,6 +55,8 @@ export const WALKAROUND_ZONES: Record<string, WalkaroundZone> = {
     name: "Controls & cables",
     x: 50,
     y: 27,
+    labelX: 89,
+    labelY: 9,
     regionName: "Handlebars",
     hint: "Controls & cables are where your hands work — look to the handlebars.",
     looking:
@@ -58,6 +70,8 @@ export const WALKAROUND_ZONES: Record<string, WalkaroundZone> = {
     name: "Lights & electrics",
     x: 50,
     y: 8,
+    labelX: 11,
+    labelY: 9,
     regionName: "Front of the machine",
     hint: "Lights & electrics face the trail — look to the very front of the machine.",
     looking:
@@ -71,6 +85,8 @@ export const WALKAROUND_ZONES: Record<string, WalkaroundZone> = {
     name: "Oil & fuel",
     x: 50,
     y: 48,
+    labelX: 89,
+    labelY: 42,
     regionName: "Tank & engine, mid-frame",
     hint: "Oil & fuel sit at the heart of the machine — tank and engine, mid-frame.",
     looking:
@@ -84,6 +100,8 @@ export const WALKAROUND_ZONES: Record<string, WalkaroundZone> = {
     name: "Chassis",
     x: 50,
     y: 88,
+    labelX: 50,
+    labelY: 92,
     regionName: "Rear rack & frame",
     hint: "The chassis look-over sweeps frame and racks — start at the rear deck.",
     looking:

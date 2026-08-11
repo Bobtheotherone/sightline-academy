@@ -4,6 +4,7 @@
  * with the slope; the CoG marker and its plumb line are drawn in screen space
  * so the plumb stays truly vertical against the tilted support polygon.
  */
+import type { CSSProperties } from "react";
 import {
   REAR_HALF_SUPPORT,
   SIDE_HALF_SUPPORT,
@@ -14,6 +15,11 @@ const S = 150; // px per concept-metre
 const CX = 200;
 const CY = 245;
 const INK = "var(--ts-pine-950)";
+
+/* Every rotated group eases to its new angle instead of snapping, so a slider
+ * step reads as the machine leaning (DESIGN-004 — `fast`, transform only). The
+ * global reduced-motion rule zeroes it. */
+const LEAN: CSSProperties = { transition: "transform var(--ts-dur-fast) var(--ts-ease-out)" };
 
 const xy = (mx: number, my: number): [number, number] => [CX + mx * S, CY - my * S];
 
@@ -148,7 +154,7 @@ export function RearView({ slope, lean, cargo, phys }: SceneProps) {
       className="block h-auto w-full"
     >
       <Horizon />
-      <g transform={`rotate(${slope} ${CX} ${CY})`}>
+      <g transform={`rotate(${slope} ${CX} ${CY})`} style={LEAN}>
         <Ground halfSupport={REAR_HALF_SUPPORT} edgeAtPlusX />
         {/* Tires */}
         {[143, 257].map((cx) => (
@@ -205,7 +211,7 @@ export function RearView({ slope, lean, cargo, phys }: SceneProps) {
           strokeLinejoin="round"
         />
         {/* Torso + helmet lean about the hips */}
-        <g transform={`rotate(${leanDeg} 200 134)`}>
+        <g transform={`rotate(${leanDeg} 200 134)`} style={LEAN}>
           <rect x={187} y={74} width={26} height={62} rx={12} fill="var(--ts-clay-500)" stroke={INK} strokeWidth={1.5} />
           <circle cx={200} cy={56} r={15} fill={INK} />
           <path d="M188 52 a15 15 0 0 1 24 0" fill="none" stroke="var(--ts-paper-0)" strokeWidth={2} opacity={0.4} />
@@ -238,7 +244,7 @@ export function SideView({ slope, lean, cargo, phys }: SceneProps) {
       className="block h-auto w-full"
     >
       <Horizon />
-      <g transform={`rotate(${-slope} ${CX} ${CY})`}>
+      <g transform={`rotate(${-slope} ${CX} ${CY})`} style={LEAN}>
         <Ground halfSupport={SIDE_HALF_SUPPORT} edgeAtPlusX={false} />
         {/* Body slab */}
         <path
@@ -299,7 +305,7 @@ export function SideView({ slope, lean, cargo, phys }: SceneProps) {
           strokeLinejoin="round"
         />
         {/* Torso + helmet lean about the hips */}
-        <g transform={`rotate(${leanDeg} 182 131)`}>
+        <g transform={`rotate(${leanDeg} 182 131)`} style={LEAN}>
           <rect x={170} y={73} width={24} height={62} rx={11} fill="var(--ts-clay-500)" stroke={INK} strokeWidth={1.5} />
           <circle cx={182} cy={59} r={14} fill={INK} />
           <rect x={184} y={55} width={9} height={4.5} rx={2.2} fill="var(--ts-paper-0)" opacity={0.85} />

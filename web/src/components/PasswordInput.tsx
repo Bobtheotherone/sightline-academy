@@ -1,6 +1,6 @@
 import { forwardRef, useId, useState, type InputHTMLAttributes } from "react";
 import { Eye, EyeOff, Check, Minus } from "lucide-react";
-import { FieldShell, inputClass } from "./Input";
+import { FieldShell, inputClass, useErrorShake } from "./Input";
 import { isCommonPassword } from "../lib/commonPasswords";
 
 function Requirement({ met, children }: { met: boolean; children: string }) {
@@ -30,6 +30,7 @@ export interface PasswordInputProps
 export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
   function PasswordInput({ label, error, showStrength, value, className = "", ...rest }, ref) {
     const id = useId();
+    const shake = useErrorShake(Boolean(error));
     const [visible, setVisible] = useState(false);
     const text = String(value ?? "");
     const longEnough = text.length >= 10;
@@ -52,7 +53,8 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
             value={value}
             aria-invalid={error ? true : undefined}
             aria-describedby={error ? `${id}-error` : hint ? `${id}-hint` : undefined}
-            className={`${inputClass(Boolean(error))} pr-11 ${className}`}
+            onAnimationEnd={shake.onAnimationEnd}
+            className={`${inputClass(Boolean(error))} pr-11 ${shake.className} ${className}`}
             {...rest}
           />
           <button

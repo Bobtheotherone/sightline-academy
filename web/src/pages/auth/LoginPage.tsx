@@ -2,6 +2,7 @@ import { useState, type FormEvent } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AlertCircle } from "lucide-react";
 import { AuthLayout } from "./AuthLayout";
+import { Reveal } from "../../activities/motion";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { PasswordInput } from "../../components/PasswordInput";
@@ -66,25 +67,31 @@ export default function LoginPage() {
             {formError}
           </p>
         )}
-        <Input
-          label="Email"
-          type="email"
-          autoComplete="email"
-          value={email}
-          error={fieldErrors.email}
-          onChange={(e) => setEmail(e.target.value)}
-          onBlur={() => setFieldErrors((f) => ({ ...f, email: validateEmail(email) }))}
-        />
-        <PasswordInput
-          label="Password"
-          autoComplete="current-password"
-          value={password}
-          error={fieldErrors.password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <Button type="submit" size="l" loading={login.isPending} className="w-full">
-          Log in
-        </Button>
+        <Reveal index={0}>
+          <Input
+            label="Email"
+            type="email"
+            autoComplete="email"
+            value={email}
+            error={fieldErrors.email}
+            onChange={(e) => setEmail(e.target.value)}
+            onBlur={() => setFieldErrors((f) => ({ ...f, email: validateEmail(email) }))}
+          />
+        </Reveal>
+        <Reveal index={1}>
+          <PasswordInput
+            label="Password"
+            autoComplete="current-password"
+            value={password}
+            error={fieldErrors.password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Reveal>
+        <Reveal index={2}>
+          <Button type="submit" size="l" loading={login.isPending} className="w-full">
+            Log in
+          </Button>
+        </Reveal>
         <p className="text-center text-sm text-ink-500">
           New here?{" "}
           <Link to="/register" className="rounded-sm font-medium text-pine-700 hover:underline">

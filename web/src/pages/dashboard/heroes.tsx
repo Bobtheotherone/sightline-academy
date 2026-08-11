@@ -1,12 +1,14 @@
-/* Dashboard hero variants (DESIGN-003 §Dashboard, SPEC-006 §Resume &
- * continuity): the mid-course Continue card — deep-linking to the learner_state
- * lesson+step while that lesson is unfinished, falling forward to the next
- * lesson once it isn't — and the graduate composition (certificate card, Ride
- * Plan card, keep-exploring-with-Ranger prompt) with the assessment-open state
- * when every module is done but the certificate isn't earned yet.
+/* Dashboard hero variants (DESIGN-003 v2 §Dashboard, SPEC-006 §Resume &
+ * continuity): the span-8 bento hero in its four states — first-run welcome,
+ * the mid-course Continue card (deep-linking to the learner_state lesson+step
+ * while that lesson is unfinished, falling forward to the next lesson once it
+ * isn't), the open assessment, and the graduate composition. All four wear the
+ * same shell: dark drifting panel, module art bled to the right edge behind a
+ * left scrim, one clay CTA.
  */
+import type { ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowRight, Award, Compass, NotebookPen } from "lucide-react";
+import { ArrowRight, Award, NotebookPen } from "lucide-react";
 import {
   api,
   ApiError,
@@ -15,13 +17,47 @@ import {
   type LessonSummary,
 } from "../../lib/api";
 import { MODULE_FACTS } from "../../lib/modules";
-import { Card } from "../../components/Card";
 import { ContourPanel } from "../../components/ContourPanel";
 import { shortDate } from "../../components/JournalCard";
 import { ProgressBar } from "../../components/Progress";
 import { LinkButton } from "../../components/Button";
 import { SlotArt } from "../../components/SlotArt";
 import { Skeleton, SkeletonGroup } from "../../components/Skeleton";
+
+/**
+ * The hero shell. Art is staged as composition, not as a framed plate: it fills
+ * the panel's right edge at full height and the scrim ramps it back to panel
+ * colour under the type, so the headline never sits on illustration detail. Both
+ * layers are decorative and drop out below md, where the copy owns the width.
+ */
+function HeroPanel({ slot, children }: { slot?: string; children: ReactNode }) {
+  return (
+    <ContourPanel variant="dark" drift className="h-full rounded-lg">
+      {slot && (
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 right-0 hidden w-[52%] md:block"
+        >
+          <SlotArt
+            slot={slot}
+            variant="dark"
+            bleed
+            ratio="4 / 3"
+            sizes="(min-width: 1024px) 38vw, 0px"
+            className="absolute inset-0 h-full w-full"
+          />
+          {/* The scrim rides the art, not the panel: the contour drift on the
+           * left stays visible, and the illustration ramps out of panel colour
+           * instead of butting against it. */}
+          <span className="absolute inset-0 bg-linear-to-r from-pine-950 via-pine-950/45 via-38% to-pine-950/0" />
+        </span>
+      )}
+      <div className="relative flex h-full flex-col justify-center p-8 md:max-w-[55%] md:p-10">
+        {children}
+      </div>
+    </ContourPanel>
+  );
+}
 
 /** Shared by the Continue card's lookups: a 4xx is an answer, not a blip. */
 function retryLookup(n: number, err: Error): boolean {
@@ -41,6 +77,8 @@ type ContinueTarget =
       detail: LessonResponse;
       /** True while that lesson is unfinished: resume the exact step (R1.2). */
       resume: boolean;
+      /** Progress through the module the target sits in — the number the trail mini shows. */
+      modulePercent: number;
     };
 
 /**
@@ -96,8 +134,9 @@ function useContinueTarget(state: LearnerStateOut): ContinueTarget {
     retry: retryLookup,
   });
   const detail = targetId === lastLessonId ? lastLessonQuery.data : targetQuery.data;
+  const modulePercent = lessonsQuery.data?.module.percent ?? searchModule?.percent ?? 0;
 
-  if (summary && detail) return { kind: "lesson", summary, detail, resume };
+  if (summary && detail) return { kind: "lesson", summary, detail, resume, modulePercent };
   if (
     lastLessonQuery.isLoading ||
     courseQuery.isLoading ||
@@ -113,6 +152,36 @@ function useContinueTarget(state: LearnerStateOut): ContinueTarget {
   return { kind: "unresolved" };
 }
 
+/** First-run hero: welcome card introducing the course + Ranger (DESIGN-003). */
+export function WelcomeCard() {
+  return (
+    <HeroPanel slot="hero-m1-mindset">
+      <p className="ts-eyebrow text-pine-300!">Start here</p>
+      <h2 className="mt-2 font-display text-2xl font-bold text-paper-0">
+        Module 1 · The Rider's Mindset
+      </h2>
+      <p className="mt-3 max-w-lg text-paper-0/80">
+        Most crashes are decided before the wheels turn. In about 45 minutes you'll see why — and
+        build the risk profile the rest of the course leans on. Ranger, your safety tutor, rides
+        along the whole way.
+      </p>
+      <div className="mt-6 flex flex-wrap gap-3">
+        <LinkButton to="/course/m1-riders-mindset" variant="accent" size="l">
+          Start Module 1
+        </LinkButton>
+        <LinkButton
+          to="/tutor"
+          variant="ghost"
+          size="l"
+          className="text-paper-0! hover:bg-paper-0/10!"
+        >
+          Meet Ranger first
+        </LinkButton>
+      </div>
+    </HeroPanel>
+  );
+}
+
 /** Mid-course hero: the next lesson to ride, at the exact step (SPEC-006). */
 export function ContinueCard({ state }: { state: LearnerStateOut }) {
   const target = useContinueTarget(state);
@@ -121,7 +190,7 @@ export function ContinueCard({ state }: { state: LearnerStateOut }) {
     return (
       /* Height tracks the loaded card (~391px desktop) so the swap doesn't
        * shift the grid below (QA-004 CLS). */
-      <SkeletonGroup label="Loading where you left off" className="block">
+      <SkeletonGroup label="Loading where you left off" className="block h-full">
         <Skeleton className="h-96 w-full rounded-lg" />
       </SkeletonGroup>
     );
@@ -131,23 +200,21 @@ export function ContinueCard({ state }: { state: LearnerStateOut }) {
 
   if (target.kind === "unresolved") {
     return (
-      <ContourPanel variant="dark" className="overflow-hidden rounded-lg">
-        <div className="flex flex-wrap items-center justify-between gap-6 p-8">
-          <div>
-            <p className="ts-eyebrow text-pine-300!">Back on the trail</p>
-            <h2 className="mt-2 font-display text-2xl font-bold text-paper-0">
-              Pick up where you left off
-            </h2>
-          </div>
+      <HeroPanel>
+        <p className="ts-eyebrow text-pine-300!">Back on the trail</p>
+        <h2 className="mt-2 font-display text-2xl font-bold text-paper-0">
+          Pick up where you left off
+        </h2>
+        <div className="mt-6">
           <LinkButton to="/course" variant="accent" size="l">
             Open the course map
           </LinkButton>
         </div>
-      </ContourPanel>
+      </HeroPanel>
     );
   }
 
-  const { summary, detail, resume } = target;
+  const { summary, detail, resume, modulePercent } = target;
   const facts = MODULE_FACTS.find((m) => m.id === summary.moduleId);
   const steps = [...detail.steps].sort((a, b) => a.order - b.order);
   // The target lesson is unfinished by construction, so this always names a step
@@ -160,49 +227,48 @@ export function ContinueCard({ state }: { state: LearnerStateOut }) {
       : `/learn/${summary.id}`;
   // Only a lesson already under way is one you "pick up".
   const started = resume || summary.percent > 0;
+  /* The bar carries the module, not the lesson: a lesson whose first step is
+   * still owed reports 0, and an empty track on the home hero reads as broken
+   * next to a trail mini naming a real percentage. */
+  const percent = Math.round(Math.max(modulePercent, summary.percent));
 
   return (
-    <ContourPanel variant="dark" className="overflow-hidden rounded-lg">
-      <div className="grid items-center gap-8 p-8 md:grid-cols-[1.2fr_1fr] md:p-10">
-        <div>
-          <p className="ts-eyebrow text-pine-300!">Continue</p>
-          <p className="mt-2 text-sm font-medium text-paper-0/70">
-            Module {facts?.order} · {facts?.title}
-          </p>
-          <h2 className="mt-1 font-display text-2xl font-bold text-paper-0">
-            {summary.title}
-          </h2>
-          <div className="mt-4 flex items-center gap-3">
-            <ProgressBar
-              value={summary.percent}
-              label={`${summary.title}: ${summary.percent} percent complete`}
-              className="max-w-56 bg-paper-0/20"
-            />
-            <span className="font-mono text-xs text-paper-0/70">
-              Step {stepNumber} of {steps.length}
-            </span>
-          </div>
-          <p className="mt-3 text-sm text-paper-0/80">Up next: {frontier.title}</p>
-          <div className="mt-6">
-            <LinkButton
-              to={href}
-              variant="accent"
-              size="l"
-              iconRight={<ArrowRight className="size-4" strokeWidth={2} aria-hidden />}
-            >
-              {started ? "Pick up the trail" : "Start the lesson"}
-            </LinkButton>
-          </div>
-        </div>
-        {facts && (
-          <SlotArt slot={facts.heroSlot} variant="dark" ratio="4 / 3" className="hidden md:block" />
-        )}
+    <HeroPanel slot={facts?.heroSlot}>
+      <p className="ts-eyebrow text-pine-300!">Continue</p>
+      <p className="mt-2 text-sm font-medium text-paper-0/70">
+        Module {facts?.order} · {facts?.title}
+      </p>
+      <h2 className="mt-1 font-display text-2xl font-bold text-paper-0">{summary.title}</h2>
+      <div className="mt-4 flex items-center gap-3">
+        {/* On pine-950 the default pine-700 fill and a paper-0/20 track resolve
+         * to the same value — the fill is restated on-dark so they read apart. */}
+        <ProgressBar
+          value={percent}
+          animateIn
+          label={`${facts?.title ?? "This module"}: ${percent} percent complete`}
+          className="max-w-56 bg-paper-0/20 [&>div]:bg-pine-300"
+        />
+        <span className="shrink-0 whitespace-nowrap font-mono text-xs text-paper-0/70">
+          Step {stepNumber} of {steps.length}
+        </span>
       </div>
-    </ContourPanel>
+      <p className="mt-3 text-sm text-paper-0/80">Up next: {frontier.title}</p>
+      <div className="mt-6">
+        <LinkButton
+          to={href}
+          variant="accent"
+          size="l"
+          iconRight={<ArrowRight className="size-4" strokeWidth={2} aria-hidden />}
+        >
+          {started ? "Pick up the trail" : "Start the lesson"}
+        </LinkButton>
+      </div>
+    </HeroPanel>
   );
 }
 
-/** Graduate hero (SPEC-006): certificate, Ride Plan, keep exploring. */
+/** Graduate hero (SPEC-006): certificate, Ride Plan, and the assessment-open
+ * state for the window where every module is done but the code isn't earned. */
 export function GraduateHero() {
   const certQuery = useQuery({
     queryKey: ["certificate"],
@@ -214,83 +280,56 @@ export function GraduateHero() {
   if (!certQuery.isLoading && !cert) {
     // Every module complete, certificate pending — the assessment is the trailhead.
     return (
-      <ContourPanel variant="dark" className="overflow-hidden rounded-lg">
-        <div className="flex flex-wrap items-center justify-between gap-6 p-8 md:p-10">
-          <div className="max-w-xl">
-            <p className="ts-eyebrow text-sun-400!">All six modules complete</p>
-            <h2 className="mt-2 font-display text-2xl font-bold text-paper-0">
-              The final assessment is open
-            </h2>
-            <p className="mt-3 text-paper-0/80">
-              Twenty questions across the whole course, no timer, 80% to earn your certificate.
-            </p>
-          </div>
+      <HeroPanel slot="hero-assessment">
+        <p className="ts-eyebrow text-sun-400!">All six modules complete</p>
+        <h2 className="mt-2 font-display text-2xl font-bold text-paper-0">
+          The final assessment is open
+        </h2>
+        <p className="mt-3 max-w-lg text-paper-0/80">
+          Twenty questions across the whole course, no timer, 80% to earn your certificate.
+        </p>
+        <div className="mt-6">
           <LinkButton to="/assessment" variant="accent" size="l">
             Take the assessment
           </LinkButton>
         </div>
-      </ContourPanel>
+      </HeroPanel>
     );
   }
 
   return (
-    <div className="grid gap-6 lg:grid-cols-3">
-      <ContourPanel variant="dark" className="overflow-hidden rounded-lg lg:col-span-1">
-        <div className="flex h-full flex-col justify-between gap-6 p-7">
-          <div>
-            <p className="ts-eyebrow text-sun-400!">Graduate</p>
-            <h2 className="mt-2 font-display text-2xl font-bold text-paper-0">
-              You've ridden the whole trail
-            </h2>
-            <p className="mt-2 text-sm text-paper-0/80">
-              Certificate earned{cert ? ` ${shortDate(cert.issuedAt)}` : ""} — verification code
-              in hand.
-            </p>
-            {cert && <p className="mt-2 font-mono text-sm text-sun-400">{cert.code}</p>}
-          </div>
-          <LinkButton
-            to="/certificate"
-            variant="accent"
-            iconLeft={<Award className="size-4" strokeWidth={1.5} aria-hidden />}
-          >
-            View your certificate
-          </LinkButton>
-        </div>
-      </ContourPanel>
-      <Card padding="m" className="flex flex-col justify-between gap-4">
-        <div>
-          <p className="ts-eyebrow">The capstone</p>
-          <h2 className="mt-1 font-display text-xl font-bold">Your Ride Plan</h2>
-          <p className="mt-2 text-sm text-ink-500">
-            Everything the course taught you, folded into one printable plan. Revisit it before
-            every ride that matters.
-          </p>
-        </div>
+    <HeroPanel slot="hero-graduate">
+      <p className="ts-eyebrow text-sun-400!">Graduate</p>
+      <h2 className="mt-2 font-display text-2xl font-bold text-paper-0">
+        You've ridden the whole trail
+      </h2>
+      <p className="mt-3 max-w-lg text-paper-0/80">
+        Certificate earned{cert ? ` ${shortDate(cert.issuedAt)}` : ""} — verification code in hand.
+        Your Ride Plan is the piece that keeps working after the course ends.
+      </p>
+      {cert && <p className="mt-2 font-mono text-sm text-sun-400">{cert.code}</p>}
+      {/* Stacked below sm: two icon buttons on one wrap line add their
+       * min-content widths together, which pushes the bento column — and with
+       * it the page — past the viewport at 375px. */}
+      <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap">
+        <LinkButton
+          to="/certificate"
+          variant="accent"
+          size="l"
+          iconLeft={<Award className="size-4" strokeWidth={1.5} aria-hidden />}
+        >
+          View your certificate
+        </LinkButton>
         <LinkButton
           to="/journal/ride_plan"
-          variant="secondary"
+          variant="ghost"
+          size="l"
+          className="text-paper-0! hover:bg-paper-0/10!"
           iconLeft={<NotebookPen className="size-4" strokeWidth={1.5} aria-hidden />}
         >
           Open your Ride Plan
         </LinkButton>
-      </Card>
-      <Card padding="m" className="flex flex-col justify-between gap-4">
-        <div>
-          <p className="ts-eyebrow">Keep exploring</p>
-          <h2 className="mt-1 flex items-center gap-2 font-display text-xl font-bold">
-            <Compass className="size-5 text-sky-600" strokeWidth={1.5} aria-hidden />
-            Ranger's still here
-          </h2>
-          <p className="mt-2 text-sm text-ink-500">
-            The course ends; the questions don't. Ask Ranger about the rides you're actually
-            planning — <span className="font-medium text-pine-950">"How should I prep for a
-            group ride in wet season?"</span>
-          </p>
-        </div>
-        <LinkButton to="/tutor" variant="secondary">
-          Ask Ranger
-        </LinkButton>
-      </Card>
-    </div>
+      </div>
+    </HeroPanel>
   );
 }
