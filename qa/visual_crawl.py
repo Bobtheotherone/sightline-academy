@@ -9,12 +9,17 @@ DESIGN-006 anti-generic checklist. Screenshots nobody views are QA theater
 (QA-001 is explicit about this).
 
 Usage:
-    python qa/visual_crawl.py --base http://localhost:5173 \
+    python qa/visual_crawl.py --base http://localhost:4173 \
         --manifest qa/route-manifest.json --out qa/crawl-runs
 
-PREFER CRAWLING THE PRODUCTION BUILD, not the dev server:
+PREFER CRAWLING THE PRODUCTION BUILD, not the dev server (bash form below; in
+PowerShell set each var on its own line first, `$env:NAME = "..."`):
 
-    npm run build && npx vite preview --port 4173   # VITE_API_TARGET=:8000
+    # API first, or /instructor with-data 403s and deep states 401:
+    #   FIXTURES=1 INSTRUCTOR_EMAILS=professor@example.edu,grad@crawl.test <api boot>
+    cd web
+    VITE_PUBLIC_ORIGIN=https://sightlinesafetyacademy.com npm run build
+    VITE_API_TARGET=http://localhost:8000 npx vite preview --port 4173 --strictPort
     python qa/visual_crawl.py --base http://localhost:4173 ...
 
 Two reasons. It tests the artifact that actually ships. And the dev server has
@@ -25,6 +30,17 @@ net::ERR_INSUFFICIENT_RESOURCES on /assessment — four states lost, reproducibl
 on clean servers. The same crawl against `vite preview` was clean, because the
 build compiles those globs to a static URL map. A dev-only failure that looks
 exactly like a product failure is the worst kind to debug at 2am.
+
+VITE_PUBLIC_ORIGIN is not decoration here. The certificate sheet prints the
+canonical public address under the verification code, and prints NOTHING there
+when the only origin on offer is the local host (baking a preview address onto
+a permanent sheet is worse than omitting it). Build without that var and
+/certificate shoots code-only — correct behavior, but it leaves the one line a
+learner hands an employer unreviewable in QA, and a reviewer who does not know
+the rule reads it as a missing element. Substitute the real production domain
+whenever it differs; the value only has to be the address that ships.
+--strictPort matters too: without it vite silently slides to 4174 and the crawl
+photographs a connection error 91 times.
 
 Requires: pip install playwright && playwright install chromium
 Assumes the API booted with FIXTURES=1 so the three crawl fixtures exist
@@ -45,6 +61,22 @@ Wave-3 harness notes:
   (examinee@crawl.test via POST /api/dev/complete-module, FIXTURES=1 only)
   so grad@'s fixture state stays untouched.
 - States marked SKIP in the run log are unreachable, not silently missing.
+
+Capture integrity (pass-9 review — half the deep-state evidence was unusable):
+- Chromium paints sticky/fixed chrome into a full-page frame at the CURRENT
+  scroll offset, so the lesson action bar, the tutor composer, the mobile tab
+  bar and the app header floated mid-document and covered real content.
+  shoot() now scrolls to the top and drops that chrome into normal flow for
+  full-page frames only — the chrome is still judged in the viewport frames,
+  where it is doing its real job.
+- A full-screen fixed overlay can never be full-page-captured honestly (one
+  viewport of overlay over a taller document). Overlay states are listed in
+  VIEWPORT_SHOTS, and shoot() also detects an open one and drops to viewport
+  size regardless, so a new overlay state cannot silently ship a hybrid frame.
+- The five /tutor conversation states all resolve to the same seeded thread,
+  which shot five byte-identical PNGs per breakpoint. Each one now frames its
+  own turn, and pins /meta/health's provider so the header (offline badge or
+  not) is the one the state name claims.
 """
 
 from __future__ import annotations
@@ -76,6 +108,18 @@ VIEWPORT_SHOTS = {
     "error-toast",
     "focus-visible-tab-through",
     "in-progress",
+    # Full-screen fixed overlays: a full-page frame paints one viewport of
+    # overlay over an un-overlaid document and reads as a broken z-index.
+    "section-interstitial",
+    "delete-confirm-modal",
+    # /tutor is a viewport-shaped surface with an internally scrolled message
+    # list — a full-page frame unrolls the list and moots the framing that
+    # makes each conversation state its own state.
+    "conversation-grounding-curriculum",
+    "conversation-grounding-mixed",
+    "conversation-grounding-general",
+    "conversation-triage-decline",
+    "offline-mode-header",
 }
 
 # States that swap the logged-in session under the main loop's feet.
@@ -518,11 +562,200 @@ def drive_history_scroll(page: Page) -> None:
     page.wait_for_timeout(300)
 
 
+# The DESIGN-002 GroundingLabel / TriageEyebrow texts, one per named tutor
+# state. All of them live in the SAME seeded thread (fixtures.py
+# TUTOR_SCRIPT), so the state is a turn, not a route — the crawl has to frame
+# it. `.` stands in for the apostrophe / em dash so the match is encoding-proof.
+TUTOR_TURN_MARKS = {
+    "conversation-grounding-curriculum": re.compile(r"^From the course$"),
+    "conversation-grounding-mixed": re.compile(r"^Course \+ Ranger.s knowledge$"),
+    "conversation-grounding-general": re.compile(r"^Ranger.s general knowledge"),
+    "conversation-triage-decline": re.compile(
+        r"^(Here for you|Not something I coach|Hard line|One for the professionals"
+        r"|Rules vary by place|Ride with your supervisor|Still Ranger"
+        r"|Trail boundary)$"
+    ),
+}
+TUTOR_TURN_STATES = set(TUTOR_TURN_MARKS) | {"offline-mode-header"}
+
+# Put the named turn just under the top of the message list: its grounding
+# label, answer and source chips all in frame, with the question it answers
+# still tailing in above it. The list only scrolls internally when the shell
+# is height-locked; when the document scrolls instead, fall back to the
+# ancestor that does scroll.
+FRAME_TURN = """(el) => {
+  const turn = el.closest('.group') || el;
+  const list = el.closest('.overflow-y-auto');
+  if (list && list.scrollHeight > list.clientHeight + 1) {
+    const delta = turn.getBoundingClientRect().top - list.getBoundingClientRect().top;
+    list.scrollTop = Math.max(0, list.scrollTop + delta - 96);
+    return;
+  }
+  turn.scrollIntoView({ block: 'center' });
+}"""
+
+LIST_TOP = """() => {
+  window.scrollTo(0, 0);
+  const lists = [...document.querySelectorAll('.overflow-y-auto')];
+  const list = lists.find((el) => el.scrollHeight > el.clientHeight);
+  if (list) list.scrollTop = 0;
+}"""
+
+
+def pin_health_provider(page: Page, provider: str) -> None:
+    """Pin GET /meta/health's `provider` for the shot, then reload so the
+    header renders under it.
+
+    The badge is the only thing that reads the field (TutorChat; OfflineBanner
+    only pings health for reachability), and it is the whole subject of
+    offline-mode-header — yet the crawl env decided it for every tutor state
+    at once, so pass-9 shot "Ranger is in offline mode" on all nine desktop
+    tutor frames and never captured the online header at all. Pinning makes
+    each header the one its state name claims, in either env. Torn down in
+    post_state_cleanup.
+    """
+
+    def fulfill(route):  # noqa: ANN001
+        try:
+            body = route.fetch().json()
+        except Exception:  # noqa: BLE001 — health really is down; show the truth
+            route.continue_()
+            return
+        body["provider"] = provider
+        route.fulfill(
+            status=200, content_type="application/json", body=json.dumps(body)
+        )
+
+    page.unroute("**/api/meta/health")
+    page.route("**/api/meta/health", fulfill)
+    page.reload()
+    page.wait_for_load_state("networkidle")
+
+
+def drive_tutor_turn(page: Page, name: str) -> None:
+    """Frame the seeded turn that IS this state, under the header it names.
+
+    Five conversation states, one seeded thread: shooting the route unchanged
+    produced five byte-identical files per breakpoint (pass-9: 8 of 27
+    assigned files were duplicates, so grounding-general, grounding-mixed and
+    the triage decline were never actually verified). Scrolling the message
+    list to the turn carrying that state's grounding label — or, for the
+    offline header, to the top of the thread — makes every frame evidence of
+    its own state.
+    """
+    try:
+        pin_health_provider(
+            page, "extractive" if name == "offline-mode-header" else "anthropic"
+        )
+        mark = TUTOR_TURN_MARKS.get(name)
+        if mark is None:  # offline-mode-header: the header is the subject
+            page.evaluate(LIST_TOP)
+            page.wait_for_timeout(300)
+            return
+        label = page.get_by_text(mark).first
+        try:
+            label.wait_for(timeout=8000)
+        except PWTimeout as exc:
+            raise LookupError(f"SKIP: no seeded turn labelled for {name}") from exc
+        label.evaluate(FRAME_TURN)
+        page.wait_for_timeout(300)
+    except Exception:  # a failed state must not leave the pin on the next one
+        page.unroute("**/api/meta/health")
+        raise
+
+
+# ── Account drives ───────────────────────────────────────────────────────────
+
+
+def drive_delete_modal(page: Page) -> None:
+    """Open the delete dialog with the document parked at the top.
+
+    Playwright scrolls an element into view before clicking it, and /account
+    is taller than the viewport — so the old click left the page 208px down
+    and the frame painted the sticky header and the fixed scrim at that
+    offset (pass-9: the header floating over the Display-name card, a 208px
+    un-dimmed strip above the scrim). A DOM click needs no scroll, so the
+    modal is judged over a page that is actually dimmed.
+    """
+    page.evaluate("() => window.scrollTo(0, 0)")
+    trigger = page.get_by_role("button", name=re.compile("delete account", re.I)).first
+    trigger.wait_for(timeout=5000)
+    trigger.evaluate("(el) => el.click()")
+    page.get_by_text("Delete your account?").wait_for(timeout=5000)
+    page.wait_for_timeout(300)  # scrim fade + 0.96→1 content scale settle
+
+
 # ── Cross-cutting drives (QA-001 §crawl items 3/5) ───────────────────────────
 
 
+# Capture-only: park the document at the top and drop every sticky/fixed
+# element into normal flow, remembering the inline position so it can be put
+# back. Computed position is the only reliable test — a class name is not.
+UNSTICK_CHROME = """() => {
+  window.scrollTo(0, 0);
+  const touched = [];
+  for (const el of document.querySelectorAll('body *')) {
+    const pos = getComputedStyle(el).position;
+    if (pos === 'sticky' || pos === 'fixed') {
+      touched.push([el, el.style.getPropertyValue('position'),
+                    el.style.getPropertyPriority('position')]);
+      el.style.setProperty('position', 'static', 'important');
+    }
+  }
+  window.__tsUnstuck = touched;
+  return touched.length;
+}"""
+
+RESTICK_CHROME = """() => {
+  for (const [el, value, priority] of window.__tsUnstuck || []) {
+    if (value) el.style.setProperty('position', value, priority);
+    else el.style.removeProperty('position');
+  }
+  window.__tsUnstuck = null;
+}"""
+
+# Any visible fixed element covering the viewport: a modal scrim, the section
+# interstitial, a mobile bottom sheet's scrim. Nothing decorative in the app
+# is fixed-and-full-bleed, so this only fires on a real overlay.
+OVERLAY_OPEN = """() => {
+  const vw = window.innerWidth, vh = window.innerHeight;
+  return [...document.querySelectorAll('body *')].some((el) => {
+    const s = getComputedStyle(el);
+    if (s.position !== 'fixed' || s.visibility === 'hidden') return false;
+    if (Number(s.opacity) < 0.05) return false;
+    const r = el.getBoundingClientRect();
+    return r.width >= vw * 0.9 && r.height >= vh * 0.9;
+  });
+}"""
+
+
 def shoot(page: Page, path: Path, full_page: bool) -> None:
-    page.screenshot(path=str(path), full_page=full_page)
+    """Capture one frame — honestly.
+
+    Full-page is the crawl's default and Chromium paints sticky/fixed chrome
+    into it at the current scroll offset, so the frame becomes document +
+    floating chrome on top of real content (pass-9: the lesson action bar hid
+    an answer option in 12 of 24 lesson shots; the /account header floated
+    over the Display-name card at the click's scroll offset). Full-page frames
+    therefore shoot the DOCUMENT: scrolled to the top, chrome in normal flow,
+    restored right after. Viewport frames are untouched — that is where the
+    chrome is judged.
+
+    An open full-screen overlay downgrades the frame to viewport size even if
+    the state was never listed in VIEWPORT_SHOTS: a full-page overlay capture
+    is a hybrid of two states and judges neither.
+    """
+    if full_page and page.evaluate(OVERLAY_OPEN):
+        full_page = False
+    if not full_page:
+        page.screenshot(path=str(path), full_page=False)
+        return
+    page.evaluate(UNSTICK_CHROME)
+    page.wait_for_timeout(120)  # reflow settles before the shutter
+    try:
+        page.screenshot(path=str(path), full_page=True)
+    finally:
+        page.evaluate(RESTICK_CHROME)
 
 
 def cc_loading_skeletons(page: Page, base: str, route: str, out: Path) -> None:
@@ -645,6 +878,14 @@ def drive_state(page: Page, base: str, route: str, state: dict, key: dict[str, s
     if name == "duplicate-email":
         return drive_register_duplicate(page)
 
+    if name == "with-data":
+        # /instructor requires INSTRUCTOR_EMAILS to include the fixture; without
+        # it the route renders the designed 403 and the shot is a false green.
+        # Assert arrival on a screen-unique string so a bad env lands as
+        # ok:false in run-log.json instead of a silent wrong-screen capture.
+        page.get_by_text("Course overview").wait_for(timeout=5000)
+        return
+
     if name == "scrolled-modules":
         page.evaluate(
             "document.getElementById('trail-heading')"
@@ -680,12 +921,11 @@ def drive_state(page: Page, base: str, route: str, state: dict, key: dict[str, s
         return drive_typing_bubble(page)
     if name == "long-history-scroll":
         return drive_history_scroll(page)
+    if name in TUTOR_TURN_STATES:
+        return drive_tutor_turn(page, name)
 
     if name == "delete-confirm-modal":
-        page.get_by_role("button", name=re.compile("delete", re.I)).first.click()
-        page.get_by_text("Delete your account?").wait_for(timeout=5000)
-        page.wait_for_timeout(250)
-        return
+        return drive_delete_modal(page)
     # Unknown states without params: screenshot the default render — the
     # reviewer decides whether that satisfies the state or files a gap.
 
@@ -695,6 +935,9 @@ def post_state_cleanup(page: Page, name: str) -> None:
         cleanup_typing_bubble(page)
     if name == "print-preview":
         page.emulate_media(media="screen")
+    if name in TUTOR_TURN_STATES:
+        # Never let a pinned provider leak into the next state's header.
+        page.unroute("**/api/meta/health")
 
 
 # ── Main crawl ───────────────────────────────────────────────────────────────
@@ -722,8 +965,12 @@ def crawl(base: str, manifest_path: Path, out_root: Path) -> int:
     with sync_playwright() as pw:
         browser = pw.chromium.launch()
         for vp in viewports:
+            # Reduced motion is mandatory (DESIGN-004 §Performance): full-page
+            # capture never scrolls, so IntersectionObserver reveals would ship
+            # as opacity-0. This forces every settled end state.
             context = browser.new_context(
-                viewport={"width": vp["width"], "height": vp["height"]}
+                viewport={"width": vp["width"], "height": vp["height"]},
+                reduced_motion="reduce",
             )
             page = context.new_page()
             current_fixture = None
@@ -806,7 +1053,7 @@ def crawl(base: str, manifest_path: Path, out_root: Path) -> int:
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--base", default="http://localhost:5173")
+    ap.add_argument("--base", default="http://localhost:4173")
     ap.add_argument("--manifest", default=str(REPO_ROOT / "qa" / "route-manifest.json"))
     ap.add_argument("--out", default=str(REPO_ROOT / "qa" / "crawl-runs"))
     a = ap.parse_args()
