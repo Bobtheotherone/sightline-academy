@@ -1,0 +1,207 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img">
+<title>A rear view of a geared rider on a quad with the centre of gravity marked low in the rider and a plumb line falling inside the track width; the ground tilts and the plumb line walks toward the downhill tire while the support margin shrinks, the rider moving uphill wins it back, and a load on the rack raises the centre of gravity and takes it away again. Four medallions show the same model on a climb, across a side-hill, with the rider's weight moved uphill, and carrying a rear load.</title>
+<!-- C-006 "One stability model, four applications".
+
+     Caption this plate serves: the centre of gravity's plumb line has to land
+     inside the support base; slopes, side-hills, rider position and loads are
+     four faces of that one rule.
+
+     HOTSPOT PLATE. The block's four seals are already placed, so these
+     medallion centres are BINDING: slopes (233,178), sidehill (967,178),
+     position (232,585), loads (966,585), r = 150. No magenta anywhere - the
+     seals are the only magenta on the page.
+
+     GEOMETRY. Centre machine: symbol space 400 wide, ground at symbol y 400,
+     placed by translate(430 320) scale(0.85) -> track 458.9..741.1, ground
+     y 660, centreline x 600. Everything tilts about the downhill contact
+     (741.1,660). The plumb line is NOT in the tilting group: it hangs from the
+     CoG in world space and stays vertical, which is the whole point.
+     ONE LINE WEIGHT: no symbol sets its own outline width; each instance sets
+     stroke-width on its wrapper (4.24 x 0.85 and 8.6 x 0.42 both land on 3.6),
+     so the medallion machines are drawn at exactly the centre machine's weight.
+
+     MARGIN BAR. Two spruce segments on the ground bracket, one either side of
+     the plumb foot, each a pathLength=100 dash whose offset is its length. At
+     rest they are equal - the symmetry is what makes the asymmetry mean
+     something later. Only the DOWNHILL segment recolours.
+
+     BEATS (12s loop, every element on the same 12s clock, holds to 100%):
+       0-35%     rest: level, plumb centred, both margins spruce and equal.
+       35-40.5%  ground + machine roll to 13 degrees; plumb walks downhill;
+                 downhill margin 141 -> 92 units and turns amber.
+       47-52%    rider moves uphill; CoG walks back; margin 92 -> 132, spruce.
+                 (the correction, and the only one the rider actually owns)
+       58.5-62%  a load lands on the rear rack, rider back upright: the CoG
+                 rises 56 symbol units into the load AND the ground steepens
+                 13 -> 30 degrees, because 30 is the angle at which THIS
+                 machine actually loses it: half-track 141, CoG 197+48 above
+                 the ground, tan(t) = 141/245 -> t = 30. At 13 degrees the
+                 plumb cannot reach the tire edge without an off-the-machine
+                 CoG, so the beat steepens rather than draw a falsehood. The
+                 downhill margin collapses to a 16-unit brick-red pip at the
+                 contact and the plumb lands just outboard of it.
+       70-75.5%  ease back to level. 75.5-100% hold (7.1s of rest per loop).
+     13 degrees is the ceiling for the SLOPE beats on purpose: a plate that
+     draws an angle at which the machine reads as falling teaches the picture,
+     not the model. 30 degrees appears only in the loaded beat, where losing it
+     is the point.
+
+     RIDER LEAN. The handlebar, both grips, both gloves and both arms live in
+     #stb-bars / #stb-hands, which never animate. Only the torso + helmet
+     (#stb-rider) rotate, about the seat at symbol (200,158), so the rider
+     leans off the machine and the bars never leave the stem.
+
+     REDUCED MOTION parks the file at the REST frame, not at a demonstrated end
+     state: the complete statement here is the level machine with its plumb
+     centred and equal margins - that is the thing being applied four ways, and
+     each medallion already shows one application statically. -->
+<style>
+.stb-tilt{animation:stb-a 12s ease-in-out infinite;transform-box:view-box;transform-origin:741.1px 660px}
+@keyframes stb-a{0%,35%{transform:rotate(0deg)}40.5%,58.5%{transform:rotate(13deg)}62%,70%{transform:rotate(30deg)}75.5%,100%{transform:rotate(0deg)}}
+.stb-cog{animation:stb-c 12s ease-in-out infinite}
+@keyframes stb-c{0%,35%{transform:translate(0px,0px)}40.5%,47%{transform:translate(47.9px,-26.7px)}52%,58.5%{transform:translate(9px,-35.7px)}62%,70%{transform:translate(141.4px,-85.7px)}75.5%,100%{transform:translate(0px,0px)}}
+.stb-pl{animation:stb-p 12s ease-in-out infinite;transform-box:view-box;transform-origin:600px 463px}
+@keyframes stb-p{0%,35%{transform:scaleY(1)}40.5%,58.5%{transform:scaleY(1.024)}62%,70%{transform:scaleY(1.388)}75.5%,100%{transform:scaleY(1)}}
+.stb-mgd{animation:stb-m 12s ease-in-out infinite,stb-k 12s step-end infinite}
+@keyframes stb-m{0%,35%{stroke-dashoffset:53}40.5%,47%{stroke-dashoffset:70.4}52%,58.5%{stroke-dashoffset:56.3}62%,70%{stroke-dashoffset:94.3}75.5%,100%{stroke-dashoffset:53}}
+@keyframes stb-k{0%{stroke:#2F6B52}37%{stroke:#DBA12E}49%{stroke:#2F6B52}59%{stroke:#A93226}72%{stroke:#2F6B52}}
+.stb-mgu{animation:stb-u 12s ease-in-out infinite}
+@keyframes stb-u{0%,35%{stroke-dashoffset:53}40.5%,47%{stroke-dashoffset:35.6}52%,58.5%{stroke-dashoffset:49.7}62%,70%{stroke-dashoffset:6.4}75.5%,100%{stroke-dashoffset:53}}
+.stb-rd{animation:stb-r 12s ease-in-out infinite;transform-box:view-box;transform-origin:200px 158px}
+@keyframes stb-r{0%,47%{transform:rotate(0deg)}52%,58.5%{transform:rotate(-16deg)}62%,100%{transform:rotate(0deg)}}
+.stb-bx{animation:stb-b 12s ease-in-out infinite}
+@keyframes stb-b{0%,56.5%{transform:translate(0px,90px);opacity:0}59.5%{transform:translate(0px,26px);opacity:0}62%,70%{transform:translate(0px,0px);opacity:1}73%{transform:translate(0px,26px);opacity:0}76%,100%{transform:translate(0px,90px);opacity:0}}
+@media (prefers-reduced-motion:reduce){.stb-tilt,.stb-cog,.stb-pl,.stb-mgd,.stb-mgu,.stb-rd,.stb-bx{animation:none}}
+</style>
+<defs>
+<clipPath id="stb-cl"><circle r="150"/></clipPath>
+<g id="stb-quad" stroke-linecap="round" stroke-linejoin="round">
+<g fill="#0D1E2E"><rect x="124" y="282" width="56" height="118" rx="20"/><rect x="220" y="282" width="56" height="118" rx="20"/></g>
+<path d="M129 346l23 7 23-7M129 376l23 7 23-7M225 346l23 7 23-7M225 376l23 7 23-7" fill="none" stroke="#46555A"/>
+<path d="M114 226h172v88q0 16-18 16H132q-18 0-18-16z" fill="#0D1E2E"/>
+<path d="M150 250 104 302M250 250 296 302" stroke="#0D1E2E" stroke-width="12"/>
+<rect x="158" y="290" width="84" height="42" rx="12" fill="#46555A" stroke="#0D1E2E"/>
+<g fill="#0D1E2E"><rect x="34" y="218" width="72" height="182" rx="22"/><rect x="294" y="218" width="72" height="182" rx="22"/></g>
+<path d="M42 244l28 9 28-9M42 276l28 9 28-9M42 308l28 9 28-9M42 340l28 9 28-9M42 372l28 9 28-9M302 244l28 9 28-9M302 276l28 9 28-9M302 308l28 9 28-9M302 340l28 9 28-9M302 372l28 9 28-9" fill="none" stroke="#46555A"/>
+<g fill="#2F6B52" stroke="#0D1E2E"><rect x="102" y="226" width="24" height="74" rx="10"/><rect x="274" y="226" width="24" height="74" rx="10"/></g>
+<path d="M46 248v-32q0-20 26-22h60v-14q0-14 18-14h100q18 0 18 14v14h60q26 2 26 22v32q0 10-14 10h-56q-12 0-14-10l-4-16H120l-4 16q-2 10-14 10H60q-14 0-14-10z" fill="#2F6B52" stroke="#0D1E2E"/>
+<g fill="#0D1E2E"><rect x="58" y="222" width="48" height="18" rx="6"/><rect x="294" y="222" width="48" height="18" rx="6"/><rect x="64" y="182" width="80" height="10" rx="5"/><rect x="256" y="182" width="80" height="10" rx="5"/><rect x="72" y="190" width="7" height="18"/><rect x="129" y="190" width="7" height="18"/><rect x="264" y="190" width="7" height="18"/><rect x="321" y="190" width="7" height="18"/><rect x="192" y="130" width="16" height="48" rx="7"/></g>
+<path d="M142 170v-32q0-16 20-16h76q20 0 20 16v32z" fill="#0D1E2E"/>
+</g>
+<g id="stb-bars" stroke-linecap="round" stroke-linejoin="round">
+<rect x="76" y="142" width="248" height="14" rx="7" fill="#0D1E2E"/>
+<g fill="#46555A" stroke="#0D1E2E"><rect x="74" y="137" width="56" height="24" rx="12"/><rect x="270" y="137" width="56" height="24" rx="12"/></g>
+<g fill="none"><path d="M104 149 188 86M296 149 212 86" stroke="#0D1E2E" stroke-width="34"/><path d="M104 149 188 86M296 149 212 86" stroke="#2F6B52" stroke-width="24"/><path d="M118 138.5 174 96.5M282 138.5 226 96.5" stroke="#F9FCFA" stroke-width="8"/></g>
+</g>
+<g id="stb-rider" stroke-linecap="round" stroke-linejoin="round">
+<path d="M156 158q-8-46 0-74 6-24 44-24t44 24q8 28 0 74z" fill="#2F6B52" stroke="#0D1E2E"/>
+<path d="M164 100q-6 30-2 58h16q-4-30 2-58zM236 100q6 30 2 58h-16q4-30-2-58z" fill="#F9FCFA"/>
+<path d="M164 46q0-40 36-40t36 40v12q0 14-14 14h-44q-14 0-14-14z" fill="#F9FCFA" stroke="#0D1E2E"/>
+<rect x="169" y="44" width="62" height="16" rx="7" fill="#0D1E2E"/>
+</g>
+<g id="stb-hands" fill="#0D1E2E"><rect x="82" y="133" width="44" height="32" rx="15"/><rect x="274" y="133" width="44" height="32" rx="15"/></g>
+<g id="stb-box" stroke-linecap="round" stroke-linejoin="round">
+<rect x="80" y="162" width="240" height="48" rx="6" fill="#2F6B52" stroke="#0D1E2E"/>
+<path d="M80 178h240" fill="none" stroke="#0D1E2E"/>
+<g fill="#F9FCFA"><rect x="148" y="184" width="38" height="18" rx="4"/><rect x="214" y="184" width="38" height="18" rx="4"/></g>
+<g fill="#0D1E2E"><rect x="104" y="158" width="14" height="58" rx="4"/><rect x="282" y="158" width="14" height="58" rx="4"/></g>
+</g>
+<g id="stb-side" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="100" cy="342" r="58" fill="#0D1E2E"/><circle cx="312" cy="346" r="54" fill="#0D1E2E"/>
+<g fill="none" stroke="#46555A"><circle cx="100" cy="342" r="36"/><circle cx="312" cy="346" r="33.5"/><path d="M142.5 375.2 127.3 379.5 118.4 392.7M81.6 392.7 72.7 379.5 57.5 375.2M46.1 340.1 55.9 327.7 55.3 311.8M85.1 290.1 100 295.6 114.9 290.1M144.7 311.8 144.1 327.7 153.9 340.1M362.2 347.8 353.1 359.3 353.6 374.1M325.8 394.3 312 389.2 298.2 394.3M270.4 374.1 270.9 359.3 261.8 347.8M272.4 315.1 286.6 311.1 294.8 298.8M329.2 298.8 337.4 311.1 351.6 315.1"/></g>
+<rect x="20" y="226" width="168" height="82" rx="24" fill="#2F6B52" stroke="#0D1E2E"/>
+<rect x="236" y="230" width="156" height="80" rx="24" fill="#2F6B52" stroke="#0D1E2E"/>
+<path d="M170 306v-52q0-24 28-26h56q20 0 24 20l12 58z" fill="#2F6B52" stroke="#0D1E2E"/>
+<rect x="176" y="300" width="96" height="20" rx="7" fill="#46555A" stroke="#0D1E2E"/>
+<g fill="#0D1E2E"><rect x="40" y="248" width="60" height="18" rx="6"/><rect x="312" y="252" width="60" height="18" rx="6"/><rect x="36" y="204" width="118" height="10" rx="5"/><rect x="252" y="208" width="118" height="10" rx="5"/><rect x="47" y="212" width="7" height="16"/><rect x="138" y="212" width="7" height="16"/><rect x="261" y="216" width="7" height="16"/><rect x="354" y="216" width="7" height="16"/></g>
+<path d="M266 230 298 190" stroke="#0D1E2E" stroke-width="10"/>
+<path d="M162 232v-26q0-14 18-14h68q16 0 16 16v24z" fill="#0D1E2E"/>
+<g fill="none"><path d="M198 210 252 240 256 296" stroke="#0D1E2E" stroke-width="34"/><path d="M198 210 252 240 256 296" stroke="#2F6B52" stroke-width="24"/></g>
+<rect x="228" y="286" width="58" height="30" rx="11" fill="#0D1E2E"/>
+<g fill="none"><path d="M234 152q38 8 64 32" stroke="#0D1E2E" stroke-width="34"/><path d="M234 152q38 8 64 32" stroke="#2F6B52" stroke-width="24"/></g>
+<path d="M180 220 198 142q6-20 28-20t24 22l8 76z" fill="#2F6B52" stroke="#0D1E2E"/>
+<path d="M206 148 192 220h16l14-72z" fill="#F9FCFA"/>
+<rect x="274" y="168" width="54" height="30" rx="14" fill="#46555A" stroke="#0D1E2E"/>
+<rect x="280" y="171" width="44" height="28" rx="13" fill="#0D1E2E"/>
+<path d="M186 96q0-42 40-42 34 0 40 30 4 16-2 30l-6 16q-4 12-18 12h-36q-18 0-18-18z" fill="#F9FCFA" stroke="#0D1E2E"/>
+<path d="M244 72q22 8 24 28 2 18-12 26l-16-4q-6-26 4-50z" fill="#0D1E2E"/>
+<path d="M236 142q22-6 24-24" fill="none" stroke="#0D1E2E" stroke-width="10"/>
+</g>
+<g id="stb-mark">
+<circle r="14" fill="#F9FCFA" stroke="#0D1E2E"/>
+<path d="M0 0v-14a14 14 0 0 1 14 14zM0 0v14a14 14 0 0 1-14-14z" fill="#0D1E2E"/>
+</g>
+</defs>
+<rect width="1200" height="800" fill="#F9FCFA"/>
+<g fill="none" stroke="#0D1E2E" stroke-opacity="0.07" stroke-width="1">
+<path d="M-10 96C150 54 330 132 520 92S880 32 1210 84"/>
+<path d="M-10 402C160 360 300 452 500 418S920 356 1210 408"/>
+<path d="M-10 706C170 664 340 748 540 714S930 660 1210 712"/>
+</g>
+<g stroke="#2F6B52" stroke-width="4" stroke-linecap="round" stroke-dasharray="10 8" fill="none">
+<path d="M327.2 294.7 505 515"/><path d="M872.8 294.7 695 515"/>
+<path d="M381.6 574.3 498 566"/><path d="M816.4 574.2 702 566"/>
+</g>
+<g class="stb-tilt">
+<g transform="translate(430 320) scale(0.85)" stroke-width="4.24"><use href="#stb-quad"/><use href="#stb-bars"/><use href="#stb-rider" class="stb-rd"/><use href="#stb-hands"/><use href="#stb-box" class="stb-bx" opacity="0"/></g>
+<path d="M424 660h352" fill="none" stroke="#46555A" stroke-width="3.4" stroke-linecap="round"/>
+<path d="M458.9 668v16M741.1 668v16M458.9 676h282.2" fill="none" stroke="#0D1E2E" stroke-width="3.6" stroke-linecap="round"/>
+<path class="stb-mgu" d="M458.9 676H741.1" pathLength="100" fill="none" stroke="#2F6B52" stroke-width="8" stroke-dasharray="100 100" stroke-dashoffset="53"/>
+<path class="stb-mgd" d="M741.1 676H458.9" pathLength="100" fill="none" stroke="#2F6B52" stroke-width="8" stroke-dasharray="100 100" stroke-dashoffset="53"/>
+</g>
+<g class="stb-cog">
+<g class="stb-pl" fill="none">
+<path d="M600 463v221" stroke="#F9FCFA" stroke-width="3" stroke-dasharray="8 10" stroke-dashoffset="-10"/>
+<path d="M600 463v221" stroke="#0D1E2E" stroke-width="4" stroke-dasharray="10 8"/>
+</g>
+<use href="#stb-mark" x="600" y="463" stroke-width="3.6"/>
+</g>
+<g transform="translate(233 178)">
+<circle r="150" fill="#F9FCFA"/>
+<g clip-path="url(#stb-cl)">
+<path d="M-160 131 160 27v143h-320z" fill="#ECF3EF"/>
+<path d="M-160 131 160 27" fill="none" stroke="#0D1E2E" stroke-width="3.6" stroke-linecap="round"/>
+<g transform="translate(40 66) rotate(-18)" stroke-width="8.6"><g transform="translate(-84 -168) scale(0.42)"><use href="#stb-side"/></g></g>
+<g fill="none" stroke="#0D1E2E" stroke-width="3.6" stroke-linecap="round"><path d="M2.5 86.6 7.5 101.8M87.2 59.1 92.2 74.3M5 94.2 89.7 66.7"/></g>
+<g fill="none" stroke-width="3.4"><path d="M24.1 -12.8V76" stroke="#F9FCFA" stroke-dasharray="7 8" stroke-dashoffset="-8"/><path d="M24.1 -12.8V76" stroke="#0D1E2E" stroke-dasharray="8 7"/></g>
+<use href="#stb-mark" transform="translate(24.1 -12.8) scale(0.62)" stroke-width="5.8"/>
+</g>
+<circle r="150" fill="none" stroke="#0D1E2E" stroke-width="3.6"/>
+</g>
+<g transform="translate(967 178)">
+<circle r="150" fill="#F9FCFA"/>
+<g clip-path="url(#stb-cl)">
+<path d="M-160 -11.1 160 159.1v14h-320z" fill="#ECF3EF"/>
+<path d="M-160 -11.1 160 159.1" fill="none" stroke="#0D1E2E" stroke-width="3.6" stroke-linecap="round"/>
+<g transform="translate(0 74) rotate(28)" stroke-width="8.6"><g transform="translate(-84 -168) scale(0.42)"><use href="#stb-quad"/><use href="#stb-bars"/><use href="#stb-rider"/><use href="#stb-hands"/></g></g>
+<g fill="none" stroke="#0D1E2E" stroke-width="3.6" stroke-linecap="round"><path d="M-65.3 48.3-72.8 62.5M57.8 113.8 50.3 127.9M-69.1 55.4 54 120.9"/></g>
+<g fill="none" stroke-width="3.4"><path d="M45.7 -12V106" stroke="#F9FCFA" stroke-dasharray="7 8" stroke-dashoffset="-8"/><path d="M45.7 -12V106" stroke="#0D1E2E" stroke-dasharray="8 7"/></g>
+<use href="#stb-mark" transform="translate(45.7 -12) scale(0.62)" stroke-width="5.8"/>
+</g>
+<circle r="150" fill="none" stroke="#0D1E2E" stroke-width="3.6"/>
+</g>
+<g transform="translate(232 585)">
+<circle r="150" fill="#F9FCFA"/>
+<g clip-path="url(#stb-cl)">
+<path d="M-160 -11.1 160 159.1v14h-320z" fill="#ECF3EF"/>
+<path d="M-160 -11.1 160 159.1" fill="none" stroke="#0D1E2E" stroke-width="3.6" stroke-linecap="round"/>
+<g transform="translate(0 74) rotate(28)" stroke-width="8.6"><g transform="translate(-84 -168) scale(0.42)"><use href="#stb-quad"/><use href="#stb-bars"/><use href="#stb-rider" transform="rotate(-22 200 158)"/><use href="#stb-hands"/></g></g>
+<g fill="none" stroke="#0D1E2E" stroke-width="3.6" stroke-linecap="round"><path d="M-65.3 48.3-72.8 62.5M57.8 113.8 50.3 127.9M-69.1 55.4 54 120.9"/></g>
+<g fill="none" stroke-width="3.4"><path d="M27.4 -17.9V96" stroke="#F9FCFA" stroke-dasharray="7 8" stroke-dashoffset="-8"/><path d="M27.4 -17.9V96" stroke="#0D1E2E" stroke-dasharray="8 7"/></g>
+<use href="#stb-mark" transform="translate(27.4 -17.9) scale(0.62)" stroke-width="5.8"/>
+</g>
+<circle r="150" fill="none" stroke="#0D1E2E" stroke-width="3.6"/>
+</g>
+<g transform="translate(966 585)">
+<circle r="150" fill="#F9FCFA"/>
+<g clip-path="url(#stb-cl)">
+<path d="M-160 74h320v96h-320z" fill="#ECF3EF"/>
+<path d="M-160 74h320" fill="none" stroke="#0D1E2E" stroke-width="3.6" stroke-linecap="round"/>
+<g transform="translate(0 74)" stroke-width="8.6"><g transform="translate(-84 -168) scale(0.42)"><use href="#stb-quad"/><use href="#stb-bars"/><use href="#stb-rider"/><use href="#stb-hands"/><use href="#stb-box"/></g></g>
+<g fill="none" stroke="#0D1E2E" stroke-width="3.6" stroke-linecap="round"><path d="M-69.7 82-69.7 98M69.7 82 69.7 98M-69.7 90 69.7 90"/></g>
+<g fill="none" stroke-width="3.4"><path d="M0 -46.9V78" stroke="#F9FCFA" stroke-dasharray="7 8" stroke-dashoffset="-8"/><path d="M0 -46.9V78" stroke="#0D1E2E" stroke-dasharray="8 7"/></g>
+<use href="#stb-mark" transform="translate(0 -46.9) scale(0.62)" stroke-width="5.8"/>
+</g>
+<circle r="150" fill="none" stroke="#0D1E2E" stroke-width="3.6"/>
+</g>
+</svg>

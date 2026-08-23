@@ -1,47 +1,47 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300" role="img">
   <!-- 404: the route runs off the edge of the map; the signpost's second
        board hangs askew, pointing nowhere. -->
-  <rect width="500" height="300" fill="#FBFCFA"/>
-  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+  <rect width="500" height="300" fill="#F9FCFA"/>
+  <g fill="none" stroke="#0D1E2E" stroke-opacity="0.06" stroke-width="1">
     <path d="M-10 272 C 90 254, 200 286, 310 268 S 470 254, 510 272"/>
     <path d="M370 60 C 420 46, 460 66, 510 50"/>
   </g>
-  <ellipse cx="210" cy="256" rx="175" ry="8" fill="#EEF3EC"/>
+  <ellipse cx="210" cy="256" rx="175" ry="8" fill="#ECF3EF"/>
   <!-- map sheet with a torn right edge -->
   <g transform="rotate(-3 205 150)">
     <path d="M62 62 L330 54 L322 78 L334 100 L322 124 L336 148 L324 172 L334 198 L326 224 L330 244 L66 250 Z"
-          fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+          fill="#F9FCFA" stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round"/>
     <!-- contours printed on the map -->
-    <g fill="none" stroke="#9CC3B4" stroke-width="1">
+    <g fill="none" stroke="#ABCDB8" stroke-width="1">
       <path d="M80 110 C 130 84, 190 124, 250 100 S 310 84, 322 96"/>
       <path d="M80 150 C 135 124, 195 164, 255 140 S 312 124, 326 138"/>
       <path d="M80 190 C 130 166, 190 204, 250 180 S 312 166, 324 180"/>
       <path d="M80 226 C 135 204, 195 240, 255 216 S 314 204, 328 218"/>
     </g>
     <!-- fold line -->
-    <path d="M196 58 L200 248" stroke="#D8E0DA" stroke-width="1.5"/>
+    <path d="M196 58 L200 248" stroke="#D6DFDA" stroke-width="1.5"/>
     <!-- the route, ending at the tear -->
-    <path d="M92 216 Q140 190 180 168 Q240 136 302 122" fill="none" stroke="#C4622D" stroke-width="2.5" stroke-dasharray="1 8" stroke-linecap="round"/>
-    <rect x="-4" y="-4" width="8" height="8" rx="2" transform="translate(140 194) rotate(45)" fill="#C4622D"/>
-    <rect x="-4" y="-4" width="8" height="8" rx="2" transform="translate(224 148) rotate(45)" fill="#C4622D"/>
-    <path d="M302 122 L322 116" fill="none" stroke="#C4622D" stroke-width="2.5" stroke-dasharray="1 8" stroke-linecap="round"/>
+    <path d="M92 216 Q140 190 180 168 Q240 136 302 122" fill="none" stroke="#B5446E" stroke-width="2.5" stroke-dasharray="1 8" stroke-linecap="round"/>
+    <rect x="-4" y="-4" width="8" height="8" rx="2" transform="translate(140 194) rotate(45)" fill="#B5446E"/>
+    <rect x="-4" y="-4" width="8" height="8" rx="2" transform="translate(224 148) rotate(45)" fill="#B5446E"/>
+    <path d="M302 122 L322 116" fill="none" stroke="#B5446E" stroke-width="2.5" stroke-dasharray="1 8" stroke-linecap="round"/>
     <!-- compass rose -->
-    <circle cx="106" cy="96" r="15" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
-    <path d="M106 84 L110 96 L106 100 L102 96 Z" fill="#C4622D" stroke="#0E2A23" stroke-width="1"/>
-    <path d="M106 108 L102 96 L106 92 L110 96 Z" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1"/>
+    <circle cx="106" cy="96" r="15" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="1.5"/>
+    <path d="M106 84 L110 96 L106 100 L102 96 Z" fill="#B5446E" stroke="#0D1E2E" stroke-width="1"/>
+    <path d="M106 108 L102 96 L106 92 L110 96 Z" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="1"/>
   </g>
   <!-- ghost blaze off the map edge -->
-  <rect x="-10" y="-10" width="20" height="20" rx="4" transform="translate(376 116) rotate(45)" fill="none" stroke="#0E2A23" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <rect x="-10" y="-10" width="20" height="20" rx="4" transform="translate(376 116) rotate(45)" fill="none" stroke="#0D1E2E" stroke-width="1.5" stroke-dasharray="4 4"/>
   <!-- signpost pointing nowhere -->
-  <g stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round">
+  <g stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round">
     <path d="M420 142 V254" stroke-width="5"/>
-    <path d="M424 148 H462 L476 158 L462 168 H424 Z" fill="#E0A72E"/>
+    <path d="M424 148 H462 L476 158 L462 168 H424 Z" fill="#DBA12E"/>
     <g transform="rotate(-16 428 194)">
-      <path d="M424 186 H458 L470 195 L458 204 H424 Z" fill="#EEF3EC"/>
+      <path d="M424 186 H458 L470 195 L458 204 H424 Z" fill="#ECF3EF"/>
     </g>
-    <circle cx="427" cy="188" r="2" fill="#0E2A23" stroke="none"/>
+    <circle cx="427" cy="188" r="2" fill="#0D1E2E" stroke="none"/>
   </g>
-  <g stroke="#1F5546" stroke-width="1.5" stroke-linecap="round" fill="none">
+  <g stroke="#2F6B52" stroke-width="1.5" stroke-linecap="round" fill="none">
     <path d="M404 254 l3 -8 3 8 M448 256 l3 -8 3 8"/>
   </g>
 </svg>

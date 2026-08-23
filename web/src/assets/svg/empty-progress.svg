@@ -1,32 +1,32 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 240" role="img">
   <!-- B-079 Empty progress: a trail odometer standing at zero, every counter drum
        still blank, with the first blazed mile waiting up the trail beside it. -->
-  <rect width="360" height="240" fill="#FBFCFA"/>
-  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+  <rect width="360" height="240" fill="#F9FCFA"/>
+  <g fill="none" stroke="#0D1E2E" stroke-opacity="0.06" stroke-width="1">
     <path d="M-10 40 C 70 18, 160 54, 250 34 S 350 20, 370 42"/>
     <path d="M-10 214 C 70 196, 160 230, 250 210 S 350 198, 370 218"/>
   </g>
-  <ellipse cx="152" cy="206" rx="118" ry="8" fill="#EEF3EC"/>
-  <g stroke="#0E2A23" stroke-linejoin="round">
-    <path d="M32 162 L44 200 H20 Z" fill="#1F5546" stroke-width="1.5"/>
+  <ellipse cx="152" cy="206" rx="118" ry="8" fill="#ECF3EF"/>
+  <g stroke="#0D1E2E" stroke-linejoin="round">
+    <path d="M32 162 L44 200 H20 Z" fill="#2F6B52" stroke-width="1.5"/>
     <path d="M32 200 V208" stroke-width="2"/>
-    <path d="M60 180 L69 204 H51 Z" fill="#9CC3B4" stroke-width="1.5"/>
+    <path d="M60 180 L69 204 H51 Z" fill="#ABCDB8" stroke-width="1.5"/>
     <path d="M60 204 V208" stroke-width="2"/>
   </g>
-  <path d="M262 204 Q296 190 328 170" fill="none" stroke="#0E2A23" stroke-width="2.5" stroke-dasharray="2 9" stroke-linecap="round"/>
-  <g stroke="#1F5546" stroke-width="1.5" stroke-linecap="round" fill="none">
+  <path d="M262 204 Q296 190 328 170" fill="none" stroke="#0D1E2E" stroke-width="2.5" stroke-dasharray="2 9" stroke-linecap="round"/>
+  <g stroke="#2F6B52" stroke-width="1.5" stroke-linecap="round" fill="none">
     <path d="M272 212 l3 -9 3 9 M280 210 l4 -7 2 7 M300 196 l3 -8 3 8 M340 186 l3 -8 3 8 M348 184 l4 -6 2 6"/>
   </g>
-  <rect x="326" y="132" width="11" height="38" rx="3" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
-  <path d="M326 141 H337" stroke="#0E2A23" stroke-width="1"/>
-  <rect x="-8" y="-8" width="16" height="16" rx="4.2" transform="translate(331.5 149) rotate(45)" fill="#C4622D" stroke="#0E2A23" stroke-width="1.5"/>
-  <path d="M92 168 V206 M216 168 V206" stroke="#0E2A23" stroke-width="3" stroke-linecap="round"/>
-  <path d="M18 206 H342" stroke="#0E2A23" stroke-width="1.5" stroke-linecap="round"/>
-  <rect x="54" y="90" width="200" height="78" rx="12" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
-  <path d="M54 106 V102 a12 12 0 0 1 12 -12 H242 a12 12 0 0 1 12 12 V106 Z" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5"/>
-  <rect x="-4.6" y="-4.6" width="9.2" height="9.2" rx="2.4" transform="translate(238 98) rotate(45)" fill="none" stroke="#9CC3B4" stroke-width="1.5"/>
-  <rect x="66" y="116" width="176" height="40" rx="5" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.2"/>
-  <g fill="#FBFCFA" stroke="#0E2A23" stroke-width="1">
+  <rect x="326" y="132" width="11" height="38" rx="3" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="1.5"/>
+  <path d="M326 141 H337" stroke="#0D1E2E" stroke-width="1"/>
+  <rect x="-8" y="-8" width="16" height="16" rx="4.2" transform="translate(331.5 149) rotate(45)" fill="#B5446E" stroke="#0D1E2E" stroke-width="1.5"/>
+  <path d="M92 168 V206 M216 168 V206" stroke="#0D1E2E" stroke-width="3" stroke-linecap="round"/>
+  <path d="M18 206 H342" stroke="#0D1E2E" stroke-width="1.5" stroke-linecap="round"/>
+  <rect x="54" y="90" width="200" height="78" rx="12" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="1.5"/>
+  <path d="M54 106 V102 a12 12 0 0 1 12 -12 H242 a12 12 0 0 1 12 12 V106 Z" fill="#2F6B52" stroke="#0D1E2E" stroke-width="1.5"/>
+  <rect x="-4.6" y="-4.6" width="9.2" height="9.2" rx="2.4" transform="translate(238 98) rotate(45)" fill="none" stroke="#ABCDB8" stroke-width="1.5"/>
+  <rect x="66" y="116" width="176" height="40" rx="5" fill="#ECF3EF" stroke="#0D1E2E" stroke-width="1.2"/>
+  <g fill="#F9FCFA" stroke="#0D1E2E" stroke-width="1">
     <rect x="72" y="121" width="23" height="30" rx="2"/>
     <rect x="100" y="121" width="23" height="30" rx="2"/>
     <rect x="128" y="121" width="23" height="30" rx="2"/>
@@ -34,7 +34,7 @@
     <rect x="184" y="121" width="23" height="30" rx="2"/>
     <rect x="212" y="121" width="23" height="30" rx="2"/>
   </g>
-  <g fill="none" stroke="#9CC3B4" stroke-width="1.2">
+  <g fill="none" stroke="#ABCDB8" stroke-width="1.2">
     <path d="M74.5 128 Q83.5 124 92.5 128 M74.5 144 Q83.5 148 92.5 144"/>
     <path d="M102.5 128 Q111.5 124 120.5 128 M102.5 144 Q111.5 148 120.5 144"/>
     <path d="M130.5 128 Q139.5 124 148.5 128 M130.5 144 Q139.5 148 148.5 144"/>
@@ -42,6 +42,6 @@
     <path d="M186.5 128 Q195.5 124 204.5 128 M186.5 144 Q195.5 148 204.5 144"/>
     <path d="M214.5 128 Q223.5 124 232.5 128 M214.5 144 Q223.5 148 232.5 144"/>
   </g>
-  <path d="M70 136 H238" stroke="#4A5A54" stroke-width="1"/>
-  <path d="M223.5 146 V150" stroke="#1F5546" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M70 136 H238" stroke="#46555A" stroke-width="1"/>
+  <path d="M223.5 146 V150" stroke="#2F6B52" stroke-width="2.4" stroke-linecap="round"/>
 </svg>

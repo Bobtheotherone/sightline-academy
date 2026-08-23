@@ -24,3 +24,9 @@ qa/crawl-runs/
 # OS noise
 Thumbs.db
 .DS_Store
+
+# Art generation source material (raw ChatGPT drops, prompt packs, upload zips).
+# ~400 MB of provenance that does not ship. Kept out of the repo deliberately;
+# protected by the mirror on the UAA Transportation Saftey drive instead.
+artgen/
+output/

@@ -1,35 +1,35 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300" role="img">
   <!-- Empty state: an open, blank field notebook with a pen ready. -->
-  <rect width="500" height="300" fill="#FBFCFA"/>
-  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+  <rect width="500" height="300" fill="#F9FCFA"/>
+  <g fill="none" stroke="#0D1E2E" stroke-opacity="0.06" stroke-width="1">
     <path d="M-10 42 C 90 20, 200 56, 310 36 S 470 22, 510 42"/>
     <path d="M-10 272 C 90 254, 200 286, 310 268 S 470 254, 510 272"/>
   </g>
-  <ellipse cx="250" cy="254" rx="165" ry="9" fill="#EEF3EC"/>
+  <ellipse cx="250" cy="254" rx="165" ry="9" fill="#ECF3EF"/>
   <!-- cover -->
-  <rect x="110" y="82" width="280" height="168" rx="8" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5"/>
+  <rect x="110" y="82" width="280" height="168" rx="8" fill="#2F6B52" stroke="#0D1E2E" stroke-width="1.5"/>
   <!-- pages -->
-  <rect x="118" y="90" width="129" height="152" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
-  <rect x="253" y="90" width="129" height="152" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+  <rect x="118" y="90" width="129" height="152" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="1.5"/>
+  <rect x="253" y="90" width="129" height="152" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="1.5"/>
   <!-- gutter + stitching -->
-  <path d="M250 92 V240" stroke="#D8E0DA" stroke-width="4"/>
-  <path d="M250 96 V236" stroke="#0E2A23" stroke-width="1" stroke-dasharray="3 4"/>
+  <path d="M250 92 V240" stroke="#D6DFDA" stroke-width="4"/>
+  <path d="M250 96 V236" stroke="#0D1E2E" stroke-width="1" stroke-dasharray="3 4"/>
   <!-- ruled lines -->
-  <g stroke="#D8E0DA" stroke-width="1">
+  <g stroke="#D6DFDA" stroke-width="1">
     <path d="M130 112 H235 M130 128 H235 M130 144 H235 M130 160 H235 M130 176 H235 M130 192 H235 M130 208 H235 M130 224 H235"/>
     <path d="M265 112 H370 M265 128 H370 M265 144 H370 M265 160 H370 M265 176 H370 M265 192 H370 M265 208 H370 M265 224 H370"/>
   </g>
   <!-- faint blaze watermark on the left page -->
-  <rect x="-13" y="-13" width="26" height="26" rx="6" transform="translate(182 166) rotate(45)" fill="none" stroke="#9CC3B4" stroke-width="1.5"/>
+  <rect x="-13" y="-13" width="26" height="26" rx="6" transform="translate(182 166) rotate(45)" fill="none" stroke="#ABCDB8" stroke-width="1.5"/>
   <!-- elastic band -->
-  <path d="M372 84 V248" stroke="#0E2A23" stroke-width="3" stroke-linecap="round"/>
+  <path d="M372 84 V248" stroke="#0D1E2E" stroke-width="3" stroke-linecap="round"/>
   <!-- bookmark ribbon -->
-  <path d="M322 90 V122 L314 113 L306 122 V90 Z" fill="#C4622D" stroke="#0E2A23" stroke-width="1"/>
+  <path d="M322 90 V122 L314 113 L306 122 V90 Z" fill="#B5446E" stroke="#0D1E2E" stroke-width="1"/>
   <!-- pen across the right page -->
   <g stroke-linecap="round">
-    <path d="M286 232 L352 158" stroke="#0E2A23" stroke-width="8.5"/>
-    <path d="M287 231 L351 159" stroke="#C4622D" stroke-width="5.5"/>
-    <path d="M352 158 L362 147" stroke="#0E2A23" stroke-width="5"/>
-    <path d="M281 238 L286 232" stroke="#0E2A23" stroke-width="3"/>
+    <path d="M286 232 L352 158" stroke="#0D1E2E" stroke-width="8.5"/>
+    <path d="M287 231 L351 159" stroke="#B5446E" stroke-width="5.5"/>
+    <path d="M352 158 L362 147" stroke="#0D1E2E" stroke-width="5"/>
+    <path d="M281 238 L286 232" stroke="#0D1E2E" stroke-width="3"/>
   </g>
 </svg>

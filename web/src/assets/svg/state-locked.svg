@@ -1,41 +1,41 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300" role="img">
   <!-- Locked state: a gate across the trail; the route continues beyond it. -->
-  <rect width="500" height="300" fill="#FBFCFA"/>
-  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+  <rect width="500" height="300" fill="#F9FCFA"/>
+  <g fill="none" stroke="#0D1E2E" stroke-opacity="0.06" stroke-width="1">
     <path d="M-10 46 C 90 24, 200 60, 310 40 S 470 26, 510 46"/>
     <path d="M-10 274 C 90 256, 200 288, 310 270 S 470 256, 510 274"/>
   </g>
   <!-- trail beyond the gate (narrower, fading) -->
-  <path d="M232 150 L268 150 L261 88 L239 88 Z" fill="#EEF3EC" stroke="#9CC3B4" stroke-width="1.5" stroke-linejoin="round"/>
-  <path d="M250 142 V86" stroke="#9CC3B4" stroke-width="2" stroke-dasharray="2 8" stroke-linecap="round"/>
-  <rect x="-5" y="-5" width="10" height="10" rx="2.5" transform="translate(250 70) rotate(45)" fill="#9CC3B4"/>
+  <path d="M232 150 L268 150 L261 88 L239 88 Z" fill="#ECF3EF" stroke="#ABCDB8" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M250 142 V86" stroke="#ABCDB8" stroke-width="2" stroke-dasharray="2 8" stroke-linecap="round"/>
+  <rect x="-5" y="-5" width="10" height="10" rx="2.5" transform="translate(250 70) rotate(45)" fill="#ABCDB8"/>
   <!-- trail up to the gate -->
-  <path d="M208 300 L292 300 L272 156 L228 156 Z" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M208 300 L292 300 L272 156 L228 156 Z" fill="#ECF3EF" stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round"/>
   <!-- fence wires running to the plate edges -->
-  <g stroke="#0E2A23" stroke-width="1.5" stroke-linecap="round">
+  <g stroke="#0D1E2E" stroke-width="1.5" stroke-linecap="round">
     <path d="M20 158 H142 M20 196 H142"/>
     <path d="M358 158 H480 M358 196 H480"/>
   </g>
-  <path d="M62 148 V212 M438 148 V212" stroke="#0E2A23" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M62 148 V212 M438 148 V212" stroke="#0D1E2E" stroke-width="2.5" stroke-linecap="round"/>
   <!-- posts -->
-  <g stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round">
-    <rect x="142" y="128" width="17" height="98" rx="4" fill="#FBFCFA"/>
+  <g stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round">
+    <rect x="142" y="128" width="17" height="98" rx="4" fill="#F9FCFA"/>
     <path d="M142 138 H159" stroke-width="1"/>
-    <rect x="341" y="128" width="17" height="98" rx="4" fill="#FBFCFA"/>
+    <rect x="341" y="128" width="17" height="98" rx="4" fill="#F9FCFA"/>
     <path d="M341 138 H358" stroke-width="1"/>
   </g>
   <!-- gate rails + brace -->
-  <g stroke="#0E2A23" stroke-width="1.5">
-    <rect x="157" y="146" width="186" height="10" rx="4" fill="#1F5546"/>
-    <rect x="157" y="188" width="186" height="10" rx="4" fill="#1F5546"/>
-    <path d="M164 192 L336 152" stroke="#1F5546" stroke-width="7" stroke-linecap="round"/>
+  <g stroke="#0D1E2E" stroke-width="1.5">
+    <rect x="157" y="146" width="186" height="10" rx="4" fill="#2F6B52"/>
+    <rect x="157" y="188" width="186" height="10" rx="4" fill="#2F6B52"/>
+    <path d="M164 192 L336 152" stroke="#2F6B52" stroke-width="7" stroke-linecap="round"/>
   </g>
   <!-- padlock on the top rail -->
-  <path d="M243 146 V136 a7 7 0 0 1 14 0 V146" fill="none" stroke="#0E2A23" stroke-width="2.5"/>
-  <rect x="238" y="146" width="24" height="19" rx="3.5" fill="#E0A72E" stroke="#0E2A23" stroke-width="1.5"/>
-  <circle cx="250" cy="155" r="2.2" fill="#0E2A23"/>
+  <path d="M243 146 V136 a7 7 0 0 1 14 0 V146" fill="none" stroke="#0D1E2E" stroke-width="2.5"/>
+  <rect x="238" y="146" width="24" height="19" rx="3.5" fill="#DBA12E" stroke="#0D1E2E" stroke-width="1.5"/>
+  <circle cx="250" cy="155" r="2.2" fill="#0D1E2E"/>
   <!-- grass at the posts -->
-  <g stroke="#1F5546" stroke-width="1.5" stroke-linecap="round" fill="none">
+  <g stroke="#2F6B52" stroke-width="1.5" stroke-linecap="round" fill="none">
     <path d="M130 226 l3 -9 3 9 M136 226 l5 -7 2 7 M362 226 l3 -9 3 9 M368 226 l5 -7 2 7 M96 240 l3 -8 3 8 M404 242 l3 -8 3 8"/>
   </g>
 </svg>

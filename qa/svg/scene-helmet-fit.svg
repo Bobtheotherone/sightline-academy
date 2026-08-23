@@ -1,0 +1,211 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" role="img">
+<title>Cutaway of a worn full-face motocross helmet in profile: a grey block rests in a dent it has pressed into the thick magenta crushable liner while the pale head inside is untouched, two gloved fingers are slid under the fastened chin strap, and a graph beside it sets a tall narrow spike against a long low hump.</title>
+<!-- B. scene-helmet-fit. Right-facing full-face helmet, worn, sectioned at local x=440;
+     the group is translated -112 so the plate reads centred (block 93 from the left edge,
+     graph 70 from the right).
+     Sphere centre (400,300) local. Bands outward from the head:
+       comfort pad #ABCDB8 r 124-136 | crush liner #B5446E r 136-176 | shell #2F6B52 r 176-190.
+     The art is drawn CRUSHED and STAYS crushed for the whole loop - EPS does not recover,
+     and no frame may show the crown healing. Over the dent (125deg-165deg) both shell faces
+     step 14 units inward to r=176 / r=162 on arcs concentric with the crown, so the shell
+     keeps its thickness and the magenta band measures 26 there against 40 elsewhere. The
+     dashed r=190 ghost spans ONLY the dent, an even 14 units outside the crushed surface,
+     and shows at both ends of the block.
+     10s loop: 0-40 complete | 40-47 block lifts away (700ms, dent stays) | 47-55 dent
+     alone | 55-62 block returns and seats (700ms) | 62-66 spike draws | 66-73 hump draws |
+     73-100 hold. The graph baseline is never hidden; the curves reset by dashoffset only. -->
+<style>
+.hf-blk { animation: hf-blk 10s infinite; }
+@keyframes hf-blk {
+  0%, 40%   { transform: translate(0px,0px); animation-timing-function: cubic-bezier(.4,0,.7,1); }
+  47%, 55%  { transform: translate(-311.3px,-218px); animation-timing-function: cubic-bezier(.2,.7,.3,1); }
+  62%, 100% { transform: translate(0px,0px); }
+}
+.hf-spike { stroke-dasharray: 100; animation: hf-spike 10s infinite; }
+@keyframes hf-spike {
+  0%, 42%   { stroke-dashoffset: 0; animation-timing-function: cubic-bezier(.4,0,.4,1); }
+  48%, 62%  { stroke-dashoffset: 100; animation-timing-function: cubic-bezier(.2,.8,.3,1); }
+  66%, 100% { stroke-dashoffset: 0; }
+}
+.hf-hump { stroke-dasharray: 100; animation: hf-hump 10s infinite; }
+@keyframes hf-hump {
+  0%, 40%   { stroke-dashoffset: 0; animation-timing-function: cubic-bezier(.4,0,.4,1); }
+  47%, 66%  { stroke-dashoffset: 100; animation-timing-function: cubic-bezier(.25,.7,.35,1); }
+  73%, 100% { stroke-dashoffset: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hf-blk, .hf-spike, .hf-hump { animation: none; }
+  .hf-blk { transform: translate(0px,0px); }
+  .hf-spike, .hf-hump { stroke-dashoffset: 0; }
+}
+</style>
+
+<rect width="1000" height="600" fill="#F9FCFA"/>
+<g fill="none" stroke="#0D1E2E" stroke-opacity="0.07" stroke-width="1">
+  <path d="M-10 96 C 120 74, 260 118, 400 92 S 660 66, 1010 94"/>
+  <path d="M-10 520 C 140 500, 320 542, 520 518 S 860 496, 1010 522"/>
+  <path d="M-10 566 C 160 548, 380 584, 600 560 S 900 544, 1010 566"/>
+</g>
+
+<g transform="translate(-112 0)">
+
+<!-- the head, wholly inside the helmet: skull, jaw and a short neck stub below the
+     section cut. Its jaw runs UNDER the front shell's skirt and behind the chin bar, so
+     no pale form ever sits on bare paper forward of the cut. -->
+<path d="M440 182.6
+         A 124 124 0 0 0 328.9 401.6
+         C 330 424, 336 448, 348 466
+         C 360 492, 378 506, 402 508
+         C 424 512, 446 506, 458 496
+         C 476 486, 506 470, 524 446
+         L 524 182.6 Z"
+      fill="#DEEDE5" stroke="#0D1E2E" stroke-width="3" stroke-linejoin="round"/>
+
+<!-- comfort pad -->
+<path d="M322 411.4 A 136 136 0 0 1 440 170 L 440 182.6 A 124 124 0 0 0 328.9 401.6 Z"
+      fill="#ABCDB8" stroke="#0D1E2E" stroke-width="3" stroke-linejoin="round"/>
+
+<!-- crush liner: the mechanism and the one accent. Across the dent its outer face runs on
+     r=162 instead of r=176, so the band measures 26 there against 40 everywhere else. -->
+<path d="M299.1 444.2
+         A 176 176 0 0 1 227.2 266.4
+         L 243.5 258.1
+         A 162 162 0 0 1 307.1 167.3
+         L 309.3 149.1
+         A 176 176 0 0 1 440 128.6
+         L 440 170
+         A 136 136 0 0 0 322 411.4 Z"
+      fill="#B5446E" stroke="#0D1E2E" stroke-width="3" stroke-linejoin="round"/>
+
+<!-- outer shell, sectioned half; over the dent both faces step 14 units inward, so the
+     shell keeps its thickness and the magenta band is the one that loses 14 -->
+<path d="M291 455.6
+         A 190 190 0 0 1 213.5 263.8
+         L 230 254.4
+         A 176 176 0 0 1 299.1 155.8
+         L 302.1 137.2
+         A 190 190 0 0 1 440 114.3
+         L 440 128.6
+         A 176 176 0 0 0 309.3 149.1
+         L 307.1 167.3
+         A 162 162 0 0 0 243.5 258.1
+         L 227.2 266.4
+         A 176 176 0 0 0 299.1 444.2 Z"
+      fill="#2F6B52" stroke="#0D1E2E" stroke-width="3" stroke-linejoin="round"/>
+
+<!-- ghost of the shell's ORIGINAL surface, spanning the dent and nothing else; the even
+     14-unit gap to the crushed surface shows at both ends of the block -->
+<path d="M302.1 137.2 A 190 190 0 0 0 213.5 263.8" fill="none"
+      stroke="#46555A" stroke-opacity="0.6" stroke-width="2.5" stroke-dasharray="7 5" stroke-linecap="round"/>
+
+<!-- the section cut across all three bands at the rear rim -->
+<path d="M291 455.6 L328.9 401.6" fill="none" stroke="#0D1E2E" stroke-width="3" stroke-linecap="round"/>
+
+<!-- front half: dome, cheek and a low jaw skirt that closes over the head -->
+<path d="M440 114.3
+         A 190 190 0 0 1 577.4 231.9
+         C 592 258, 598 292, 594 326
+         C 592 352, 586 378, 576 398
+         C 570 416, 564 432, 556 444
+         C 524 478, 484 504, 448 516
+         L 440 518 Z"
+      fill="#2F6B52" stroke="#0D1E2E" stroke-width="3" stroke-linejoin="round"/>
+<path d="M448 384 C 468 398, 486 406, 502 408" fill="none" stroke="#0D1E2E" stroke-width="2" stroke-linecap="round"/>
+
+<!-- chin bar: one moulded mass with the shell, wrapping back under the jaw -->
+<path d="M502 366 L 596 330
+         C 624 322, 646 340, 650 364
+         L 656 410
+         C 658 428, 648 442, 632 444
+         L 552 456
+         C 530 458, 512 448, 506 428
+         C 500 408, 498 384, 502 366 Z"
+      fill="#2F6B52" stroke="#0D1E2E" stroke-width="3" stroke-linejoin="round"/>
+<path d="M580 342 C 572 378, 570 414, 574 452" fill="none" stroke="#0D1E2E" stroke-width="3" stroke-linecap="round"/>
+<path d="M606 384 L638 376 L644 410 L612 418 Z" fill="none" stroke="#0D1E2E" stroke-width="2" stroke-linejoin="round"/>
+<g stroke="#0D1E2E" stroke-width="2.5" stroke-linecap="round">
+  <path d="M613 391 L634 386"/>
+  <path d="M616 400 L637 395"/>
+  <path d="M619 409 L640 404"/>
+</g>
+
+<!-- visor port: shell-green aperture frame, dark lens -->
+<path d="M452 244 L508 220 C 532 210, 554 218, 564 236 L 578 264 L 572 326
+         C 570 340, 558 350, 542 350 L 452 350 Z"
+      fill="#2F6B52" stroke="#0D1E2E" stroke-width="3" stroke-linejoin="round"/>
+<path d="M459 251 L508 228 C 531 219, 550 226, 559 242 L 572 267 L 566 325
+         C 564 336, 554 344, 541 344 L 459 344 Z"
+      fill="#0D1E2E" fill-opacity="0.85"/>
+<path d="M470 250 C 496 238, 522 240, 540 251" fill="none"
+      stroke="#ABCDB8" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round"/>
+
+<!-- peak: a slab with a visible underside and two vent slots near the tip -->
+<path d="M440 184
+         C 482 156, 530 138, 574 134
+         C 592 133, 606 142, 608 155
+         C 610 168, 600 177, 584 181
+         C 540 190, 486 202, 440 212 Z"
+      fill="#2F6B52" stroke="#0D1E2E" stroke-width="3" stroke-linejoin="round"/>
+<path d="M452 202 C 500 192, 552 180, 588 170" fill="none" stroke="#0D1E2E" stroke-width="2" stroke-linecap="round"/>
+<path d="M556 156 L588 150" fill="none" stroke="#0D1E2E" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M550 168 L582 162" fill="none" stroke="#0D1E2E" stroke-width="2.5" stroke-linecap="round"/>
+
+<!-- exactly two gloved fingers, lying flat on the jaw; the strap band crosses only their
+     proximal ends. Ink-grey fill against the navy strap and navy glove: one line language,
+     separation by value. -->
+<g transform="translate(486 520) rotate(-145)" fill="#46555A" stroke="#0D1E2E" stroke-width="3" stroke-linejoin="round">
+  <rect x="-16" y="-22" width="118" height="18" rx="9"/>
+  <rect x="-16" y="4" width="118" height="18" rx="9"/>
+</g>
+
+<!-- one gloved hand: back of hand, thumb pad, the two fingers continuous with it, one seam
+     for the folded fingers, a gauntlet cuff and the forearm running out to the plate edge -->
+<path d="M499 502
+         C 512 494, 534 490, 556 496
+         C 574 496, 590 512, 596 534
+         C 600 552, 608 566, 618 574
+         L 648 600 L 552 600
+         C 540 586, 528 570, 518 556
+         L 488 562 L 473 538 Z"
+      fill="#0D1E2E" stroke="#0D1E2E" stroke-width="3" stroke-linejoin="round"/>
+<path d="M530 492 C 544 508, 552 526, 552 544" fill="none"
+      stroke="#46555A" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M528 560 L610 566 L626 592 L544 586 Z"
+      fill="#46555A" stroke="#0D1E2E" stroke-width="3" stroke-linejoin="round"/>
+
+<!-- chin strap: anchored through the rear shell, under the jaw, buckled, up to the D-ring
+     on the chin bar. Navy fill, navy outline, like every other line in the file. -->
+<g fill="#0D1E2E" stroke="#0D1E2E" stroke-width="3" stroke-linejoin="round">
+  <path d="M291.7 454.7 L421.7 538.7 L430.3 525.3 L300.3 441.3 Z"/>
+  <path d="M421.8 525.2 L551.8 445.2 L560.2 458.8 L430.2 538.8 Z"/>
+  <rect x="411" y="517" width="30" height="30" rx="7"/>
+</g>
+<rect x="418" y="524" width="16" height="16" rx="3" fill="#F9FCFA"/>
+<g transform="rotate(33 296 448)">
+  <rect x="285" y="442" width="22" height="12" rx="5" fill="#0D1E2E"/>
+  <rect x="290" y="445.5" width="12" height="5" rx="2.5" fill="#F9FCFA"/>
+</g>
+<g transform="rotate(-32 556 452)">
+  <rect x="545" y="446" width="22" height="12" rx="5" fill="#0D1E2E"/>
+  <rect x="550" y="449.5" width="12" height="5" rx="2.5" fill="#F9FCFA"/>
+</g>
+
+<!-- the impact block, seated to depth in the dent it made and offset off the dent's centre
+     so the ghost-to-surface gap stays exposed beside it -->
+<g class="hf-blk">
+  <g transform="rotate(-55 236.1 185.3)">
+    <rect x="198.1" y="155.3" width="76" height="60" rx="10" fill="#46555A" stroke="#0D1E2E" stroke-width="3"/>
+  </g>
+</g>
+
+</g>
+
+<!-- the same hit twice: a tall narrow spike and a long low hump. The baseline never hides. -->
+<g>
+  <path d="M640 470 H930" fill="none" stroke="#46555A" stroke-width="2" stroke-linecap="round"/>
+  <path class="hf-spike" pathLength="100" d="M644 470 C 666 470, 668 210, 684 210 C 700 210, 702 470, 724 470"
+        fill="none" stroke="#46555A" stroke-opacity="0.5" stroke-width="3" stroke-linecap="round"/>
+  <path class="hf-hump" pathLength="100" d="M644 470 C 700 470, 714 382, 786 382 C 858 382, 872 470, 928 470"
+        fill="none" stroke="#2F6B52" stroke-width="3" stroke-linecap="round"/>
+</g>
+</svg>

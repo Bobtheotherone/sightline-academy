@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" fill="none" stroke="#0E2A23" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" fill="none" stroke="#0D1E2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <!-- C-110 Warmth for an unplanned wait: a quilted insulating layer folded down into a stack, collar showing. -->
-  <rect x="10" y="30" width="28" height="10" rx="3" fill="#EEF3EC"/>
-  <path d="M12 10h6l6 7 6-7h6a5 5 0 0 1 5 5v11a5 5 0 0 1-5 5H12a5 5 0 0 1-5-5V15a5 5 0 0 1 5-5z" fill="#9CC3B4"/>
+  <rect x="10" y="30" width="28" height="10" rx="3" fill="#ECF3EF"/>
+  <path d="M12 10h6l6 7 6-7h6a5 5 0 0 1 5 5v11a5 5 0 0 1-5 5H12a5 5 0 0 1-5-5V15a5 5 0 0 1 5-5z" fill="#ABCDB8"/>
   <path d="M13 23h22M13 27.5h22" stroke-width="1.5"/>
 </svg>

@@ -1,31 +1,31 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300" role="img">
   <!-- Empty state: Ranger's campaign hat and compass, waiting for a question. -->
-  <rect width="500" height="300" fill="#FBFCFA"/>
-  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+  <rect width="500" height="300" fill="#F9FCFA"/>
+  <g fill="none" stroke="#0D1E2E" stroke-opacity="0.06" stroke-width="1">
     <path d="M-10 44 C 90 22, 200 58, 310 38 S 470 24, 510 44"/>
     <path d="M-10 274 C 90 256, 200 288, 310 270 S 470 256, 510 274"/>
   </g>
-  <ellipse cx="228" cy="234" rx="150" ry="10" fill="#EEF3EC"/>
-  <ellipse cx="392" cy="252" rx="52" ry="7" fill="#EEF3EC"/>
+  <ellipse cx="228" cy="234" rx="150" ry="10" fill="#ECF3EF"/>
+  <ellipse cx="392" cy="252" rx="52" ry="7" fill="#ECF3EF"/>
   <!-- campaign hat -->
-  <g stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round">
-    <path d="M162 176 Q170 108 228 104 Q286 108 294 176 Z" fill="#1F5546"/>
+  <g stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round">
+    <path d="M162 176 Q170 108 228 104 Q286 108 294 176 Z" fill="#2F6B52"/>
     <path d="M228 104 Q222 130 224 152 M228 104 Q236 130 234 152" fill="none" stroke-width="1"/>
-    <path d="M164 170 Q228 150 292 170 L292 180 Q228 160 164 180 Z" fill="#C4622D"/>
-    <rect x="-5" y="-5" width="10" height="10" rx="2.5" transform="translate(228 172) rotate(45)" fill="#E0A72E" stroke="#0E2A23" stroke-width="1"/>
-    <ellipse cx="228" cy="196" rx="112" ry="26" fill="#1F5546"/>
+    <path d="M164 170 Q228 150 292 170 L292 180 Q228 160 164 180 Z" fill="#B5446E"/>
+    <rect x="-5" y="-5" width="10" height="10" rx="2.5" transform="translate(228 172) rotate(45)" fill="#DBA12E" stroke="#0D1E2E" stroke-width="1"/>
+    <ellipse cx="228" cy="196" rx="112" ry="26" fill="#2F6B52"/>
     <path d="M120 192 Q228 172 336 192" fill="none" stroke-width="1"/>
   </g>
   <!-- lanyard to the compass -->
-  <path d="M330 210 Q352 224 366 234" fill="none" stroke="#0E2A23" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M330 210 Q352 224 366 234" fill="none" stroke="#0D1E2E" stroke-width="1.5" stroke-linecap="round"/>
   <!-- compass -->
-  <g stroke="#0E2A23" stroke-width="1.5">
-    <circle cx="392" cy="218" r="34" fill="#FBFCFA" stroke-width="2"/>
-    <circle cx="392" cy="218" r="27" fill="none" stroke="#9CC3B4" stroke-width="1.5"/>
+  <g stroke="#0D1E2E" stroke-width="1.5">
+    <circle cx="392" cy="218" r="34" fill="#F9FCFA" stroke-width="2"/>
+    <circle cx="392" cy="218" r="27" fill="none" stroke="#ABCDB8" stroke-width="1.5"/>
     <path d="M392 188 V194 M392 248 V242 M362 218 H368 M422 218 H416" stroke-width="1.5"/>
     <path d="M413 197 L409 201 M413 239 L409 235 M371 197 L375 201 M371 239 L375 235" stroke-width="1"/>
-    <path d="M392 196 L400 218 L384 218 Z" fill="#C4622D" stroke-width="1"/>
-    <path d="M392 240 L384 218 L400 218 Z" fill="#4A5A54" stroke-width="1"/>
-    <circle cx="392" cy="218" r="2.5" fill="#FBFCFA"/>
+    <path d="M392 196 L400 218 L384 218 Z" fill="#B5446E" stroke-width="1"/>
+    <path d="M392 240 L384 218 L400 218 Z" fill="#46555A" stroke-width="1"/>
+    <circle cx="392" cy="218" r="2.5" fill="#F9FCFA"/>
   </g>
 </svg>

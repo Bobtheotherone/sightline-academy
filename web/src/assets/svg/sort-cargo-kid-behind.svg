@@ -1,15 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" fill="none" stroke="#0E2A23" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M6.8 52.6 V48.2 Q6.8 45.6 10.3 45.6 H18.2 L21.7 39.4 H31.4 L34.9 45.6 H42.0 Q45.5 45.6 45.5 49.1 V48.2 Z" fill="#9CC3B4" stroke="#0E2A23"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" fill="none" stroke="#0D1E2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M6.8 52.6 V48.2 Q6.8 45.6 10.3 45.6 H18.2 L21.7 39.4 H31.4 L34.9 45.6 H42.0 Q45.5 45.6 45.5 49.1 V48.2 Z" fill="#ABCDB8" stroke="#0D1E2E"/>
   <path d="M38.4 45.6 L41.1 37.6 M37.6 37.6 H44.6" stroke-width="2"/>
-  <circle cx="13.8" cy="51.7" r="6.3" fill="#9CC3B4"/>
+  <circle cx="13.8" cy="51.7" r="6.3" fill="#ABCDB8"/>
   <circle cx="13.8" cy="51.7" r="2.3" stroke-width="1.6"/>
-  <circle cx="38.4" cy="51.7" r="6.3" fill="#9CC3B4"/>
+  <circle cx="38.4" cy="51.7" r="6.3" fill="#ABCDB8"/>
   <circle cx="38.4" cy="51.7" r="2.3" stroke-width="1.6"/>
-  <circle cx="34" cy="17" r="5.6" fill="#9CC3B4" stroke="#0E2A23"/>
-  <path d="M36.8 16.6 H42.8" stroke="#0E2A23" stroke-width="2"/>
-  <path d="M30.6 21.4 Q29.2 30.4 32.6 36.4 L40.0 36.4 Q39.0 30.4 37.4 21.4 Z" fill="#9CC3B4" stroke="#0E2A23"/>
-  <circle cx="18.5" cy="21" r="5.0" fill="#A93226" stroke="#0E2A23"/>
-  <path d="M21.0 20.6 H26.7" stroke="#0E2A23" stroke-width="2"/>
-  <path d="M15.1 25.4 Q13.7 33 15 37.5 H22.3 Q23.3 31 22 25.4 Z" fill="#A93226" stroke="#0E2A23"/>
+  <circle cx="34" cy="17" r="5.6" fill="#ABCDB8" stroke="#0D1E2E"/>
+  <path d="M36.8 16.6 H42.8" stroke="#0D1E2E" stroke-width="2"/>
+  <path d="M30.6 21.4 Q29.2 30.4 32.6 36.4 L40.0 36.4 Q39.0 30.4 37.4 21.4 Z" fill="#ABCDB8" stroke="#0D1E2E"/>
+  <circle cx="18.5" cy="21" r="5.0" fill="#A93226" stroke="#0D1E2E"/>
+  <path d="M21.0 20.6 H26.7" stroke="#0D1E2E" stroke-width="2"/>
+  <path d="M15.1 25.4 Q13.7 33 15 37.5 H22.3 Q23.3 31 22 25.4 Z" fill="#A93226" stroke="#0D1E2E"/>
   <path d="M47 7 L59 19 M59 7 L47 19" stroke="#A93226" stroke-width="3.4"/>
 </svg>

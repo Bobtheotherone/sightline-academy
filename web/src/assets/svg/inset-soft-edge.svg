@@ -2,25 +2,25 @@
   <!-- Hotspot inset for scene-trail-hazards / undercut soft edge. Section through
        the bank: the tread runs on well past the ground beneath it. Water has taken
        the toe out, roots hang in the shadow, and danger marks what is not there. -->
-  <rect width="320" height="240" fill="#FBFCFA"/>
-  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+  <rect width="320" height="240" fill="#F9FCFA"/>
+  <g fill="none" stroke="#0D1E2E" stroke-opacity="0.06" stroke-width="1">
     <path d="M-10 26 C 62 4, 132 44, 202 22 S 300 6, 330 28"/>
   </g>
   <!-- far bank across the water -->
-  <path d="M196 156 Q252 142, 320 150 L320 198 L196 198 Z" fill="#9CC3B4"/>
-  <g stroke="#0E2A23" stroke-linejoin="round">
-    <path d="M268 156 L278 128 L288 156 Z" fill="#1F5546" stroke-width="1.5"/>
+  <path d="M196 156 Q252 142, 320 150 L320 198 L196 198 Z" fill="#ABCDB8"/>
+  <g stroke="#0D1E2E" stroke-linejoin="round">
+    <path d="M268 156 L278 128 L288 156 Z" fill="#2F6B52" stroke-width="1.5"/>
   </g>
   <!-- the bank body: solid ground that stops a long way short of the lip -->
   <path d="M0 96 L166 92 L176 122 Q164 142, 144 154 Q120 168, 104 180 Q94 188, 92 194 L0 194 Z"
-        fill="#9CC3B4" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
-  <g stroke="#4A5A54" stroke-width="1.5" stroke-linecap="round" opacity="0.5">
+        fill="#ABCDB8" stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round"/>
+  <g stroke="#46555A" stroke-width="1.5" stroke-linecap="round" opacity="0.5">
     <path d="M16 130 H50 M70 136 H104 M24 164 H56 M74 176 H104 M118 132 H146"/>
   </g>
   <!-- the void under the lip: shadow where the ground should be -->
-  <path d="M176 122 Q164 142, 144 154 Q120 168, 104 180 Q94 188, 92 194 L176 194 Z" fill="#4A5A54"/>
+  <path d="M176 122 Q164 142, 144 154 Q120 168, 104 180 Q94 188, 92 194 L176 194 Z" fill="#46555A"/>
   <!-- roots that were holding this bank together, hanging in that shadow -->
-  <g fill="none" stroke="#EEF3EC" stroke-width="3" stroke-linecap="round">
+  <g fill="none" stroke="#ECF3EF" stroke-width="3" stroke-linecap="round">
     <path d="M126 114 Q134 142, 124 172"/>
     <path d="M146 116 Q160 138, 158 166 Q157 180, 148 190"/>
     <path d="M164 120 Q174 134, 176 156"/>
@@ -28,16 +28,16 @@
     <path d="M124 172 L138 182 M158 166 L170 172 M104 156 L92 164"/>
   </g>
   <!-- tread, running out over nothing -->
-  <path d="M0 76 L164 72 L166 92 L0 96 Z" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M0 76 L164 72 L166 92 L0 96 Z" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round"/>
   <!-- cracks running parallel to the edge, only near the lip -->
-  <g stroke="#0E2A23" stroke-width="1.5" fill="none" stroke-linecap="round">
+  <g stroke="#0D1E2E" stroke-width="1.5" fill="none" stroke-linecap="round">
     <path d="M116 74 Q120 83, 116 94"/>
     <path d="M142 73 Q146 82, 142 93"/>
   </g>
   <!-- the lip breaking off, and pieces already gone -->
-  <path d="M166 92 L180 100 L174 110 Z" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
-  <path d="M148 150 L160 156 L146 164 Z" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
-  <path d="M118 180 L130 186 L116 192 Z" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M166 92 L180 100 L174 110 Z" fill="#ECF3EF" stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M148 150 L160 156 L146 164 Z" fill="#ECF3EF" stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M118 180 L130 186 L116 192 Z" fill="#ECF3EF" stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round"/>
   <!-- how far the surface reaches past anything holding it up -->
   <g fill="none" stroke="#A93226" stroke-linecap="round">
     <path d="M176 122 Q164 142, 144 154 Q120 168, 104 180 Q94 188, 92 194" stroke-width="4"/>
@@ -45,10 +45,10 @@
   </g>
   <!-- water, still working at the toe -->
   <path d="M0 194 Q70 190, 152 192 Q236 194, 320 188 L320 240 L0 240 Z"
-        fill="#2E6E8E" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
-  <g fill="none" stroke="#FBFCFA" stroke-width="1.5" stroke-linecap="round">
+        fill="#1E8A6E" stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round"/>
+  <g fill="none" stroke="#F9FCFA" stroke-width="1.5" stroke-linecap="round">
     <path d="M42 226 Q64 220, 88 226 M148 230 Q172 224, 196 230 M240 222 Q264 216, 288 222"/>
   </g>
-  <path d="M240 208 H108" fill="none" stroke="#FBFCFA" stroke-width="2.5" stroke-linecap="round"/>
-  <path d="M120 202 L106 208 L120 214" fill="none" stroke="#FBFCFA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M240 208 H108" fill="none" stroke="#F9FCFA" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M120 202 L106 208 L120 214" fill="none" stroke="#F9FCFA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

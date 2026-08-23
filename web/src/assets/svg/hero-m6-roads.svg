@@ -1,53 +1,53 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img">
   <!-- Module 6 hero: bird's-eye view — a blazed trail meets a paved road at a
        marked crossing; the rider is stopped square with sight lines drawn. -->
-  <rect width="400" height="300" fill="#FBFCFA"/>
-  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+  <rect width="400" height="300" fill="#F9FCFA"/>
+  <g fill="none" stroke="#0D1E2E" stroke-opacity="0.06" stroke-width="1">
     <path d="M-10 40 C 70 20, 160 52, 250 34 S 380 20, 410 40"/>
     <path d="M-10 268 C 80 248, 180 282, 280 264 S 380 248, 410 268"/>
   </g>
   <!-- road -->
-  <rect x="252" y="0" width="92" height="300" fill="#D8E0DA"/>
-  <path d="M252 0 V300 M344 0 V300" stroke="#0E2A23" stroke-width="2"/>
-  <path d="M298 0 V300" stroke="#FBFCFA" stroke-width="3" stroke-dasharray="16 12"/>
+  <rect x="252" y="0" width="92" height="300" fill="#D6DFDA"/>
+  <path d="M252 0 V300 M344 0 V300" stroke="#0D1E2E" stroke-width="2"/>
+  <path d="M298 0 V300" stroke="#F9FCFA" stroke-width="3" stroke-dasharray="16 12"/>
   <!-- trail, both sides of the crossing -->
-  <path d="M0 150 Q120 146 252 152 L252 188 Q120 196 0 192 Z" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
-  <path d="M344 152 Q372 150 400 150 L400 190 Q372 190 344 188 Z" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M0 150 Q120 146 252 152 L252 188 Q120 196 0 192 Z" fill="#ECF3EF" stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M344 152 Q372 150 400 150 L400 190 Q372 190 344 188 Z" fill="#ECF3EF" stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round"/>
   <!-- stop bar before the pavement -->
-  <path d="M244 154 V186" stroke="#0E2A23" stroke-width="4" stroke-linecap="round"/>
+  <path d="M244 154 V186" stroke="#0D1E2E" stroke-width="4" stroke-linecap="round"/>
   <!-- ATV stopped square, top view, facing the road -->
-  <g stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round">
-    <rect x="186" y="145" width="16" height="10" rx="3" fill="#0E2A23"/>
-    <rect x="186" y="185" width="16" height="10" rx="3" fill="#0E2A23"/>
-    <rect x="222" y="145" width="16" height="10" rx="3" fill="#0E2A23"/>
-    <rect x="222" y="185" width="16" height="10" rx="3" fill="#0E2A23"/>
-    <rect x="182" y="156" width="56" height="28" rx="8" fill="#1F5546"/>
+  <g stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round">
+    <rect x="186" y="145" width="16" height="10" rx="3" fill="#0D1E2E"/>
+    <rect x="186" y="185" width="16" height="10" rx="3" fill="#0D1E2E"/>
+    <rect x="222" y="145" width="16" height="10" rx="3" fill="#0D1E2E"/>
+    <rect x="222" y="185" width="16" height="10" rx="3" fill="#0D1E2E"/>
+    <rect x="182" y="156" width="56" height="28" rx="8" fill="#2F6B52"/>
     <path d="M234 152 V188" stroke-width="3"/>
-    <ellipse cx="204" cy="170" rx="7" ry="11" fill="#1F5546"/>
-    <circle cx="208" cy="170" r="7" fill="#C4622D"/>
+    <ellipse cx="204" cy="170" rx="7" ry="11" fill="#2F6B52"/>
+    <circle cx="208" cy="170" r="7" fill="#B5446E"/>
   </g>
   <!-- sight lines along the road, both directions -->
-  <g stroke="#2E6E8E" stroke-width="2" stroke-linecap="round" fill="none">
+  <g stroke="#1E8A6E" stroke-width="2" stroke-linecap="round" fill="none">
     <path d="M216 164 L290 24" stroke-dasharray="6 6"/>
     <path d="M282 36 L290 22 L296 37" />
     <path d="M216 176 L290 278" stroke-dasharray="6 6"/>
     <path d="M282 268 L291 280 L295 264" />
   </g>
   <!-- oncoming vehicle -->
-  <g stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round">
-    <rect x="302" y="28" width="34" height="56" rx="9" fill="#1F5546"/>
-    <path d="M306 46 H332" stroke="#FBFCFA" stroke-width="4"/>
-    <path d="M308 72 H330" stroke="#FBFCFA" stroke-width="2.5"/>
+  <g stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round">
+    <rect x="302" y="28" width="34" height="56" rx="9" fill="#2F6B52"/>
+    <path d="M306 46 H332" stroke="#F9FCFA" stroke-width="4"/>
+    <path d="M308 72 H330" stroke="#F9FCFA" stroke-width="2.5"/>
   </g>
   <!-- crossing marker -->
-  <path d="M200 120 V144" stroke="#0E2A23" stroke-width="3" stroke-linecap="round"/>
-  <rect x="-11" y="-11" width="22" height="22" rx="4" transform="translate(200 102) rotate(45)" fill="#E0A72E" stroke="#0E2A23" stroke-width="1.5"/>
-  <path d="M200 94 V110 M192 102 H208" stroke="#0E2A23" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M200 120 V144" stroke="#0D1E2E" stroke-width="3" stroke-linecap="round"/>
+  <rect x="-11" y="-11" width="22" height="22" rx="4" transform="translate(200 102) rotate(45)" fill="#DBA12E" stroke="#0D1E2E" stroke-width="1.5"/>
+  <path d="M200 94 V110 M192 102 H208" stroke="#0D1E2E" stroke-width="3.5" stroke-linecap="round"/>
   <!-- trail blazes -->
-  <rect x="-4" y="-4" width="8" height="8" rx="2" transform="translate(60 140) rotate(45)" fill="#C4622D"/>
-  <rect x="-4" y="-4" width="8" height="8" rx="2" transform="translate(368 144) rotate(45)" fill="#C4622D"/>
+  <rect x="-4" y="-4" width="8" height="8" rx="2" transform="translate(60 140) rotate(45)" fill="#B5446E"/>
+  <rect x="-4" y="-4" width="8" height="8" rx="2" transform="translate(368 144) rotate(45)" fill="#B5446E"/>
   <!-- verge grass -->
-  <g stroke="#1F5546" stroke-width="1.5" stroke-linecap="round" fill="none">
+  <g stroke="#2F6B52" stroke-width="1.5" stroke-linecap="round" fill="none">
     <path d="M60 236 l3 -7 3 7 M120 250 l3 -7 3 7 M100 96 l3 -7 3 7 M170 70 l3 -7 3 7 M370 240 l3 -7 3 7 M368 80 l3 -7 3 7"/>
   </g>
 </svg>

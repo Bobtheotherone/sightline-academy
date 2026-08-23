@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1250 500" role="img">
+<title>Two identical quads on the same slope: the low strapped case keeps its load's plumb line well inside the tires, while the tall stacked boxes carry it out to the edge of the downhill tire.</title>
+<style>
+.slc-tl,.slc-tr{transform-box:view-box;animation:slc-tilt 10s infinite}
+.slc-tl{transform-origin:438px 408px;transform:rotate(10deg)}
+.slc-tr{transform-origin:1028px 408px;transform:rotate(10deg)}
+@keyframes slc-tilt{
+0%,42%{transform:rotate(10deg);animation-timing-function:cubic-bezier(.45,.05,.55,.95)}
+49%,71%{transform:rotate(0deg);animation-timing-function:cubic-bezier(.45,.05,.55,.95)}
+78%,100%{transform:rotate(10deg)}
+}
+.slc-pl,.slc-pr{transform-box:view-box;transform-origin:0 0}
+.slc-pl{transform:translate(23.2px,-16.9px);animation:slc-wl 10s infinite}
+.slc-pr{transform:translate(53.5px,-7.9px);animation:slc-wr 10s infinite}
+@keyframes slc-wl{
+0%,42%{transform:translate(23.2px,-16.9px);animation-timing-function:cubic-bezier(.45,.05,.55,.95)}
+49%,71%{transform:translate(0px,0px);animation-timing-function:cubic-bezier(.45,.05,.55,.95)}
+78%,100%{transform:translate(23.2px,-16.9px)}
+}
+@keyframes slc-wr{
+0%,42%{transform:translate(53.5px,-7.9px);animation-timing-function:cubic-bezier(.45,.05,.55,.95)}
+49%,71%{transform:translate(0px,0px);animation-timing-function:cubic-bezier(.45,.05,.55,.95)}
+78%,100%{transform:translate(53.5px,-7.9px)}
+}
+.slc-mgl{stroke-dashoffset:63.4;animation:slc-ml 10s infinite}
+@keyframes slc-ml{
+0%,42%{stroke-dashoffset:63.4;animation-timing-function:cubic-bezier(.45,.05,.55,.95)}
+49%,71%{stroke-dashoffset:50;animation-timing-function:cubic-bezier(.45,.05,.55,.95)}
+78%,100%{stroke-dashoffset:63.4}
+}
+.slc-mgr-g,.slc-mgr-r{stroke-dashoffset:94.6;animation:slc-mr 10s infinite}
+@keyframes slc-mr{
+0%,42%{stroke-dashoffset:94.6;animation-timing-function:cubic-bezier(.45,.05,.55,.95)}
+49%,71%{stroke-dashoffset:66.7;animation-timing-function:cubic-bezier(.45,.05,.55,.95)}
+78%,100%{stroke-dashoffset:94.6}
+}
+.slc-mgr-r{animation:slc-mr 10s infinite,slc-swap 10s steps(1) infinite}
+@keyframes slc-swap{0%{opacity:1}48%{opacity:0}72%{opacity:1}}
+.slc-vd{animation:slc-vf 10s infinite}
+@keyframes slc-vf{0%,42%{opacity:1}49%,71%{opacity:0}78%,100%{opacity:1}}
+@media (prefers-reduced-motion:reduce){
+.slc-tl,.slc-tr,.slc-pl,.slc-pr,.slc-mgl,.slc-mgr-g,.slc-mgr-r,.slc-vd{animation:none}
+}
+</style>
+<defs>
+<g id="slc-quad">
+<path d="M-36 -100 -66 -70M36 -100 66 -70" fill="none" stroke="#0D1E2E" stroke-width="2.5" stroke-linecap="round"/>
+<rect x="-70" y="-48" width="140" height="16" rx="8" fill="#0D1E2E"/>
+<path d="M-50 -115h100v36q0 9-11 9H-39q-11 0-11-9z" fill="#0D1E2E"/>
+<rect x="-24" y="-80" width="48" height="32" rx="7" fill="#46555A" stroke="#0D1E2E" stroke-width="2"/>
+<g fill="#0D1E2E"><rect x="-108" y="-118" width="48" height="118" rx="24"/><rect x="60" y="-118" width="48" height="118" rx="24"/></g>
+<path d="M-102 -97l18 6 18-6M-102 -78l18 6 18-6M-102 -59l18 6 18-6M-102 -40l18 6 18-6M-102 -21l18 6 18-6M66 -97l18 6 18-6M66 -78l18 6 18-6M66 -59l18 6 18-6M66 -40l18 6 18-6M66 -21l18 6 18-6" fill="none" stroke="#46555A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M-101 -94v-22q0-13 16-14h40v-9q0-9 13-9h64q13 0 13 9v9h40q16 1 16 14v22q0 7-9 7h-36q-8 0-10-7l-3-11H-52l-3 11q-2 7-10 7H-92q-9 0-9-7z" fill="#2F6B52" stroke="#0D1E2E" stroke-width="3.75" stroke-linejoin="round"/>
+<g fill="#2F6B52" stroke="#0D1E2E" stroke-width="2"><rect x="-47" y="-113" width="14" height="44" rx="6"/><rect x="33" y="-113" width="14" height="44" rx="6"/></g>
+<path d="M-47 -103h14M-47 -93h14M-47 -83h14M33 -103h14M33 -93h14M33 -83h14" stroke="#0D1E2E" stroke-width="2"/>
+<g fill="#0D1E2E"><rect x="-90" y="-122" width="32" height="13" rx="6"/><rect x="58" y="-122" width="32" height="13" rx="6"/></g>
+<rect x="-88" y="-166" width="176" height="18" rx="8" fill="#2F6B52" stroke="#0D1E2E" stroke-width="3.75"/>
+<rect x="-20" y="-222" width="40" height="56" rx="9" fill="#2F6B52" stroke="#0D1E2E" stroke-width="3.75"/>
+<rect x="-11" y="-215" width="22" height="14" rx="4" fill="#46555A"/>
+</g>
+<g id="slc-rail">
+<path d="M-88 -166V-176q0-6 6-6H82q6 0 6 6v10" fill="none" stroke="#0D1E2E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="slc-bars">
+<path d="M-104 -234q20 0 32 9l48 5h48l48-5q12-9 32-9" fill="none" stroke="#0D1E2E" stroke-width="2.5" stroke-linecap="round"/>
+<g fill="#0D1E2E"><rect x="-105" y="-237" width="20" height="11" rx="5.5" transform="rotate(15.5 -95 -231.5)"/><rect x="85" y="-237" width="20" height="11" rx="5.5" transform="rotate(-15.5 95 -231.5)"/></g>
+<path d="M-82 -228 -74 -218M82 -228 74 -218" fill="none" stroke="#0D1E2E" stroke-width="2" stroke-linecap="round"/>
+</g>
+</defs>
+
+<rect width="1250" height="500" fill="#F9FCFA"/>
+<g fill="none" stroke="#0D1E2E" stroke-opacity="0.07" stroke-width="1">
+<path d="M-10 96 C 180 62 420 132 640 94 S 1060 48 1260 100"/>
+<path d="M-10 308 C 210 284 450 326 700 298 S 1080 262 1260 306"/>
+<path d="M-10 478 C 210 448 460 500 700 472 S 1090 432 1260 484"/>
+</g>
+<path d="M625 70 V452" fill="none" stroke="#D6DFDA" stroke-width="3" stroke-dasharray="12 10"/>
+
+<!-- ============ LEFT: low flat case, plumb stays well inside ============ -->
+<g class="slc-tl">
+<path d="M174 408 H546" fill="none" stroke="#0D1E2E" stroke-width="3.75" stroke-linecap="round"/>
+<use href="#slc-quad" x="330" y="408"/>
+<use href="#slc-rail" x="330" y="408"/>
+<use href="#slc-bars" x="330" y="408"/>
+<rect x="256" y="182" width="148" height="60" rx="5" fill="#ABCDB8" stroke="#0D1E2E" stroke-width="3.75"/>
+<path d="M296 182V260M364 182V260" stroke="#0D1E2E" stroke-width="3" stroke-linecap="butt"/>
+<path d="M222 448 H438 M222 436 V460 M438 436 V460" fill="none" stroke="#0D1E2E" stroke-width="3.75" stroke-linecap="round"/>
+<path class="slc-mgl" d="M438 448 H222" pathLength="100" fill="none" stroke="#2F6B52" stroke-width="7" stroke-dasharray="100" stroke-linecap="butt"/>
+</g>
+
+<!-- ============ RIGHT: tall loose stack, plumb walks out to the tire edge ============ -->
+<g class="slc-tr">
+<path d="M764 408 H1136" fill="none" stroke="#0D1E2E" stroke-width="3.75" stroke-linecap="round"/>
+<use href="#slc-quad" x="920" y="408"/>
+<use href="#slc-rail" x="920" y="408"/>
+<use href="#slc-bars" x="920" y="408"/>
+<g transform="rotate(5 920 165)">
+<rect x="858" y="80" width="124" height="85" fill="#F9FCFA" stroke="#A93226" stroke-width="3.75"/>
+<path d="M858 96H982" stroke="#A93226" stroke-width="2"/>
+<path d="M884 80V165M938 80V165" stroke="#0D1E2E" stroke-width="3" stroke-linecap="butt"/>
+</g>
+<rect x="846" y="154" width="148" height="88" fill="#F9FCFA" stroke="#A93226" stroke-width="3.75"/>
+<path d="M846 172H994" stroke="#A93226" stroke-width="2"/>
+<path d="M876 154V260M934 154V260" stroke="#0D1E2E" stroke-width="3" stroke-linecap="butt"/>
+<path d="M812 448 H1028 M812 436 V460 M1028 436 V460" fill="none" stroke="#0D1E2E" stroke-width="3.75" stroke-linecap="round"/>
+<path class="slc-mgr-g" d="M1028 448 H812" pathLength="100" fill="none" stroke="#2F6B52" stroke-width="7" stroke-dasharray="100" stroke-linecap="butt"/>
+<path class="slc-mgr-r" d="M1028 448 H812" pathLength="100" fill="none" stroke="#A93226" stroke-width="7" stroke-dasharray="100" stroke-linecap="butt"/>
+</g>
+
+<!-- ============ plumb lines: never rotate, only walk ============ -->
+<g class="slc-pl">
+<path d="M330 299 V454" fill="none" stroke="#F9FCFA" stroke-width="7" stroke-linecap="butt"/>
+<path d="M330 299 V454" fill="none" stroke="#0D1E2E" stroke-width="3" stroke-dasharray="11 9" stroke-linecap="butt"/>
+<circle cx="330" cy="284" r="15" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="3"/>
+<path d="M330 284v-15a15 15 0 0 1 15 15zM330 284v15a15 15 0 0 1-15-15z" fill="#0D1E2E"/>
+</g>
+<g class="slc-pr">
+<path d="M956 121 V454" fill="none" stroke="#F9FCFA" stroke-width="7" stroke-linecap="butt"/>
+<path d="M956 121 V454" fill="none" stroke="#0D1E2E" stroke-width="3" stroke-dasharray="11 9" stroke-linecap="butt"/>
+<circle cx="956" cy="106" r="15" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="3"/>
+<path d="M956 106v-15a15 15 0 0 1 15 15zM956 106v15a15 15 0 0 1-15-15z" fill="#0D1E2E"/>
+</g>
+
+<!-- ============ verdicts ============ -->
+<g class="slc-vd">
+<rect x="-30" y="-30" width="60" height="60" rx="10" transform="translate(140 112) rotate(45)" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="3.75"/>
+<path d="M127 112 L136 122 L154 100" fill="none" stroke="#2F6B52" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g class="slc-vd">
+<rect x="-30" y="-30" width="60" height="60" rx="10" transform="translate(1150 100) rotate(45)" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="3.75"/>
+<path d="M1138 88 L1162 112 M1162 88 L1138 112" fill="none" stroke="#A93226" stroke-width="7" stroke-linecap="round"/>
+</g>
+</svg>

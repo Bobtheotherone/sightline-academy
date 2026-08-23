@@ -2,49 +2,49 @@
   <!-- B-034 Readiness plan (M5): the page carries the three things that make a
        ride recoverable - who you told, when you said you would be back, and the
        kit that leaves with you. The return time is the blazed commitment. -->
-  <rect width="240" height="160" fill="#FBFCFA"/>
-  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+  <rect width="240" height="160" fill="#F9FCFA"/>
+  <g fill="none" stroke="#0D1E2E" stroke-opacity="0.06" stroke-width="1">
     <path d="M-6 22 C 44 10, 100 30, 152 20 S 226 12, 246 24"/>
     <path d="M-6 148 C 44 138, 100 156, 152 146 S 226 138, 246 150"/>
   </g>
-  <rect x="18" y="12" width="204" height="136" rx="5" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
-  <path d="M18 28 V17 a5 5 0 0 1 5 -5 H217 a5 5 0 0 1 5 5 V28 Z" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5"/>
-  <rect x="-4.6" y="-4.6" width="9.2" height="9.2" rx="2.4" transform="translate(208 20) rotate(45)" fill="none" stroke="#9CC3B4" stroke-width="1.5"/>
-  <g stroke="#D8E0DA" stroke-width="1">
+  <rect x="18" y="12" width="204" height="136" rx="5" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="1.5"/>
+  <path d="M18 28 V17 a5 5 0 0 1 5 -5 H217 a5 5 0 0 1 5 5 V28 Z" fill="#2F6B52" stroke="#0D1E2E" stroke-width="1.5"/>
+  <rect x="-4.6" y="-4.6" width="9.2" height="9.2" rx="2.4" transform="translate(208 20) rotate(45)" fill="none" stroke="#ABCDB8" stroke-width="1.5"/>
+  <g stroke="#D6DFDA" stroke-width="1">
     <path d="M26 44 H214 M26 66 H214 M26 88 H214 M26 110 H214 M26 132 H214"/>
   </g>
-  <rect x="30" y="33" width="15" height="22" rx="3" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5"/>
-  <rect x="33" y="37" width="9" height="12" rx="1.5" fill="#FBFCFA"/>
-  <circle cx="37.5" cy="52" r="1.4" fill="#FBFCFA"/>
-  <path d="M54 44 H198" stroke="#4A5A54" stroke-width="2.6" stroke-linecap="round"/>
-  <circle cx="50" cy="88" r="21" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.8"/>
-  <g stroke="#0E2A23" stroke-linecap="round">
+  <rect x="30" y="33" width="15" height="22" rx="3" fill="#2F6B52" stroke="#0D1E2E" stroke-width="1.5"/>
+  <rect x="33" y="37" width="9" height="12" rx="1.5" fill="#F9FCFA"/>
+  <circle cx="37.5" cy="52" r="1.4" fill="#F9FCFA"/>
+  <path d="M54 44 H198" stroke="#46555A" stroke-width="2.6" stroke-linecap="round"/>
+  <circle cx="50" cy="88" r="21" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="1.8"/>
+  <g stroke="#0D1E2E" stroke-linecap="round">
     <path d="M50 71 V74 M67 88 H64 M50 105 V102 M33 88 H36" stroke-width="1.6"/>
     <path d="M64.7 96.5 L66.5 97.5 M58.5 102.7 L59.5 104.5 M41.5 102.7 L40.5 104.5 M35.3 96.5 L33.5 97.5 M35.3 79.5 L33.5 78.5 M41.5 73.3 L40.5 71.5 M58.5 73.3 L59.5 71.5 M64.7 79.5 L66.5 78.5" stroke-width="1"/>
     <path d="M50 88 V77" stroke-width="2.6"/>
   </g>
-  <path d="M50 88 L62 93" stroke="#C4622D" stroke-width="2.6" stroke-linecap="round"/>
-  <rect x="-3.4" y="-3.4" width="6.8" height="6.8" rx="1.8" transform="translate(65.5 94.5) rotate(45)" fill="#C4622D"/>
-  <circle cx="50" cy="88" r="2.2" fill="#0E2A23"/>
-  <g stroke="#4A5A54" stroke-linecap="round">
+  <path d="M50 88 L62 93" stroke="#B5446E" stroke-width="2.6" stroke-linecap="round"/>
+  <rect x="-3.4" y="-3.4" width="6.8" height="6.8" rx="1.8" transform="translate(65.5 94.5) rotate(45)" fill="#B5446E"/>
+  <circle cx="50" cy="88" r="2.2" fill="#0D1E2E"/>
+  <g stroke="#46555A" stroke-linecap="round">
     <path d="M84 78 H196" stroke-width="2.6"/>
     <path d="M84 92 H170" stroke-width="2"/>
   </g>
-  <g fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.4">
+  <g fill="#F9FCFA" stroke="#0D1E2E" stroke-width="1.4">
     <rect x="30" y="115" width="10" height="10" rx="2"/>
     <rect x="30" y="132" width="10" height="10" rx="2"/>
     <rect x="126" y="115" width="10" height="10" rx="2"/>
     <rect x="126" y="132" width="10" height="10" rx="2"/>
   </g>
-  <g fill="none" stroke="#1F5546" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <g fill="none" stroke="#2F6B52" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M32.4 120.2 L34.6 122.6 L38 118"/>
     <path d="M32.4 137.2 L34.6 139.6 L38 135"/>
     <path d="M128.4 120.2 L130.6 122.6 L134 118"/>
   </g>
-  <g stroke="#4A5A54" stroke-width="2" stroke-linecap="round">
+  <g stroke="#46555A" stroke-width="2" stroke-linecap="round">
     <path d="M46 120 H110 M46 137 H96"/>
   </g>
-  <g stroke="#9CC3B4" stroke-width="2" stroke-linecap="round">
+  <g stroke="#ABCDB8" stroke-width="2" stroke-linecap="round">
     <path d="M142 120 H206 M142 137 H190"/>
   </g>
 </svg>

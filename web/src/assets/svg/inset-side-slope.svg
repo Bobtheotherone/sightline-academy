@@ -2,50 +2,50 @@
   <!-- Hotspot inset for scene-trail-hazards / off-camber section. Cut across the
        trail bench: the far edge sits below the near one, and the trees have been
        leaning downhill for years. Clay is the surface measured against level. -->
-  <rect width="320" height="240" fill="#FBFCFA"/>
-  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+  <rect width="320" height="240" fill="#F9FCFA"/>
+  <g fill="none" stroke="#0D1E2E" stroke-opacity="0.06" stroke-width="1">
     <path d="M-10 26 C 62 4, 132 44, 202 22 S 300 6, 330 28"/>
   </g>
   <!-- hillside in section: soil body, then the surface skin over it -->
-  <path d="M0 44 Q46 66, 82 96 Q102 114, 118 146 L232 174 Q262 190, 286 212 L308 240 L0 240 Z" fill="#9CC3B4"/>
+  <path d="M0 44 Q46 66, 82 96 Q102 114, 118 146 L232 174 Q262 190, 286 212 L308 240 L0 240 Z" fill="#ABCDB8"/>
   <path d="M0 52 Q46 74, 82 104 Q102 122, 118 154 L232 182 Q262 198, 286 220 L300 240"
-        fill="none" stroke="#EEF3EC" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+        fill="none" stroke="#ECF3EF" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M0 44 Q46 66, 82 96 Q102 114, 118 146 L232 174 Q262 190, 286 212 L308 240"
-        fill="none" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
-  <g stroke="#4A5A54" stroke-width="1.5" stroke-linecap="round" opacity="0.45">
+        fill="none" stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round"/>
+  <g stroke="#46555A" stroke-width="1.5" stroke-linecap="round" opacity="0.45">
     <path d="M20 128 H54 M40 168 H76 M16 198 H52 M196 216 H234 M226 234 H264"/>
   </g>
   <!-- the trail bench, cut into the hill and canted across its width -->
   <path d="M118 146 L232 174 L228 192 L114 164 Z"
-        fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+        fill="#F9FCFA" stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round"/>
   <!-- level, for comparison -->
-  <path d="M112 146 H262" fill="none" stroke="#D8E0DA" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <path d="M112 146 H262" fill="none" stroke="#D6DFDA" stroke-width="1.5" stroke-dasharray="6 5"/>
   <!-- off-camber ticks, the same device the base plate uses -->
-  <g stroke="#0E2A23" stroke-width="1.5" fill="none" stroke-linecap="round">
+  <g stroke="#0D1E2E" stroke-width="1.5" fill="none" stroke-linecap="round">
     <path d="M140 158 L152 142"/>
     <path d="M172 166 L184 150"/>
     <path d="M204 174 L216 158"/>
   </g>
   <!-- saplings, all leaning the same way: downhill -->
   <g transform="rotate(20 96 108)">
-    <path d="M96 108 V80" stroke="#0E2A23" stroke-width="2"/>
-    <path d="M96 34 L112 82 H80 Z M96 50 L109 94 H83 Z" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M96 108 V80" stroke="#0D1E2E" stroke-width="2"/>
+    <path d="M96 34 L112 82 H80 Z M96 50 L109 94 H83 Z" fill="#2F6B52" stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round"/>
   </g>
   <g transform="rotate(23 286 208)">
-    <path d="M286 208 V186" stroke="#0E2A23" stroke-width="2"/>
-    <path d="M286 146 L300 188 H272 Z M286 160 L298 198 H274 Z" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M286 208 V186" stroke="#0D1E2E" stroke-width="2"/>
+    <path d="M286 146 L300 188 H272 Z M286 160 L298 198 H274 Z" fill="#2F6B52" stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round"/>
   </g>
   <g transform="rotate(21 64 82)">
-    <path d="M64 82 V66" stroke="#0E2A23" stroke-width="2"/>
-    <path d="M64 34 L76 68 H52 Z" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M64 82 V66" stroke="#0D1E2E" stroke-width="2"/>
+    <path d="M64 34 L76 68 H52 Z" fill="#2F6B52" stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round"/>
   </g>
   <!-- the cant: near edge high, far edge low, and this much between them -->
-  <g stroke="#C4622D" stroke-linecap="round" fill="none">
+  <g stroke="#B5446E" stroke-linecap="round" fill="none">
     <path d="M114 146 L236 176" stroke-width="4"/>
     <path d="M252 148 V174" stroke-width="3"/>
     <path d="M246 156 L252 146 L258 156" stroke-width="3"/>
     <path d="M246 166 L252 176 L258 166" stroke-width="3"/>
   </g>
-  <circle cx="116" cy="146" r="5.5" fill="#C4622D"/>
-  <circle cx="234" cy="176" r="5.5" fill="#C4622D"/>
+  <circle cx="116" cy="146" r="5.5" fill="#B5446E"/>
+  <circle cx="234" cy="176" r="5.5" fill="#B5446E"/>
 </svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" fill="none" stroke="#0D1E2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <title>Hard sun overhead and a water bottle already empty — stop and tend the rider.</title>
+  <circle cx="20.5" cy="21" r="10.5" fill="#DBA12E"/>
+  <path d="M20.5 7.5 V4.5 M20.5 34.5 V37.5 M34 21 H37 M7 21 H4 M30.1 11.5 L32.2 9.3 M30.1 30.5 L32.2 32.7 M10.9 30.5 L8.8 32.7 M10.9 11.5 L8.8 9.3"/>
+  <path d="M15 45 Q18.5 41.5 22 44 T29 40.5" stroke="#DBA12E"/>
+  <path d="M13 53 Q16.5 49.5 20 52 T27 48.5" stroke="#DBA12E"/>
+  <path d="M42 13 V19.5 Q42 24.5 38 27 Q36 28.5 36 32 V54.5 Q36 58.5 40 58.5 H55 Q59 58.5 59 54.5 V32 Q59 28.5 57 27 Q53 24.5 53 19.5 V13 Z" fill="#F9FCFA"/>
+  <path d="M37.5 50 H57.5" stroke="#D6DFDA" stroke-width="1.8" stroke-linecap="butt" stroke-dasharray="3.2 2.4"/>
+  <rect x="40.5" y="5.5" width="14" height="7.5" rx="2" fill="#ABCDB8"/>
+</svg>

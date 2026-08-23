@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" role="img">
   <!-- B-071 checkpoint_first_try: the checkpoint pennant, marked clean. -->
-  <path d="M4 14.6 V2.2" fill="none" stroke="#C4622D" stroke-width="1.6" stroke-linecap="round"/>
-  <path d="M4.4 3.2 L11.8 6.4 L4.4 9.6 Z" fill="#C4622D"/>
-  <path d="M13.6 2 V4.4 M12.4 3.2 H14.8" fill="none" stroke="#C4622D" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M4 14.6 V2.2" fill="none" stroke="#B5446E" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M4.4 3.2 L11.8 6.4 L4.4 9.6 Z" fill="#B5446E"/>
+  <path d="M13.6 2 V4.4 M12.4 3.2 H14.8" fill="none" stroke="#B5446E" stroke-width="1.3" stroke-linecap="round"/>
 </svg>

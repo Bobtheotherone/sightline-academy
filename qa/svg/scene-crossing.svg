@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" role="img">
+<title>Plan view of a dirt trail crossing a paved road: a geared rider has stopped at the stop line short of the pavement, with dotted sight lines drawn left and right along the road to markers at the limit of view, a car in the far lane, and the next rider waiting one machine length back.</title>
+<style>
+.xc-q1,.xc-q2,.xc-q3,.xc-car{animation-duration:12s;animation-iteration-count:infinite;animation-timing-function:linear}
+.xc-swL,.xc-swR{animation-duration:12s;animation-iteration-count:infinite;animation-timing-function:ease-in-out}
+.xc-q1{animation-name:xc-cross}
+.xc-q2{animation-name:xc-adv}
+.xc-q3{animation-name:xc-arr}
+.xc-car{animation-name:xc-drive}
+.xc-swL{animation-name:xc-lsL}
+.xc-swR{animation-name:xc-lsR}
+@keyframes xc-cross{0%,78.5%{transform:translateY(0px);opacity:1;animation-timing-function:cubic-bezier(.45,0,.75,1)}85%{transform:translateY(-278px);opacity:1;animation-timing-function:linear}88.5%,100%{transform:translateY(-312px);opacity:0}}
+@keyframes xc-adv{0%,80.5%{transform:translateY(0px);animation-timing-function:cubic-bezier(.25,0,.2,1)}85.5%,100%{transform:translateY(-130px)}}
+@keyframes xc-arr{0%,82.5%{transform:translateY(180px);animation-timing-function:cubic-bezier(.25,0,.2,1)}87.5%,100%{transform:translateY(0px)}}
+@keyframes xc-drive{0%,48.5%{transform:translateX(110px)}79.2%{transform:translateX(1120px);animation-timing-function:steps(1,end)}80%,92%{transform:translateX(-140px)}99%,100%{transform:translateX(110px)}}
+@keyframes xc-lsL{0%,20%{stroke-dashoffset:0}22%,25.5%{stroke-dashoffset:100}28%,34.5%{stroke-dashoffset:0}36.5%,47%{stroke-dashoffset:100}49.5%,55%{stroke-dashoffset:0}56.5%,88.5%{stroke-dashoffset:100}90.5%,100%{stroke-dashoffset:0}}
+@keyframes xc-lsR{0%,20%{stroke-dashoffset:0}22%,39%{stroke-dashoffset:100}41.5%,44.5%{stroke-dashoffset:0}46.5%,91%{stroke-dashoffset:100}93%,100%{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){
+.xc-q1,.xc-q2,.xc-q3,.xc-car,.xc-swL,.xc-swR{animation:none}
+.xc-q1,.xc-q2{transform:translateY(0px);opacity:1}
+.xc-q3{transform:translateY(180px)}
+.xc-car{transform:translateX(110px)}
+.xc-swL,.xc-swR{stroke-dashoffset:0}}
+</style>
+<defs>
+<path id="xc-firA" d="M0 -27 L-9 -11 L-5 -12 L-14 4 L-8 3 L-19 20 L19 20 L8 3 L14 4 L5 -12 L9 -11 Z" stroke-linejoin="round"/>
+<path id="xc-firB" d="M0 -29 L-8 -12 L-4 -13 L-12 3 L-6 2 L-16 20 L17 20 L9 2 L14 3 L6 -13 L10 -12 Z" stroke-linejoin="round"/>
+<path id="xc-rock" d="M-11 3 L-4 -8 L8 -6 L11 4 L-1 9 Z" stroke-linejoin="round"/>
+<g id="xc-quad" stroke="#0D1E2E" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+<g fill="#0D1E2E" stroke="none"><rect x="-43" y="-46" width="15" height="30" rx="5"/><rect x="28" y="-46" width="15" height="30" rx="5"/><rect x="-43" y="16" width="15" height="30" rx="5"/><rect x="28" y="16" width="15" height="30" rx="5"/></g>
+<g stroke="#46555A" stroke-width="2" fill="none"><path d="M-41.5 -39 h12 M-41.5 -31 h12 M-41.5 -23 h12 M29.5 -39 h12 M29.5 -31 h12 M29.5 -23 h12 M-41.5 23 h12 M-41.5 31 h12 M-41.5 39 h12 M29.5 23 h12 M29.5 31 h12 M29.5 39 h12"/></g>
+<path fill="#2F6B52" d="M-29 -45 Q-29 -56 -18 -56 L18 -56 Q29 -56 29 -45 L29 -26 Q29 -20 25 -18 L22 -16 Q20 -14 20 -8 L20 8 Q20 14 22 16 L25 18 Q29 20 29 26 L29 45 Q29 56 18 56 L-18 56 Q-29 56 -29 45 L-29 26 Q-29 20 -25 18 L-22 16 Q-20 14 -20 8 L-20 -8 Q-20 -14 -22 -16 L-25 -18 Q-29 -20 -29 -26 Z"/>
+<g fill="#DEEDE5" stroke-width="2"><rect x="-15" y="-54" width="9" height="6" rx="2.5"/><rect x="6" y="-54" width="9" height="6" rx="2.5"/></g>
+<g fill="none" stroke-width="2">
+<rect x="-19" y="-48" width="38" height="17" rx="6"/><path d="M-19 -42.5 h38 M-19 -37 h38 M0 -48 v17"/>
+<rect x="-19" y="33" width="38" height="17" rx="6"/><path d="M-19 38.5 h38 M-19 44 h38 M0 33 v17"/>
+</g>
+<rect x="-12" y="10" width="24" height="24" rx="7" fill="#0D1E2E" stroke-width="2"/>
+<path fill="#0D1E2E" stroke="none" d="M-27.2 -15 Q-26.2 -27.5 -14 -28.5 L14 -28.5 Q26.2 -27.5 27.2 -15 L22.8 -15 Q22 -23.6 13.6 -24.2 L-13.6 -24.2 Q-22 -23.6 -22.8 -15 Z"/>
+<rect x="-5.5" y="-29" width="11" height="7" rx="3" fill="#0D1E2E" stroke-width="2"/>
+<path fill="#2F6B52" stroke-width="2" d="M-21 -4 Q-22 -13 -11 -16 L11 -16 Q22 -13 21 -4 L18 18 Q16 24 10 24 L-10 24 Q-16 24 -18 18 Z"/>
+<g fill="#DEEDE5" stroke-width="2">
+<path d="M-18 -6 L-11 -10 L-17 -23 L-25 -19 Z"/>
+<path d="M18 -6 L11 -10 L17 -23 L25 -19 Z"/>
+</g>
+<g fill="#0D1E2E" stroke-width="2"><rect x="-25.5" y="2" width="7" height="15" rx="3"/><rect x="18.5" y="2" width="7" height="15" rx="3"/></g>
+<g fill="#0D1E2E" stroke-width="2"><ellipse cx="-21" cy="-23" rx="5.5" ry="5"/><ellipse cx="21" cy="-23" rx="5.5" ry="5"/></g>
+<circle cx="0" cy="-6" r="13" fill="#F9FCFA" stroke-width="3"/>
+<path fill="#0D1E2E" stroke="none" d="M-11.3 -8 A11.5 11.5 0 0 1 11.3 -8 L3.9 -6.7 A4 4 0 0 0 -3.9 -6.7 Z"/>
+</g>
+<g id="xc-carg" stroke="#0D1E2E" stroke-width="3" stroke-linejoin="round">
+<g fill="#0D1E2E" stroke="none"><rect x="-58" y="-29" width="22" height="9" rx="3"/><rect x="36" y="-29" width="22" height="9" rx="3"/><rect x="-58" y="20" width="22" height="9" rx="3"/><rect x="36" y="20" width="22" height="9" rx="3"/></g>
+<rect x="-82" y="-23" width="165" height="46" rx="18" fill="#2F6B52"/>
+<g fill="#0D1E2E" stroke-width="2"><rect x="24" y="-31" width="10" height="6" rx="2"/><rect x="24" y="25" width="10" height="6" rx="2"/></g>
+<rect x="-28" y="-17" width="48" height="34" rx="8" fill="#ABCDB8" stroke-width="2"/>
+<path d="M20 -17 L38 -11 L38 11 L20 17 Z" fill="#0D1E2E" stroke-width="2"/>
+<path d="M-28 -17 L-46 -11 L-46 11 L-28 17 Z" fill="#0D1E2E" stroke-width="2"/>
+<g fill="#DEEDE5" stroke-width="2"><rect x="65" y="-18" width="10" height="8" rx="3"/><rect x="65" y="10" width="10" height="8" rx="3"/></g>
+</g>
+<mask id="xc-mL" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="600">
+<path class="xc-swL" d="M487 326 L466 292 L46 292" fill="none" stroke="#F9FCFA" stroke-width="34" stroke-linecap="round" stroke-linejoin="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="0"/>
+</mask>
+<mask id="xc-mR" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="600">
+<path class="xc-swR" d="M513 326 L534 292 L954 292" fill="none" stroke="#F9FCFA" stroke-width="34" stroke-linecap="round" stroke-linejoin="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="0"/>
+</mask>
+</defs>
+<rect width="1000" height="600" fill="#F9FCFA"/>
+<g fill="none" stroke="#0D1E2E" stroke-opacity="0.07" stroke-width="1">
+<path d="M-10 124 C 150 102, 300 146, 470 124 S 800 96, 1010 120"/>
+<path d="M-10 414 C 140 392, 300 436, 460 414 S 780 384, 1010 408"/>
+<path d="M-10 556 C 160 534, 320 578, 500 556 S 820 526, 1010 550"/>
+</g>
+<path d="M440 180 L437 148 L443 110 L438 72 L442 30 L439 0 L561 0 L564 34 L558 74 L563 112 L557 150 L560 180 Z" fill="#DEEDE5"/>
+<path d="M424 600 L428 564 L422 526 L429 484 L423 442 L430 400 L424 358 L428 320 L572 320 L576 358 L570 400 L577 442 L571 484 L578 526 L572 564 L576 600 Z" fill="#DEEDE5"/>
+<path d="M438 600 L441 566 L436 528 L442 486 L437 444 L443 402 L438 360 L441 320 L559 320 L562 358 L557 400 L563 440 L558 482 L564 522 L559 562 L562 600 Z" fill="#ECF3EF"/>
+<g fill="none" stroke="#ABCDB8" stroke-width="3" stroke-dasharray="18 22" stroke-linecap="round">
+<path d="M452 600 L455 566 L450 528 L456 486 L451 444 L457 402 L452 360 L455 320"/>
+<path d="M548 600 L545 562 L550 522 L544 482 L549 440 L543 400 L548 358 L545 320"/>
+</g>
+<g fill="none" stroke="#0D1E2E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M438 600 L441 566 L436 528 L442 486 L437 444 L443 402 L438 360 L441 320"/>
+<path d="M562 600 L559 562 L564 522 L558 482 L563 440 L557 400 L562 358 L559 320"/>
+</g>
+<rect x="0" y="180" width="1000" height="140" fill="#46555A"/>
+<rect x="440" y="180" width="120" height="140" fill="#ECF3EF" opacity="0.35"/>
+<path d="M0 250 H1000" stroke="#D6DFDA" stroke-width="3" stroke-dasharray="24 18" fill="none"/>
+<g stroke="#0D1E2E" stroke-width="3" fill="none"><path d="M0 180 H1000 M0 320 H1000"/></g>
+<rect x="442" y="331" width="116" height="8" rx="3" fill="#B5446E" stroke="#0D1E2E" stroke-width="3" stroke-linejoin="round"/>
+<g fill="#ABCDB8" stroke="#0D1E2E" stroke-linejoin="round">
+<use href="#xc-firA" transform="translate(36,52) scale(.85)" stroke-width="3.5"/>
+<use href="#xc-firB" transform="translate(86,34) scale(1.05)" stroke-width="2.9" fill="#2F6B52" />
+<use href="#xc-firA" transform="translate(140,58) scale(.75)" stroke-width="4"/>
+<use href="#xc-firB" transform="translate(188,40) scale(.95)" stroke-width="3.2"/>
+<use href="#xc-firA" transform="translate(268,30) scale(.9)" stroke-width="3.3"/>
+<use href="#xc-firB" transform="translate(322,54) scale(1.1)" stroke-width="2.7" fill="#2F6B52" />
+<use href="#xc-firA" transform="translate(376,36) scale(.8)" stroke-width="3.8"/>
+<use href="#xc-firB" transform="translate(612,44) scale(1)" stroke-width="3"/>
+<use href="#xc-firA" transform="translate(668,26) scale(.85)" stroke-width="3.5"/>
+<use href="#xc-firB" transform="translate(726,50) scale(1.15)" stroke-width="2.6" fill="#2F6B52" />
+<use href="#xc-firA" transform="translate(818,38) scale(.95)" stroke-width="3.2"/>
+<use href="#xc-firB" transform="translate(872,58) scale(.8)" stroke-width="3.8"/>
+<use href="#xc-firA" transform="translate(930,32) scale(1.1)" stroke-width="2.7"/>
+<use href="#xc-firB" transform="translate(986,48) scale(.9)" stroke-width="3.3"/>
+<use href="#xc-firA" transform="translate(44,372) scale(.9)" stroke-width="3.3"/>
+<use href="#xc-firB" transform="translate(104,392) scale(.75)" stroke-width="4" fill="#2F6B52" />
+<use href="#xc-firA" transform="translate(162,364) scale(1)" stroke-width="3"/>
+<use href="#xc-firB" transform="translate(256,386) scale(.85)" stroke-width="3.5"/>
+<use href="#xc-firA" transform="translate(318,366) scale(1.05)" stroke-width="2.9" fill="#2F6B52" />
+<use href="#xc-firB" transform="translate(382,398) scale(.9)" stroke-width="3.3"/>
+<use href="#xc-firA" transform="translate(614,370) scale(.95)" stroke-width="3.2"/>
+<use href="#xc-firB" transform="translate(668,392) scale(.8)" stroke-width="3.8" fill="#2F6B52" />
+<use href="#xc-firA" transform="translate(760,368) scale(1.15)" stroke-width="2.6"/>
+<use href="#xc-firB" transform="translate(818,388) scale(.9)" stroke-width="3.3"/>
+<use href="#xc-firA" transform="translate(930,372) scale(1.05)" stroke-width="2.9" fill="#2F6B52" />
+</g>
+<g fill="#2F6B52" stroke="#0D1E2E" stroke-linejoin="round">
+<use href="#xc-firB" transform="translate(58,118) scale(1.15)" stroke-width="2.6"/>
+<use href="#xc-firA" transform="translate(112,140) scale(.9)" stroke-width="3.3" fill="#ABCDB8" />
+<use href="#xc-firB" transform="translate(172,126) scale(1.25)" stroke-width="2.4"/>
+<use href="#xc-firA" transform="translate(286,132) scale(1.05)" stroke-width="2.9"/>
+<use href="#xc-firB" transform="translate(350,144) scale(.85)" stroke-width="3.5" fill="#ABCDB8" />
+<use href="#xc-firA" transform="translate(398,124) scale(1.2)" stroke-width="2.5"/>
+<use href="#xc-firA" transform="translate(626,138) scale(.9)" stroke-width="3.3"/>
+<use href="#xc-firB" transform="translate(690,122) scale(1.2)" stroke-width="2.5"/>
+<use href="#xc-firA" transform="translate(752,142) scale(1)" stroke-width="3" fill="#ABCDB8" />
+<use href="#xc-firB" transform="translate(836,128) scale(1.15)" stroke-width="2.6"/>
+<use href="#xc-firA" transform="translate(898,146) scale(.85)" stroke-width="3.5"/>
+<use href="#xc-firB" transform="translate(960,130) scale(1.05)" stroke-width="2.9"/>
+<use href="#xc-firB" transform="translate(48,470) scale(1.1)" stroke-width="2.7"/>
+<use href="#xc-firA" transform="translate(36,556) scale(1.25)" stroke-width="2.4"/>
+<use href="#xc-firB" transform="translate(118,510) scale(.95)" stroke-width="3.2" fill="#ABCDB8" />
+<use href="#xc-firA" transform="translate(104,596) scale(1.15)" stroke-width="2.6"/>
+<use href="#xc-firB" transform="translate(196,552) scale(1.05)" stroke-width="2.9"/>
+<use href="#xc-firA" transform="translate(176,464) scale(.85)" stroke-width="3.5" fill="#ABCDB8" />
+<use href="#xc-firB" transform="translate(262,532) scale(1.2)" stroke-width="2.5"/>
+<use href="#xc-firA" transform="translate(348,486) scale(1.1)" stroke-width="2.7"/>
+<use href="#xc-firA" transform="translate(330,588) scale(1)" stroke-width="3" fill="#ABCDB8" />
+<use href="#xc-firB" transform="translate(390,520) scale(.9)" stroke-width="3.3"/>
+<use href="#xc-firB" transform="translate(606,516) scale(1)" stroke-width="3"/>
+<use href="#xc-firA" transform="translate(652,570) scale(1.15)" stroke-width="2.6" fill="#ABCDB8" />
+<use href="#xc-firB" transform="translate(700,492) scale(.85)" stroke-width="3.5"/>
+<use href="#xc-firA" transform="translate(798,548) scale(1.2)" stroke-width="2.5"/>
+<use href="#xc-firB" transform="translate(860,494) scale(.95)" stroke-width="3.2" fill="#ABCDB8" />
+<use href="#xc-firA" transform="translate(846,592) scale(1.05)" stroke-width="2.9"/>
+<use href="#xc-firB" transform="translate(938,542) scale(1.1)" stroke-width="2.7"/>
+<use href="#xc-firA" transform="translate(972,470) scale(.9)" stroke-width="3.3"/>
+</g>
+<g fill="#D6DFDA" stroke="#0D1E2E" stroke-linejoin="round">
+<use href="#xc-rock" transform="translate(222,96)" stroke-width="3"/>
+<use href="#xc-rock" transform="translate(410,70) scale(.8)" stroke-width="3.8"/>
+<use href="#xc-rock" transform="translate(784,92) scale(.9)" stroke-width="3.3"/>
+<use href="#xc-rock" transform="translate(232,452)" stroke-width="3"/>
+<use href="#xc-rock" transform="translate(300,438) scale(.85)" stroke-width="3.5"/>
+<use href="#xc-rock" transform="translate(730,530) scale(1.05)" stroke-width="2.9"/>
+<use href="#xc-rock" transform="translate(890,440) scale(.9)" stroke-width="3.3"/>
+</g>
+<g transform="translate(0,215)"><g class="xc-car"><use href="#xc-carg"/></g></g>
+<g transform="translate(500,532)"><g class="xc-q3"><use href="#xc-quad"/></g></g>
+<g transform="translate(500,532)"><g class="xc-q2"><use href="#xc-quad"/></g></g>
+<g transform="translate(500,402)"><g class="xc-q1"><use href="#xc-quad"/></g></g>
+<g fill="none" stroke="#0D1E2E" stroke-width="4.5" stroke-linecap="round">
+<g mask="url(#xc-mL)">
+<path d="M487 326 L466 292 L70 292" stroke-dasharray="0.5 11.5"/>
+<circle cx="60" cy="292" r="9"/>
+</g>
+<g mask="url(#xc-mR)">
+<path d="M513 326 L534 292 L930 292" stroke-dasharray="0.5 11.5"/>
+<circle cx="940" cy="292" r="9"/>
+</g>
+</g>
+</svg>

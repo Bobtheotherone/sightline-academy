@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" fill="none" stroke="#0D1E2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <title>A thunderhead with a lightning bolt and rain — change the route or the schedule.</title>
+  <!-- bolt first: the cloud is painted over its top edge so it drops out of the flat base.
+       Limbs are ~10 units wide, so ~6.8 units of amber survive inside the 2-unit stroke; the
+       tip is an 86-degree dart, not a needle, so the amber runs to 2.6 units of the point and
+       the point clears y=55.5 (the baseline the set's ground lines sit on). -->
+  <path d="M17.5 27 L10 41 H16.5 L12 49.5 L15.5 53.5 L23 46 L27.5 38 H22 L28 27 Z" fill="#DBA12E"/>
+  <path d="M34 36 L30 46.5 M41.5 34.5 L37.5 45 M49 37 L45 47.5 M56 35 L52 45.5" stroke="#1E8A6E"/>
+  <path d="M5.5 32 A11.5 11.5 0 0 1 16 16.5 A12 12 0 0 1 35.5 11.5 A11 11 0 0 1 49.5 18.5 A10.5 10.5 0 0 1 58.5 32 Z" fill="#ABCDB8"/>
+</svg>

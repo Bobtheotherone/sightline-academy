@@ -1,15 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img">
   <!-- B-026 Level 4 Trailhand (450 XP): a worked trail carrying three blazes
        across two read contour terraces - the ground itself is now legible. -->
-  <circle cx="64" cy="64" r="61" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
-  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+  <circle cx="64" cy="64" r="61" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="1.5"/>
+  <g fill="none" stroke="#0D1E2E" stroke-opacity="0.06" stroke-width="1">
     <path d="M8 38 Q40 24 66 32 Q94 40 120 28"/>
   </g>
-  <path d="M5.1 79.8 Q34 60 64 70 Q94 80 122.9 79.8 A61 61 0 0 1 5.1 79.8 Z" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5"/>
-  <path d="M11.2 94.5 Q38 78 64 86 Q92 94 116.8 94.5 A61 61 0 0 1 11.2 94.5 Z" fill="#9CC3B4" stroke="#0E2A23" stroke-width="1.5"/>
-  <path d="M14 60 Q40 44 66 52 Q92 60 116 48" fill="none" stroke="#0E2A23" stroke-width="1.5"/>
-  <path d="M22 102 Q46 90 64 80 Q84 69 108 60" fill="none" stroke="#0E2A23" stroke-width="2.5" stroke-linecap="round"/>
-  <g fill="#C4622D" stroke="#0E2A23" stroke-width="1.2">
+  <path d="M5.1 79.8 Q34 60 64 70 Q94 80 122.9 79.8 A61 61 0 0 1 5.1 79.8 Z" fill="#ECF3EF" stroke="#0D1E2E" stroke-width="1.5"/>
+  <path d="M11.2 94.5 Q38 78 64 86 Q92 94 116.8 94.5 A61 61 0 0 1 11.2 94.5 Z" fill="#ABCDB8" stroke="#0D1E2E" stroke-width="1.5"/>
+  <path d="M14 60 Q40 44 66 52 Q92 60 116 48" fill="none" stroke="#0D1E2E" stroke-width="1.5"/>
+  <path d="M22 102 Q46 90 64 80 Q84 69 108 60" fill="none" stroke="#0D1E2E" stroke-width="2.5" stroke-linecap="round"/>
+  <g fill="#B5446E" stroke="#0D1E2E" stroke-width="1.2">
     <rect x="-6" y="-6" width="12" height="12" rx="3.2" transform="translate(38 94) rotate(45)"/>
     <rect x="-6" y="-6" width="12" height="12" rx="3.2" transform="translate(64 80) rotate(45)"/>
     <rect x="-6" y="-6" width="12" height="12" rx="3.2" transform="translate(94 66) rotate(45)"/>

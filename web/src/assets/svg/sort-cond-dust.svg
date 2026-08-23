@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" fill="none" stroke="#0E2A23" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M4.6 44.6 V40.7 Q4.6 38.4 7.7 38.4 H14.7 L17.8 32.9 H26.4 L29.5 38.4 H35.8 Q38.9 38.4 38.9 41.5 V40.7 Z" fill="#9CC3B4" stroke="#0E2A23"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" fill="none" stroke="#0D1E2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4.6 44.6 V40.7 Q4.6 38.4 7.7 38.4 H14.7 L17.8 32.9 H26.4 L29.5 38.4 H35.8 Q38.9 38.4 38.9 41.5 V40.7 Z" fill="#ABCDB8" stroke="#0D1E2E"/>
   <path d="M32.6 38.4 L35.0 31.3 M31.9 31.3 H38.1" stroke-width="2"/>
-  <circle cx="10.8" cy="43.8" r="5.6" fill="#9CC3B4"/>
+  <circle cx="10.8" cy="43.8" r="5.6" fill="#ABCDB8"/>
   <circle cx="10.8" cy="43.8" r="2.0" stroke-width="1.6"/>
-  <circle cx="32.6" cy="43.8" r="5.6" fill="#9CC3B4"/>
+  <circle cx="32.6" cy="43.8" r="5.6" fill="#ABCDB8"/>
   <circle cx="32.6" cy="43.8" r="2.0" stroke-width="1.6"/>
   <path d="M35 44 C31 34 38 25 47 26.5" stroke-width="2.2"/>
   <path d="M39 52 C34 47 36 38 43 35.5" stroke-width="2.2"/>

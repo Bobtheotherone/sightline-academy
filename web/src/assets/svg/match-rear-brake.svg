@@ -1,12 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" fill="none" stroke="#0E2A23" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <!-- C-102 Rear brake: an over-ankle boot with its toe down on the pedal pad, the arm swept back to its pivot. -->
-  <circle cx="7" cy="38" r="3" fill="#EEF3EC"/>
-  <path d="M6.4 36.2L26 29.4l1.4 3.8L7.8 40z" fill="#EEF3EC"/>
-  <g transform="rotate(-8 33 28.5)">
-    <rect x="25" y="25" width="16" height="7" rx="2" fill="#9CC3B4"/>
-    <path d="M29 27v3M33 27v3M37 27v3" stroke-width="1.5"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" fill="none" stroke="#0D1E2E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+  <!-- C-102 Rear/foot brake: the boot that works it, toe down on the cleated pedal pad.
+       Boot construction follows sort-gear-boots; boot and pad tilt together so the pedal
+       reads as depressed rather than as a step to stand on. -->
+  <g transform="translate(0 3.5) rotate(-3 21 32.5)">
+    <path d="M21.4 4h9.2a1.4 1.4 0 0 1 1.4 1.4V26.4c0 1.8-1 2.6-2.8 2.6H10c-1.8 0-2.8-.8-2.8-2 0-1.2 1.2-2.4 3.6-3.2l6.2-2.2c2.2-.7 3.2-1.9 3.2-3.8V5.4A1.4 1.4 0 0 1 21.4 4Z" fill="#ABCDB8"/>
+    <path d="M9 24.6h21.6M21.2 8.4h10.4" stroke-width="1.8"/>
   </g>
-  <path d="M8.5 4H20v11.5l8 2.8c3.8 1.3 5.6 3.2 5 5-.4 1.2-1.7 1.7-3.6 1.7H11c-1.6 0-2.5-1-2.5-2.6z" fill="#9CC3B4"/>
-  <path d="M9.5 25h7v4.5h-5.5a1.5 1.5 0 0 1-1.5-1.5z" fill="#9CC3B4"/>
-  <path d="M10 7.5h9" stroke-width="1.5"/>
+  <g transform="rotate(-4 21 36.5)">
+    <rect x="6" y="32.5" width="30" height="8" rx="3" fill="#ECF3EF"/>
+    <path d="M11 34.9v3.2M16 34.9v3.2M21 34.9v3.2M26 34.9v3.2" stroke-width="1.8"/>
+    <circle cx="32" cy="36.5" r="1.9" stroke-width="1.7"/>
+  </g>
 </svg>

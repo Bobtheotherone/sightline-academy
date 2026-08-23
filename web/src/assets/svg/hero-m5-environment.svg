@@ -1,49 +1,49 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img">
   <!-- Module 5 hero: a weather front rolling over a valley trail, drawn with
        map furniture — front line, compass rose, scale bar. -->
-  <rect width="400" height="300" fill="#FBFCFA"/>
-  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+  <rect width="400" height="300" fill="#F9FCFA"/>
+  <g fill="none" stroke="#0D1E2E" stroke-opacity="0.06" stroke-width="1">
     <path d="M-10 40 C 70 18, 160 54, 250 34 S 380 18, 410 40"/>
   </g>
   <!-- clear sky, for now -->
-  <circle cx="344" cy="42" r="15" fill="#E0A72E" stroke="#0E2A23" stroke-width="1.5"/>
+  <circle cx="344" cy="42" r="15" fill="#DBA12E" stroke="#0D1E2E" stroke-width="1.5"/>
   <!-- valley floor + flanking hills -->
   <path d="M0 170 Q70 120 140 150 Q210 180 260 150 Q330 110 400 150 L400 300 L0 300 Z"
-        fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
-  <path d="M0 300 L0 210 Q60 190 110 230 Q140 252 150 300 Z" fill="#9CC3B4" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
-  <path d="M400 300 V200 Q340 180 290 225 Q262 250 255 300 Z" fill="#9CC3B4" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+        fill="#ECF3EF" stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M0 300 L0 210 Q60 190 110 230 Q140 252 150 300 Z" fill="#ABCDB8" stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M400 300 V200 Q340 180 290 225 Q262 250 255 300 Z" fill="#ABCDB8" stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round"/>
   <!-- trail through the valley -->
   <path d="M200 298 Q195 260 205 230 Q215 205 200 185 Q188 168 196 152"
-        fill="none" stroke="#C4622D" stroke-width="2.5" stroke-dasharray="1 8" stroke-linecap="round"/>
-  <rect x="-4" y="-4" width="8" height="8" rx="2" transform="translate(206 236) rotate(45)" fill="#C4622D"/>
-  <rect x="-4" y="-4" width="8" height="8" rx="2" transform="translate(197 156) rotate(45)" fill="#C4622D"/>
+        fill="none" stroke="#B5446E" stroke-width="2.5" stroke-dasharray="1 8" stroke-linecap="round"/>
+  <rect x="-4" y="-4" width="8" height="8" rx="2" transform="translate(206 236) rotate(45)" fill="#B5446E"/>
+  <rect x="-4" y="-4" width="8" height="8" rx="2" transform="translate(197 156) rotate(45)" fill="#B5446E"/>
   <!-- storm mass over the west ridge -->
   <path d="M20 62 Q18 38 44 36 Q50 18 78 20 Q106 18 112 40 Q136 42 134 62 Q132 80 108 80 L44 80 Q22 80 20 62 Z"
-        fill="#4A5A54" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
-  <path d="M40 44 Q52 30 74 32" fill="none" stroke="#FBFCFA" stroke-width="1.5" stroke-linecap="round"/>
-  <g stroke="#2E6E8E" stroke-width="2" stroke-linecap="round">
+        fill="#46555A" stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M40 44 Q52 30 74 32" fill="none" stroke="#F9FCFA" stroke-width="1.5" stroke-linecap="round"/>
+  <g stroke="#1E8A6E" stroke-width="2" stroke-linecap="round">
     <path d="M38 88 L30 116 M58 88 L50 120 M78 88 L70 118 M98 88 L90 114 M118 86 L112 108"/>
   </g>
   <!-- cold-front line sweeping toward the clear side -->
-  <path d="M134 66 Q210 88 288 82 Q330 79 362 68" fill="none" stroke="#2E6E8E" stroke-width="2.5" stroke-linecap="round"/>
-  <g fill="#2E6E8E">
+  <path d="M134 66 Q210 88 288 82 Q330 79 362 68" fill="none" stroke="#1E8A6E" stroke-width="2.5" stroke-linecap="round"/>
+  <g fill="#1E8A6E">
     <path d="M168 76 L180 88 L156 86 Z"/>
     <path d="M232 84 L244 96 L220 94 Z"/>
     <path d="M300 80 L311 91 L288 90 Z"/>
   </g>
   <!-- compass rose -->
-  <g stroke="#0E2A23" stroke-width="1.5">
-    <circle cx="352" cy="244" r="20" fill="#FBFCFA"/>
+  <g stroke="#0D1E2E" stroke-width="1.5">
+    <circle cx="352" cy="244" r="20" fill="#F9FCFA"/>
     <path d="M352 228 V232 M352 260 V256 M336 244 H340 M368 244 H364" stroke-width="1.5"/>
-    <path d="M352 226 L357 244 L352 249 L347 244 Z" fill="#C4622D" stroke-width="1"/>
-    <path d="M352 262 L347 244 L352 239 L357 244 Z" fill="#FBFCFA" stroke-width="1"/>
-    <circle cx="352" cy="244" r="1.8" fill="#0E2A23" stroke="none"/>
+    <path d="M352 226 L357 244 L352 249 L347 244 Z" fill="#B5446E" stroke-width="1"/>
+    <path d="M352 262 L347 244 L352 239 L357 244 Z" fill="#F9FCFA" stroke-width="1"/>
+    <circle cx="352" cy="244" r="1.8" fill="#0D1E2E" stroke="none"/>
   </g>
   <!-- map scale bar -->
-  <g stroke="#0E2A23" stroke-width="1">
-    <rect x="28" y="266" width="20" height="5" fill="#0E2A23"/>
-    <rect x="48" y="266" width="20" height="5" fill="#FBFCFA"/>
-    <rect x="68" y="266" width="20" height="5" fill="#0E2A23"/>
-    <rect x="88" y="266" width="20" height="5" fill="#FBFCFA"/>
+  <g stroke="#0D1E2E" stroke-width="1">
+    <rect x="28" y="266" width="20" height="5" fill="#0D1E2E"/>
+    <rect x="48" y="266" width="20" height="5" fill="#F9FCFA"/>
+    <rect x="68" y="266" width="20" height="5" fill="#0D1E2E"/>
+    <rect x="88" y="266" width="20" height="5" fill="#F9FCFA"/>
   </g>
 </svg>

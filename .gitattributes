@@ -1,0 +1,16 @@
+# ---------------------------------------------------------------------------
+# Git LFS — binary art assets
+#
+# Rasters are stored in LFS: they are large, opaque to diff, and rewritten
+# wholesale by the imagegen pipeline. SVGs are deliberately NOT in LFS —
+# they are ~1 MB of text in total, they compress well, and keeping them as
+# ordinary blobs means `git diff` on hand-tuned vector work stays readable.
+# ---------------------------------------------------------------------------
+
+web/src/assets/raster/**  filter=lfs diff=lfs merge=lfs -text
+web/public/**/*.png       filter=lfs diff=lfs merge=lfs -text
+web/public/**/*.jpg       filter=lfs diff=lfs merge=lfs -text
+web/public/**/*.webp      filter=lfs diff=lfs merge=lfs -text
+web/public/**/*.avif      filter=lfs diff=lfs merge=lfs -text
+web/public/**/*.ico       filter=lfs diff=lfs merge=lfs -text
+qa/svg/renders/**         filter=lfs diff=lfs merge=lfs -text

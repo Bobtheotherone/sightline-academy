@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img">
   <!-- B-024 Level 2 Greenhorn (100 XP): the same trailhead post, now with the
        first trail segment leaving it toward an unearned marker further on. -->
-  <circle cx="64" cy="64" r="61" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
-  <path d="M20 98 Q64 92 108 98" fill="none" stroke="#0E2A23" stroke-width="2" stroke-linecap="round"/>
-  <path d="M48 96 Q72 88 88 66" fill="none" stroke="#0E2A23" stroke-width="2.5" stroke-linecap="round"/>
-  <rect x="-5" y="-5" width="10" height="10" rx="2.6" transform="translate(90 60) rotate(45)" fill="none" stroke="#9CC3B4" stroke-width="1.5"/>
-  <rect x="35" y="38" width="14" height="58" rx="4" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
-  <path d="M35 48 H49" stroke="#0E2A23" stroke-width="1"/>
-  <rect x="-7.5" y="-7.5" width="15" height="15" rx="4" transform="translate(42 66) rotate(45)" fill="#C4622D" stroke="#0E2A23" stroke-width="1.5"/>
+  <circle cx="64" cy="64" r="61" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="1.5"/>
+  <path d="M20 98 Q64 92 108 98" fill="none" stroke="#0D1E2E" stroke-width="2" stroke-linecap="round"/>
+  <path d="M48 96 Q72 88 88 66" fill="none" stroke="#0D1E2E" stroke-width="2.5" stroke-linecap="round"/>
+  <rect x="-5" y="-5" width="10" height="10" rx="2.6" transform="translate(90 60) rotate(45)" fill="none" stroke="#ABCDB8" stroke-width="1.5"/>
+  <rect x="35" y="38" width="14" height="58" rx="4" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="1.5"/>
+  <path d="M35 48 H49" stroke="#0D1E2E" stroke-width="1"/>
+  <rect x="-7.5" y="-7.5" width="15" height="15" rx="4" transform="translate(42 66) rotate(45)" fill="#B5446E" stroke="#0D1E2E" stroke-width="1.5"/>
 </svg>

@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" role="img">
   <!-- B-073 journal_artifact_complete: a written notebook page. -->
-  <g fill="none" stroke="#C4622D" stroke-linecap="round">
+  <g fill="none" stroke="#B5446E" stroke-linecap="round">
     <rect x="3" y="1.9" width="10" height="12.2" rx="1.6" stroke-width="1.5"/>
     <path d="M6.2 2.6 V13.4" stroke-width="1.4"/>
     <path d="M8.6 6 H11 M8.6 9.2 H11" stroke-width="1.3"/>

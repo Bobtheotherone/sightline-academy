@@ -2,47 +2,47 @@
   <!-- Hotspot inset for scene-atv-anatomy / suspension. The coil-over caught part
        way through its travel: the frame holds its line, the arm swings, the tire
        stays pressed into the rock. Clay is the stroke still in reserve. -->
-  <rect width="320" height="240" fill="#FBFCFA"/>
-  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+  <rect width="320" height="240" fill="#F9FCFA"/>
+  <g fill="none" stroke="#0D1E2E" stroke-opacity="0.06" stroke-width="1">
     <path d="M-10 30 C 62 6, 132 48, 202 26 S 300 8, 330 32"/>
   </g>
   <!-- uneven ground: a hollow at the left, a rock lifting the wheel at the right -->
   <path d="M0 212 Q40 224, 86 228 Q124 230, 154 224 L182 216 Q206 200, 232 197
            Q258 199, 274 214 L300 222 L320 220 L320 240 L0 240 Z"
-        fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
-  <g stroke="#4A5A54" stroke-width="1.5" stroke-linecap="round" opacity="0.45">
+        fill="#ECF3EF" stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round"/>
+  <g stroke="#46555A" stroke-width="1.5" stroke-linecap="round" opacity="0.45">
     <path d="M22 232 H58 M98 234 H134 M270 226 H304"/>
   </g>
   <g stroke-linecap="round" stroke-linejoin="round">
     <!-- frame: the datum the wheel travels against -->
-    <path d="M18 40 H206" stroke="#0E2A23" stroke-width="8"/>
-    <path d="M40 48 V170" stroke="#0E2A23" stroke-width="5"/>
+    <path d="M18 40 H206" stroke="#0D1E2E" stroke-width="8"/>
+    <path d="M40 48 V170" stroke="#0D1E2E" stroke-width="5"/>
     <!-- coil-over: shaft, spring wound around it, damper body at the foot -->
-    <path d="M156 50 L112 158" stroke="#0E2A23" stroke-width="4"/>
+    <path d="M156 50 L112 158" stroke="#0D1E2E" stroke-width="4"/>
     <path d="M156 50 L167 62 L135 62 L158 84 L126 83 L150 105 L118 105 L141 127 L109 126 L132 149 L112 158"
-          fill="none" stroke="#0E2A23" stroke-width="4"/>
-    <circle cx="156" cy="50" r="9" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
-    <rect x="97" y="140" width="30" height="20" rx="9" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5" transform="rotate(-68 112 150)"/>
-    <circle cx="112" cy="160" r="7" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+          fill="none" stroke="#0D1E2E" stroke-width="4"/>
+    <circle cx="156" cy="50" r="9" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="1.5"/>
+    <rect x="97" y="140" width="30" height="20" rx="9" fill="#ECF3EF" stroke="#0D1E2E" stroke-width="1.5" transform="rotate(-68 112 150)"/>
+    <circle cx="112" cy="160" r="7" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="1.5"/>
     <!-- lower arm swinging from the frame pivot out to the knuckle -->
-    <path d="M46 166 L214 172" stroke="#0E2A23" stroke-width="7"/>
-    <path d="M214 172 L228 150" stroke="#0E2A23" stroke-width="6"/>
-    <circle cx="46" cy="166" r="7" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
-    <path d="M112 160 L114 170" stroke="#0E2A23" stroke-width="5"/>
+    <path d="M46 166 L214 172" stroke="#0D1E2E" stroke-width="7"/>
+    <path d="M214 172 L228 150" stroke="#0D1E2E" stroke-width="6"/>
+    <circle cx="46" cy="166" r="7" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="1.5"/>
+    <path d="M112 160 L114 170" stroke="#0D1E2E" stroke-width="5"/>
     <!-- the wheel, drawn exactly as the base plate draws wheels -->
-    <circle cx="232" cy="146" r="52" fill="#0E2A23"/>
-    <circle cx="232" cy="146" r="43" fill="none" stroke="#FBFCFA" stroke-width="3" stroke-dasharray="8 13" opacity="0.55"/>
-    <circle cx="232" cy="146" r="25" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
-    <path d="M232 125 V167 M211 146 H253" stroke="#0E2A23" stroke-width="1.5"/>
-    <circle cx="232" cy="146" r="6" fill="#0E2A23"/>
+    <circle cx="232" cy="146" r="52" fill="#0D1E2E"/>
+    <circle cx="232" cy="146" r="43" fill="none" stroke="#F9FCFA" stroke-width="3" stroke-dasharray="8 13" opacity="0.55"/>
+    <circle cx="232" cy="146" r="25" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="1.5"/>
+    <path d="M232 125 V167 M211 146 H253" stroke="#0D1E2E" stroke-width="1.5"/>
+    <circle cx="232" cy="146" r="6" fill="#0D1E2E"/>
   </g>
   <!-- travel still in hand: what keeps the tire pressed down instead of skipping -->
-  <g fill="none" stroke="#C4622D" stroke-linecap="round" stroke-linejoin="round">
+  <g fill="none" stroke="#B5446E" stroke-linecap="round" stroke-linejoin="round">
     <path d="M190 74 L155 158" stroke-width="3.5"/>
     <path d="M181 79 L190 74 L194 84" stroke-width="3.5"/>
     <path d="M164 152 L155 158 L151 148" stroke-width="3.5"/>
   </g>
-  <g fill="none" stroke="#D8E0DA" stroke-width="1.5" stroke-dasharray="5 4">
+  <g fill="none" stroke="#D6DFDA" stroke-width="1.5" stroke-dasharray="5 4">
     <path d="M172 67 L206 81"/>
     <path d="M137 151 L171 165"/>
   </g>

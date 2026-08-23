@@ -2,37 +2,37 @@
   <!-- Hotspot inset for scene-atv-anatomy / racks & cargo points. The rear rack
        carrying a low, centred, strapped case; the posted limit tag hangs off the
        rail; clay marks where the load's weight actually sits. -->
-  <rect width="320" height="240" fill="#FBFCFA"/>
-  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+  <rect width="320" height="240" fill="#F9FCFA"/>
+  <g fill="none" stroke="#0D1E2E" stroke-opacity="0.06" stroke-width="1">
     <path d="M-10 36 C 62 12, 132 54, 202 32 S 300 14, 330 38"/>
     <path d="M-10 208 C 66 184, 136 226, 206 204 S 302 184, 330 208"/>
   </g>
   <g stroke-linecap="round" stroke-linejoin="round">
     <!-- the load: low, centred, wider than tall -->
-    <rect x="86" y="68" width="150" height="48" rx="6" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5"/>
-    <path d="M86 84 H236" stroke="#FBFCFA" stroke-width="1.5"/>
+    <rect x="86" y="68" width="150" height="48" rx="6" fill="#2F6B52" stroke="#0D1E2E" stroke-width="1.5"/>
+    <path d="M86 84 H236" stroke="#F9FCFA" stroke-width="1.5"/>
     <!-- straps passing over the case and hooking the rails -->
-    <path d="M118 62 V130 M204 62 V130" stroke="#0E2A23" stroke-width="4"/>
-    <path d="M110 126 H126 M196 126 H212" stroke="#0E2A23" stroke-width="2.5"/>
-    <rect x="110" y="86" width="16" height="12" rx="3" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5"/>
-    <rect x="196" y="86" width="16" height="12" rx="3" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5"/>
+    <path d="M118 62 V130 M204 62 V130" stroke="#0D1E2E" stroke-width="4"/>
+    <path d="M110 126 H126 M196 126 H212" stroke="#0D1E2E" stroke-width="2.5"/>
+    <rect x="110" y="86" width="16" height="12" rx="3" fill="#ECF3EF" stroke="#0D1E2E" stroke-width="1.5"/>
+    <rect x="196" y="86" width="16" height="12" rx="3" fill="#ECF3EF" stroke="#0D1E2E" stroke-width="1.5"/>
     <!-- rack: slats between two rails, same device as the base plate -->
     <path d="M60 116 V138 M84 116 V138 M108 116 V138 M132 116 V138 M156 116 V138
              M180 116 V138 M204 116 V138 M228 116 V138 M252 116 V138"
-          stroke="#0E2A23" stroke-width="2.5"/>
-    <path d="M44 120 H268 M44 134 H268" stroke="#0E2A23" stroke-width="4"/>
+          stroke="#0D1E2E" stroke-width="2.5"/>
+    <path d="M44 120 H268 M44 134 H268" stroke="#0D1E2E" stroke-width="4"/>
     <!-- rack legs down to the frame -->
-    <path d="M66 138 L70 186 M246 138 L226 190" stroke="#0E2A23" stroke-width="4"/>
-    <path d="M56 190 L242 194" stroke="#0E2A23" stroke-width="5"/>
+    <path d="M66 138 L70 186 M246 138 L226 190" stroke="#0D1E2E" stroke-width="4"/>
+    <path d="M56 190 L242 194" stroke="#0D1E2E" stroke-width="5"/>
     <!-- posted rack limit tag, hung on the rail -->
-    <path d="M282 122 V150" stroke="#0E2A23" stroke-width="1.5"/>
+    <path d="M282 122 V150" stroke="#0D1E2E" stroke-width="1.5"/>
     <path d="M266 150 H298 Q304 150, 304 156 V184 Q304 190, 298 190 H266 Q260 190, 260 184 V156 Q260 150, 266 150 Z"
-          fill="#E0A72E" stroke="#0E2A23" stroke-width="1.5"/>
-    <path d="M268 162 H296 M268 172 H296 M268 181 H284" stroke="#0E2A23" stroke-width="2"/>
-    <circle cx="282" cy="150" r="3.5" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
+          fill="#DBA12E" stroke="#0D1E2E" stroke-width="1.5"/>
+    <path d="M268 162 H296 M268 172 H296 M268 181 H284" stroke="#0D1E2E" stroke-width="2"/>
+    <circle cx="282" cy="150" r="3.5" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="1.5"/>
   </g>
   <!-- where the weight sits: low and over the rack's centre -->
-  <g stroke="#C4622D" stroke-width="2.5" fill="none" stroke-linecap="round">
+  <g stroke="#B5446E" stroke-width="2.5" fill="none" stroke-linecap="round">
     <circle cx="161" cy="102" r="13"/>
     <path d="M161 89 V115 M148 102 H174"/>
     <path d="M161 115 V162"/>

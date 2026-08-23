@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img">
   <!-- Certificate seal: rope border, pine ring, blaze-and-summit center.
        Designed to hold in grayscale print. -->
-  <circle cx="120" cy="120" r="113" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
-  <circle cx="120" cy="120" r="99" fill="none" stroke="#0E2A23" stroke-width="1.5"/>
-  <g stroke="#0E2A23" stroke-width="1.5" fill="none" stroke-linecap="round">
+  <circle cx="120" cy="120" r="113" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="1.5"/>
+  <circle cx="120" cy="120" r="99" fill="none" stroke="#0D1E2E" stroke-width="1.5"/>
+  <g stroke="#0D1E2E" stroke-width="1.5" fill="none" stroke-linecap="round">
     <path d="M124 8 L114 20" transform="rotate(0 120 120)"/>
     <path d="M124 8 L114 20" transform="rotate(10 120 120)"/>
     <path d="M124 8 L114 20" transform="rotate(20 120 120)"/>
@@ -42,10 +42,10 @@
     <path d="M124 8 L114 20" transform="rotate(350 120 120)"/>
   </g>
   <!-- pine ring band -->
-  <circle cx="120" cy="120" r="88" fill="#1F5546"/>
-  <circle cx="120" cy="120" r="74" fill="#FBFCFA"/>
+  <circle cx="120" cy="120" r="88" fill="#2F6B52"/>
+  <circle cx="120" cy="120" r="74" fill="#F9FCFA"/>
   <!-- paper ticks on the band -->
-  <g stroke="#FBFCFA" stroke-width="1.5">
+  <g stroke="#F9FCFA" stroke-width="1.5">
     <path d="M120 34 V44" transform="rotate(15 120 120)"/>
     <path d="M120 34 V44" transform="rotate(45 120 120)"/>
     <path d="M120 34 V44" transform="rotate(75 120 120)"/>
@@ -60,16 +60,16 @@
     <path d="M120 34 V44" transform="rotate(345 120 120)"/>
   </g>
   <!-- faint contours inside -->
-  <g fill="none" stroke="#9CC3B4" stroke-width="1">
+  <g fill="none" stroke="#ABCDB8" stroke-width="1">
     <path d="M62 96 C 90 82, 122 104, 152 90 S 172 82, 178 88"/>
     <path d="M56 152 C 88 138, 124 160, 156 146 S 178 138, 184 144"/>
   </g>
   <!-- center blaze with summit line -->
-  <rect x="-31" y="-31" width="62" height="62" rx="13" transform="translate(120 120) rotate(45)" fill="#C4622D" stroke="#0E2A23" stroke-width="1.5"/>
-  <path d="M98 132 L110 114 L118 124 L131 104 L144 132" fill="none" stroke="#FBFCFA" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="-31" y="-31" width="62" height="62" rx="13" transform="translate(120 120) rotate(45)" fill="#B5446E" stroke="#0D1E2E" stroke-width="1.5"/>
+  <path d="M98 132 L110 114 L118 124 L131 104 L144 132" fill="none" stroke="#F9FCFA" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
   <!-- cardinal diamonds -->
-  <rect x="-4" y="-4" width="8" height="8" rx="2" transform="translate(120 60) rotate(45)" fill="#1F5546"/>
-  <rect x="-4" y="-4" width="8" height="8" rx="2" transform="translate(120 180) rotate(45)" fill="#1F5546"/>
-  <rect x="-4" y="-4" width="8" height="8" rx="2" transform="translate(60 120) rotate(45)" fill="#1F5546"/>
-  <rect x="-4" y="-4" width="8" height="8" rx="2" transform="translate(180 120) rotate(45)" fill="#1F5546"/>
+  <rect x="-4" y="-4" width="8" height="8" rx="2" transform="translate(120 60) rotate(45)" fill="#2F6B52"/>
+  <rect x="-4" y="-4" width="8" height="8" rx="2" transform="translate(120 180) rotate(45)" fill="#2F6B52"/>
+  <rect x="-4" y="-4" width="8" height="8" rx="2" transform="translate(60 120) rotate(45)" fill="#2F6B52"/>
+  <rect x="-4" y="-4" width="8" height="8" rx="2" transform="translate(180 120) rotate(45)" fill="#2F6B52"/>
 </svg>

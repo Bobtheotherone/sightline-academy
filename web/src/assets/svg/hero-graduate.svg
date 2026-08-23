@@ -2,35 +2,35 @@
   <!-- B-083 Graduate hero: the summit reached. The whole range the course crossed
        lies below, the climbed trail runs back down to the right, and one blaze is
        planted at the top beside the summit cairn. -->
-  <rect width="480" height="270" fill="#FBFCFA"/>
-  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+  <rect width="480" height="270" fill="#F9FCFA"/>
+  <g fill="none" stroke="#0D1E2E" stroke-opacity="0.06" stroke-width="1">
     <path d="M-10 36 C 100 12, 220 52, 330 30 S 460 16, 490 38"/>
     <path d="M-10 68 C 100 46, 220 84, 330 62 S 460 48, 490 70"/>
   </g>
-  <circle cx="392" cy="56" r="17" fill="#E0A72E" stroke="#0E2A23" stroke-width="1.5"/>
-  <path d="M-4 156 L22 124 L44 146 L74 104 L108 142 L138 128 L170 152 L206 110 L246 148 L276 132 L314 154 L352 118 L392 146 L428 130 L456 152 L484 134 L484 216 L-4 216 Z" fill="#9CC3B4" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
-  <path d="M-4 208 L36 172 L72 198 L114 160 L156 200 L192 182 L232 206 L276 168 L322 202 L366 180 L412 206 L452 174 L484 200 L484 250 L-4 250 Z" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
-  <path d="M-4 274 L-4 210 L46 178 L102 156 L154 172 L212 202 L276 226 L356 240 L484 246 L484 274 Z" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
-  <g fill="none" stroke="#0E2A23" stroke-width="1.5" stroke-linecap="round">
+  <circle cx="392" cy="56" r="17" fill="#DBA12E" stroke="#0D1E2E" stroke-width="1.5"/>
+  <path d="M-4 156 L22 124 L44 146 L74 104 L108 142 L138 128 L170 152 L206 110 L246 148 L276 132 L314 154 L352 118 L392 146 L428 130 L456 152 L484 134 L484 216 L-4 216 Z" fill="#ABCDB8" stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M-4 208 L36 172 L72 198 L114 160 L156 200 L192 182 L232 206 L276 168 L322 202 L366 180 L412 206 L452 174 L484 200 L484 250 L-4 250 Z" fill="#2F6B52" stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M-4 274 L-4 210 L46 178 L102 156 L154 172 L212 202 L276 226 L356 240 L484 246 L484 274 Z" fill="#ECF3EF" stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round"/>
+  <g fill="none" stroke="#0D1E2E" stroke-width="1.5" stroke-linecap="round">
     <path d="M20 232 Q90 216 150 226 Q206 236 254 252"/>
     <path d="M56 260 Q126 248 186 256 Q236 262 286 270"/>
     <path d="M338 256 Q400 250 462 260"/>
   </g>
-  <path d="M420 254 Q300 240 208 208 Q150 188 110 166" fill="none" stroke="#C4622D" stroke-width="3" stroke-dasharray="1 9" stroke-linecap="round"/>
-  <g fill="#C4622D" stroke="#0E2A23" stroke-width="1.2">
+  <path d="M420 254 Q300 240 208 208 Q150 188 110 166" fill="none" stroke="#B5446E" stroke-width="3" stroke-dasharray="1 9" stroke-linecap="round"/>
+  <g fill="#B5446E" stroke="#0D1E2E" stroke-width="1.2">
     <rect x="-5.6" y="-5.6" width="11.2" height="11.2" rx="3" transform="translate(307 236) rotate(45)"/>
     <rect x="-5.6" y="-5.6" width="11.2" height="11.2" rx="3" transform="translate(154 188) rotate(45)"/>
   </g>
-  <g stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round">
-    <path d="M150 180 L158 198 H142 Z" fill="#9CC3B4"/>
+  <g stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round">
+    <path d="M150 180 L158 198 H142 Z" fill="#ABCDB8"/>
     <path d="M154 198 V204" stroke-width="2"/>
   </g>
-  <g fill="#9CC3B4" stroke="#0E2A23" stroke-width="1.5">
+  <g fill="#ABCDB8" stroke="#0D1E2E" stroke-width="1.5">
     <ellipse cx="58" cy="196" rx="17" ry="8"/>
     <ellipse cx="56" cy="184" rx="13" ry="7"/>
     <ellipse cx="58" cy="174" rx="8" ry="5"/>
   </g>
-  <rect x="96" y="100" width="13" height="58" rx="3.5" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
-  <path d="M96 111 H109" stroke="#0E2A23" stroke-width="1"/>
-  <rect x="-11.5" y="-11.5" width="23" height="23" rx="6" transform="translate(102.5 122) rotate(45)" fill="#C4622D" stroke="#0E2A23" stroke-width="1.5"/>
+  <rect x="96" y="100" width="13" height="58" rx="3.5" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="1.5"/>
+  <path d="M96 111 H109" stroke="#0D1E2E" stroke-width="1"/>
+  <rect x="-11.5" y="-11.5" width="23" height="23" rx="6" transform="translate(102.5 122) rotate(45)" fill="#B5446E" stroke="#0D1E2E" stroke-width="1.5"/>
 </svg>

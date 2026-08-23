@@ -2,41 +2,41 @@
   <!-- Hotspot inset for scene-atv-anatomy / engine & fuel. The engine mass with
        the two walkaround stops joined by one clay check line: fuel cap above,
        oil sight glass on the case. -->
-  <rect width="320" height="240" fill="#FBFCFA"/>
-  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+  <rect width="320" height="240" fill="#F9FCFA"/>
+  <g fill="none" stroke="#0D1E2E" stroke-opacity="0.06" stroke-width="1">
     <path d="M-10 40 C 62 16, 132 58, 202 36 S 300 18, 330 42"/>
     <path d="M-10 210 C 66 186, 136 228, 206 206 S 302 186, 330 210"/>
   </g>
   <g stroke-linecap="round" stroke-linejoin="round">
     <!-- frame tube passing behind -->
-    <path d="M40 90 L268 68" stroke="#0E2A23" stroke-width="5"/>
+    <path d="M40 90 L268 68" stroke="#0D1E2E" stroke-width="5"/>
     <!-- fuel tank sitting straight on the engine, same body colour as the base plate -->
     <path d="M60 88 Q60 66, 84 64 L192 58 Q214 57, 216 74 L216 94 Q142 100, 60 96 Z"
-          fill="#1F5546" stroke="#0E2A23" stroke-width="1.5"/>
-    <path d="M102 50 H134 L130 66 H106 Z" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5"/>
-    <rect x="94" y="36" width="46" height="16" rx="7" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5"/>
-    <path d="M104 44 H130" stroke="#0E2A23" stroke-width="1.5"/>
+          fill="#2F6B52" stroke="#0D1E2E" stroke-width="1.5"/>
+    <path d="M102 50 H134 L130 66 H106 Z" fill="#2F6B52" stroke="#0D1E2E" stroke-width="1.5"/>
+    <rect x="94" y="36" width="46" height="16" rx="7" fill="#ECF3EF" stroke="#0D1E2E" stroke-width="1.5"/>
+    <path d="M104 44 H130" stroke="#0D1E2E" stroke-width="1.5"/>
     <!-- cylinder head + fins -->
-    <rect x="96" y="98" width="76" height="28" rx="4" fill="#4A5A54" stroke="#0E2A23" stroke-width="1.5"/>
-    <path d="M104 106 H164 M104 114 H164 M104 121 H164" stroke="#FBFCFA" stroke-width="2"/>
+    <rect x="96" y="98" width="76" height="28" rx="4" fill="#46555A" stroke="#0D1E2E" stroke-width="1.5"/>
+    <path d="M104 106 H164 M104 114 H164 M104 121 H164" stroke="#F9FCFA" stroke-width="2"/>
     <!-- crankcase -->
-    <rect x="80" y="124" width="128" height="82" rx="10" fill="#4A5A54" stroke="#0E2A23" stroke-width="1.5"/>
-    <path d="M92 138 H182 M92 150 H182" stroke="#FBFCFA" stroke-width="2"/>
-    <circle cx="146" cy="176" r="22" fill="none" stroke="#0E2A23" stroke-width="1.5"/>
-    <circle cx="146" cy="176" r="6" fill="#0E2A23"/>
+    <rect x="80" y="124" width="128" height="82" rx="10" fill="#46555A" stroke="#0D1E2E" stroke-width="1.5"/>
+    <path d="M92 138 H182 M92 150 H182" stroke="#F9FCFA" stroke-width="2"/>
+    <circle cx="146" cy="176" r="22" fill="none" stroke="#0D1E2E" stroke-width="1.5"/>
+    <circle cx="146" cy="176" r="6" fill="#0D1E2E"/>
     <!-- header and muffler -->
-    <path d="M208 140 Q244 136, 254 156" fill="none" stroke="#0E2A23" stroke-width="4"/>
-    <rect x="248" y="152" width="60" height="20" rx="10" fill="#4A5A54" stroke="#0E2A23" stroke-width="1.5"/>
-    <path d="M260 162 H296" stroke="#FBFCFA" stroke-width="2"/>
+    <path d="M208 140 Q244 136, 254 156" fill="none" stroke="#0D1E2E" stroke-width="4"/>
+    <rect x="248" y="152" width="60" height="20" rx="10" fill="#46555A" stroke="#0D1E2E" stroke-width="1.5"/>
+    <path d="M260 162 H296" stroke="#F9FCFA" stroke-width="2"/>
     <!-- oil sight glass on the case -->
-    <circle cx="196" cy="188" r="11" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
-    <path d="M186 190 Q196 195, 206 190 L206 196 Q196 200, 186 196 Z" fill="#4A5A54" stroke="#0E2A23" stroke-width="1"/>
+    <circle cx="196" cy="188" r="11" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="1.5"/>
+    <path d="M186 190 Q196 195, 206 190 L206 196 Q196 200, 186 196 Z" fill="#46555A" stroke="#0D1E2E" stroke-width="1"/>
     <!-- ground shadow, same device as the base plate -->
-    <ellipse cx="160" cy="220" rx="120" ry="7" fill="#EEF3EC"/>
-    <path d="M42 220 H278" stroke="#0E2A23" stroke-width="1.5"/>
+    <ellipse cx="160" cy="220" rx="120" ry="7" fill="#ECF3EF"/>
+    <path d="M42 220 H278" stroke="#0D1E2E" stroke-width="1.5"/>
   </g>
   <!-- the walkaround check line: fuel cap, then oil level. One clay device. -->
-  <g fill="none" stroke="#C4622D" stroke-width="3" stroke-linecap="round">
+  <g fill="none" stroke="#B5446E" stroke-width="3" stroke-linecap="round">
     <circle cx="117" cy="44" r="21"/>
     <circle cx="196" cy="188" r="21"/>
     <path d="M136 54 Q194 98, 194 166" stroke-dasharray="6 7" stroke-width="2.5"/>

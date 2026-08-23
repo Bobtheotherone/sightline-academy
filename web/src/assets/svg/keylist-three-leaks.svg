@@ -1,21 +1,234 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 400" role="img">
-  <!-- C-002 The three leaks: one judgment reservoir, its level fallen, draining through three separate mechanisms of equal size - group gravity, familiarity, sunk momentum. -->
-  <rect width="720" height="400" fill="#FBFCFA"/>
-  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
-    <path d="M-10 46 C 120 20, 300 68, 470 42 S 690 18, 730 46"/>
-    <path d="M-10 358 C 130 336, 320 380, 500 354 S 700 334, 730 358"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 400" role="img"
+     font-family="ui-sans-serif, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <!-- C-002 The three leaks.
+
+       Caption this serves: "Think of judgment as a tank with three slow leaks.
+       It never empties all at once - which is why a rider running on low still
+       feels like they're thinking straight."
+
+       TEXT HERE IS DELIBERATE (owner directive) and is the documented exception
+       to VISUAL_ASSETS U3, which bans letterforms in plates. U3 was written to
+       catch GARBLED GENERATED text - brand marks on gear, an AI-rendered phone
+       screen. These are authored labels. Two costs to know: this file is served
+       through <img>, so the text is invisible to screen readers (the manifest
+       alt carries the same phrases) and cannot use Inter, so it falls back to a
+       system stack. lint_assets.py has a narrow allowance for this slot only.
+
+       LEGIBILITY OVER A MOVING WATERLINE. Every phrase rides on an opaque
+       pine-100 pill, so ink-on-pill contrast is identical whether the pill is
+       over green water or over the empty part of the tank - the level can pass
+       through a phrase without ever affecting how it reads. The six slots are
+       fixed and pre-spaced (2 columns x 3 rows, 77px column gap, 10px row gap),
+       so no two phrases can overlap no matter how their timings land.
+
+       20s LOOP, three phases:
+         0-65%   drain   - thoughts surface and fade; the three leaks drip
+         65-75%  low     - thoughts stop, leaks keep going, nothing alarms
+         75-100% recover - drips stop, an inflow pours in from above, and the
+                           level eases back to full over 5s. Deliberately NOT a
+                           snap-refill: the tank is filled by something, not
+                           teleported back to full.
+       CSS only. Embedded via <img>, so the app's global reduced-motion kill in
+       styles/tokens.css cannot reach this - the @media block below is the
+       file's own kill switch and parks everything mid-drain. Every free-running
+       period (waves 4/5s, drips 1.25/2/2.5s, inflow 1s) divides 20 exactly and
+       every stagger uses NEGATIVE delays, so the loop closes with no seam. -->
+  <style>
+    .lvl, .ndl { animation: drain 20s infinite; }
+    @keyframes drain {
+      0%   { transform: translateY(0px);  animation-timing-function: linear; }
+      65%  { transform: translateY(88px); animation-timing-function: linear; }
+      75%  { transform: translateY(88px); animation-timing-function: cubic-bezier(.33,0,.2,1); }
+      100% { transform: translateY(0px); }
+    }
+
+    .wv-a { animation: wave 5s linear infinite; }
+    .wv-b { animation: wave 4s linear infinite; }
+    @keyframes wave { to { transform: translateX(-120px); } }
+
+    /* the leaks run during drain and low, and stop for the recovery */
+    .leaks { animation: leaking 20s linear infinite; }
+    @keyframes leaking {
+      0%, 70% { opacity: 1; } 75%, 96% { opacity: 0; } 100% { opacity: 1; }
+    }
+    .drop { animation-name: drip; animation-timing-function: linear; animation-iteration-count: infinite; }
+    .s1 { animation-duration: 1.25s; }
+    .s2 { animation-duration: 2s; }
+    .s3 { animation-duration: 2.5s; }
+    .off  { animation-delay: -.625s; }
+    .off2 { animation-delay: -1s; }
+    .off3 { animation-delay: -1.25s; }
+    @keyframes drip {
+      0%   { transform: translateY(0px);   opacity: 0; }
+      12%  { opacity: 1; }
+      88%  { transform: translateY(96px);  opacity: 1; }
+      100% { transform: translateY(104px); opacity: 0; }
+    }
+
+    .rip { animation-name: ripple; animation-timing-function: linear; animation-iteration-count: infinite; opacity: 0; }
+    @keyframes ripple {
+      0%, 82% { transform: scale(.25); opacity: 0; }
+      88%     { opacity: .5; }
+      100%    { transform: scale(1.7); opacity: 0; }
+    }
+
+    .pool { animation: fill 20s linear infinite; }
+    @keyframes fill {
+      0%   { transform: scale(.28); opacity: .4; }
+      65%  { transform: scale(1);   opacity: 1; }
+      75%  { transform: scale(1);   opacity: 1; }
+      100% { transform: scale(.28); opacity: .4; }
+    }
+
+    /* what refills it */
+    .inflow { animation: pour 20s linear infinite; opacity: 0; }
+    @keyframes pour {
+      0%, 74% { opacity: 0; } 79%, 95% { opacity: 1; } 100% { opacity: 0; }
+    }
+    .indrop { animation: infall 1s linear infinite; }
+    .i2 { animation-delay: -.333s; }
+    .i3 { animation-delay: -.666s; }
+    @keyframes infall {
+      0%   { transform: translateY(0px);  opacity: 0; }
+      20%  { opacity: 1; }
+      85%  { opacity: 1; }
+      100% { transform: translateY(30px); opacity: 0; }
+    }
+
+    /* Staggered with NEGATIVE delays (-20s + offset) so every phrase stays on
+       the 20s grid; a positive delay would shift it off for good and the loop
+       would stop closing. All six are clear before the low hold at 13s. */
+    .th  { animation: think 20s linear infinite; opacity: 0; }
+    @keyframes think {
+      0%   { opacity: 0; } 3% { opacity: 1; } 15% { opacity: 1; } 18% { opacity: 0; } 100% { opacity: 0; }
+    }
+    .th2 { animation-delay: -18.4s; }
+    .th3 { animation-delay: -16.8s; }
+    .th4 { animation-delay: -15.2s; }
+    .th5 { animation-delay: -13.6s; }
+    .th6 { animation-delay: -12s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .lvl, .ndl, .wv-a, .wv-b, .leaks, .drop, .rip, .pool,
+      .inflow, .indrop, .th { animation: none; }
+      .lvl, .ndl { transform: translateY(52px); }
+      .leaks { opacity: 1; }
+      .drop  { transform: translateY(48px); opacity: 1; }
+      .rip   { opacity: 0; }
+      .pool  { transform: scale(.8); opacity: 1; }
+      .inflow { opacity: 0; }
+      .th    { opacity: 0; }
+      .th1, .th4 { opacity: 1; }
+    }
+  </style>
+  <defs>
+    <linearGradient id="liq" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ABCDB8"/>
+      <stop offset="1" stop-color="#2F6B52"/>
+    </linearGradient>
+    <filter id="lift" x="-10%" y="-14%" width="120%" height="136%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#0D1E2E" flood-opacity=".13"/>
+    </filter>
+    <clipPath id="tankClip"><rect x="154" y="62" width="456" height="136" rx="18"/></clipPath>
+  </defs>
+
+  <rect width="720" height="400" fill="#F9FCFA"/>
+  <g fill="none" stroke="#0D1E2E" stroke-opacity=".07" stroke-width="1">
+    <path d="M-10 34 C 120 12, 300 56, 470 30 S 690 10, 730 34"/>
+    <path d="M-10 370 C 130 350, 320 388, 500 366 S 700 348, 730 370"/>
   </g>
-  <rect x="246" y="48" width="228" height="140" rx="20" fill="#FBFCFA"/>
-  <path d="M248 104 H472 V168 A18 18 0 0 1 454 186 H266 A18 18 0 0 1 248 168 Z" fill="#9CC3B4"/>
-  <rect x="246" y="48" width="228" height="140" rx="20" fill="none" stroke="#0E2A23" stroke-width="1.5"/>
-  <g stroke="#0E2A23" stroke-width="1.5" stroke-linecap="round"><path d="M234 62 H246 M234 83 H246 M234 104 H246 M234 125 H246 M234 146 H246 M234 167 H246"/><path d="M228 62 V167" stroke-width="1.5"/></g>
-  <path d="M252 68 H468" stroke="#0E2A23" stroke-width="1.6" stroke-dasharray="7 6" stroke-opacity="0.6"/>
-  <path d="M452.0 74.0 L452.0 93.0" fill="none" stroke="#0E2A23" stroke-width="1.8" stroke-linecap="round"/><path d="M-7 -4.9 L0 0 L-7 4.9" transform="translate(452.0 96.0) rotate(90.0)" fill="none" stroke="#0E2A23" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M226 104 H472" stroke="#C4622D" stroke-width="4" stroke-linecap="round"/>
-  <g fill="#0E2A23"><rect x="283" y="184" width="14" height="12" rx="2"/><rect x="353" y="184" width="14" height="12" rx="2"/><rect x="423" y="184" width="14" height="12" rx="2"/></g>
-  <g fill="none" stroke="#9CC3B4" stroke-width="9" stroke-linecap="round"><path d="M290 196 C 290 228, 180 232, 148 262 L148 274"/><path d="M360 196 V274"/><path d="M430 196 C 430 228, 540 232, 572 262 L572 274"/></g>
-  <g fill="#9CC3B4"><ellipse cx="148" cy="282" rx="34" ry="7"/><ellipse cx="360" cy="282" rx="34" ry="7"/><ellipse cx="572" cy="282" rx="34" ry="7"/></g>
-  <g><g fill="#0E2A23"><circle cx="104" cy="322" r="7.5"/><circle cx="126" cy="322" r="7.5"/><circle cx="148" cy="322" r="7.5"/></g><circle cx="192" cy="322" r="7.5" fill="#FBFCFA" stroke="#0E2A23" stroke-width="2.2"/><path d="M184.0 322.0 L165.0 322.0" fill="none" stroke="#0E2A23" stroke-width="2.4" stroke-linecap="round"/><path d="M-8 -5.6 L0 0 L-8 5.6" transform="translate(162.0 322.0) rotate(180.0)" fill="none" stroke="#0E2A23" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></g>
-  <g><rect x="-9.5" y="-9.5" width="19" height="19" rx="4.75" transform="translate(330 322) rotate(45)" fill="#0E2A23"/><rect x="-9.5" y="-9.5" width="19" height="19" rx="4.75" transform="translate(360 322) rotate(45)" fill="#0E2A23"/><rect x="-9.5" y="-9.5" width="19" height="19" rx="4.8" transform="translate(390 322) rotate(45)" fill="none" stroke="#0E2A23" stroke-width="2" stroke-dasharray="4 4"/><path d="M322.0 298.0 L395.0 298.0" fill="none" stroke="#0E2A23" stroke-width="2" stroke-linecap="round" stroke-dasharray="5 5"/><path d="M-7 -4.9 L0 0 L-7 4.9" transform="translate(398.0 298.0) rotate(0.0)" fill="none" stroke="#0E2A23" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
-  <g><path d="M524 340 H620" fill="none" stroke="#0E2A23" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M556 340 A16 16 0 0 1 588 340" fill="none" stroke="#0E2A23" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M572 316 V308 M549 328 l-6 -5 M595 328 l6 -5" fill="none" stroke="#0E2A23" stroke-width="1.8" stroke-linecap="round"/><path d="M526.0 300.0 L617.0 300.0" fill="none" stroke="#0E2A23" stroke-width="2.6" stroke-linecap="round"/><path d="M-8 -5.6 L0 0 L-8 5.6" transform="translate(620.0 300.0) rotate(0.0)" fill="none" stroke="#0E2A23" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></g>
+
+  <!-- ===== what fills it back up ===== -->
+  <g class="inflow">
+    <rect x="368" y="20" width="28" height="15" rx="4" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="1.8"/>
+    <path d="M377 35 h14 v6 a4 4 0 0 1 -4 4 h-6 a4 4 0 0 1 -4 -4 Z" fill="#0D1E2E"/>
+    <g fill="#2F6B52">
+      <g class="indrop"><ellipse cx="384" cy="50" rx="3.4" ry="4.6"/></g>
+      <g class="indrop i2"><ellipse cx="384" cy="50" rx="3.4" ry="4.6"/></g>
+      <g class="indrop i3"><ellipse cx="384" cy="50" rx="3.4" ry="4.6"/></g>
+    </g>
+  </g>
+
+  <!-- ===== gauge ===== -->
+  <g stroke="#0D1E2E" stroke-width="1.6" stroke-linecap="round" fill="none">
+    <path d="M112 68 V190"/>
+    <path d="M112 80 H134 M112 102 H127 M112 124 H127 M112 146 H127 M112 168 H134"/>
+  </g>
+  <g class="ndl">
+    <text x="95" y="84" text-anchor="end" font-size="11.5" font-weight="500" fill="#46555A">Judgment level</text>
+    <path d="M115 73 L133 80 L115 87 Z" fill="#B5446E"/>
+    <path d="M99 80 H115" stroke="#B5446E" stroke-width="2.6" stroke-linecap="round"/>
+  </g>
+
+  <!-- ===== the tank ===== -->
+  <g filter="url(#lift)"><rect x="152" y="60" width="460" height="140" rx="20" fill="#F9FCFA"/></g>
+  <g clip-path="url(#tankClip)">
+    <g class="lvl">
+      <!-- spans x -80..940: the clip runs to 610 and the wave scrolls 120 left,
+           so anything shorter exposes the path's own right edge mid-loop -->
+      <path class="wv-a" d="M-80 86 q30 -6 60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 V250 H-80 Z"
+            fill="url(#liq)" fill-opacity=".45"/>
+      <path class="wv-b" d="M-80 80 q30 -7 60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 V250 H-80 Z"
+            fill="url(#liq)" stroke="#B5446E" stroke-width="2.5" stroke-linejoin="round"/>
+    </g>
+    <path d="M168 80 H596" stroke="#0D1E2E" stroke-width="1.6" stroke-dasharray="7 6" stroke-opacity=".45"/>
+  </g>
+
+  <!-- ===== the thoughts that drain it ===== -->
+  <g font-size="12.5" font-weight="500" fill="#0D1E2E" text-anchor="middle">
+    <g class="th th1">
+      <rect x="194" y="79" width="148" height="26" rx="13" fill="#ECF3EF" stroke="#0D1E2E" stroke-opacity=".22" stroke-width="1"/>
+      <text x="268" y="96.4">Everyone else went.</text>
+    </g>
+    <g class="th th2">
+      <rect x="428" y="115" width="136" height="26" rx="13" fill="#ECF3EF" stroke="#0D1E2E" stroke-opacity=".22" stroke-width="1"/>
+      <text x="496" y="132.4">Nothing new here.</text>
+    </g>
+    <g class="th th3">
+      <rect x="191" y="151" width="154" height="26" rx="13" fill="#ECF3EF" stroke="#0D1E2E" stroke-opacity=".22" stroke-width="1"/>
+      <text x="268" y="168.4">We've come this far.</text>
+    </g>
+    <g class="th th4">
+      <rect x="422" y="79" width="148" height="26" rx="13" fill="#ECF3EF" stroke="#0D1E2E" stroke-opacity=".22" stroke-width="1"/>
+      <text x="496" y="96.4">Don't hold them up.</text>
+    </g>
+    <g class="th th5">
+      <rect x="197" y="115" width="142" height="26" rx="13" fill="#ECF3EF" stroke="#0D1E2E" stroke-opacity=".22" stroke-width="1"/>
+      <text x="268" y="132.4">I know this trail.</text>
+    </g>
+    <g class="th th6">
+      <rect x="419" y="151" width="154" height="26" rx="13" fill="#ECF3EF" stroke="#0D1E2E" stroke-opacity=".22" stroke-width="1"/>
+      <text x="496" y="168.4">But I'm almost there.</text>
+    </g>
+  </g>
+
+  <rect x="152" y="60" width="460" height="140" rx="20" fill="none" stroke="#0D1E2E" stroke-width="1.8"/>
+
+  <!-- ===== three leaks, equal size ===== -->
+  <g fill="#0D1E2E">
+    <path d="M231 199 h18 v7 a5 5 0 0 1 -5 5 h-8 a5 5 0 0 1 -5 -5 Z"/>
+    <path d="M373 199 h18 v7 a5 5 0 0 1 -5 5 h-8 a5 5 0 0 1 -5 -5 Z"/>
+    <path d="M515 199 h18 v7 a5 5 0 0 1 -5 5 h-8 a5 5 0 0 1 -5 -5 Z"/>
+  </g>
+  <g class="leaks" fill="#2F6B52">
+    <g class="drop s1" style="transform-origin:240px 218px"><ellipse cx="240" cy="218" rx="3.8" ry="5.2"/></g>
+    <g class="drop s1 off" style="transform-origin:240px 218px"><ellipse cx="240" cy="218" rx="3.8" ry="5.2"/></g>
+    <g class="drop s2" style="transform-origin:382px 218px"><ellipse cx="382" cy="218" rx="3.8" ry="5.2"/></g>
+    <g class="drop s2 off2" style="transform-origin:382px 218px"><ellipse cx="382" cy="218" rx="3.8" ry="5.2"/></g>
+    <g class="drop s3" style="transform-origin:524px 218px"><ellipse cx="524" cy="218" rx="3.8" ry="5.2"/></g>
+    <g class="drop s3 off3" style="transform-origin:524px 218px"><ellipse cx="524" cy="218" rx="3.8" ry="5.2"/></g>
+  </g>
+
+  <!-- ===== what has run out of it ===== -->
+  <path d="M120 322 H644" stroke="#0D1E2E" stroke-width="1.6" stroke-opacity=".25" stroke-linecap="round"/>
+  <g>
+    <g class="pool" style="transform-origin:240px 322px"><ellipse cx="240" cy="322" rx="44" ry="8" fill="#ABCDB8"/><ellipse cx="240" cy="322" rx="44" ry="8" fill="none" stroke="#2F6B52" stroke-opacity=".45" stroke-width="1.2"/></g>
+    <g class="pool" style="transform-origin:382px 322px"><ellipse cx="382" cy="322" rx="44" ry="8" fill="#ABCDB8"/><ellipse cx="382" cy="322" rx="44" ry="8" fill="none" stroke="#2F6B52" stroke-opacity=".45" stroke-width="1.2"/></g>
+    <g class="pool" style="transform-origin:524px 322px"><ellipse cx="524" cy="322" rx="44" ry="8" fill="#ABCDB8"/><ellipse cx="524" cy="322" rx="44" ry="8" fill="none" stroke="#2F6B52" stroke-opacity=".45" stroke-width="1.2"/></g>
+  </g>
+  <g fill="none" stroke="#2F6B52" stroke-width="1.6">
+    <ellipse class="rip s1" cx="240" cy="322" rx="17" ry="4" style="transform-origin:240px 322px"/>
+    <ellipse class="rip s2" cx="382" cy="322" rx="17" ry="4" style="transform-origin:382px 322px"/>
+    <ellipse class="rip s3" cx="524" cy="322" rx="17" ry="4" style="transform-origin:524px 322px"/>
+  </g>
 </svg>

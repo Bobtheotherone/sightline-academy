@@ -1,13 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img">
   <!-- B-025 Level 3 Pathfinder (250 XP): a blazed post standing at a fork. The
        chosen branch runs on solid and blazed; the other fades away unmarked. -->
-  <circle cx="64" cy="64" r="61" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
-  <path d="M18 104 Q64 98 110 104" fill="none" stroke="#0E2A23" stroke-width="2" stroke-linecap="round"/>
-  <path d="M64 96 Q46 80 32 56" fill="none" stroke="#9CC3B4" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 6"/>
-  <rect x="-5.4" y="-5.4" width="10.8" height="10.8" rx="2.8" transform="translate(29 50) rotate(45)" fill="none" stroke="#9CC3B4" stroke-width="1.8"/>
-  <path d="M64 96 Q84 80 102 58" fill="none" stroke="#0E2A23" stroke-width="3" stroke-linecap="round"/>
-  <rect x="57" y="56" width="14" height="48" rx="4" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
-  <path d="M57 66 H71" stroke="#0E2A23" stroke-width="1"/>
-  <rect x="-7" y="-7" width="14" height="14" rx="3.7" transform="translate(64 76) rotate(45)" fill="#C4622D" stroke="#0E2A23" stroke-width="1.5"/>
-  <rect x="-6.2" y="-6.2" width="12.4" height="12.4" rx="3.3" transform="translate(105 53) rotate(45)" fill="#C4622D" stroke="#0E2A23" stroke-width="1.5"/>
+  <circle cx="64" cy="64" r="61" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="1.5"/>
+  <path d="M18 104 Q64 98 110 104" fill="none" stroke="#0D1E2E" stroke-width="2" stroke-linecap="round"/>
+  <path d="M64 96 Q46 80 32 56" fill="none" stroke="#ABCDB8" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 6"/>
+  <rect x="-5.4" y="-5.4" width="10.8" height="10.8" rx="2.8" transform="translate(29 50) rotate(45)" fill="none" stroke="#ABCDB8" stroke-width="1.8"/>
+  <path d="M64 96 Q84 80 102 58" fill="none" stroke="#0D1E2E" stroke-width="3" stroke-linecap="round"/>
+  <rect x="57" y="56" width="14" height="48" rx="4" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="1.5"/>
+  <path d="M57 66 H71" stroke="#0D1E2E" stroke-width="1"/>
+  <rect x="-7" y="-7" width="14" height="14" rx="3.7" transform="translate(64 76) rotate(45)" fill="#B5446E" stroke="#0D1E2E" stroke-width="1.5"/>
+  <rect x="-6.2" y="-6.2" width="12.4" height="12.4" rx="3.3" transform="translate(105 53) rotate(45)" fill="#B5446E" stroke="#0D1E2E" stroke-width="1.5"/>
 </svg>

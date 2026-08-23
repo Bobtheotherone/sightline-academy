@@ -1,12 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" fill="none" stroke="#0E2A23" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" fill="none" stroke="#0D1E2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <path d="M12 33 H52 L47 55 H17 Z" stroke-width="2.2"/>
   <path d="M24 33 L22.5 55 M40 33 L41.5 55" stroke-width="1.8"/>
   <path d="M12.6 40 H51.4" stroke-width="1.8"/>
   <path d="M20 33 L17.5 24" stroke-width="3"/>
   <circle cx="16.5" cy="20" r="4.2" stroke-width="2.2"/>
   <g transform="rotate(22 41 16)">
-    <rect x="30" y="7" width="19" height="9" rx="1.5" fill="#E0A72E"/>
-    <rect x="37" y="16" width="5.5" height="14" rx="2" fill="#E0A72E"/>
+    <rect x="30" y="7" width="19" height="9" rx="1.5" fill="#DBA12E"/>
+    <rect x="37" y="16" width="5.5" height="14" rx="2" fill="#DBA12E"/>
   </g>
   <path d="M54 27 C58 23 58 17.5 55 13" stroke-width="1.8"/>
 </svg>

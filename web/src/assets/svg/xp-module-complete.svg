@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" role="img">
   <!-- B-072 module_complete: the badge frame - a blaze diamond earned. -->
-  <rect x="-5" y="-5" width="10" height="10" rx="2.6" transform="translate(8 8) rotate(45)" fill="none" stroke="#C4622D" stroke-width="1.6"/>
-  <rect x="-2.1" y="-2.1" width="4.2" height="4.2" rx="1.2" transform="translate(8 8) rotate(45)" fill="#C4622D"/>
+  <rect x="-5" y="-5" width="10" height="10" rx="2.6" transform="translate(8 8) rotate(45)" fill="none" stroke="#B5446E" stroke-width="1.6"/>
+  <rect x="-2.1" y="-2.1" width="4.2" height="4.2" rx="1.2" transform="translate(8 8) rotate(45)" fill="#B5446E"/>
 </svg>

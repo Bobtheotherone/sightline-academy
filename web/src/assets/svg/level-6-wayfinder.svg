@@ -1,19 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img">
   <!-- B-028 Level 6 Wayfinder (1000 XP): a graduated eight-point compass card set
        on a nested contour field - this rider now reads both ground and bearing. -->
-  <circle cx="64" cy="64" r="61" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
-  <g stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round">
-    <path d="M11 72 Q6 38 44 24 Q90 8 114 42 Q130 72 96 100 Q52 122 24 100 Q13 90 11 72 Z" fill="#EEF3EC"/>
-    <path d="M24 70 Q22 44 54 32 Q94 18 110 48 Q120 72 92 94 Q54 112 32 94 Q26 86 24 70 Z" fill="#9CC3B4"/>
+  <circle cx="64" cy="64" r="61" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="1.5"/>
+  <g stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round">
+    <path d="M11 72 Q6 38 44 24 Q90 8 114 42 Q130 72 96 100 Q52 122 24 100 Q13 90 11 72 Z" fill="#ECF3EF"/>
+    <path d="M24 70 Q22 44 54 32 Q94 18 110 48 Q120 72 92 94 Q54 112 32 94 Q26 86 24 70 Z" fill="#ABCDB8"/>
   </g>
-  <circle cx="64" cy="64" r="40" fill="#1F5546" stroke="#0E2A23" stroke-width="1.5"/>
-  <circle cx="64" cy="64" r="32" fill="none" stroke="#9CC3B4" stroke-width="1.2"/>
-  <g stroke="#9CC3B4" stroke-linecap="round">
+  <circle cx="64" cy="64" r="40" fill="#2F6B52" stroke="#0D1E2E" stroke-width="1.5"/>
+  <circle cx="64" cy="64" r="32" fill="none" stroke="#ABCDB8" stroke-width="1.2"/>
+  <g stroke="#ABCDB8" stroke-linecap="round">
     <path d="M64 31 V25 M97 64 H103 M64 97 V103 M31 64 H25" stroke-width="1.8"/>
     <path d="M87.3 87.3 L91.6 91.6 M40.7 87.3 L36.4 91.6 M87.3 40.7 L91.6 36.4 M40.7 40.7 L36.4 36.4" stroke-width="1.2"/>
   </g>
-  <path d="M77.4 50.6 L69 64 L77.4 77.4 L64 69 L50.6 77.4 L59 64 L50.6 50.6 L64 59 Z" fill="#9CC3B4" stroke="#0E2A23" stroke-width="1"/>
-  <path d="M64 36 L71 57 L92 64 L71 71 L64 92 L57 71 L36 64 L57 57 Z" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.2" stroke-linejoin="round"/>
-  <path d="M64 36 L71 57 L64 64 L57 57 Z" fill="#C4622D" stroke="#0E2A23" stroke-width="1" stroke-linejoin="round"/>
-  <circle cx="64" cy="64" r="3.4" fill="#1F5546" stroke="#0E2A23" stroke-width="1"/>
+  <path d="M77.4 50.6 L69 64 L77.4 77.4 L64 69 L50.6 77.4 L59 64 L50.6 50.6 L64 59 Z" fill="#ABCDB8" stroke="#0D1E2E" stroke-width="1"/>
+  <path d="M64 36 L71 57 L92 64 L71 71 L64 92 L57 71 L36 64 L57 57 Z" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="1.2" stroke-linejoin="round"/>
+  <path d="M64 36 L71 57 L64 64 L57 57 Z" fill="#B5446E" stroke="#0D1E2E" stroke-width="1" stroke-linejoin="round"/>
+  <circle cx="64" cy="64" r="3.4" fill="#2F6B52" stroke="#0D1E2E" stroke-width="1"/>
 </svg>

@@ -1,12 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" fill="none" stroke="#0E2A23" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <!-- C-105 Body position, the invisible control: a helmeted rider standing on the boards, weight moved forward over the bars. Clay marks the lean. -->
-  <rect x="8" y="40" width="32" height="5" rx="2.5" fill="#EEF3EC"/>
-  <rect x="2" y="18" width="9" height="6" rx="3" fill="#EEF3EC"/>
-  <path d="M28 28l-5 6 3 6" stroke-width="4.5"/>
-  <path d="M19 17l-6 2-4.5 2" stroke-width="3.5"/>
-  <path d="M14.54 18.88L21.46 13.12 31.46 25.12 24.54 30.88z" fill="#9CC3B4"/>
-  <circle cx="17" cy="10" r="5.5" fill="#9CC3B4"/>
-  <path d="M12.3 12h6.4" stroke-width="1.5"/>
-  <path d="M43 17c-2-7-9-12-16.5-12" stroke="#C4622D" stroke-width="2.5"/>
-  <path d="M30 1.6L26 5l3.8 3.4" stroke="#C4622D" stroke-width="2.5"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" fill="none" stroke="#0D1E2E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+  <!-- C-105 Body position, the invisible control: the rider up off the seat, knee bent and
+       weight carried forward over the bars. Rider built the SET-C-SORT way
+       (sort-cargo-two-up): circle helmet, peak stroke, one tapered body. Wheels are drawn
+       over the deck, as they are there — full tyres read as a quad, tucked-under arcs
+       read as a car. -->
+  <path d="M7 31h6.5L17 25h7l3 6h13.5q3 0 3 3v1q0 3-3 3H7q-3 0-3-3v-1q0-3 3-3Z" fill="#ABCDB8"/>
+  <circle cx="12" cy="36" r="7" fill="#ABCDB8"/>
+  <circle cx="36" cy="36" r="7" fill="#ABCDB8"/>
+  <circle cx="12" cy="36" r="2.6" stroke-width="1.6"/>
+  <circle cx="36" cy="36" r="2.6" stroke-width="1.6"/>
+  <path d="M32 31 34 24M31 24h7"/>
+  <path d="M20.5 25.5 26.5 28.5 25 32.5" stroke-width="6.6"/>
+  <path d="M20.5 25.5 26.5 28.5 25 32.5" stroke="#ABCDB8" stroke-width="3.6"/>
+  <path d="M19.63 13.54Q16.2 19.4 16.92 24.12l6.16 1.76Q24.8 19.8 26.37 15.46Z" fill="#ABCDB8"/>
+  <path d="M23.6 16.4 34 24" stroke-width="5.8"/>
+  <path d="M23.6 16.4 34 24" stroke="#ABCDB8" stroke-width="2.8"/>
+  <circle cx="24.32" cy="9.88" r="4.5" fill="#ABCDB8"/>
+  <path d="M26.3 9h3.4" stroke-width="2.4"/>
+  <path d="M16 10 10.4 5.8V7.8H4v4.4h6.4v2Z" fill="#B5446E"/>
 </svg>

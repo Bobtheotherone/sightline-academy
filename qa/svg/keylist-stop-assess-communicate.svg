@@ -1,0 +1,258 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" role="img">
+  <title>Stop, assess, communicate as a strict order: three medallions in a row - stop, then assess, then communicate - each reached only after the barrier gate in front of the previous one lifts.</title>
+  <!-- A. keylist-stop-assess-communicate. 12 s loop, one animation-duration on every
+       element, keyframe percentages for the beats and a hold to 100 %.
+         0-30 %  the COMPLETE state (t = 0, the reduced-motion state, and the frame an
+                 <img> shows for its first 3.6 s - so a first glance and every harness
+                 screenshot land on the teaching frame). DECLARED DEVIATION from the
+                 brief's 0-5 %: the owner accepts a 2-4 s head rest; beat DURATIONS are
+                 unchanged and total rest is 7.3 s of 12.
+         30-34 % 2, 3 and both connectors dim; both booms swing down across the connector
+         34-38 % medallion 1 pulses    38-42 % boom 1 lifts to -45 deg
+         42-46 % connector 1 travels and lights   46-50 % medallion 2 lights
+         50.5-56 % the eye blinks (after 2 is fully lit, so the blink is seen)
+         55-59 % boom 2 lifts   59-63 % connector 2 travels   63-67 % medallion 3 lights
+         63.5-69 % the three sound arcs draw, 150 ms apart   69-100 % hold
+       GATE (both, identical): a CANTILEVERED boom barrier, the shipped raster's language
+       - a wide navy base plate, ONE spruce hinge post 9 x 68 with a navy outline, a paper
+       pivot ring at its top, and a 40-unit striped boom pinned through that ring. There
+       is no second post; the owner permits a cantilever provided it reads. Raised rest
+       angle is -45 deg (a lifted arm, not a bollard); shut, the boom lies across the
+       dashes on the medallion-2 side of the gap, barring the entrance to the next stage.
+       Line weights: outline 3, interior detail 2, limbs as stroke pairs that leave a
+       3.0-unit navy edge everywhere (arms 18/12, legs 22/16).
+       Base CSS already carries the complete state, so the reduced-motion block only has
+       to switch the animations off. -->
+  <style>
+    .sac-m1{animation:sac-pulse 12s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 50%}
+    .sac-m2{animation:sac-lit2 12s ease-in-out infinite}
+    .sac-m3{animation:sac-lit3 12s ease-in-out infinite}
+    .sac-c1{animation:sac-litc1 12s ease-in-out infinite}
+    .sac-c2{animation:sac-litc2 12s ease-in-out infinite}
+    .sac-d1{animation:sac-tr1 12s ease-out infinite}
+    .sac-d2{animation:sac-tr2 12s ease-out infinite}
+    .sac-a1,.sac-a2{transform-box:fill-box;transform-origin:0% 50%;transform:rotate(-45deg)}
+    .sac-a1{animation:sac-g1 12s ease-in-out infinite}
+    .sac-a2{animation:sac-g2 12s ease-in-out infinite}
+    .sac-lid{transform:translateY(-118px);animation:sac-blink 12s infinite}
+    .sac-ar1{animation:sac-arcA 12s ease-out infinite}
+    .sac-ar2{animation:sac-arcB 12s ease-out infinite}
+    .sac-ar3{animation:sac-arcC 12s ease-out infinite}
+
+    @keyframes sac-pulse{0%,34%{transform:scale(1)}36%{transform:scale(1.03)}38%,100%{transform:scale(1)}}
+    @keyframes sac-lit2{0%,30%{opacity:1}34%,46%{opacity:.45}50%,100%{opacity:1}}
+    @keyframes sac-lit3{0%,30%{opacity:1}34%,63%{opacity:.45}67%,100%{opacity:1}}
+    @keyframes sac-litc1{0%,30%{opacity:1}34%,42%{opacity:.45}46%,100%{opacity:1}}
+    @keyframes sac-litc2{0%,30%{opacity:1}34%,59%{opacity:.45}63%,100%{opacity:1}}
+    /* -56 is exactly four 6/8 dash periods, so the wrap at 100 % is invisible */
+    @keyframes sac-tr1{0%,42%{stroke-dashoffset:0}46%,100%{stroke-dashoffset:-56}}
+    @keyframes sac-tr2{0%,59%{stroke-dashoffset:0}63%,100%{stroke-dashoffset:-56}}
+    @keyframes sac-g1{0%,30%{transform:rotate(-45deg)}34%,38%{transform:rotate(0deg)}42%,100%{transform:rotate(-45deg)}}
+    @keyframes sac-g2{0%,30%{transform:rotate(-45deg)}34%,55%{transform:rotate(0deg)}59%,100%{transform:rotate(-45deg)}}
+    /* ONE lid, travelling far enough that its paper covers the whole iris - no second
+       stroke to meet, so no shutter slit can open - and carrying its own navy crease,
+       which lands low in the almond at full closure */
+    @keyframes sac-blink{
+      0%,50.5%{transform:translateY(-118px);animation-timing-function:cubic-bezier(.4,0,1,1)}
+      52.4%{transform:translateY(0);animation-timing-function:cubic-bezier(.35,0,.5,1)}
+      56%,100%{transform:translateY(-118px)}}
+    @keyframes sac-arcA{0%,30%{stroke-dashoffset:0}34%,63.5%{stroke-dashoffset:32}66%,100%{stroke-dashoffset:0}}
+    @keyframes sac-arcB{0%,30%{stroke-dashoffset:0}34%,64.75%{stroke-dashoffset:50}67.25%,100%{stroke-dashoffset:0}}
+    @keyframes sac-arcC{0%,30%{stroke-dashoffset:0}34%,66%{stroke-dashoffset:69}68.5%,100%{stroke-dashoffset:0}}
+
+    @media (prefers-reduced-motion: reduce){
+      .sac-m1,.sac-m2,.sac-m3,.sac-c1,.sac-c2,.sac-d1,.sac-d2,
+      .sac-a1,.sac-a2,.sac-lid,.sac-ar1,.sac-ar2,.sac-ar3{animation:none}
+    }
+  </style>
+  <defs>
+    <!-- full-face helmet, right profile: paper shell and paper chin bar, a NARROW navy
+         visor band across the eye line only (about a third of the shell height), a paper
+         peak over it, and a rounded front edge. No face, ever. -->
+    <g id="sac-helm">
+      <path d="M-15 -2 C-15 -12 -8 -19 1 -19 C11 -19 18 -12 18 -2 L19 6 C19 13 14 18 6 18 L-3 18 C-11 18 -15 13 -15 5 Z" fill="#F9FCFA"/>
+      <path d="M-2 -7 C2 -10 10 -10 15 -7.5 L18.3 -5.5 L18.7 1 L15 2 C9 3.5 1 3 -2 0 Z" fill="#0D1E2E"/>
+      <path d="M-15 -2 C-15 -12 -8 -19 1 -19 C11 -19 18 -12 18 -2 L19 6 C19 13 14 18 6 18 L-3 18 C-11 18 -15 13 -15 5 Z" fill="none" stroke="#0D1E2E" stroke-width="3" stroke-linejoin="round"/>
+    </g>
+    <!-- gloved hand: mitten body, a thumb off the far end, a paper cuff line at the wrist -->
+    <g id="sac-mit">
+      <rect x="-4" y="-7" width="20" height="14" rx="6.5" fill="#0D1E2E"/>
+      <path d="M8 -7 C12 -12 18 -11 18 -6.5 C18 -3 14 -1.5 10 -2.5 Z" fill="#0D1E2E"/>
+      <path d="M-1 -5.5 V5.5" fill="none" stroke="#ABCDB8" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    <!-- riding boot, ankle at the origin, sole at y=10, toe toward +x -->
+    <g id="sac-boot">
+      <path d="M-7 -10 C-7 -12.5 -5.5 -13.5 -3 -13.5 H2.5 C6 -13.5 7.5 -11 7.5 -7.5 L8.5 0 C13 1 16.5 3.5 17.5 7 C18 9 16.5 10 14.5 10 H-6 C-8.5 10 -9.5 8.5 -9.5 6.5 L-9 -7.5 Z" fill="#0D1E2E"/>
+      <path d="M-8.5 6.5 H16.5" fill="none" stroke="#46555A" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    <!-- knobby tire, plan view: 16-wide carcass with lugs on BOTH shoulders, each lug
+         overlapping the carcass by 3 units so none reads as a detached tooth -->
+    <g id="sac-tire">
+      <path d="M-8 -20 H8 L8 -19 C13 -19 13 -13 8 -13 L8 -11 C13 -11 13 -5 8 -5 L8 -3 C13 -3 13 3 8 3 L8 5 C13 5 13 11 8 11 L8 13 C13 13 13 19 8 19 L8 20 H-8 L-8 19 C-13 19 -13 13 -8 13 L-8 11 C-13 11 -13 5 -8 5 L-8 3 C-13 3 -13 -3 -8 -3 L-8 -5 C-13 -5 -13 -11 -8 -11 L-8 -13 C-13 -13 -13 -19 -8 -19 Z" fill="#0D1E2E"/>
+      <path d="M0 -12 V12" fill="none" stroke="#46555A" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    <clipPath id="sac-eye"><path d="M454 214 Q500 174 546 214 Q500 254 454 214 Z"/></clipPath>
+  </defs>
+  <rect width="1000" height="600" fill="#F9FCFA"/>
+  <g fill="none" stroke="#0D1E2E" stroke-opacity="0.07" stroke-width="1">
+    <path d="M-10 78 C 150 44, 360 106, 560 70 S 880 34, 1010 78"/>
+    <path d="M-10 168 C 180 142, 300 196, 520 166 S 860 134, 1010 172"/>
+    <path d="M-10 570 C 200 544, 420 596, 640 566 S 900 538, 1010 574"/>
+  </g>
+  <path d="M-10 522 C 130 498, 260 546, 400 524 S 660 492, 790 522 S 950 548, 1010 518" fill="none" stroke="#46555A" stroke-opacity="0.3" stroke-width="3" stroke-dasharray="10 12" stroke-linecap="round"/>
+
+  <!-- ===== connectors (behind the gates and the medallions), six 6/8 dashes each,
+             ending on the arrowhead base; the arrowhead lands on the medallion rim ===== -->
+  <g class="sac-c1">
+    <path class="sac-d1" d="M292 300 H369" fill="none" stroke="#2F6B52" stroke-width="3" stroke-dasharray="6 8"/>
+    <path d="M-7 -5 L0 0 L-7 5" transform="translate(376,300)" fill="none" stroke="#2F6B52" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g class="sac-c2">
+    <path class="sac-d2" d="M622 300 H699" fill="none" stroke="#2F6B52" stroke-width="3" stroke-dasharray="6 8"/>
+    <path d="M-7 -5 L0 0 L-7 5" transform="translate(706,300)" fill="none" stroke="#2F6B52" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- ===== gate 1: base plate, spruce hinge post, paper pivot ring, striped boom ===== -->
+  <g>
+    <rect x="311" y="367" width="34" height="10" rx="3" fill="#0D1E2E"/>
+    <rect x="322" y="302" width="12" height="68" rx="3" fill="#2F6B52" stroke="#0D1E2E" stroke-width="3"/>
+    <g transform="translate(328,300)"><g class="sac-a1">
+      <rect x="0" y="-7.5" width="40" height="15" rx="4" fill="#F9FCFA"/>
+      <path d="M3 -7.5h8v15h-8Z M15 -7.5h8v15h-8Z M27 -7.5h8v15h-8Z" fill="#2F6B52"/>
+      <rect x="0" y="-7.5" width="40" height="15" rx="4" fill="none" stroke="#0D1E2E" stroke-width="3"/>
+    </g></g>
+    <circle cx="328" cy="300" r="7.5" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="3"/>
+    <circle cx="328" cy="300" r="2.6" fill="#0D1E2E"/>
+  </g>
+  <!-- ===== gate 2 ===== -->
+  <g>
+    <rect x="641" y="367" width="34" height="10" rx="3" fill="#0D1E2E"/>
+    <rect x="652" y="302" width="12" height="68" rx="3" fill="#2F6B52" stroke="#0D1E2E" stroke-width="3"/>
+    <g transform="translate(658,300)"><g class="sac-a2">
+      <rect x="0" y="-7.5" width="40" height="15" rx="4" fill="#F9FCFA"/>
+      <path d="M3 -7.5h8v15h-8Z M15 -7.5h8v15h-8Z M27 -7.5h8v15h-8Z" fill="#2F6B52"/>
+      <rect x="0" y="-7.5" width="40" height="15" rx="4" fill="none" stroke="#0D1E2E" stroke-width="3"/>
+    </g></g>
+    <circle cx="658" cy="300" r="7.5" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="3"/>
+    <circle cx="658" cy="300" r="2.6" fill="#0D1E2E"/>
+  </g>
+
+  <!-- ===== 1. STOP - the one magenta ===== -->
+  <g class="sac-m1">
+    <circle cx="170" cy="300" r="120" fill="#B5446E" stroke="#0D1E2E" stroke-width="3"/>
+    <!-- open GLOVED palm: paper fingers and palm, then a navy gauntlet cuff across the
+         heel with a paper stitch line, so the shape reads as a glove, not skin -->
+    <path d="M152 242 L152 203 A6.5 6.5 0 0 1 165 203 L165 234 C165.5 239 166.5 239 167 234 L167 198 A6.5 6.5 0 0 1 180 198 L180 233 C180.5 238 181.5 238 182 233 L182 203 A6.5 6.5 0 0 1 195 203 L195 236 C195.5 241 196.5 241 197 236 L197 214 A5.5 5.5 0 0 1 208 214 L209 262 C209 275 202 283 189 283 L165 283 C155 283 148 278 146 270 C140 263 130 254 124 245 C119 239 122 231 129 231 C133 231 134 236 135 239 C139 242 146 246 150 248 Z" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M151 246 C165 240 192 240 206 247" fill="none" stroke="#0D1E2E" stroke-width="2" stroke-linecap="round"/>
+    <path d="M146 268 C158 278 197 275 209 260 L211 271 C211 282 203 288 190 288 L165 288 C154 288 147 282 145 273 Z" fill="#0D1E2E" stroke="#0D1E2E" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M150 277 C161 284 193 282 204 274" fill="none" stroke="#F9FCFA" stroke-width="2" stroke-linecap="round"/>
+    <!-- plan-view quad, front at the top: spruce body, navy seat, four knobby tires with
+         lugs on both shoulders, sage tube racks, key switch parked at OFF -->
+    <g>
+      <use href="#sac-tire" transform="translate(121,312)"/>
+      <use href="#sac-tire" transform="translate(219,312)"/>
+      <use href="#sac-tire" transform="translate(121,384)"/>
+      <use href="#sac-tire" transform="translate(219,384)"/>
+      <path d="M158 294 H182 C193 294 201 301 203 311 L206 328 C206 337 202 342 196 343 L196 357 C202 358 206 363 206 372 L204 392 C202 402 194 408 183 408 H157 C146 408 138 402 136 392 L134 372 C134 363 138 358 144 357 L144 343 C138 342 134 337 134 328 L137 311 C139 301 147 294 158 294 Z" fill="#2F6B52" stroke="#0D1E2E" stroke-width="3" stroke-linejoin="round"/>
+      <g fill="#ABCDB8" stroke="#0D1E2E" stroke-width="3">
+        <rect x="137" y="299" width="66" height="16" rx="3"/>
+        <rect x="137" y="388" width="66" height="16" rx="3"/>
+      </g>
+      <path d="M155 299 V315 M170 299 V315 M185 299 V315 M155 388 V404 M170 388 V404 M185 388 V404" fill="none" stroke="#0D1E2E" stroke-width="2"/>
+      <path d="M170 344 V358" fill="none" stroke="#0D1E2E" stroke-width="3" stroke-linecap="round"/>
+      <path d="M124 350 C146 343 194 343 216 350" fill="none" stroke="#0D1E2E" stroke-width="3" stroke-linecap="round"/>
+      <path d="M122 354 L134 347 M218 354 L206 347" fill="none" stroke="#0D1E2E" stroke-width="9" stroke-linecap="round"/>
+      <path d="M164 356 C158 356 154 360 154 366 L153 376 C153 382 160 384 170 384 C180 384 187 382 187 376 L186 366 C186 360 182 356 176 356 Z" fill="#0D1E2E" stroke="#0D1E2E" stroke-width="3" stroke-linejoin="round"/>
+      <!-- key switch: paper bezel, key laid flat to the left, and two paper detent marks
+           90 deg apart so the parked position reads as OFF rather than as a bare key -->
+      <path d="M154 328 H158.5 M170 340 V344.5" fill="none" stroke="#F9FCFA" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="170" cy="328" r="10.5" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="2"/>
+      <circle cx="176" cy="328" r="3.4" fill="#0D1E2E"/>
+      <path d="M176 328 H163 M165 328 V333" fill="none" stroke="#0D1E2E" stroke-width="3" stroke-linecap="round"/>
+    </g>
+  </g>
+  <circle cx="170" cy="452" r="5" fill="#0D1E2E"/>
+
+  <!-- ===== 2. ASSESS ===== -->
+  <g class="sac-m2">
+    <circle cx="500" cy="300" r="120" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="3"/>
+    <path d="M454 214 Q500 174 546 214 Q500 254 454 214 Z" fill="#F9FCFA"/>
+    <circle cx="500" cy="214" r="17" fill="#2F6B52" stroke="#0D1E2E" stroke-width="2"/>
+    <circle cx="500" cy="214" r="7.5" fill="#0D1E2E"/>
+    <circle cx="497" cy="211" r="2.4" fill="#F9FCFA"/>
+    <g clip-path="url(#sac-eye)">
+      <path class="sac-lid" d="M446 108 H554 V226 C530 234 470 234 446 226 Z" fill="#DEEDE5"/>
+      <path class="sac-lid" d="M452 214 C470 222 530 222 548 214" fill="none" stroke="#0D1E2E" stroke-width="3" stroke-linecap="round"/>
+    </g>
+    <path d="M454 214 Q500 174 546 214 Q500 254 454 214 Z" fill="none" stroke="#0D1E2E" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M410 376 H590" fill="none" stroke="#D6DFDA" stroke-width="2" stroke-linecap="round"/>
+    <!-- SEATED geared rider, right, facing left: torso within 10 deg of vertical, both
+         legs forward along the ground rule, the prop hand BEHIND the hip. No limb of his
+         crosses the kneeling rider's outline; 11 units of paper separate the two. -->
+    <g>
+      <path d="M570 346 L554 352 L540 356" fill="none" stroke="#0D1E2E" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M570 346 L554 352 L540 356" fill="none" stroke="#3B8266" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+      <use href="#sac-boot" transform="translate(540,356) scale(-1,1)"/>
+      <path d="M566 354 L532 362 L514 366" fill="none" stroke="#0D1E2E" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M566 354 L532 362 L514 366" fill="none" stroke="#2F6B52" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+      <use href="#sac-boot" transform="translate(514,366) scale(-1,1)"/>
+      <g transform="rotate(9 568 326)">
+        <rect x="552" y="296" width="32" height="60" rx="13" fill="#2F6B52"/>
+        <rect x="556" y="306" width="14" height="28" rx="3" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="2"/>
+        <rect x="552" y="296" width="32" height="60" rx="13" fill="none" stroke="#0D1E2E" stroke-width="3"/>
+      </g>
+      <path d="M574 302 L586 330 L582 356" fill="none" stroke="#0D1E2E" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M574 302 L586 330 L582 356" fill="none" stroke="#2F6B52" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+      <use href="#sac-mit" transform="translate(582,356) rotate(99)"/>
+      <use href="#sac-helm" transform="translate(572,278) scale(-1,1)"/>
+    </g>
+    <!-- KNEELING geared rider, left, facing right: torso 6 deg off vertical, one knee
+         down and back, one foot flat and forward, near hand resting on his own knee -->
+    <g>
+      <path d="M436 348 L424 366" fill="none" stroke="#0D1E2E" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M436 348 L424 366" fill="none" stroke="#3B8266" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+      <use href="#sac-boot" transform="translate(428,364) scale(-1,1)"/>
+      <path d="M442 346 L472 340 L468 366" fill="none" stroke="#0D1E2E" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M442 346 L472 340 L468 366" fill="none" stroke="#2F6B52" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+      <use href="#sac-boot" transform="translate(468,366)"/>
+      <g transform="rotate(6 438 320)">
+        <rect x="422" y="290" width="32" height="62" rx="13" fill="#2F6B52"/>
+        <rect x="434" y="298" width="14" height="28" rx="3" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="2"/>
+        <rect x="422" y="290" width="32" height="62" rx="13" fill="none" stroke="#0D1E2E" stroke-width="3"/>
+      </g>
+      <path d="M443 297 L461 316 L470 331" fill="none" stroke="#0D1E2E" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M443 297 L461 316 L470 331" fill="none" stroke="#2F6B52" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+      <use href="#sac-mit" transform="translate(470,331) rotate(59)"/>
+      <use href="#sac-helm" transform="translate(442,278)"/>
+    </g>
+    <g fill="#0D1E2E"><circle cx="493" cy="452" r="5"/><circle cx="507" cy="452" r="5"/></g>
+  </g>
+
+  <!-- ===== 3. COMMUNICATE ===== -->
+  <g class="sac-m3">
+    <circle cx="830" cy="300" r="120" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="3"/>
+    <path d="M800 274 L806 242" fill="none" stroke="#0D1E2E" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="806" cy="240" r="4" fill="#0D1E2E"/>
+    <g fill="none" stroke="#2F6B52" stroke-width="3" stroke-linecap="round">
+      <path class="sac-ar1" d="M815.4 226.1 A16 16 0 0 1 815.4 251.9" stroke-dasharray="32"/>
+      <path class="sac-ar2" d="M821.3 218 A26 26 0 0 1 821.3 260" stroke-dasharray="50"/>
+      <path class="sac-ar3" d="M827.2 209.9 A36 36 0 0 1 827.2 268.1" stroke-dasharray="69"/>
+    </g>
+    <rect x="757" y="300" width="6" height="26" rx="3" fill="#0D1E2E"/>
+    <rect x="762" y="272" width="50" height="112" rx="9" fill="#2F6B52" stroke="#0D1E2E" stroke-width="3"/>
+    <g fill="none" stroke="#F9FCFA" stroke-width="2" stroke-linecap="round">
+      <path d="M772 288 H802 M772 297 H802 M772 306 H802 M772 315 H802"/>
+    </g>
+    <rect x="771" y="326" width="32" height="20" rx="3" fill="#DEEDE5" stroke="#0D1E2E" stroke-width="2"/>
+    <g fill="#F9FCFA">
+      <circle cx="778" cy="358" r="3.2"/><circle cx="787" cy="358" r="3.2"/><circle cx="796" cy="358" r="3.2"/>
+      <circle cx="778" cy="370" r="3.2"/><circle cx="787" cy="370" r="3.2"/><circle cx="796" cy="370" r="3.2"/>
+    </g>
+    <rect x="850" y="292" width="54" height="96" rx="10" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="3"/>
+    <rect x="857" y="302" width="40" height="72" rx="4" fill="#DEEDE5" stroke="#0D1E2E" stroke-width="2"/>
+    <g fill="none" stroke="#0D1E2E" stroke-width="2" stroke-linecap="round">
+      <path d="M869 297 H885 M869 381 H885"/>
+    </g>
+    <g fill="#0D1E2E"><circle cx="816" cy="452" r="5"/><circle cx="830" cy="452" r="5"/><circle cx="844" cy="452" r="5"/></g>
+  </g>
+</svg>

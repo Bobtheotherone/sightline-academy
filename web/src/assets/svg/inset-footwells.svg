@@ -2,42 +2,42 @@
   <!-- Hotspot inset for scene-atv-anatomy / footwells & pegs. Boot planted flat on
        the peg inside the running board; the clay heel guard is the wall standing
        between that foot and the rear wheel. -->
-  <rect width="320" height="240" fill="#FBFCFA"/>
-  <g fill="none" stroke="#0E2A23" stroke-opacity="0.06" stroke-width="1">
+  <rect width="320" height="240" fill="#F9FCFA"/>
+  <g fill="none" stroke="#0D1E2E" stroke-opacity="0.06" stroke-width="1">
     <path d="M-10 36 C 62 12, 132 54, 202 32 S 300 14, 330 38"/>
   </g>
   <g stroke-linecap="round" stroke-linejoin="round">
     <!-- rear wheel crowding the footwell from behind -->
-    <circle cx="312" cy="150" r="80" fill="#0E2A23"/>
-    <circle cx="312" cy="150" r="66" fill="none" stroke="#FBFCFA" stroke-width="3" stroke-dasharray="8 13" opacity="0.55"/>
-    <circle cx="312" cy="150" r="38" fill="#FBFCFA" stroke="#0E2A23" stroke-width="1.5"/>
-    <path d="M312 118 V182 M280 150 H320" stroke="#0E2A23" stroke-width="1.5"/>
-    <circle cx="312" cy="150" r="8" fill="#0E2A23"/>
+    <circle cx="312" cy="150" r="80" fill="#0D1E2E"/>
+    <circle cx="312" cy="150" r="66" fill="none" stroke="#F9FCFA" stroke-width="3" stroke-dasharray="8 13" opacity="0.55"/>
+    <circle cx="312" cy="150" r="38" fill="#F9FCFA" stroke="#0D1E2E" stroke-width="1.5"/>
+    <path d="M312 118 V182 M280 150 H320" stroke="#0D1E2E" stroke-width="1.5"/>
+    <circle cx="312" cy="150" r="8" fill="#0D1E2E"/>
     <!-- fender crescent over that wheel, same device as the base plate -->
     <path d="M236 84 Q258 48, 320 46 L320 66 Q274 68, 256 94 Z"
-          fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5"/>
+          fill="#ECF3EF" stroke="#0D1E2E" stroke-width="1.5"/>
     <!-- frame rail and hangers carrying the board -->
-    <path d="M14 118 L206 106" stroke="#0E2A23" stroke-width="5"/>
-    <path d="M46 118 V178 M178 111 V172" stroke="#0E2A23" stroke-width="4"/>
+    <path d="M14 118 L206 106" stroke="#0D1E2E" stroke-width="5"/>
+    <path d="M46 118 V178 M178 111 V172" stroke="#0D1E2E" stroke-width="4"/>
     <!-- over-the-ankle boot, drawn as the gear plate draws boots -->
     <path d="M212 166 V72 Q212 58, 197 58 H168 V138 L118 140 Q104 141, 104 154 V166 Z"
-          fill="#4A5A54" stroke="#0E2A23" stroke-width="1.5"/>
-    <path d="M168 96 H212" stroke="#0E2A23" stroke-width="1.5" fill="none"/>
+          fill="#46555A" stroke="#0D1E2E" stroke-width="1.5"/>
+    <path d="M168 96 H212" stroke="#0D1E2E" stroke-width="1.5" fill="none"/>
     <path d="M174 68 L204 74 M174 80 L204 86 M174 110 L204 116 M174 122 L204 128"
-          stroke="#9CC3B4" stroke-width="2.5" fill="none"/>
-    <rect x="100" y="164" width="116" height="12" rx="5" fill="#9CC3B4" stroke="#0E2A23" stroke-width="1.5"/>
+          stroke="#ABCDB8" stroke-width="2.5" fill="none"/>
+    <rect x="100" y="164" width="116" height="12" rx="5" fill="#ABCDB8" stroke="#0D1E2E" stroke-width="1.5"/>
     <!-- footpeg bar carrying the sole -->
-    <path d="M88 184 H212" stroke="#0E2A23" stroke-width="9"/>
-    <path d="M196 184 L200 200" stroke="#0E2A23" stroke-width="4"/>
+    <path d="M88 184 H212" stroke="#0D1E2E" stroke-width="9"/>
+    <path d="M196 184 L200 200" stroke="#0D1E2E" stroke-width="4"/>
     <!-- running board floor with its grip ribs -->
-    <path d="M20 186 L224 178 L224 202 L26 212 Z" fill="#EEF3EC" stroke="#0E2A23" stroke-width="1.5"/>
+    <path d="M20 186 L224 178 L224 202 L26 212 Z" fill="#ECF3EF" stroke="#0D1E2E" stroke-width="1.5"/>
     <path d="M42 186 V206 M60 185 V205 M78 184.5 V204 M96 184 V203.5
-             M204 179 V199 M214 178.5 V198.5" stroke="#0E2A23" stroke-width="1.5"/>
+             M204 179 V199 M214 178.5 V198.5" stroke="#0D1E2E" stroke-width="1.5"/>
     <!-- ground -->
-    <ellipse cx="150" cy="230" rx="132" ry="6" fill="#EEF3EC"/>
-    <path d="M18 230 H286" stroke="#0E2A23" stroke-width="1.5"/>
+    <ellipse cx="150" cy="230" rx="132" ry="6" fill="#ECF3EF"/>
+    <path d="M18 230 H286" stroke="#0D1E2E" stroke-width="1.5"/>
   </g>
   <!-- the heel guard: the wall between the foot and the wheel -->
   <path d="M234 72 Q252 118, 250 198 L228 200 Q232 124, 214 84 Z"
-        fill="#C4622D" stroke="#0E2A23" stroke-width="1.5" stroke-linejoin="round"/>
+        fill="#B5446E" stroke="#0D1E2E" stroke-width="1.5" stroke-linejoin="round"/>
 </svg>

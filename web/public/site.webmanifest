@@ -1,7 +1,7 @@
 {
-  "name": "Sightline Safety Academy",
+  "name": "Sightline ATV Safety Academy",
   "short_name": "Sightline",
-  "description": "A free online ATV and road safety course built around judgment, not fear.",
+  "description": "An online ATV and road safety course built around judgment, not fear.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

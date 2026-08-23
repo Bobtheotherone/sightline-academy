@@ -1,9 +1,51 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" fill="none" stroke="#0E2A23" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <!-- C-100 Thumb throttle: the hand stays closed on the grip and only the thumb works the lever. -->
-  <rect x="3" y="29" width="42" height="6" rx="3" fill="#EEF3EC"/>
-  <rect x="5.5" y="23.75" width="17" height="6.5" rx="2" fill="#9CC3B4" transform="rotate(29.7 14 27)"/>
-  <circle cx="21" cy="31" r="3.2" fill="#EEF3EC"/>
-  <rect x="12" y="18.5" width="14" height="7" rx="3.5" fill="#EEF3EC" transform="rotate(-20 19 22)"/>
-  <rect x="21" y="16" width="23" height="20" rx="7" fill="#EEF3EC"/>
-  <path d="M27 19v14M33 19v14M39 19v14" stroke-width="1.5"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" fill="none" stroke="#0D1E2E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+  <!-- C-100 Thumb throttle: the rider's RIGHT hand on the grip — four knuckles cresting
+       over the bar, arm running off-frame right — with the thumb dropped down the inboard
+       side, PRESSING DOWN the flat throttle paddle, which hinges at its stem and extends
+       right beneath the thumb.
+       Anatomy rules, researched and hard-won — do not regress:
+       - Four fingers busy gripping the bar are what make the free digit a THUMB (a
+         floating fist with a top digit extended is the manicule, a pointing INDEX).
+         Four lobes, not three.
+       - The ARM is a SHORT stub from the centre of the palm's underside, bending a
+         little right and ending in a FLAT crop — and it lives INSIDE the hand's
+         two-pass union so hand and arm are one seamless body part. A cuff nub read as
+         a spare thumb; a separate arm rect read as detached; a long round-capped arm
+         read as a hose and crowded the thumb.
+       - The paddle hinges at the stem (bolt visible there) and extends RIGHT, under the
+         thumb, tilted down at its free end — pressed down, maximum-leverage at the tip.
+         Press contact uses the C-102 boot-on-pedal layering: hand drawn after lever.
+       - The paddle is a WIDE FLAT TAB (a capsule with ticks read as a digit; every
+         long-arm-plus-angled-pad read as a leg in a sock). The thumb is a rounded RECT
+         with a squared tip (a stroke capsule's cap read as a fingernail). Glove pale
+         (green read as flesh); machine parts green. -->
+  <rect x="-5" y="12" width="35" height="8" rx="4" fill="#ABCDB8"/>
+  <path d="M3.5 14v4M7 14v4" stroke-width="1.7"/>
+  <g fill="#0D1E2E" stroke="#0D1E2E" stroke-width="5.2">
+    <path d="M12 19.5 12 23.5" fill="none" stroke-width="7.6"/>
+    <rect x="9.5" y="21.5" width="12" height="5" rx="2.5" transform="rotate(14 12 24)"/>
+  </g>
+  <g fill="#ABCDB8" stroke="none">
+    <path d="M12 19.5 12 23.5" stroke="#ABCDB8" stroke-width="3.4"/>
+    <rect x="9.5" y="21.5" width="12" height="5" rx="2.5" transform="rotate(14 12 24)"/>
+  </g>
+  <circle cx="12" cy="21.8" r="1.1" fill="#0D1E2E" stroke="none"/>
+  <g fill="#0D1E2E" stroke="#0D1E2E" stroke-width="5.2">
+    <rect x="21" y="14" width="17" height="13" rx="5"/>
+    <rect x="24.5" y="24" width="8.5" height="11.5" rx="1.5" transform="rotate(-12 28.75 24)"/>
+    <rect x="21.6" y="9.4" width="3.7" height="7.8" rx="1.85"/>
+    <rect x="25.9" y="8.6" width="3.7" height="8.4" rx="1.85"/>
+    <rect x="30.2" y="8.6" width="3.7" height="8.4" rx="1.85"/>
+    <rect x="34.5" y="9.4" width="3.7" height="7.8" rx="1.85"/>
+    <rect x="15.5" y="18.4" width="9" height="6.2" rx="2.7" transform="rotate(-55 24.5 21.5)"/>
+  </g>
+  <g fill="#ECF3EF" stroke="none">
+    <rect x="21" y="14" width="17" height="13" rx="5"/>
+    <rect x="24.5" y="24" width="8.5" height="11.5" rx="1.5" transform="rotate(-12 28.75 24)"/>
+    <rect x="21.6" y="9.4" width="3.7" height="7.8" rx="1.85"/>
+    <rect x="25.9" y="8.6" width="3.7" height="8.4" rx="1.85"/>
+    <rect x="30.2" y="8.6" width="3.7" height="8.4" rx="1.85"/>
+    <rect x="34.5" y="9.4" width="3.7" height="7.8" rx="1.85"/>
+    <rect x="15.5" y="18.4" width="9" height="6.2" rx="2.7" transform="rotate(-55 24.5 21.5)"/>
+  </g>
 </svg>
