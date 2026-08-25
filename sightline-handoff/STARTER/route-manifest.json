@@ -221,6 +221,72 @@
       ]
     },
     {
+      "route": "/games",
+      "page": "Field practice hub (The range)",
+      "states": [
+        {
+          "state": "hub-mixed-locked-unlocked",
+          "fixture": "mid"
+        }
+      ]
+    },
+    {
+      "route": "/games/:moduleId/round",
+      "page": "Sharp round",
+      "states": [
+        {
+          "state": "question",
+          "fixture": "mid",
+          "param": "m1-riders-mindset"
+        },
+        {
+          "state": "feedback-after-pick",
+          "fixture": "mid",
+          "param": "m1-riders-mindset"
+        },
+        {
+          "state": "end-card",
+          "fixture": "mid",
+          "param": "m1-riders-mindset",
+          "note": "all-correct run also shows the clean-run ceremony"
+        }
+      ]
+    },
+    {
+      "route": "/games/walkaround-order",
+      "page": "Walkaround order",
+      "states": [
+        {
+          "state": "fresh",
+          "fixture": "mid"
+        },
+        {
+          "state": "complete-clean-run",
+          "fixture": "mid",
+          "note": "tap Tires, Controls, Lights, Oil, Chassis in order"
+        }
+      ]
+    },
+    {
+      "route": "/games/replay/:lessonId/:stepId",
+      "page": "Activity replay (pure play)",
+      "states": [
+        {
+          "state": "hunt-spot-mode",
+          "fixture": "mid",
+          "param": "m2-l1-anatomy",
+          "stepId": "m2-l1-s2"
+        },
+        {
+          "state": "locked-direct-visit",
+          "fixture": "fresh",
+          "param": "m2-l1-anatomy",
+          "stepId": "m2-l1-s2",
+          "note": "designed locked state — lesson not yet unlocked for fresh"
+        }
+      ]
+    },
+    {
       "route": "/journal",
       "page": "Field Journal",
       "states": [

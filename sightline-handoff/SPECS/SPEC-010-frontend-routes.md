@@ -13,7 +13,7 @@ consumes. Add a route → update both in the same commit.
 | `/register` | Register | default; validation errors; duplicate email |
 | `/verify/:code` | Certificate verify | valid; invalid code |
 
-## App shell (top nav: Course, Journal, Progress, Ranger; user menu; tutor slide-over trigger)
+## App shell (top nav: Course, Practice, Journal, Progress, Ranger; user menu; tutor slide-over trigger. Practice is desktop-only — the mobile tab bar keeps its four designed stops and module pages carry the "Field practice" entry link)
 
 | Route | Page | Key states to verify |
 | --- | --- | --- |
@@ -21,6 +21,10 @@ consumes. Add a route → update both in the same commit.
 | `/course` | Course map | mixed locked/unlocked; all complete |
 | `/course/:moduleId` | Module overview | not-started; partial; complete (badge shown); locked (direct-URL visit shows designed locked state) |
 | `/learn/:lessonId` | Lesson player | each of the 12 renderers (route to instances listed in route-manifest.json); continue-disabled state; section interstitial; lesson-complete screen |
+| `/games` | Field practice hub ("The range") | unlocked modules with game cards + best chips; locked modules dimmed lock rows; loading skeletons |
+| `/games/:moduleId/round` | Sharp round | question; feedback after pick (wrong pick highlights the truth); end card with score; clean-run ceremony on perfect |
+| `/games/walkaround-order` | Walkaround order | fresh; miss note after wrong tap; complete; clean-run ceremony on zero misses |
+| `/games/replay/:lessonId/:stepId` | Activity replay (pure play) | hunt opens in spot mode; locked-lesson direct visit (designed locked state) |
 | `/journal` | Field Journal | empty; 2 drafts; all complete |
 | `/journal/:artifactType` | Artifact detail | draft; complete; ride_plan with prefills |
 | `/progress` | Progress & badges | early; late (badges earned, level ring) |

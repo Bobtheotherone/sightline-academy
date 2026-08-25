@@ -37,13 +37,15 @@ required: true
   "instructions": "Four condition families and what each one attacks.",
   "blocks": [
     {"type": "text", "md": "Module 4 taught you to read the ground. Conditions are the layer that re-writes what you read — the same trail at noon in July and at dusk after rain are two different trails wearing one name."},
-    {"type": "keylist", "title": "The four families", "items": [
-      {"term": "Water — rain, mud, crossings", "detail": "Attacks traction and hides ground. Wet roots and clay behave like ice; standing water conceals depth and scour. Fast-moving water is its own category: it moves machines, and depth/current judgment fails from the seat (Module 1's creek, forever)."},
-      {"term": "Cold & heat", "detail": "Attack the rider. Cold stiffens hands (throttle and brake precision), then judgment itself as the body diverts resources. Heat dehydrates and dulls attention. Both degrade you *before* you notice — the rider is always the last to know."},
-      {"term": "Light — dusk, dawn, shadow", "detail": "Attacks the scan. Depth cues flatten, ruts vanish, and your Module 4 skill quietly loses resolution. Failing light is a schedule instrument: turnaround time exists because of it."},
-      {"term": "Dust & visibility", "detail": "Attacks spacing. Following a machine in its dust cone means riding blind at whatever speed the group set. The fix is distance — enough that you see trail, not tailgate."}
-    ]},
-    {"type": "figure", "assetSlot": "keylist-four-families", "caption": "Water and light change the trail you're reading; cold, heat, and dust change the rider doing the reading — and a hard day usually hands you one from each side."},
+    {"type": "hotspot_figure", "assetSlot": "keylist-four-families", "ratio": "3 / 2",
+     "prompt": "Open each family to see what it attacks — the trail, or the rider.",
+     "caption": "Water and light change the trail you're reading; cold, heat, and dust change the rider doing the reading — and a hard day usually hands you one from each side.",
+     "stops": [
+      {"id": "water", "x": 12.3, "y": 22.6, "size": 18, "term": "Water — rain, mud, crossings", "detail": "Attacks traction and hides ground. Wet roots and clay behave like ice; standing water conceals depth and scour. Fast-moving water is its own category: it moves machines, and depth/current judgment fails from the seat (Module 1's creek, forever)."},
+      {"id": "light", "x": 35.1, "y": 22.6, "size": 18, "term": "Light — dusk, dawn, shadow", "detail": "Attacks the scan. Depth cues flatten, ruts vanish, and your Module 4 skill quietly loses resolution. Failing light is a schedule instrument: turnaround time exists because of it."},
+      {"id": "temperature", "x": 86.1, "y": 24.2, "size": 16, "term": "Cold & heat", "detail": "Attack the rider. Cold stiffens hands (throttle and brake precision), then judgment itself as the body diverts resources. Heat dehydrates and dulls attention. Both degrade you *before* you notice — the rider is always the last to know."},
+      {"id": "dust", "x": 87.5, "y": 67.7, "size": 17, "term": "Dust & visibility", "detail": "Attacks spacing. Following a machine in its dust cone means riding blind at whatever speed the group set. The fix is distance — enough that you see trail, not tailgate."}
+     ]},
     {"type": "callout", "variant": "tip", "title": "The condition question", "md": "Before every ride, ask one question: **\"What's different today?\"** New rain, first frost, later start, bigger group, heavier load. The answer is the list of adjustments. A ride where the honest answer is \"quite a lot is different\" is a ride that deserves a smaller plan."}
   ]
 }
@@ -133,12 +135,14 @@ required: true
   "instructions": "Three artifacts every serious ride carries — two on paper, one on the rack.",
   "blocks": [
     {"type": "text", "md": "Remoteness isn't dangerous by itself — *unplanned* remoteness is. The difference between an inconvenience and an emergency ten miles from the trailhead is almost always preparation that happened in the driveway."},
-    {"type": "keylist", "title": "The before-you-go trio", "items": [
-      {"term": "1. The ride plan", "detail": "Where you're going, the route, who's along, and — the part people skip — the **turnaround time**: the clock time at which you head back regardless of where you are. Light and fatigue math done in advance, when you're smart."},
-      {"term": "2. The communication plan", "detail": "Someone NOT on the ride knows the plan and the check-in time, and knows what to do if you miss it (who to call, where you said you'd be). Phones die and lose coverage in exactly the terrain ATVs love — the plan can't live only in your pocket. For genuinely remote country, satellite messengers exist; awareness of that option is part of the plan."},
-      {"term": "3. The carry kit", "detail": "Awareness-level contents: water and food beyond the plan, first-aid basics you know how to use, tool basics for your machine, a way to make light, a way to stay warm if the ride becomes a wait, and navigation that doesn't need a signal. Sized to remoteness — the mail-run kit and the backcountry kit are different kits."}
-    ]},
-    {"type": "figure", "assetSlot": "keylist-before-you-go", "caption": "All three exist in the driveway or they don't exist at all — not one of them can be assembled at the moment you find out you needed it."},
+    {"type": "hotspot_figure", "assetSlot": "keylist-before-you-go", "ratio": "3 / 2",
+     "prompt": "Open each artifact — all three exist in the driveway or not at all.",
+     "caption": "All three exist in the driveway or they don't exist at all — not one of them can be assembled at the moment you find out you needed it.",
+     "stops": [
+      {"id": "plan", "x": 21.5, "y": 84.0, "size": 13, "term": "1. The ride plan", "detail": "Where you're going, the route, who's along, and — the part people skip — the **turnaround time**: the clock time at which you head back regardless of where you are. Light and fatigue math done in advance, when you're smart."},
+      {"id": "comms", "x": 48.5, "y": 83.0, "size": 13, "term": "2. The communication plan", "detail": "Someone NOT on the ride knows the plan and the check-in time, and knows what to do if you miss it (who to call, where you said you'd be). Phones die and lose coverage in exactly the terrain ATVs love — the plan can't live only in your pocket. For genuinely remote country, satellite messengers exist; awareness of that option is part of the plan."},
+      {"id": "kit", "x": 84.6, "y": 45.4, "size": 13, "term": "3. The carry kit", "detail": "Awareness-level contents: water and food beyond the plan, first-aid basics you know how to use, tool basics for your machine, a way to make light, a way to stay warm if the ride becomes a wait, and navigation that doesn't need a signal. Sized to remoteness — the mail-run kit and the backcountry kit are different kits."}
+     ]},
     {"type": "callout", "variant": "story", "title": "The check-in that worked", "md": "Ask around and you'll find a version of this story in every riding community: machine dead in a drainage at dusk, no coverage — and a rider who was warm, fed, and found within hours *because someone in town knew the route and the missed check-in time meant something*. The trio isn't paperwork. It's the difference between \"a long evening\" and a search that starts at midnight with no starting point."}
   ]
 }

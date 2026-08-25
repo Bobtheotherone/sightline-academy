@@ -67,12 +67,14 @@ required: true
 {
   "instructions": "Three pieces of engineering, one conclusion.",
   "blocks": [
-    {"type": "keylist", "title": "Why the machine itself objects", "items": [
-      {"term": "Tires built to deform", "detail": "Module 2's low-pressure knobbies grip by squishing into soft, uneven ground. On hard pavement there's nothing to deform into — the tall soft carcass squirms instead, making steering vague and imprecise exactly when precision matters most."},
-      {"term": "The rear axle problem", "detail": "Many ATVs drive both rear wheels together (solid or limited-slip rear axles). On dirt, the inside wheel slips a little in every turn and nobody notices. On grippy pavement it can't slip — so the machine fights the turn, pushing wide or hopping, and the handling becomes unpredictable in a way no rider skill fixes."},
-      {"term": "High CoG meets grippy surface", "detail": "Module 4's stability envelope again: on dirt, a hard maneuver tends to slide the tires — the machine drifts. On pavement the tires grip, so the same maneuver *tips* instead. Pavement converts slide-outs into rollovers."}
-    ]},
-    {"type": "figure", "assetSlot": "keylist-pavement-physics", "caption": "Three independent facts about the machine, all arriving at the same conclusion — and not one of them is a fact about the rider, which is why no amount of skill argues with it."},
+    {"type": "hotspot_figure", "assetSlot": "keylist-pavement-physics", "ratio": "3 / 2",
+     "prompt": "Open each fact — all three arrive at the same conclusion.",
+     "caption": "Three independent facts about the machine, all arriving at the same conclusion — and not one of them is a fact about the rider, which is why no amount of skill argues with it.",
+     "stops": [
+      {"id": "tires", "x": 19.2, "y": 35.5, "size": 24, "term": "Tires built to deform", "detail": "Module 2's low-pressure knobbies grip by squishing into soft, uneven ground. On hard pavement there's nothing to deform into — the tall soft carcass squirms instead, making steering vague and imprecise exactly when precision matters most."},
+      {"id": "axle", "x": 49.9, "y": 33.8, "size": 24, "term": "The rear axle problem", "detail": "Many ATVs drive both rear wheels together (solid or limited-slip rear axles). On dirt, the inside wheel slips a little in every turn and nobody notices. On grippy pavement it can't slip — so the machine fights the turn, pushing wide or hopping, and the handling becomes unpredictable in a way no rider skill fixes."},
+      {"id": "cog", "x": 80.5, "y": 34.2, "size": 24, "term": "High CoG meets grippy surface", "detail": "Module 4's stability envelope again: on dirt, a hard maneuver tends to slide the tires — the machine drifts. On pavement the tires grip, so the same maneuver *tips* instead. Pavement converts slide-outs into rollovers."}
+     ]},
     {"type": "callout", "variant": "caution", "title": "And then there's traffic", "md": "Everything above happens on an empty road. A real road adds vehicles with several times your mass, closing speeds no trail produces, and drivers who are not expecting an ATV. An unprotected rider on an unpredictable-handling machine among cars is the single deadliest combination in the ATV record — which is why it leads the short list from Module 1."},
     {"type": "text", "md": "The judgment version: **pavement is not a shortcut surface, a connector, or a quick hop.** Trailers and trucks exist to move ATVs between riding areas. The only pavement question left is crossings — next lesson."}
   ]
@@ -131,13 +133,15 @@ required: true
   "instructions": "Sometimes a trail system crosses a road. There's a right way.",
   "blocks": [
     {"type": "text", "md": "Many jurisdictions permit ATVs to *cross* roads at designated points under specific conditions — the category of rule usually looks like: cross at/near right angles, at designated crossings where marked, after a complete stop, yielding to all road traffic. The reasons write themselves once you have Modules 4 and 6:"},
-    {"type": "keylist", "title": "Anatomy of a good crossing", "items": [
-      {"term": "Stop completely, look completely", "detail": "Full stop before the road surface. Traffic from both directions, then again — closing speeds on roads beat trail intuition, and a car at highway speed covers a football field in seconds."},
-      {"term": "Square, brisk, done", "detail": "Cross at a right angle: it minimizes your time on pavement AND avoids turning on it (Lesson 1's tip-not-slide problem lives in pavement turns). Steady and brisk, straight across, no pausing mid-road."},
-      {"term": "The group crosses as individuals", "detail": "One machine at a time, each making its own stop-and-look. \"Following the leader across\" delegates your traffic judgment to someone who was looking three seconds ago — group gravity's most dangerous form."},
-      {"term": "Designated beats convenient", "detail": "Marked crossings exist where sight lines were judged adequate. A convenient crossing point with a blind curve upstream is a bad trade for saved minutes."}
-    ]},
-    {"type": "figure", "assetSlot": "scene-crossing", "caption": "Stopped square behind the bar, sight lines swept both ways, minimum time on pavement. Every part of a good crossing is visible from above — which is how you should picture it before you reach one."},
+    {"type": "hotspot_figure", "assetSlot": "scene-crossing", "ratio": "3 / 2",
+     "prompt": "Open each part of the crossing.",
+     "caption": "Stopped square behind the bar, sight lines swept both ways, minimum time on pavement. Every part of a good crossing is visible from above — which is how you should picture it before you reach one.",
+     "stops": [
+      {"id": "stop", "x": 50.5, "y": 58.6, "size": 12, "term": "Stop completely, look completely", "detail": "Full stop before the road surface. Traffic from both directions, then again — closing speeds on roads beat trail intuition, and a car at highway speed covers a football field in seconds."},
+      {"id": "square", "x": 50.5, "y": 39.1, "size": 12, "term": "Square, brisk, done", "detail": "Cross at a right angle: it minimizes your time on pavement AND avoids turning on it (Lesson 1's tip-not-slide problem lives in pavement turns). Steady and brisk, straight across, no pausing mid-road."},
+      {"id": "individuals", "x": 50.1, "y": 85.0, "size": 12, "term": "The group crosses as individuals", "detail": "One machine at a time, each making its own stop-and-look. \"Following the leader across\" delegates your traffic judgment to someone who was looking three seconds ago — group gravity's most dangerous form."},
+      {"id": "designated", "x": 92.8, "y": 47.7, "size": 12, "term": "Designated beats convenient", "detail": "Marked crossings exist where sight lines were judged adequate. A convenient crossing point with a blind curve upstream is a bad trade for saved minutes."}
+     ]},
     {"type": "callout", "variant": "tip", "title": "The category-and-authority pattern", "md": "Crossing rules, minimum ages, supervision requirements, helmet mandates, and where ATVs may operate all vary by state, province, and country — and they change. This course gives you the reasoning and the rule-categories; your local OHV/DMV authority gives you the current specifics. Ranger answers legal questions exactly this way, on purpose."}
   ]
 }
@@ -226,12 +230,14 @@ required: true
 {
   "instructions": "Three standards for the human environment.",
   "blocks": [
-    {"type": "keylist", "title": "The three standards", "items": [
-      {"term": "Zero impairment — zero, before and during", "detail": "Riding runs on balance, reaction time, and judgment; alcohol and impairing substances attack all three, starting well below any legal driving line. And impairment's first casualty is the ability to notice you're impaired (Module 5's cold-hands logic, sharpened). The standard that actually works is the simple one: riding days are dry days. Full stop."},
-      {"term": "Yield generously, pass like a neighbor", "detail": "Trails carry hikers, cyclists, horses, dogs, and other machines. The working defaults: slow early and wide for everyone on foot or hoof; a horse gets engines quieted and instructions from its rider followed (a spooked horse endangers its rider — and you); uphill traffic generally has the right of way; oncoming machines get a wide line and — a genuinely useful convention — a hand signal counting the riders behind you so no one's surprised by your group's tail."},
-      {"term": "Ride like access depends on it — it does", "detail": "Stay on designated trails: shortcut braids and meadow scars are how riding areas close. Pack out what you brought. Noise carries — closed areas and neighbors hear machines long before they see them. Every rider is a vote on whether the next generation gets these trails."}
-    ]},
-    {"type": "figure", "assetSlot": "keylist-three-standards", "caption": "Three signs at one junction because all three hold down whichever branch you take — most of this course is enforced by physics, and these three are enforced by everyone else on the trail."},
+    {"type": "hotspot_figure", "assetSlot": "keylist-three-standards", "ratio": "3 / 2",
+     "prompt": "Open each sign — all three hold down whichever branch you take.",
+     "caption": "Three signs at one junction because all three hold down whichever branch you take — most of this course is enforced by physics, and these three are enforced by everyone else on the trail.",
+     "stops": [
+      {"id": "impairment", "x": 48.2, "y": 22.3, "size": 11, "term": "Zero impairment — zero, before and during", "detail": "Riding runs on balance, reaction time, and judgment; alcohol and impairing substances attack all three, starting well below any legal driving line. And impairment's first casualty is the ability to notice you're impaired (Module 5's cold-hands logic, sharpened). The standard that actually works is the simple one: riding days are dry days. Full stop."},
+      {"id": "yield", "x": 48.2, "y": 36.3, "size": 11, "term": "Yield generously, pass like a neighbor", "detail": "Trails carry hikers, cyclists, horses, dogs, and other machines. The working defaults: slow early and wide for everyone on foot or hoof; a horse gets engines quieted and instructions from its rider followed (a spooked horse endangers its rider — and you); uphill traffic generally has the right of way; oncoming machines get a wide line and — a genuinely useful convention — a hand signal counting the riders behind you so no one's surprised by your group's tail."},
+      {"id": "access", "x": 48.2, "y": 50.4, "size": 11, "term": "Ride like access depends on it — it does", "detail": "Stay on designated trails: shortcut braids and meadow scars are how riding areas close. Pack out what you brought. Noise carries — closed areas and neighbors hear machines long before they see them. Every rider is a vote on whether the next generation gets these trails."}
+     ]},
     {"type": "callout", "variant": "story", "title": "Why the counting signal exists", "md": "Meeting an oncoming group on a narrow trail, the lead rider holds up three fingers: three more behind me. You hold your line and your patience through exactly three machines, then relax. A five-second convention that prevents the classic head-on: pulling back onto the trail into rider number four. Small courtesies on trails are usually crash prevention wearing manners."}
   ]
 }

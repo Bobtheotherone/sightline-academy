@@ -121,14 +121,14 @@ required: true
 {
   "instructions": "The model behind the lab.",
   "blocks": [
-    {"type": "text", "md": "Picture the four tire contact patches as corners of a rectangle on the ground — the **support area**. Now picture the combined weight of machine, rider, and cargo concentrated at one point — the **center of gravity (CoG)**, which on an ATV sits high, and higher still with a seated rider.\n\nThe machine stays upright while the CoG's straight-down line lands *inside* the support area. Tilt the ground, and that line marches toward the edge. Cross the edge and physics finishes the argument — that's a rollover, and it needs no speed at all to happen."},
+    {"type": "text", "md": "Picture the four tire contact patches as corners of a rectangle on the ground — the **support area**. Now picture the combined weight of machine, rider, and cargo concentrated at one point — the **center of gravity (CoG)**, which on an ATV sits high, especially with a seated rider.\n\nThe machine stays upright while the CoG's straight-down line lands *inside* the support area. Tilt the ground, and that line marches toward the edge. Cross the edge and physics finishes the argument — that's a rollover, and it needs no speed at all to happen."},
     {"type": "keylist", "title": "Everything this one model explains", "items": [
       {"term": "Why slopes have limits", "detail": "Steeper ground walks the CoG line toward the support edge. Every machine/load/rider combination has an angle where margin runs out — and it's smaller than it feels from the seat."},
       {"term": "Why side-hills are the sharpest case", "detail": "The support rectangle is narrower side-to-side than front-to-back, so sideways tilt spends margin fastest. Off-camber trail is the stability envelope's thinnest edge."},
-      {"term": "Why rider position is a control", "detail": "The rider is a third of the system's weight and the only movable part — weight shifted uphill moves the CoG away from the failing edge. This is why fit (leverage!) mattered in Module 2."},
+      {"term": "Why rider position is a control", "detail": "The rider is a third of the system's weight and the only movable part — weight shifted uphill moves the CoG away from the failing edge. Making that shift takes leverage, and a machine you can't brace against is one you can't correct on — which is what the fit checks in Module 2 were protecting."},
       {"term": "Why loads and passengers change everything", "detail": "Cargo raises and shifts the CoG; a passenger on a single-rider machine raises it AND freezes the movable part. Module 6 makes this concrete."}
     ]},
-    {"type": "callout", "variant": "caution", "title": "What this model is", "md": "A concept model for judgment — not an operating chart. Real limits shift with tire pressure, surface, moisture, momentum, and machine design, always in the unfavorable direction from the ideal. The lab that follows builds intuition for the *shape* of the envelope; respect for the real one is what keeps riders off steep and off-camber ground they can't verify. Hands-on courses teach slope technique in person, on chosen ground, for exactly this reason."}
+    {"type": "callout", "variant": "caution", "title": "What this model is", "md": "Real limits shift with tire pressure, surface, moisture, momentum, and machine design, always in the unfavorable direction from the ideal. The lab that follows builds intuition for the *shape* of the envelope; respect for the real one is what keeps riders off steep and off-camber ground they can't verify. Hands-on courses teach slope technique in person, on chosen ground, for exactly this reason."}
   ]
 }
 ```
@@ -145,15 +145,16 @@ required: true
 
 ```json payload
 {
-  "instructions": "Tilt the ground and move the rider. Watch the CoG line against the support area. Meet all three objectives.",
+  "instructions": "Four pieces of ground, one machine. Set up the rider, play the run, and watch where the center of gravity goes. Clear all four.",
   "lab": "stability_explorer",
-  "config": {"views": ["rear", "side"], "sliders": ["slope_angle", "rider_lean", "cargo_load"], "showMarginMeter": true},
+  "config": {"mode": "scenarios", "scenarios": ["traverse", "haul", "descent", "shortcut"], "freeTilt": true},
   "objectives": [
-    {"id": "find_edge", "text": "On the rear view, increase side-slope until the CoG line reaches the support edge — note the angle"},
-    {"id": "lean_recovery", "text": "At that angle, shift rider lean uphill and watch the margin return — then find the steeper angle where even full lean isn't enough"},
-    {"id": "cargo_effect", "text": "Add rear cargo load on the side view and observe how the same uphill grade now spends more margin"}
+    {"id": "traverse", "text": "Cross the side-hill traverse without rolling — find how much uphill lean the rut demands"},
+    {"id": "haul", "text": "Climb the hunt haul with a full rear rack — keep the front wheels planted"},
+    {"id": "descent", "text": "Ride the steep drop through the washout without going over the bars"},
+    {"id": "shortcut", "text": "Recognize the shortcut for what it is — some ground can't be leaned out of"}
   ],
-  "debrief": "Three things worth keeping forever: the edge arrives earlier than intuition says; rider position genuinely buys margin but only a finite amount; and load quietly re-draws the whole envelope. When real ground makes you wonder which side of the edge you're on — that wondering IS the answer. Choose different ground."
+  "debrief": "Four runs, one lesson underneath: the machine stays upright while the center of gravity's plumb line stays inside the tires, and everything you did — leaning into the hill, standing on the pegs, respecting the load — was about keeping it there. Rider position genuinely buys margin, but only a finite amount, and the shortcut showed you the edge of it. On real ground there is no margin meter; when you catch yourself wondering which side of the edge you're on, that wondering is the signal. Pick a different line."
 }
 ```
 

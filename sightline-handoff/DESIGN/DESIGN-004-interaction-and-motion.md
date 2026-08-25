@@ -82,6 +82,51 @@
 7. **Section interstitial** — kept (contour drift + title rise, auto-continue,
    skippable). Do not add an entry delay (E2E clicks it inside 2.5s).
 
+## The play layer (§Play)
+
+Lessons carry a game layer built from judgment, never haste — every mechanic
+is accuracy-based because the XP law ("never from speed") is also the play
+law. All of it derives from existing curriculum payloads; no authored content
+is invented and no server contract changes.
+
+1. **Spot mode** (hotspot scenes) — first encounters open the scene unmarked:
+   tap where you see a cue; a hit settles a blaze in with the cue's name, a
+   miss gets one soft ripple and costs nothing. "Reveal the rest" is always
+   one tap away; keyboard riders aim a crosshair with the arrows. Review (the
+   classic marked renderer) follows, and completion still means reading every
+   waypoint. Resume/revisit skips the hunt. Spotting all cues unaided earns
+   the clean-run moment — the hazards scene's own acceptance criterion
+   ("name the cues without the markers on") made playable.
+2. **Sharp streak** — a lesson-scoped chain of consecutive first-try
+   successes (checkpoint answered right first try, sort card placed clean,
+   pair matched clean, cue spotted unaided). Mini-blaze chain beside the
+   footer's step counter; milestones at 3/5/8 settle in clay. A miss resets
+   quietly — no shame UI. Hunt misses are scanning, not answers: they never
+   break the chain.
+3. **Clean run** — an activity finished with zero misses this session earns a
+   badge-gold banner with the badge tier's single shine sweep. Session-local:
+   resuming a half-done activity can never claim a run it can't prove.
+4. **Field practice — "The range"** (`/games`, SPEC-010) — every unlocked
+   module's challenges, replayable outside the lesson flow. Three game kinds,
+   all assembled from the module's own authored payloads:
+   - *Sharp round* — the module's checkpoint questions re-dealt as a one-shot
+     round (up to 5). No clock, no retries; the rail blazes each sharp answer
+     and a miss gets its own ✕ mark (never the padlock — lock means locked).
+     The authored feedback shows after every pick; a perfect round earns the
+     clean-run ceremony.
+   - *Walkaround order* — rebuild T-CLOC from memory, tap by tap, from the
+     walkaround lab's own zone data. Wrong tap shakes and costs a miss; zero
+     misses earns the ceremony.
+   - *Replays* — hunt/sort/match/branching steps re-run through the real
+     renderers with no evidence in and a no-op sink out, labeled honestly:
+     "pure play, nothing is recorded."
+   Range rules: locked modules stay locked ("the range only drills what
+   you've ridden"); personal bests live in localStorage only
+   (`ts-practice:{userId}:{gameId}` — higher score wins, clean breaks ties);
+   nothing is sent to the server and lesson evidence is never touched. Nav
+   entry "Practice" is desktop-only — the mobile tab bar keeps its four
+   designed stops; module pages carry the "Field practice" link instead.
+
 ## Micro-interaction defaults
 
 - Focus-visible: 2px pine-300 ring at 2px offset (`--ts-focus-ring` double

@@ -38,7 +38,8 @@ required: true
   "blocks": [
     {"type": "text", "md": "An ATV weighs roughly as much as three or four adults, rides on soft, low-pressure tires, and puts nothing between you and the ground. That combination is exactly why it can go places a truck can't — and exactly why the margin for error is thin.\n\nHere's the part experienced riders will tell you: the machine is rarely the problem. **Most serious ATV crashes trace back to a decision made before or during the ride** — where to ride, how to ride, what to wear, who's aboard, and what condition the rider was in."},
     {"type": "callout", "variant": "story", "title": "The pattern", "md": "Ask a search-and-rescue volunteer what their ATV callouts have in common and you'll hear the same short list on repeat: no helmet, paved road or unfamiliar ground, a passenger on a machine built for one, alcohol, or a rider on a machine too big for them. This module is about getting that list into your head before it applies to you."},
-    {"type": "text", "md": "This course won't teach you throttle technique — that's what hands-on training is for. What it will do is train the judgment layer: seeing risk clearly, early, and personally."}
+    {"type": "text", "md": "This course won't teach you throttle technique — that's what hands-on training is for. What it will do is train the judgment layer: seeing risk clearly, early, and personally."},
+    {"type": "callout", "variant": "tip", "title": "Why decisions, not skills?", "md": "Skill matters — and hands-on training builds it. But the record says most serious outcomes were shaped by choices any rider could have made differently *regardless of skill level*. Judgment scales instantly; skill takes seasons."}
   ]
 }
 ```
@@ -80,25 +81,60 @@ required: true
 ```yaml step
 id: m1-l1-s3
 section: learn
-renderer: content
-minutes: 4
+renderer: hotspot_list
+minutes: 5
 required: true
 ```
 
 ```json payload
 {
-  "instructions": "These six show up throughout the course. Learn them as a set.",
-  "blocks": [
-    {"type": "keylist", "title": "The six decisions behind most serious crashes", "items": [
-      {"term": "Bare head", "detail": "No helmet, or a helmet that doesn't fit or isn't fastened. The most consequential single choice a rider makes."},
-      {"term": "Pavement", "detail": "ATVs are engineered for soft, uneven ground. On pavement they handle unpredictably and roll more easily in turns — Module 6 covers the physics."},
-      {"term": "Extra rider", "detail": "A passenger on a machine designed for one changes balance and blocks the rider's ability to shift weight — which is how ATVs are steered and stabilized."},
-      {"term": "Impairment", "detail": "Alcohol or drugs before or during a ride. Balance, reaction time, and judgment are the three things riding runs on; impairment attacks all three."},
-      {"term": "Wrong-size machine", "detail": "Riders — especially young riders — on machines too large or powerful for them. Fit rules exist because leverage and reach are physical requirements, not suggestions."},
-      {"term": "Outrunning your eyes", "detail": "Riding faster than the distance you can see and process — over crests, around brush, into shadow. If you can't see it, you can't choose around it."}
-    ]},
-    {"type": "figure", "assetSlot": "keylist-six-decisions", "caption": "Six marks at equal distance from one rider — none of them outranks the others, and every one of them is close enough to reach you on an ordinary ride."},
-    {"type": "callout", "variant": "tip", "title": "Why decisions, not skills?", "md": "Skill matters — and hands-on training builds it. But the record says most serious outcomes were shaped by choices any rider could have made differently *regardless of skill level*. Judgment scales instantly; skill takes seasons."}
+  "instructions": "Find all six marks around the rider, then open each one. The step is done when you've read every one.",
+  "assetSlot": "scene-six-decisions",
+  "intro": "Six decisions ring one geared rider at equal distance. None of them outranks the others, and every one is close enough to reach you on an ordinary ride.",
+  "requireAll": true,
+  "hotspots": [
+    {
+      "id": "helmet",
+      "label": "Bare head",
+      "x": 50.0,
+      "y": 11.62,
+      "description": "No helmet, or a helmet that doesn't fit or isn't fastened. The most consequential single choice a rider makes."
+    },
+    {
+      "id": "pavement",
+      "label": "Pavement",
+      "x": 70.5,
+      "y": 31.69,
+      "description": "ATVs are engineered for soft, uneven ground. On pavement they handle unpredictably and roll more easily in turns — Module 6 covers the physics."
+    },
+    {
+      "id": "passenger",
+      "label": "Extra rider",
+      "x": 70.3,
+      "y": 66.75,
+      "description": "A passenger on a machine designed for one changes balance and blocks the rider's ability to shift weight — which is how ATVs are steered and stabilized."
+    },
+    {
+      "id": "impairment",
+      "label": "Impairment",
+      "x": 49.97,
+      "y": 87.4,
+      "description": "Alcohol or drugs before or during a ride. Balance, reaction time, and judgment are the three things riding runs on; impairment attacks all three."
+    },
+    {
+      "id": "fit",
+      "label": "Wrong-size machine",
+      "x": 29.61,
+      "y": 66.55,
+      "description": "Riders — especially young riders — on machines too large or powerful for them. Fit rules exist because leverage and reach are physical requirements, not suggestions."
+    },
+    {
+      "id": "eyes",
+      "label": "Outrunning your eyes",
+      "x": 29.35,
+      "y": 31.49,
+      "description": "Riding faster than the distance you can see and process — over crests, around brush, into shadow. If you can't see it, you can't choose around it."
+    }
   ]
 }
 ```
@@ -120,10 +156,10 @@ required: true
   "passCopy": "That's the mindset. On to the trail decisions.",
   "reviseCopy": "Look back at the six decisions — the answer lives there.",
   "inner": {
-    "prompt": "A capable adult rider on a well-maintained ATV rides familiar trails — but tonight adds one beer before heading out and skips the helmet \"because it's a short loop.\" What just happened to their risk?",
+    "prompt": "A capable adult rider on a well-maintained ATV rides familiar trails — but tonight adds one beer and skips the helmet, convinced that's the cooler way to ride. What just happened to their risk?",
     "options": [
       {"id": "a", "text": "Barely changed — skill and familiarity carry the ride", "isBest": false, "feedback": "Familiarity helps you spot hazards, but it does nothing for reaction time or for what happens to an unprotected head in a crash. Two of the six decisions just flipped the wrong way at once."},
-      {"id": "b", "text": "It multiplied — impairment degrades the rider while the missing helmet raises the cost of any mistake", "isBest": true, "feedback": "Exactly. Risk factors don't add, they multiply: one raises the odds of a crash, the other raises the severity of the crash. \"Short loop\" changes neither."},
+      {"id": "b", "text": "It multiplied — impairment degrades the rider while the missing helmet raises the cost of any mistake", "isBest": true, "feedback": "Exactly. Risk factors don't add, they multiply: one raises the odds of a crash, the other raises the severity of the crash. Looking cool changes neither."},
       {"id": "c", "text": "It only matters if they ride fast", "isBest": false, "feedback": "Speed is an amplifier too — but plenty of serious crashes happen at modest speeds. A slow rollover onto an unprotected head is not a minor event."}
     ],
     "explanation": "The habit to build: whenever a ride changes — even by one small choice — re-ask which of the six decisions just moved."
@@ -152,16 +188,16 @@ required: true
 
 ```json payload
 {
-  "instructions": "Three ways good judgment leaks out of good riders.",
+  "instructions": "Three ways good riders talk themselves into bad calls.",
   "blocks": [
-    {"type": "text", "md": "You now know the short list. The harder problem is that riders who *know* the list still override it in the moment. Three leaks do most of the damage:"},
+    {"type": "text", "md": "You know the short list now. Here's the catch: *knowing* it doesn't stop you from talking yourself past it on the trail. That usually happens one of three ways:"},
     {"type": "keylist", "title": "The three leaks", "items": [
-      {"term": "Group gravity", "detail": "When the group rides past a hazard, following feels safer than it is and stopping feels more awkward than it should. The rider at the back inherits everyone else's choices — plus dust and worse sight lines."},
-      {"term": "Familiarity discount", "detail": "\"I've ridden this trail a hundred times\" quietly becomes \"this trail can't surprise me.\" Trails change — washouts, downed limbs, new mud, other people. Your hundredth ride is on a trail you've never seen in today's condition."},
-      {"term": "Sunk momentum", "detail": "You're two hours in, the light's going, and the shortcut looks tempting. Tired riders don't get more cautious; they get more committed to finishing. Fatigue is when plans should get *more* conservative, and usually get less."}
+      {"term": "Group gravity", "detail": "Everyone else rode past it, so you do too — pulling over feels awkward and keeping up feels safe. It isn't. And the rider at the back gets the worst deal: everyone else's choices, plus their dust and half the view."},
+      {"term": "Familiarity discount", "detail": "\"I've ridden this trail a hundred times\" quietly slides into \"nothing here can surprise me.\" But the trail you remember isn't the trail today — rain reshapes it, limbs drop across it, other people show up on it. Ride number one hundred deserves fresh eyes."},
+      {"term": "Sunk momentum", "detail": "\"We've come this far.\" Two hours in, light fading, and the shortcut starts looking smart. Tired riders don't get more careful — they get set on being done. The end of a long day is exactly when your plan should get safer, and it's when most riders let it slip."}
     ]},
-    {"type": "figure", "assetSlot": "keylist-three-leaks", "caption": "One reservoir, three separate outlets — judgment does not fail all at once, which is why a rider running low still feels perfectly reasonable to themselves."},
-    {"type": "callout", "variant": "tip", "title": "The out-loud rule", "md": "Judgment holds better when it's spoken. \"I'm going around this one\" or \"I'm taking the long way back\" said out loud — even to yourself — turns a vague discomfort into a decision. Groups with one person willing to say it out loud make better calls; be that person."}
+    {"type": "figure", "assetSlot": "keylist-three-leaks", "caption": "Think of judgment as a tank with three slow leaks. It never empties all at once — which is why a rider running on low still feels like they're thinking straight."},
+    {"type": "callout", "variant": "tip", "title": "The out-loud rule", "md": "Judgment holds better when you say it. \"I'm going around this one\" or \"I'm heading back the long way\" — spoken out loud, even just to yourself — turns a nagging feeling into an actual decision. Every group makes better calls when one person is willing to say it first. Be that person."}
   ]
 }
 ```
@@ -179,7 +215,7 @@ required: true
 ```json payload
 {
   "instructions": "Ride the scenario. Your choices are honored — including the risky ones. You'll see where each leads.",
-  "scenario": "Late afternoon, a group of four on familiar trails. Spring melt has the creek higher than you've ever seen it at the usual crossing — fast, opaque, edges undercut. The two lead riders splash through without stopping and wave from the far bank. Your friend behind you shouts \"just gun it!\"",
+  "scenario": "Mid-morning, a group of four on familiar trails. Spring melt has the creek higher than you've ever seen it at the usual crossing — fast, opaque, edges undercut. The two lead riders splash through without stopping and wave from the far bank. Your friend to your left shouts \"just gun it!\"",
   "startNode": "n1",
   "nodes": [
     {
@@ -187,21 +223,22 @@ required: true
       "prompt": "The far bank is thirty feet away. What's your move?",
       "choices": [
         {"id": "follow", "label": "Follow their line — they made it", "quality": "risky", "feedback": "You start across. Their crossing told you the line held *their* weight on *their* line two minutes ago — moving water rearranges beds fast, and you can't see yours. Halfway across, your front wheel drops into a scoured hole they missed. You're stopped, in current, on an unstable machine. This is how riders and machines end up downstream. Back up the decision: what could you have checked first?", "next": "n1"},
-        {"id": "assess", "label": "Stop on the bank and assess before deciding", "quality": "best", "feedback": "You stop. From the bank you can actually look: how fast is the water moving, can you see bottom, is there a wider/shallower reach nearby, and what happens downstream if something goes wrong? Two of those answers are bad today. Stopping cost you thirty seconds and bought you the whole decision.", "next": "n2"},
+        {"id": "assess", "label": "Stop on the bank and assess before deciding", "quality": "best", "feedback": "You stop. In good morning light you can actually look: how fast is the water moving, can you see bottom, is there a wider/shallower reach nearby, and what happens downstream if something goes wrong? The usual line fails two of those checks — but fifty yards up you find a wider, slower reach where you can see bottom, and the group crosses there. Thirty seconds of stopping bought the whole decision.", "next": "n2"},
         {"id": "defer", "label": "Wave them on — you'll find another way and meet up", "quality": "okay", "feedback": "A defensible instinct — you refused a crossing you couldn't judge. Stronger version: stop and *assess* first, then decide with information. Sometimes the crossing is fine and you learn why; sometimes it isn't and now you can name the reason to the group instead of just peeling off.", "next": "n2"}
       ]
     },
     {
       "id": "n2",
-      "prompt": "You judge this crossing a bad bet today. The lead riders are on the far bank pointing at the light: \"We're losing the sun — it's this or the long way.\" What do you say?",
+      "report": "Another ride, weeks later. Same group, same trail, same crossing — except you're at it after dark this time, and the melt still has the creek up. Your headlight flattens the water into one black sheet: no speed, no depth, no bottom. The two who led that day are already across again, their lights small in the trees. The water sounds louder than it did in daylight.",
+      "prompt": "The lead riders idle at the far edge: \"We've ridden this crossing all spring — same line, quick, done.\" What do you say?",
       "choices": [
-        {"id": "cave", "label": "\"Fine — but slow.\" Cross carefully.", "quality": "risky", "feedback": "\"Carefully\" doesn't change the water. A hazard you judged a bad bet doesn't become a good bet at lower speed — slower in fast current can mean *more* time exposed on an unstable bed. Notice what happened: the group's schedule just outvoted your judgment. Try the moment again.", "next": "n2"},
-        {"id": "voice", "label": "\"Not this one, not today. I'm taking the long way — who's with me?\"", "quality": "best", "feedback": "Out loud, specific, and it offers the group an easy exit ramp. In real groups this sentence works far more often than new riders expect — usually at least one other rider was waiting for someone to say it. The long way home is a story; the crossing gone wrong is an incident report.", "next": null},
-        {"id": "silent", "label": "Turn around without a word and head back alone", "quality": "okay", "feedback": "You kept yourself out of the water — genuinely the most important thing. But a group that splits without communicating has created a new problem: nobody knows who's where if something goes wrong on either route. Module 5 is all about this. The strongest move keeps your judgment *and* the group's awareness.", "next": null}
+        {"id": "cave", "label": "\"Same line as always — go.\" Cross by headlight.", "quality": "risky", "feedback": "Every daylight read you have of this crossing is weeks old — melt-fed creeks climb, drop, and rearrange their beds all spring, and a bed that shifted won't announce it. At night the water tells you nothing: headlight glare turns the surface into a mirror, and depth and speed become guesses. You'd be crossing on memory, through water you can't see. That's the familiarity discount with the lights off. Try the moment again.", "next": "n2"},
+        {"id": "voice", "label": "\"Not in the dark — we can't read the water. Long way around, who's with me?\"", "quality": "best", "feedback": "Out loud, specific, and it names the real problem: not nerve — visibility. A dark trail holds still under your headlight; moving water you can't read is a different animal. Groups take this exit ramp more often than new riders expect. The long way around is a story; a night crossing gone wrong is a search party.", "next": null},
+        {"id": "silent", "label": "Turn around without a word and take the long way alone", "quality": "okay", "feedback": "You kept yourself out of water you couldn't see — genuinely the most important thing. But a group that splits up in the dark without a word has created a second problem: nobody knows who's where if either route goes wrong, and night makes that worse. Module 5 is all about this. The strongest move keeps your judgment *and* the group's awareness.", "next": null}
       ]
     }
   ],
-  "debrief": "The strongest line was assess → say it out loud with an exit ramp. Notice that no riding skill was involved anywhere — this entire scenario was decided by whether you stopped, what you checked, and what you said. That's the mindset this course trains, and it's the part that transfers to every machine you'll ever ride."
+  "debrief": "The strongest line was assess in the light, then say it out loud in the dark. Same creek, two rides, two different problems: in daylight, stopping could buy you information; after dark there was none to buy — low visibility turned a crossing you'd already ridden into unknown ground. Notice that no riding skill was involved anywhere — this scenario was decided by whether you stopped, what you could actually see, and what you said. That's the mindset this course trains, and it's the part that transfers to every machine you'll ever ride."
 }
 ```
 

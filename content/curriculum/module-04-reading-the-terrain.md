@@ -58,14 +58,15 @@ required: true
   "assetSlot": "scene-trail-hazards",
   "intro": "Mid-morning, mixed forest trail descending toward a drainage.",
   "requireAll": true,
+  "spotFirst": true,
   "hotspots": [
-    {"id": "crest", "label": "Blind crest", "x": 18, "y": 30, "description": "The trail rises and vanishes — beyond it could be a washout, a stopped machine, or an oncoming one. The cue is the vanishing point itself. Response category: speed you could stop within the visible distance, and position for sight line."},
-    {"id": "shadow_rut", "label": "Shadowed ruts", "x": 40, "y": 62, "description": "Deep wheel ruts running through shade. Shadow flattens depth perception — a rut that looks like a stripe can swallow a wheel. Cue: linear shadows aligned with the trail. Read them where light crosses them."},
-    {"id": "wet_clay", "label": "Dark wet patch", "x": 55, "y": 70, "description": "A darker, smoother band across the trail low in the drainage — moisture. Wet clay and algae-slick rock behave like ice for knobby tires. Cue: color change plus location (low points collect water)."},
-    {"id": "loose_over_hard", "label": "Gravel over hardpack", "x": 68, "y": 58, "description": "A sheen of loose marbles over a hard base — the classic traction trap on corners and brakes. Cue: uniform sparkle, scattered stones at the trail edge where wheels have thrown them."},
-    {"id": "deadfall", "label": "Downed limb", "x": 78, "y": 44, "description": "A limb across the far side of the trail, partly screened by brush. Fresh deadfall means the trail differs from every previous ride — the familiarity discount's favorite ambush. Cue: horizontal line breaking the trail's vertical texture."},
-    {"id": "side_slope", "label": "Off-camber section", "x": 30, "y": 48, "description": "The trail tilts sideways where it traverses the hillside. Side-slopes attack stability directly — next lesson's lab shows exactly how. Cue: the trail's far edge sits lower than its near edge; vegetation leans."},
-    {"id": "soft_edge", "label": "Undercut soft edge", "x": 62, "y": 78, "description": "The downhill trail edge above the drainage is soft and possibly undercut — edges fail under weight, and this one has water working beneath it. Cue: crumbled edge line, exposed roots, cracks parallel to the edge. Response category: track away from suspect edges."}
+    {"id": "crest", "label": "Blind crest", "x": 18.0, "y": 14.0, "region": [[10.7, 12.8], [13.1, 11.3], [16.4, 11], [19.6, 11.5], [22.9, 12.7], [25.9, 14.4], [25.1, 17.5], [21.2, 16.4], [16.9, 15.5], [12.8, 15.6], [10.3, 15.9]], "description": "The trail rises and vanishes — beyond it could be a washout, a stopped machine, or an oncoming one. The cue is the vanishing point itself. Response category: speed you could stop within the visible distance, and position for sight line."},
+    {"id": "shadow_rut", "label": "Shadowed ruts", "x": 35.4, "y": 65.6, "region": [[24.5, 50.4], [30, 52.2], [34.5, 57.4], [37.7, 61.7], [40.3, 66], [43.5, 70.4], [45.1, 71.3], [43.2, 72], [38.2, 74.1], [36.1, 74.9], [34.8, 74.7], [33.1, 70.4], [31.6, 66], [30.1, 61.7], [27.8, 57.4], [25.7, 53.1]], "description": "Deep wheel ruts running through shade. Shadow flattens depth perception — a rut that looks like a stripe can swallow a wheel. Cue: linear shadows aligned with the trail. Read them where light crosses them."},
+    {"id": "wet_clay", "label": "Dark wet patch", "x": 40.0, "y": 83.9, "region": [[21.1, 88.9], [25.4, 84], [30.3, 79.1], [35.7, 75.9], [42.2, 73.2], [48.6, 70.8], [55.1, 68.7], [61.6, 66.3], [63.8, 70], [62.7, 74.8], [56.2, 80.2], [49.2, 86], [42.2, 91.6], [35.1, 97.2], [30.8, 100], [21.1, 100]], "description": "A darker, smoother band across the trail low in the drainage — moisture. Wet clay and algae-slick rock behave like ice for knobby tires. Cue: color change plus location (low points collect water)."},
+    {"id": "loose_over_hard", "label": "Gravel over hardpack", "x": 73.2, "y": 50.9, "region": [[65.7, 46.1], [68.1, 41.3], [72.4, 38.3], [77.5, 37.2], [79.8, 41.8], [80.8, 49.4], [79.5, 56.9], [76.2, 62.9], [71.4, 65.9], [68.2, 62.9], [66.1, 54.2]], "description": "A sheen of loose marbles over a hard base — the classic traction trap on corners and brakes. Cue: uniform sparkle, scattered stones at the trail edge where wheels have thrown them."},
+    {"id": "deadfall", "label": "Downed limb", "x": 79.0, "y": 30.4, "region": [[71.4, 29.5], [75.8, 29], [80.1, 28.6], [84.4, 28.3], [87.6, 28.9], [87.6, 30.9], [84.4, 31.2], [80.1, 31.8], [75.8, 32.5], [71.4, 33.1]], "description": "A limb across the far side of the trail, partly screened by brush. Fresh deadfall means the trail differs from every previous ride — the familiarity discount's favorite ambush. Cue: horizontal line breaking the trail's vertical texture."},
+    {"id": "side_slope", "label": "Off-camber section", "x": 17.9, "y": 48.2, "region": [[12.2, 34.4], [15.8, 40.4], [19.3, 46.5], [22.8, 52.7], [26.4, 60.3], [22.5, 61.4], [18.9, 54.5], [15.4, 48], [12.8, 41.5], [8.3, 35.2]], "description": "The trail tilts sideways where it traverses the hillside. Side-slopes attack stability directly — next lesson's lab shows exactly how. Cue: the trail's far edge sits lower than its near edge; vegetation leans."},
+    {"id": "soft_edge", "label": "Undercut soft edge", "x": 65.2, "y": 85.3, "region": [[49.9, 96.3], [53.1, 91.5], [57.4, 86.6], [61.7, 82.3], [66.1, 78.3], [70.4, 74.5], [74.7, 71.3], [79, 68.6], [82.3, 66.6], [83.3, 70.9], [76.9, 78], [70.4, 85.5], [63.9, 93.1], [57.4, 100], [53.6, 100], [49.9, 100]], "description": "The downhill trail edge above the drainage is soft and possibly undercut — edges fail under weight, and this one has water working beneath it. Cue: crumbled edge line, exposed roots, cracks parallel to the edge. Response category: track away from suspect edges."}
   ]
 }
 ```
@@ -121,15 +122,16 @@ required: true
 {
   "instructions": "The model behind the lab.",
   "blocks": [
-    {"type": "text", "md": "Picture the four tire contact patches as corners of a rectangle on the ground — the **support area**. Now picture the combined weight of machine, rider, and cargo concentrated at one point — the **center of gravity (CoG)**, which on an ATV sits high, and higher still with a seated rider.\n\nThe machine stays upright while the CoG's straight-down line lands *inside* the support area. Tilt the ground, and that line marches toward the edge. Cross the edge and physics finishes the argument — that's a rollover, and it needs no speed at all to happen."},
-    {"type": "keylist", "title": "Everything this one model explains", "items": [
-      {"term": "Why slopes have limits", "detail": "Steeper ground walks the CoG line toward the support edge. Every machine/load/rider combination has an angle where margin runs out — and it's smaller than it feels from the seat."},
-      {"term": "Why side-hills are the sharpest case", "detail": "The support rectangle is narrower side-to-side than front-to-back, so sideways tilt spends margin fastest. Off-camber trail is the stability envelope's thinnest edge."},
-      {"term": "Why rider position is a control", "detail": "The rider is a third of the system's weight and the only movable part — weight shifted uphill moves the CoG away from the failing edge. This is why fit (leverage!) mattered in Module 2."},
-      {"term": "Why loads and passengers change everything", "detail": "Cargo raises and shifts the CoG; a passenger on a single-rider machine raises it AND freezes the movable part. Module 6 makes this concrete."}
-    ]},
-    {"type": "figure", "assetSlot": "keylist-stability-model", "caption": "One fact at the center, four familiar rules radiating out of it — learn the middle and the four stop being separate things to remember."},
-    {"type": "callout", "variant": "caution", "title": "What this model is", "md": "A concept model for judgment — not an operating chart. Real limits shift with tire pressure, surface, moisture, momentum, and machine design, always in the unfavorable direction from the ideal. The lab that follows builds intuition for the *shape* of the envelope; respect for the real one is what keeps riders off steep and off-camber ground they can't verify. Hands-on courses teach slope technique in person, on chosen ground, for exactly this reason."}
+    {"type": "text", "md": "Picture the four tire contact patches as corners of a rectangle on the ground — the **support area**. Now picture the combined weight of machine, rider, and cargo concentrated at one point — the **center of gravity (CoG)**, which on an ATV sits high, especially with a seated rider.\n\nThe machine stays upright while the CoG's straight-down line lands *inside* the support area. Tilt the ground, and that line marches toward the edge. Cross the edge and physics finishes the argument — that's a rollover, and it needs no speed at all to happen."},
+    {"type": "hotspot_figure", "assetSlot": "keylist-stability-model", "ratio": "3 / 2",
+     "prompt": "Open each case to see the one model behind it.",
+     "stops": [
+      {"id": "slopes", "x": 19.4, "y": 22.2, "size": 24, "term": "Why slopes have limits", "detail": "Steeper ground walks the CoG line toward the support edge. Every machine/load/rider combination has an angle where margin runs out — and it's smaller than it feels from the seat."},
+      {"id": "sidehill", "x": 80.6, "y": 22.2, "size": 24, "term": "Why side-hills are the sharpest case", "detail": "The support rectangle is narrower side-to-side than front-to-back, so sideways tilt spends margin fastest. Off-camber trail is the stability envelope's thinnest edge."},
+      {"id": "position", "x": 19.3, "y": 73.1, "size": 24, "term": "Why rider position is a control", "detail": "The rider is a third of the system's weight and the only movable part — weight shifted uphill moves the CoG away from the failing edge. Making that shift takes leverage, and a machine you can't brace against is one you can't correct on — which is what the fit checks in Module 2 were protecting."},
+      {"id": "loads", "x": 80.5, "y": 73.1, "size": 24, "term": "Why loads and passengers change everything", "detail": "Cargo raises and shifts the CoG; a passenger on a single-rider machine raises it AND freezes the movable part. Module 6 makes this concrete."}
+     ]},
+    {"type": "callout", "variant": "caution", "title": "What this model is", "md": "Real limits shift with tire pressure, surface, moisture, momentum, and machine design, always in the unfavorable direction from the ideal. The lab that follows builds intuition for the *shape* of the envelope; respect for the real one is what keeps riders off steep and off-camber ground they can't verify. Hands-on courses teach slope technique in person, on chosen ground, for exactly this reason."}
   ]
 }
 ```
@@ -146,15 +148,16 @@ required: true
 
 ```json payload
 {
-  "instructions": "Tilt the ground and move the rider. Watch the CoG line against the support area. Meet all three objectives.",
+  "instructions": "Four pieces of ground, one machine. Set up the rider, play the run, and watch where the center of gravity goes. Clear all four.",
   "lab": "stability_explorer",
-  "config": {"views": ["rear", "side"], "sliders": ["slope_angle", "rider_lean", "cargo_load"], "showMarginMeter": true},
+  "config": {"mode": "scenarios", "scenarios": ["traverse", "haul", "descent", "shortcut"], "freeTilt": true},
   "objectives": [
-    {"id": "find_edge", "text": "On the rear view, increase side-slope until the CoG line reaches the support edge — note the angle"},
-    {"id": "lean_recovery", "text": "At that angle, shift rider lean uphill and watch the margin return — then find the steeper angle where even full lean isn't enough"},
-    {"id": "cargo_effect", "text": "Add rear cargo load on the side view and observe how the same uphill grade now spends more margin"}
+    {"id": "traverse", "text": "Cross the side-hill traverse without rolling — find how much uphill lean the rut demands"},
+    {"id": "haul", "text": "Climb the hunt haul with a full rear rack — keep the front wheels planted"},
+    {"id": "descent", "text": "Ride the steep drop through the washout without going over the bars"},
+    {"id": "shortcut", "text": "Recognize the shortcut for what it is — some ground can't be leaned out of"}
   ],
-  "debrief": "Three things worth keeping forever: the edge arrives earlier than intuition says; rider position genuinely buys margin but only a finite amount; and load quietly re-draws the whole envelope. When real ground makes you wonder which side of the edge you're on — that wondering IS the answer. Choose different ground."
+  "debrief": "Four runs, one lesson underneath: the machine stays upright while the center of gravity's plumb line stays inside the tires, and everything you did — leaning into the hill, standing on the pegs, respecting the load — was about keeping it there. Rider position genuinely buys margin, but only a finite amount, and the shortcut showed you the edge of it. On real ground there is no margin meter; when you catch yourself wondering which side of the edge you're on, that wondering is the signal. Pick a different line."
 }
 ```
 

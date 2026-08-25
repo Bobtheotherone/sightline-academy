@@ -34,9 +34,12 @@ required: true
 
 ```json payload
 {
-  "instructions": "Set up the tour.",
+  "instructions": "Two minutes, then we'll walk the machine.",
   "blocks": [
-    {"type": "text", "md": "Every hazard judgment you'll make in Modules 4–6 runs through the machine: how it grips, where its weight sits, how it stops. You don't need to be a mechanic. You do need to be able to look at an ATV and see *systems* — because the pre-ride check, fit rules, and loading limits all make sense the moment you can.\n\nExplore the machine. Visit every marked point."}
+    {
+      "type": "text",
+      "md": "An ATV isn't one lump of metal. It's a set of parts, and every one has a job.\n\nAlmost everything you'll decide later comes back to three of them: what's gripping, where the weight is, and what's going to stop you.\n\nYou don't need to be a mechanic. You just need to know what each part is for. Once you do, the pre-ride check turns into one question you ask eight times: would I trust this today?\n\nWe'll cover eight parts. What each does, and what goes wrong when it stops."
+    }
   ]
 }
 ```
@@ -55,17 +58,65 @@ required: true
 {
   "instructions": "Tap every waypoint on the machine. Each one earns its place in the walkaround you'll learn next lesson.",
   "assetSlot": "scene-atv-anatomy",
-  "intro": "Side view of a typical single-rider utility ATV.",
+  "intro": "Side view of a typical single-rider utility ATV. Four waypoints sit at the end of a drawn line; the rest sit on the part itself.",
   "requireAll": true,
   "hotspots": [
-    {"id": "tires", "label": "Tires & wheels", "x": 22, "y": 72, "description": "Low-pressure, deep-tread tires designed to deform around soft, uneven ground — that deformation IS the grip. Pressure a few PSI off changes handling more than you'd expect, and it's why these tires behave badly on pavement (Module 6)."},
-    {"id": "handlebars", "label": "Handlebars & controls", "x": 55, "y": 22, "description": "Steering plus the control cluster: throttle (usually a thumb lever), brakes, and switches. On an ATV you steer with the bars *and* your body weight together — which is why fit and free movement matter so much."},
-    {"id": "brakes", "label": "Brakes", "x": 30, "y": 62, "description": "Front and rear systems, hand and/or foot operated. The walkaround checks lever feel and function *before* you need them, because the bottom of a hill is a bad place to learn your rear brake is soft."},
-    {"id": "suspension", "label": "Suspension", "x": 38, "y": 58, "description": "Keeps the tires in contact with uneven ground so grip and braking stay available. Sagging or leaking suspension quietly shrinks your margins on every bump."},
-    {"id": "engine", "label": "Engine & fuel", "x": 48, "y": 50, "description": "Fuel level, oil level, and leaks are walkaround items — running dry or seizing far from the trailhead turns a ride into a recovery. Engine size classes also drive youth-fit rules (Lesson 4)."},
-    {"id": "footwells", "label": "Footwells & pegs", "x": 62, "y": 68, "description": "Where your feet live — and stay. Footwells keep boots away from the wheels; the rider's ability to stand and shift weight through the pegs is core to how ATVs handle terrain."},
-    {"id": "racks", "label": "Racks & cargo points", "x": 82, "y": 38, "description": "Utility ATVs carry loads — but every kilogram changes the balance you'll study in Module 4. Racks have posted limits, and loads must be secured low and centered (Module 6 covers loading)."},
-    {"id": "chassis", "label": "Frame & chassis", "x": 58, "y": 55, "description": "The skeleton everything bolts to. The walkaround's chassis check is a look for cracks, loose fasteners, and anything hanging — small findings here are cheap; discovered-on-trail findings are not."}
+    {
+      "id": "tires",
+      "label": "Tires & wheels",
+      "x": 10.48,
+      "y": 67.43,
+      "description": "Low-pressure, deep-tread tires designed to deform around soft, uneven ground — that deformation IS the grip. Pressure a few PSI off changes handling more than you'd expect, and it's why these tires behave badly on pavement (Module 6)."
+    },
+    {
+      "id": "handlebars",
+      "label": "Handlebars & controls",
+      "x": 54.04,
+      "y": 15.09,
+      "description": "Steering plus the control cluster: throttle (usually a thumb lever), brakes, and switches. On an ATV you steer with the bars *and* your body weight together — which is why fit and free movement matter so much."
+    },
+    {
+      "id": "brakes",
+      "label": "Brakes",
+      "x": 74.54,
+      "y": 69.27,
+      "description": "Front and rear systems, hand and/or foot operated. The walkaround checks lever feel and function *before* you need them, because the bottom of a hill is a bad place to learn your rear brake is soft."
+    },
+    {
+      "id": "suspension",
+      "label": "Suspension",
+      "x": 29.43,
+      "y": 48.86,
+      "description": "Keeps the tires in contact with uneven ground so grip and braking stay available. Sagging or leaking suspension quietly shrinks your margins on every bump."
+    },
+    {
+      "id": "engine",
+      "label": "Engine & fuel",
+      "x": 46.88,
+      "y": 57.55,
+      "description": "Fuel level, oil level, and leaks are walkaround items — running dry or seizing far from the trailhead turns a ride into a recovery. Engine size classes also drive youth-fit rules (Lesson 4)."
+    },
+    {
+      "id": "footwells",
+      "label": "Footwells & pegs",
+      "x": 59.9,
+      "y": 67.86,
+      "description": "Where your feet live — and stay. Footwells keep boots away from the wheels; the rider's ability to stand and shift weight through the pegs is core to how ATVs handle terrain."
+    },
+    {
+      "id": "racks",
+      "label": "Racks & cargo points",
+      "x": 91.02,
+      "y": 26.17,
+      "description": "Utility ATVs carry loads — but every kilogram changes the balance you'll study in Module 4. Racks have posted limits, and loads must be secured low and centered (Module 6 covers loading)."
+    },
+    {
+      "id": "chassis",
+      "label": "Frame & chassis",
+      "x": 46.03,
+      "y": 83.93,
+      "description": "The skeleton everything bolts to. The walkaround's chassis check is a look for cracks, loose fasteners, and anything hanging — small findings here are cheap; discovered-on-trail findings are not."
+    }
   ]
 }
 ```
@@ -205,21 +256,23 @@ required: true
   "instructions": "The T-CLOC framework. You'll practice it in the lab next.",
   "blocks": [
     {"type": "text", "md": "Riders who've been at this for decades share a ritual: a slow lap around the machine before every ride. The industry mnemonic for it is **T-CLOC** — five zones that catch the overwhelming majority of preventable mechanical problems:"},
-    {"type": "keylist", "title": "T-CLOC", "items": [
-      {"term": "T — Tires & wheels", "detail": "Pressure by gauge (not by eye), tread condition, sidewall damage, wheel fasteners snug."},
-      {"term": "C — Controls & cables", "detail": "Throttle moves freely and snaps closed. Brake levers firm, not spongy. Steering sweeps lock to lock without binding."},
-      {"term": "L — Lights & electrics", "detail": "Headlight, taillight, engine stop switch actually stops the engine. Matters double at dawn, dusk, and dust."},
-      {"term": "O — Oil & fuel", "detail": "Levels checked, no fresh drips underneath, fuel enough for the ride plus reserve."},
-      {"term": "C — Chassis", "detail": "The look-over: cracks, loose fasteners, anything hanging or freshly bent. Load racks secure."}
-    ]},
-    {"type": "figure", "assetSlot": "keylist-tcloc", "caption": "Five stations walked as a loop, always from the same starting point — a fixed order is what stops the zone you like least from quietly becoming the one you skip."},
+    {"type": "hotspot_figure", "assetSlot": "keylist-tcloc", "ratio": "3 / 2",
+     "prompt": "Open each stop to walk the loop.",
+     "caption": "Five stations walked as a loop, always from the same starting point — a fixed order is what stops the zone you like least from quietly becoming the one you skip.",
+     "stops": [
+      {"id": "tires", "x": 26.2, "y": 17.5, "term": "T — Tires & wheels", "detail": "Pressure by gauge (not by eye), tread condition, sidewall damage, wheel fasteners snug."},
+      {"id": "controls", "x": 74.6, "y": 17.5, "term": "C — Controls & cables", "detail": "Throttle moves freely and snaps closed. Brake levers firm, not spongy. Steering sweeps lock to lock without binding."},
+      {"id": "lights", "x": 78.8, "y": 67.8, "term": "L — Lights & electrics", "detail": "Headlight, taillight, engine stop switch actually stops the engine. Matters double at dawn, dusk, and dust."},
+      {"id": "oil", "x": 50.0, "y": 85.7, "term": "O — Oil & fuel", "detail": "Levels checked, no fresh drips underneath, fuel enough for the ride plus reserve."},
+      {"id": "chassis", "x": 21.2, "y": 67.5, "term": "C — Chassis", "detail": "The look-over: cracks, loose fasteners, anything hanging or freshly bent. Load racks secure."}
+     ]},
     {"type": "callout", "variant": "caution", "title": "The awareness line", "md": "This course teaches you *what the zones are and what a check is looking for* — enough to do a meaningful walkaround and to know when something needs a qualified mechanic. Your machine's owner's manual gives the exact specs (pressures, fluid points) for your specific model; a hands-on course will put a trainer's eyes on your technique. Use all three."},
     {"type": "callout", "variant": "story", "title": "Why it works", "md": "The walkaround isn't really a mechanical inspection — it's a *change detector*. You saw the machine yesterday; today the ritual makes you see it again. New drip, softer lever, lower tire: changes are the signal, and five minutes of ritual is what makes changes visible."}
   ]
 }
 ```
 
-## Step: Lab — the walkaround
+## Step: Lab — what changed overnight
 
 ```yaml step
 id: m2-l3-s2
@@ -231,14 +284,14 @@ required: true
 
 ```json payload
 {
-  "instructions": "Work the machine from above: place each T-CLOC zone, then step through what each check looks for.",
+  "instructions": "You rode yesterday; the machine sat overnight. Each zone is shown as it was and as it is — click the problem in today's plate.",
   "lab": "walkaround",
-  "config": {"assetSlot": "scene-walkaround-top", "zones": ["tires", "controls", "lights", "oil", "chassis"]},
+  "config": {},
   "objectives": [
-    {"id": "place_all", "text": "Place all five T-CLOC zone labels on the correct regions of the machine"},
-    {"id": "review_all", "text": "Step through every zone's \"what you're looking for\" card"}
+    {"id": "find_all", "text": "Find the fault in every T-CLOC zone"},
+    {"id": "call_all", "text": "Make the call on each one you turn up"}
   ],
-  "debrief": "Five zones, in the same order every time — order is what makes it a ritual, and ritual is what makes it reliable when you're tired, cold, or excited to ride. Next: log the practice in your journal so the sequence is in your own words."
+  "debrief": "Zones in the same order every time — order is what makes it a ritual, and ritual is what makes it reliable when you're tired, cold, or excited to ride. Notice you never found any of these by knowing the machine: you found them by having something to compare against. That is the whole trick. Next: put this in your own words in the journal — including the findings that would end your ride before it starts."
 }
 ```
 

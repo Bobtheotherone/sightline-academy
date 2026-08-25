@@ -14,8 +14,8 @@
 1. **Hero** — full-bleed `--ts-grad-panel` band with drifting contour layer
    (strong variant). Left: eyebrow, fluid display headline ("Ride like you've
    thought it through."), one-line sub, CTA row (primary clay "Start the course
-   — it's free" + ghost "See the six modules" anchor), and under it a **mono
-   facts strip**: `6 modules · 22 lessons · ~5 hrs · free`. Right: the
+   " + ghost "See the six modules" anchor), and under it a **mono
+   facts strip**: `6 modules · 22 lessons · ~5 hrs · $5/mo launch price` (price read from /billing/plan, never hardcoded). Right: the
    hero-landing plate **bleeding out of the panel's bottom-right edge** (no box,
    no border), with a soft `--ts-glow-clay` placed behind it. Blaze-diamond
    scroll cue at the band's bottom center.

@@ -38,13 +38,13 @@ required: true
   "blocks": [
     {"type": "text", "md": "A helmet has one job: **stretch out the time** over which your head decelerates in an impact. The crushable liner collapses over milliseconds, and those milliseconds are the difference between forces a brain can take and forces it can't. Everything else about helmets falls out of this:"},
     {"type": "keylist", "title": "Consequences of the mechanism", "items": [
-      {"term": "It must be ON and fastened", "detail": "The liner can't help a head it isn't attached to. \"Just moving the machine\" and \"short loop\" crashes land on the same physics as any other."},
+      {"term": "It must be ON and fastened", "detail": "The liner can't help a head it isn't attached to. A crash while just moving the machine across the yard obeys the same physics as a crash miles out on the trail."},
       {"term": "It must FIT", "detail": "A loose helmet shifts on impact and can present its edge instead of its shell. Snug all around, no rocking front-to-back, cheek pads in contact, strap so only two fingers fit under it."},
-      {"term": "It must be RATED", "detail": "A motorsports safety standard label (e.g., DOT or equivalent regional certification) means the crush behavior was actually tested. A bicycle helmet is built for different impacts; a novelty shell is built for none."},
+      {"term": "It must be RATED", "detail": "Look for a motorsports safety certification on the shell: a DOT sticker, or whatever the equivalent is where you ride. That label means someone actually tested how the liner crushes. A bicycle helmet is built for a different kind of impact, and a thin uncertified shell sold just to look like a helmet isn't built for impact at all."},
       {"term": "It crushes ONCE", "detail": "The liner is single-use at real impact energies. A helmet that's taken a serious hit — or bounced hard off concrete from height — has spent some of its one crush. Retire it. Same for aging: manufacturers give a service life (commonly ~5 years of use); liners degrade."}
     ]},
     {"type": "figure", "assetSlot": "scene-helmet-fit", "caption": "The liner is the mechanism. The shell spreads the hit; the liner crushes to buy milliseconds — which is why fit, fastening, rating, and retirement are all the same rule wearing different clothes."},
-    {"type": "callout", "variant": "tip", "title": "Eyes too", "md": "Goggles or a face shield ride with the helmet every time. Trail speed turns dust, brush, and stones into eye hazards, and watering eyes at the wrong moment is a control failure. Anti-fog and a strap that seats on the helmet — not the bare head — are the two features worth insisting on."}
+    {"type": "callout", "variant": "tip", "title": "Eyes too", "md": "Goggles or a face shield ride with the helmet every time. Trail speed turns dust, brush, and stones into eye hazards, and watering eyes at the wrong moment is a control failure. Two features are worth insisting on: anti-fog, and a strap that sits on the helmet rather than against your bare head."}
   ]
 }
 ```
@@ -128,7 +128,7 @@ required: true
 
 ```json payload
 {
-  "instructions": "Sort each item into the right column. Wrong drops explain themselves — use them.",
+  "instructions": "Sort each item into the right column. Don't worry about getting it right the first time; a wrong drop explains itself.",
   "shuffle": true,
   "categories": [
     {"id": "every", "label": "Every ride", "hint": "Non-negotiables, any distance, any weather"},
@@ -165,8 +165,8 @@ required: true
 {
   "instructions": "Two habits that make the gear list real.",
   "blocks": [
-    {"type": "callout", "variant": "tip", "title": "Habit 1 — gear lives together", "md": "Helmet, goggles, gloves, boots in one spot. The every-ride set you can grab in one motion is the set that actually gets worn. Gear scattered across the house is gear that gets skipped \"just this once.\""},
-    {"type": "callout", "variant": "tip", "title": "Habit 2 — gear gets the walkaround too", "md": "Once a season, T-CLOC your gear: helmet inspection (Lesson 1), goggle strap and lens, boot soles, glove palms, and the age check — gear has a service life just like tires. Your gear card next lesson includes a condition line for exactly this reason."},
+    {"type": "callout", "variant": "tip", "title": "Habit 1 — gear lives together", "md": "Helmet, goggles, gloves, boots in one spot. If you can grab the whole set in one motion, you will actually wear it. Gear scattered across the house is gear that gets skipped \"just this once.\""},
+    {"type": "callout", "variant": "tip", "title": "Habit 2 — check your gear like you check the machine", "md": "Once a season, inspect your gear the same way you'd inspect the ATV. Look at the helmet (Lesson 1), the goggle strap and lens, the soles of your boots, the palms of your gloves, and how old all of it is. Gear wears out on a schedule, the same way tires do. Your gear card next lesson has a condition line for exactly this reason."},
     {"type": "text", "md": "One more framing worth keeping: gear is the only layer of this whole course that still works **after** a mistake — yours or someone else's. Judgment prevents crashes; gear survives them. You want both layers, every ride."}
   ]
 }
