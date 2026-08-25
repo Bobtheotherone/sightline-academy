@@ -1,0 +1,41 @@
+{
+ "sprite": {
+  "w": 863,
+  "h": 459
+ },
+ "wheels": {
+  "front": {
+   "cx": 143,
+   "cy": 336,
+   "r": 123
+  },
+  "rear": {
+   "cx": 688,
+   "cy": 336,
+   "r": 124
+  }
+ },
+ "source": "hero-m2-machine-1200w.png (background flood-filled to alpha, callout leaders dropped)",
+ "groundY": 459,
+ "frontIsLeft": true,
+ "seat": [
+  490,
+  118
+ ],
+ "grip": [
+  300,
+  18
+ ],
+ "peg": [
+  430,
+  332
+ ],
+ "rackRear": [
+  760,
+  95
+ ],
+ "bodyCentre": [
+  430,
+  250
+ ]
+}

@@ -1,4 +1,7 @@
-# Resume note — stability lab rebuild (physics + painted sprites)
+# Stability lab rebuild — build notes (complete)
+
+The lab is a matter-js rigid-body game on painted sprites. CONTRACT.md is the interface contract the three modules were built to; verify_game.mjs drives every scenario through the live site (animated and reduced motion); harness2/ renders the stage from hand-made frames. Physics acceptance lives in web/src/activities/lab_objective/stabilityRun.check.ts.
+
 
 State at the pause (owner restarting the laptop):
 
@@ -10,7 +13,14 @@ State at the pause (owner restarting the laptop):
   rewritten on the new stage, old scene*/StabilityScene/stabilitySim* files deleted, unused wheel crops deleted.
 - Curriculum m4-l2-s2 already authored for the four scenario objectives (traverse/haul/descent/shortcut).
 
-## In flight when paused
+## Update (after physics landed)
+- Module P landed (stabilityWorld.ts/stabilityRun.ts/stabilityRun.check.ts, 114-run table, deterministic in-process).
+  Sent back for a tuning pass: monotonic lean sweeps, minMargin ≥ 0.08 on clean runs, descent ≤ 35°, standing never
+  worse than seated, matter-js global state reset per run (browser vs node outcomes differed), ±0.03 lean robustness.
+- Coordinator UI fixes done: readouts freeze at the failure frame; clean-run fact guards the grazing case.
+- Live site is running the physics build (pre-retune). Re-run verify_game.mjs after the retune lands.
+
+## In flight when paused (historical)
 - Module P (physics, matter-js): stabilityWorld.ts (713 lines, 5 tsc errors: Constraint/Anchored at ~446/458,
   anglePrev/positionPrev at ~586, World.debug at ~696), stabilityRun.ts (real implementation present),
   stabilityRun.check.ts (187 lines, unfinished). Agent was killed by the restart — RELAUNCH a fresh agent with

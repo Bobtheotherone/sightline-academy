@@ -194,7 +194,7 @@ const STEPS: { source: string; step: StepOut }[] = [
       required: true,
       payload: {
         instructions:
-          "Sort each item into the right column. Wrong drops explain themselves — use them.",
+          "Sort each item into the right column. Don’t worry about getting it right the first time; a wrong drop explains itself.",
         shuffle: true,
         categories: [
           { id: "every", label: "Every ride", hint: "Non-negotiables, any distance, any weather" },
@@ -646,29 +646,37 @@ const STEPS: { source: string; step: StepOut }[] = [
       required: true,
       payload: {
         instructions:
-          "Tilt the ground and move the rider. Watch the CoG line against the support area. Meet all three objectives.",
+          "Four pieces of ground, one machine. Set up the rider, play the run, and watch where the center of gravity goes. Clear all four.",
         lab: "stability_explorer",
         config: {
-          views: ["rear", "side"],
-          sliders: ["slope_angle", "rider_lean", "cargo_load"],
-          showMarginMeter: true,
+          mode: "scenarios",
+          scenarios: ["traverse", "haul", "descent", "shortcut"],
+          freeTilt: true,
         },
         objectives: [
           {
-            id: "find_edge",
-            text: "On the rear view, increase side-slope until the CoG line reaches the support edge — note the angle",
+            id: "traverse",
+            text:
+              "Cross the side-hill traverse without rolling — find how much uphill lean the rut demands",
           },
           {
-            id: "lean_recovery",
-            text: "At that angle, shift rider lean uphill and watch the margin return — then find the steeper angle where even full lean isn't enough",
+            id: "haul",
+            text:
+              "Climb the hunt haul with a full rear rack — keep the front wheels planted",
           },
           {
-            id: "cargo_effect",
-            text: "Add rear cargo load on the side view and observe how the same uphill grade now spends more margin",
+            id: "descent",
+            text:
+              "Ride the steep drop through the washout without going over the bars",
+          },
+          {
+            id: "shortcut",
+            text:
+              "Recognize the shortcut for what it is — some ground can't be leaned out of",
           },
         ],
         debrief:
-          "Three things worth keeping forever: the edge arrives earlier than intuition says; rider position genuinely buys margin but only a finite amount; and load quietly re-draws the whole envelope. When real ground makes you wonder which side of the edge you're on — that wondering IS the answer. Choose different ground.",
+          "Four runs, one lesson underneath: the machine stays upright while the center of gravity's plumb line stays inside the tires, and everything you did — leaning into the hill, standing on the pegs, respecting the load — was about keeping it there. Rider position genuinely buys margin, but only a finite amount, and the shortcut showed you the edge of it. On real ground there is no margin meter; when you catch yourself wondering which side of the edge you're on, that wondering is the signal. Pick a different line.",
       },
     },
   },

@@ -1,0 +1,48 @@
+{
+ "sprite": {
+  "w": 742,
+  "h": 692
+ },
+ "groundY": 692,
+ "tireOuterLeftX": 43,
+ "tireOuterRightX": 704,
+ "contactLeft": [
+  101,
+  691
+ ],
+ "contactRight": [
+  647,
+  691
+ ],
+ "seat": [
+  372,
+  108
+ ],
+ "gripLeft": [
+  189,
+  23
+ ],
+ "gripRight": [
+  554,
+  23
+ ],
+ "footLeft": [
+  214,
+  503
+ ],
+ "footRight": [
+  529,
+  503
+ ],
+ "rackTop": [
+  372,
+  138
+ ],
+ "bodyCentre": [
+  372,
+  373
+ ],
+ "trackMetres": 1.1,
+ "note": "straight rear elevation; downhill is +x on screen in the game; contacts are the tire centrelines at the ground row",
+ "source": "artgen/incoming/batch-07/b012-lesson-m4-l2.png \u2014 background to alpha; plumb overlay, shadow and bracket removed"
+}
