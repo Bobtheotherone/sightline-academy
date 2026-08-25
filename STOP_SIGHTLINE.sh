@@ -97,10 +97,23 @@ say ""
 say "Sightline Safety Academy — stopping"
 say "-----------------------------------"
 
-stop_one "web.pid" "the web pages"
-stop_one "api.pid" "the course server"
+# START records which shape it used. In "single" there is one program serving
+# both the pages and the course; in "two" there are the pages and the course
+# server. Looking for a second program that was never started would only
+# produce a puzzling line about something that "was not running".
+RUN_MODE=""
+if [ -f "$RUN_DIR/mode" ]; then
+    RUN_MODE=$(tr -dc 'a-z' < "$RUN_DIR/mode" 2>/dev/null) || RUN_MODE=""
+fi
 
-rm -f "$RUN_DIR/ports.env"
+if [ "$RUN_MODE" = "single" ]; then
+    stop_one "api.pid" "the site"
+else
+    stop_one "web.pid" "the web pages"
+    stop_one "api.pid" "the course server"
+fi
+
+rm -f "$RUN_DIR/ports.env" "$RUN_DIR/mode"
 
 say ""
 say "Sightline is stopped on this computer."

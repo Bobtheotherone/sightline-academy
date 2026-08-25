@@ -62,10 +62,25 @@ Write-Host ''
 Write-Host 'Sightline Safety Academy - stopping'
 Write-Host '-----------------------------------'
 
-Stop-One 'web.pid' 'the web pages'
-Stop-One 'api.pid' 'the course server'
+# START records which shape it used. In 'single' there is one program serving
+# both the pages and the course; in 'two' there are the pages and the course
+# server. Looking for a second program that was never started would only
+# produce a puzzling line about something that "was not running".
+$modeFile = Join-Path $RunDir 'mode'
+$runMode = ''
+if (Test-Path $modeFile) {
+    $runMode = ((Get-Content $modeFile | Select-Object -First 1) + '').Trim()
+}
+
+if ($runMode -eq 'single') {
+    Stop-One 'api.pid' 'the site'
+} else {
+    Stop-One 'web.pid' 'the web pages'
+    Stop-One 'api.pid' 'the course server'
+}
 
 Remove-Item (Join-Path $RunDir 'ports.env') -ErrorAction SilentlyContinue
+Remove-Item $modeFile -ErrorAction SilentlyContinue
 
 Write-Host ''
 Write-Host 'Sightline is stopped on this computer.'

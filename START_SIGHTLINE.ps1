@@ -14,6 +14,7 @@
 #      SIGHTLINE_API_PORT           default 8000
 #      SIGHTLINE_WEB_PORT           default 8080
 #      SIGHTLINE_NONINTERACTIVE=1   never ask any questions
+#      SIGHTLINE_NO_NODE=1          use the prebuilt site, ignore Node.js
 #
 #  Written for Windows PowerShell 5.1, which is what ships with Windows.
 # =============================================================================
@@ -41,6 +42,8 @@ $ApiLog     = Join-Path $LogDir 'api.log'
 $WebLog     = Join-Path $LogDir 'web.log'
 $ApiPidFile = Join-Path $RunDir 'api.pid'
 $WebPidFile = Join-Path $RunDir 'web.pid'
+$PortsFile  = Join-Path $RunDir 'ports.env'
+$ModeFile   = Join-Path $RunDir 'mode'
 $ServerDir  = Join-Path $Root 'server'
 $WebDir     = Join-Path $Root 'web'
 $EnvFile    = Join-Path $Root '.env'
@@ -154,10 +157,28 @@ New-Item -ItemType Directory -Force -Path $RunDir | Out-Null
 # =============================================================================
 # 0. Already running? Then there is nothing to do.
 # =============================================================================
+# How many programs to look for depends on how it was started last time, so
+# read that back instead of guessing: one program in 'single' mode, two in
+# 'two'. Same for the port the course server actually answers on.
+$recordedMode = ''
+if (Test-Path $ModeFile) {
+    $recordedMode = ((Get-Content $ModeFile | Select-Object -First 1) + '').Trim()
+}
+$recordedApiPort = $ApiPort
+if (Test-Path $PortsFile) {
+    foreach ($line in (Get-Content $PortsFile)) {
+        if ($line -match '^API_PORT=(\d+)') { $recordedApiPort = $Matches[1] }
+    }
+}
+
 $existingApi = Read-PidFile $ApiPidFile
 $existingWeb = Read-PidFile $WebPidFile
-if ((Test-PidAlive $existingApi) -and (Test-PidAlive $existingWeb)) {
-    $script:Health = Get-Health $ApiPort
+$stillUp = $false
+if (Test-PidAlive $existingApi) {
+    if (($recordedMode -eq 'single') -or (Test-PidAlive $existingWeb)) { $stillUp = $true }
+}
+if ($stillUp) {
+    $script:Health = Get-Health $recordedApiPort
     if ($script:Health -and $script:Health.status -eq 'ok') {
         Write-Host ''
         Write-Host 'Sightline is already running on this computer; nothing to do.'
@@ -244,26 +265,61 @@ $nodeHelp = @(
     '  After installing, close this window and open START_SIGHTLINE again.'
 )
 
-if (-not (Have 'node')) {
-    Fail (@('This computer does not have Node.js, which builds the course web pages.', '') + $nodeHelp)
-}
-
 $npmCmd = $null
 foreach ($candidate in @('npm.cmd', 'npm')) {
     $found = Get-Command $candidate -ErrorAction SilentlyContinue
     if ($found) { $npmCmd = $found.Source; break }
 }
+
+$nodeVersion = ''
+$nodeMajor = 0
+if ((Have 'node') -and $npmCmd) {
+    $nodeVersion = (& node --version) -replace '^v', ''
+    if ($nodeVersion -match '^(\d+)') { $nodeMajor = [int]$Matches[1] }
+}
+
+$DistDir = Join-Path $WebDir 'dist'
+$prebuilt = Test-Path (Join-Path $DistDir 'index.html')
+
+# There are two ways to run, and this is where it is decided.
+#
+#   single  The pages are already built, and the course server hands them out
+#           itself. Nothing else is installed and nothing else runs. This is
+#           what a released copy of the folder gets.
+#   two     Node builds the pages and serves them, which is what you want while
+#           the pages are being changed.
+#
+# The absence of web\node_modules is what tells a released copy from somebody's
+# working checkout. A release ships the built pages and nothing to build them
+# with, so it should start straight away even on a computer that happens to
+# have Node installed - otherwise "unzip and double-click" quietly turns into a
+# 200 MB download and a build. A checkout that has run npm install keeps the
+# behaviour its owner expects.
+#
+# 20, not 18, is the Node cut-off: the page styling tool (@tailwindcss/oxide)
+# declares "node >= 20", and npm quietly SKIPS its compiled part on anything
+# older. The install then looks like it worked and the build fails later with
+# "Cannot find native binding", which is a miserable thing to hand to somebody.
+$hasNodeModules = Test-Path (Join-Path $WebDir 'node_modules')
+$Mode = 'two'
+if ($prebuilt -and (($env:SIGHTLINE_NO_NODE -eq '1') -or ($nodeMajor -lt 20) -or (-not $hasNodeModules))) {
+    $Mode = 'single'
+}
+
+if ($Mode -eq 'single') {
+    Note 'Using the prebuilt site (no Node.js needed).'
+    Note 'Delete web\dist or run npm install in web\ to develop the pages.'
+} else {
+
+if ($env:SIGHTLINE_NO_NODE -eq '1') {
+    Fail (@('The pages have not been built yet, so Node.js is needed to build them once.', '') + $nodeHelp)
+}
+if (-not (Have 'node')) {
+    Fail (@('This computer does not have Node.js, which builds the course web pages.', '') + $nodeHelp)
+}
 if (-not $npmCmd) {
     Fail (@('Node.js is installed but npm is missing, and the web pages need it.', '') + $nodeHelp)
 }
-
-$nodeVersion = (& node --version) -replace '^v', ''
-$nodeMajor = 0
-if ($nodeVersion -match '^(\d+)') { $nodeMajor = [int]$Matches[1] }
-# 20, not 18: the page styling tool (@tailwindcss/oxide) declares "node >= 20",
-# and npm quietly SKIPS its compiled part on anything older. The install then
-# looks like it worked and the build fails later with "Cannot find native
-# binding", which is a miserable thing to hand to somebody. Refuse up front.
 if ($nodeMajor -lt 20) {
     Fail (@("Node.js version $nodeVersion is too old. This project needs version 20 or newer.", '') + $nodeHelp)
 }
@@ -353,6 +409,8 @@ if (Test-NeedsBuild) {
 } else {
     Note 'Web pages are already built and up to date.'
 }
+
+}  # end of two-process preparation
 
 # =============================================================================
 # 3. The settings file (.env)
@@ -493,7 +551,13 @@ if ((Get-CurrentKey) -eq '') {
 # =============================================================================
 Step 'Step 5 of 6 - starting the site'
 
-foreach ($p in @($ApiPort, $WebPort)) {
+# In single mode the course server answers on the site's own port, so the
+# address a person types is http://localhost:8080 either way.
+if ($Mode -eq 'single') { $ApiListenPort = $WebPort } else { $ApiListenPort = $ApiPort }
+
+$portsToCheck = @($WebPort)
+if ($Mode -ne 'single') { $portsToCheck += $ApiPort }
+foreach ($p in $portsToCheck) {
     if (Test-PortInUse $p) {
         Fail @(
             "Another program on this computer is already using port $p.",
@@ -506,39 +570,46 @@ foreach ($p in @($ApiPort, $WebPort)) {
 }
 
 Set-Content -Path $ApiLog -Value '' -Encoding UTF8
-Set-Content -Path $WebLog -Value '' -Encoding UTF8
+if ($Mode -ne 'single') { Set-Content -Path $WebLog -Value '' -Encoding UTF8 }
 Remove-Item $ApiPidFile, $WebPidFile -ErrorAction SilentlyContinue
 
-# Both programs are launched through a tiny generated .cmd file. That keeps the
+# Each program is launched through a tiny generated .cmd file. That keeps the
 # quoting simple and gives one merged log per program instead of two half-logs.
 $apiCmd = Join-Path $RunDir 'start-api.cmd'
 $webCmd = Join-Path $RunDir 'start-web.cmd'
 
-$nodeExe = (Get-Command node).Source
-$viteJs = Join-Path $WebDir 'node_modules\vite\bin\vite.js'
+# Only set in single mode. Empty means the course server serves no pages, which
+# is what the two-process mode wants: there, Node hands the pages out.
+$webDistForApi = ''
+if ($Mode -eq 'single') { $webDistForApi = $DistDir }
 
 $apiLines = @(
     '@echo off',
     "set `"DATA_DIR=$DataDir`"",
     "set `"CONTENT_DIR=$ContentDir`"",
     "set `"PUBLIC_BASE_URL=$SiteUrl`"",
+    "set `"WEB_DIST_DIR=$webDistForApi`"",
     "cd /d `"$ServerDir`"",
-    "`"$Uv`" run uvicorn app.main:app --host 127.0.0.1 --port $ApiPort > `"$ApiLog`" 2>&1"
+    "`"$Uv`" run uvicorn app.main:app --host 127.0.0.1 --port $ApiListenPort > `"$ApiLog`" 2>&1"
 )
 Set-Content -Path $apiCmd -Value $apiLines -Encoding ASCII
 
-if (Test-Path $viteJs) {
-    $webRun = "`"$nodeExe`" `"$viteJs`" preview --host 127.0.0.1 --port $WebPort --strictPort > `"$WebLog`" 2>&1"
-} else {
-    $webRun = "npx vite preview --host 127.0.0.1 --port $WebPort --strictPort > `"$WebLog`" 2>&1"
+if ($Mode -ne 'single') {
+    $nodeExe = (Get-Command node).Source
+    $viteJs = Join-Path $WebDir 'node_modules\vite\bin\vite.js'
+    if (Test-Path $viteJs) {
+        $webRun = "`"$nodeExe`" `"$viteJs`" preview --host 127.0.0.1 --port $WebPort --strictPort > `"$WebLog`" 2>&1"
+    } else {
+        $webRun = "npx vite preview --host 127.0.0.1 --port $WebPort --strictPort > `"$WebLog`" 2>&1"
+    }
+    $webLines = @(
+        '@echo off',
+        "set `"VITE_API_TARGET=http://127.0.0.1:$ApiPort`"",
+        "cd /d `"$WebDir`"",
+        $webRun
+    )
+    Set-Content -Path $webCmd -Value $webLines -Encoding ASCII
 }
-$webLines = @(
-    '@echo off',
-    "set `"VITE_API_TARGET=http://127.0.0.1:$ApiPort`"",
-    "cd /d `"$WebDir`"",
-    $webRun
-)
-Set-Content -Path $webCmd -Value $webLines -Encoding ASCII
 
 $apiProc = Start-Process -FilePath $apiCmd -WorkingDirectory $ServerDir -WindowStyle Hidden -PassThru
 Set-Content -Path $ApiPidFile -Value ([string]$apiProc.Id) -Encoding ASCII
@@ -550,7 +621,7 @@ Write-Host '   it reads the whole course in. Later starts take seconds.'
 $startedAt = Get-Date
 $lastBeat = $startedAt
 while ($true) {
-    $h = Get-Health $ApiPort
+    $h = Get-Health $ApiListenPort
     if ($h -and $h.status -eq 'ok') { $script:Health = $h; break }
 
     if (-not (Test-PidAlive $apiProc.Id)) {
@@ -579,41 +650,47 @@ while ($true) {
 }
 Note 'The course server is up.'
 
-$webProc = Start-Process -FilePath $webCmd -WorkingDirectory $WebDir -WindowStyle Hidden -PassThru
-Set-Content -Path $WebPidFile -Value ([string]$webProc.Id) -Encoding ASCII
+if ($Mode -eq 'single') {
+    Note 'The site is being served by the course server itself.'
+} else {
+    $webProc = Start-Process -FilePath $webCmd -WorkingDirectory $WebDir -WindowStyle Hidden -PassThru
+    Set-Content -Path $WebPidFile -Value ([string]$webProc.Id) -Encoding ASCII
 
-$webStartedAt = Get-Date
-while ($true) {
-    $up = $false
-    try {
-        $r = Invoke-WebRequest -Uri "http://127.0.0.1:$WebPort/" -TimeoutSec 5 -UseBasicParsing
-        if ($r.StatusCode -eq 200) { $up = $true }
-    } catch { }
-    if ($up) { break }
+    $webStartedAt = Get-Date
+    while ($true) {
+        $up = $false
+        try {
+            $r = Invoke-WebRequest -Uri "http://127.0.0.1:$WebPort/" -TimeoutSec 5 -UseBasicParsing
+            if ($r.StatusCode -eq 200) { $up = $true }
+        } catch { }
+        if ($up) { break }
 
-    if (-not (Test-PidAlive $webProc.Id)) {
-        Write-Host ''
-        Write-Host '   The last lines of data\logs\web.log:'
-        Get-Content $WebLog -Tail 20 -ErrorAction SilentlyContinue | ForEach-Object { Write-Host "   | $_" }
-        Fail @(
-            'The web page server stopped while it was starting up.',
-            "The whole record is in this file: $WebLog"
-        )
+        if (-not (Test-PidAlive $webProc.Id)) {
+            Write-Host ''
+            Write-Host '   The last lines of data\logs\web.log:'
+            Get-Content $WebLog -Tail 20 -ErrorAction SilentlyContinue | ForEach-Object { Write-Host "   | $_" }
+            Fail @(
+                'The web page server stopped while it was starting up.',
+                "The whole record is in this file: $WebLog"
+            )
+        }
+        if (((Get-Date) - $webStartedAt).TotalSeconds -ge 120) {
+            Fail @(
+                'The web pages did not come up within two minutes.',
+                "The reason will be at the end of this file: $WebLog"
+            )
+        }
+        Start-Sleep -Seconds 1
     }
-    if (((Get-Date) - $webStartedAt).TotalSeconds -ge 120) {
-        Fail @(
-            'The web pages did not come up within two minutes.',
-            "The reason will be at the end of this file: $WebLog"
-        )
-    }
-    Start-Sleep -Seconds 1
+    Note 'The web pages are up.'
 }
-Note 'The web pages are up.'
 
-Set-Content -Path (Join-Path $RunDir 'ports.env') -Encoding ASCII -Value @(
-    "API_PORT=$ApiPort",
+# What STOP and ADD_RANGER_KEY read back: which shape is running, and where.
+Set-Content -Path $PortsFile -Encoding ASCII -Value @(
+    "API_PORT=$ApiListenPort",
     "WEB_PORT=$WebPort"
 )
+Set-Content -Path $ModeFile -Value $Mode -Encoding ASCII
 
 # =============================================================================
 # 5. Accounts

@@ -154,3 +154,18 @@ have them change it under Account.
 | A content edit is not showing up | The `version` field in `/api/meta/health`, and the seed line in the API log | Curriculum: restart `sightline-api`. Corpus: file-body edits need one boot with `SEED_FORCE=1`. Frontend: `cd web && npm run build`, then restart `sightline-web`. |
 | The API will not start after a content edit | The last lines of `journalctl --user -u sightline-api.service` | A `SeedError` names the file and step id. Fix the payload; the boot is refusing on purpose. |
 | Someone's account may be compromised | The audit log, `GET /api/admin/audit` | `POST /api/admin/accounts/{id}/revoke-sessions` signs them out everywhere, then reset the password as above. |
+
+## Cutting a new package for the professor
+
+The "unzip and double-click" package is a GitHub release asset, built from the tracked tree with
+the real illustrations and the prebuilt site:
+
+```sh
+git lfs pull                                   # make sure no plate is a pointer
+tools/make-release-zip.sh v1.1                 # -> dist-release/Sightline-Academy-v1.1.zip
+gh release create v1.1 dist-release/Sightline-Academy-v1.1.zip \
+  --title "Sightline Academy v1.1" --notes "What changed, in one or two lines."
+```
+
+`releases/latest` always points at the newest one, so the link in the professor's email keeps
+working. Do not hand anyone GitHub's *Code → Download ZIP* — it ships LFS pointers, not pictures.

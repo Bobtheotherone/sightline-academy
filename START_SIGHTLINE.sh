@@ -15,6 +15,7 @@
 #      SIGHTLINE_API_PORT           default 8000
 #      SIGHTLINE_WEB_PORT           default 8080
 #      SIGHTLINE_NONINTERACTIVE=1   never ask any questions
+#      SIGHTLINE_NO_NODE=1          use the prebuilt site, ignore Node.js
 # =============================================================================
 
 set -u
@@ -36,6 +37,8 @@ API_LOG="$LOG_DIR/api.log"
 WEB_LOG="$LOG_DIR/web.log"
 API_PID_FILE="$RUN_DIR/api.pid"
 WEB_PID_FILE="$RUN_DIR/web.pid"
+PORTS_FILE="$RUN_DIR/ports.env"
+MODE_FILE="$RUN_DIR/mode"
 
 INTERACTIVE=1
 if [ "${SIGHTLINE_NONINTERACTIVE:-0}" = "1" ] || [ ! -t 0 ]; then
@@ -155,10 +158,29 @@ HEALTH_JSON=""
 # =============================================================================
 # 0. Already running? Then there is nothing to do.
 # =============================================================================
+# How many programs to look for depends on how it was started last time, so
+# read that back instead of guessing: one program in "single" mode, two in
+# "two". Same for the port the course server actually answers on.
+RECORDED_MODE=""
+if [ -f "$MODE_FILE" ]; then
+    RECORDED_MODE=$(tr -dc 'a-z' < "$MODE_FILE" 2>/dev/null) || RECORDED_MODE=""
+fi
+RECORDED_API_PORT=""
+if [ -f "$PORTS_FILE" ]; then
+    RECORDED_API_PORT=$(sed -n 's/^API_PORT=//p' "$PORTS_FILE" | head -1 | tr -dc '0-9')
+fi
+[ -n "$RECORDED_API_PORT" ] || RECORDED_API_PORT="$API_PORT"
+
 EXISTING_API=$(read_pid_file "$API_PID_FILE" 2>/dev/null) || EXISTING_API=""
 EXISTING_WEB=$(read_pid_file "$WEB_PID_FILE" 2>/dev/null) || EXISTING_WEB=""
-if pid_alive "$EXISTING_API" && pid_alive "$EXISTING_WEB"; then
-    HEALTH_JSON=$(http_get "http://127.0.0.1:${API_PORT}/api/meta/health") || HEALTH_JSON=""
+STILL_UP=0
+if pid_alive "$EXISTING_API"; then
+    if [ "$RECORDED_MODE" = "single" ] || pid_alive "$EXISTING_WEB"; then
+        STILL_UP=1
+    fi
+fi
+if [ "$STILL_UP" -eq 1 ]; then
+    HEALTH_JSON=$(http_get "http://127.0.0.1:${RECORDED_API_PORT}/api/meta/health") || HEALTH_JSON=""
     case "$HEALTH_JSON" in
         *'"status":"ok"'*)
             say ""
@@ -230,22 +252,65 @@ case "$(uname -s 2>/dev/null || echo unknown)" in
     *)      NODE_HELP="  Windows: run  winget install OpenJS.NodeJS.LTS  or install the LTS version from https://nodejs.org" ;;
 esac
 
+NODE_VERSION=""
+NODE_MAJOR=0
+if have node && have npm; then
+    NODE_VERSION=$(node --version 2>/dev/null | tr -d 'v')
+    NODE_MAJOR=${NODE_VERSION%%.*}
+    case "$NODE_MAJOR" in
+        ''|*[!0-9]*) NODE_MAJOR=0 ;;
+    esac
+fi
+
+DIST_DIR="$ROOT/web/dist"
+PREBUILT=0
+[ -f "$DIST_DIR/index.html" ] && PREBUILT=1
+
+# There are two ways to run, and this is where it is decided.
+#
+#   single  The pages are already built, and the course server hands them out
+#           itself. Nothing else is installed and nothing else runs. This is
+#           what a released copy of the folder gets.
+#   two     Node builds the pages and serves them, which is what you want while
+#           the pages are being changed.
+#
+# The absence of web/node_modules is what tells a released copy from somebody's
+# working checkout. A release ships the built pages and nothing to build them
+# with, so it should start straight away even on a computer that happens to
+# have Node installed — otherwise "unzip and double-click" quietly turns into a
+# 200 MB download and a build. A checkout that has run npm install keeps the
+# behaviour its owner expects.
+#
+# 20, not 18, is the Node cut-off: the page styling tool (@tailwindcss/oxide)
+# declares "node >= 20", and npm quietly SKIPS its compiled part on anything
+# older. The install then looks like it worked and the build fails later with
+# "Cannot find native binding", which is a miserable thing to hand to somebody.
+MODE=two
+if [ "$PREBUILT" -eq 1 ]; then
+    if [ "${SIGHTLINE_NO_NODE:-0}" = "1" ] \
+        || [ "$NODE_MAJOR" -lt 20 ] \
+        || [ ! -d "$ROOT/web/node_modules" ]; then
+        MODE=single
+    fi
+fi
+
+if [ "$MODE" = "single" ]; then
+    note "Using the prebuilt site (no Node.js needed)."
+    note "Delete web/dist or run npm install in web/ to develop the pages."
+else
+
+if [ "${SIGHTLINE_NO_NODE:-0}" = "1" ]; then
+    die "The pages have not been built yet, so Node.js is needed to build them once." \
+        "" \
+        "Install it, then run this script again:" \
+        "$NODE_HELP"
+fi
 if ! have node || ! have npm; then
     die "This computer does not have Node.js, which builds the course web pages." \
         "" \
         "Install it, then run this script again:" \
         "$NODE_HELP"
 fi
-
-NODE_VERSION=$(node --version 2>/dev/null | tr -d 'v')
-NODE_MAJOR=${NODE_VERSION%%.*}
-case "$NODE_MAJOR" in
-    ''|*[!0-9]*) NODE_MAJOR=0 ;;
-esac
-# 20, not 18: the page styling tool (@tailwindcss/oxide) declares "node >= 20",
-# and npm quietly SKIPS its compiled part on anything older. The install then
-# looks like it worked and the build fails later with "Cannot find native
-# binding", which is a miserable thing to hand to somebody. Refuse up front.
 if [ "$NODE_MAJOR" -lt 20 ]; then
     die "Node.js version $NODE_VERSION is too old. This project needs version 20 or newer." \
         "" \
@@ -309,6 +374,8 @@ if needs_build; then
 else
     note "Web pages are already built and up to date."
 fi
+
+fi  # end of two-process preparation
 
 # =============================================================================
 # 3. The settings file (.env)
@@ -447,27 +514,40 @@ fi
 # =============================================================================
 step "Step 5 of 6 — starting the site"
 
-if port_in_use "$API_PORT"; then
-    die "Another program on this computer is already using port $API_PORT." \
-        "Close that program, or start Sightline on different ports:" \
-        "  SIGHTLINE_API_PORT=8001 SIGHTLINE_WEB_PORT=8081 ./START_SIGHTLINE.sh"
-fi
-if port_in_use "$WEB_PORT"; then
-    die "Another program on this computer is already using port $WEB_PORT." \
-        "Close that program, or start Sightline on different ports:" \
-        "  SIGHTLINE_API_PORT=8001 SIGHTLINE_WEB_PORT=8081 ./START_SIGHTLINE.sh"
+# In single mode the course server answers on the site's own port, so the
+# address a person types is http://localhost:8080 either way.
+if [ "$MODE" = "single" ]; then
+    API_LISTEN_PORT="$WEB_PORT"
+else
+    API_LISTEN_PORT="$API_PORT"
 fi
 
+check_port() {
+    if port_in_use "$1"; then
+        die "Another program on this computer is already using port $1." \
+            "Close that program, or start Sightline on different ports:" \
+            "  SIGHTLINE_API_PORT=8001 SIGHTLINE_WEB_PORT=8081 ./START_SIGHTLINE.sh"
+    fi
+}
+check_port "$WEB_PORT"
+[ "$MODE" = "single" ] || check_port "$API_PORT"
+
 : > "$API_LOG"
-: > "$WEB_LOG"
 rm -f "$API_PID_FILE" "$WEB_PID_FILE"
+[ "$MODE" = "single" ] || : > "$WEB_LOG"
+
+# Only set in single mode. Empty means the course server serves no pages, which
+# is what the two-process mode wants: there, Node hands the pages out.
+WEB_DIST_FOR_API=""
+[ "$MODE" = "single" ] && WEB_DIST_FOR_API="$DIST_DIR"
 
 (
     cd "$ROOT/server" || exit 1
     DATA_DIR="$DATA_DIR_ABS" \
     CONTENT_DIR="$CONTENT_DIR_ABS" \
     PUBLIC_BASE_URL="$SITE_URL" \
-    nohup "$UV" run uvicorn app.main:app --host 127.0.0.1 --port "$API_PORT" \
+    WEB_DIST_DIR="$WEB_DIST_FOR_API" \
+    nohup "$UV" run uvicorn app.main:app --host 127.0.0.1 --port "$API_LISTEN_PORT" \
         >>"$API_LOG" 2>&1 </dev/null &
     printf '%s\n' "$!" > "$API_PID_FILE"
 )
@@ -481,7 +561,7 @@ START_TS=$(date +%s)
 LAST_BEAT=$START_TS
 TIMEOUT_S=900
 while :; do
-    body=$(http_get "http://127.0.0.1:${API_PORT}/api/meta/health") || body=""
+    body=$(http_get "http://127.0.0.1:${API_LISTEN_PORT}/api/meta/health") || body=""
     case "$body" in
         *'"status":"ok"'*) HEALTH_JSON="$body"; break ;;
     esac
@@ -508,48 +588,54 @@ while :; do
 done
 note "The course server is up."
 
-(
-    cd "$ROOT/web" || exit 1
-    if [ -f "node_modules/vite/bin/vite.js" ]; then
-        VITE_API_TARGET="http://127.0.0.1:${API_PORT}" \
-        nohup node node_modules/vite/bin/vite.js preview \
-            --host 127.0.0.1 --port "$WEB_PORT" --strictPort \
-            >>"$WEB_LOG" 2>&1 </dev/null &
-    else
-        VITE_API_TARGET="http://127.0.0.1:${API_PORT}" \
-        nohup npx vite preview \
-            --host 127.0.0.1 --port "$WEB_PORT" --strictPort \
-            >>"$WEB_LOG" 2>&1 </dev/null &
-    fi
-    printf '%s\n' "$!" > "$WEB_PID_FILE"
-)
-WEB_PID=$(read_pid_file "$WEB_PID_FILE") || WEB_PID=""
+if [ "$MODE" = "single" ]; then
+    note "The site is being served by the course server itself."
+else
+    (
+        cd "$ROOT/web" || exit 1
+        if [ -f "node_modules/vite/bin/vite.js" ]; then
+            VITE_API_TARGET="http://127.0.0.1:${API_PORT}" \
+            nohup node node_modules/vite/bin/vite.js preview \
+                --host 127.0.0.1 --port "$WEB_PORT" --strictPort \
+                >>"$WEB_LOG" 2>&1 </dev/null &
+        else
+            VITE_API_TARGET="http://127.0.0.1:${API_PORT}" \
+            nohup npx vite preview \
+                --host 127.0.0.1 --port "$WEB_PORT" --strictPort \
+                >>"$WEB_LOG" 2>&1 </dev/null &
+        fi
+        printf '%s\n' "$!" > "$WEB_PID_FILE"
+    )
+    WEB_PID=$(read_pid_file "$WEB_PID_FILE") || WEB_PID=""
 
-WEB_START_TS=$(date +%s)
-while :; do
-    if http_get "http://127.0.0.1:${WEB_PORT}/" >/dev/null 2>&1; then
-        break
-    fi
-    if ! pid_alive "$WEB_PID"; then
-        say ""
-        say "   The last lines of data/logs/web.log:"
-        tail -n 20 "$WEB_LOG" 2>/dev/null | sed 's/^/   | /'
-        die "The web page server stopped while it was starting up." \
-            "The whole record is in this file: $WEB_LOG"
-    fi
-    NOW=$(date +%s)
-    if [ $((NOW - WEB_START_TS)) -ge 120 ]; then
-        die "The web pages did not come up within two minutes." \
-            "The reason will be at the end of this file: $WEB_LOG"
-    fi
-    sleep 1
-done
-note "The web pages are up."
+    WEB_START_TS=$(date +%s)
+    while :; do
+        if http_get "http://127.0.0.1:${WEB_PORT}/" >/dev/null 2>&1; then
+            break
+        fi
+        if ! pid_alive "$WEB_PID"; then
+            say ""
+            say "   The last lines of data/logs/web.log:"
+            tail -n 20 "$WEB_LOG" 2>/dev/null | sed 's/^/   | /'
+            die "The web page server stopped while it was starting up." \
+                "The whole record is in this file: $WEB_LOG"
+        fi
+        NOW=$(date +%s)
+        if [ $((NOW - WEB_START_TS)) -ge 120 ]; then
+            die "The web pages did not come up within two minutes." \
+                "The reason will be at the end of this file: $WEB_LOG"
+        fi
+        sleep 1
+    done
+    note "The web pages are up."
+fi
 
+# What STOP and ADD_RANGER_KEY read back: which shape is running, and where.
 {
-    printf 'API_PORT=%s\n' "$API_PORT"
+    printf 'API_PORT=%s\n' "$API_LISTEN_PORT"
     printf 'WEB_PORT=%s\n' "$WEB_PORT"
-} > "$RUN_DIR/ports.env"
+} > "$PORTS_FILE"
+printf '%s\n' "$MODE" > "$MODE_FILE"
 
 # =============================================================================
 # 5. Accounts

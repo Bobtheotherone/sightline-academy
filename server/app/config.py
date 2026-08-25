@@ -94,6 +94,11 @@ class Settings(BaseSettings):
 
     # ── Boot behavior ────────────────────────────────────────────────────────
     seed_force: int = 0  # 1 => re-run the seed pipeline even if course tables are populated
+    # Absolute path of the built SPA (web/dist). When set and present, the API
+    # serves the site itself — index.html for client routes, hashed bundles from
+    # /assets — so a laptop copy needs no Node.js and no second process. Empty
+    # in production behind nginx, which owns the static documents there.
+    web_dist_dir: str = ""
     fixtures: int = 0  # 1 => create the QA-001 crawl fixture accounts (dev only)
 
     # ── Storage ──────────────────────────────────────────────────────────────

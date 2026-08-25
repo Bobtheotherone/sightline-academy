@@ -59,6 +59,17 @@ if (Test-Path $portsFile) {
     }
 }
 
+# Which shape the site is running in, so the restart comes back the same way.
+# 'single' means the course server is serving the pages itself and Node is not
+# involved at all; restarting without saying so could send it down the build
+# path on a computer that has no Node.
+$modeFile = Join-Path $RunDir 'mode'
+$runMode = ''
+if (Test-Path $modeFile) {
+    $runMode = ((Get-Content $modeFile | Select-Object -First 1) + '').Trim()
+}
+if ($runMode -eq 'single') { $noNode = '1' } else { $noNode = '0' }
+
 function Note ([string]$t) { Write-Host "   $t" }
 function Fail ([string[]]$lines) {
     Write-Host ''
@@ -211,10 +222,12 @@ Write-Host ''
 Write-Host 'Restarting the site so Ranger picks the key up...'
 & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $Root 'STOP_SIGHTLINE.ps1') | Out-Null
 $env:SIGHTLINE_NONINTERACTIVE = '1'
+$env:SIGHTLINE_NO_NODE = $noNode
 $env:SIGHTLINE_API_PORT = $ApiPort
 $env:SIGHTLINE_WEB_PORT = $WebPort
 & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $Root 'START_SIGHTLINE.ps1') | Out-Null
 $env:SIGHTLINE_NONINTERACTIVE = $null
+$env:SIGHTLINE_NO_NODE = $null
 
 # --- Ask the server itself, so success is confirmed without printing the key --
 Write-Host 'Asking the site which tutor it is using...'

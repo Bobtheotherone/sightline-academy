@@ -7,50 +7,44 @@ a 33-document course corpus. FastAPI + SQLite + Chroma behind, React + Vite + Ta
 
 ## Run it on your machine
 
-**Requirements.** [Node.js 20 or newer](https://nodejs.org) — the LTS build. On Node 18
-`npm ci` silently skips Tailwind's native binding and the build dies with "Cannot find native
-binding", so the launchers refuse anything below 20. And a supported platform: Windows x64, an
-Apple Silicon Mac on macOS 14 or newer, or Linux x64. Intel Macs, Windows on ARM and older
-macOS cannot install the server's PyTorch wheels at all — on those, use the live site or put
-it on a small VPS (`DEPLOY.md`). Everything else the launcher fetches itself, Python 3.12
-included.
+**The short way (no developer tools needed).** Download the current package from
+<https://github.com/Bobtheotherone/sightline-academy/releases/latest> — the file is
+`Sightline-Academy.zip` under *Assets*. Unzip it somewhere simple (your Desktop, or `C:\Sightline`
+on Windows), open the folder, and start it:
 
 | Your computer | Do this |
 |---|---|
-| Windows | Double-click `START_SIGHTLINE.bat` |
-| macOS | Double-click `START_SIGHTLINE.command` |
+| Windows | Double-click `START_SIGHTLINE.bat`. If Windows says "protected your PC", choose **More info** then **Run anyway**. |
+| macOS | Right-click `START_SIGHTLINE.command` and choose **Open** (first time only; after that a double-click works). Apple Silicon, macOS 14 or newer. |
 | Linux | Run `./START_SIGHTLINE.sh` |
 
-It is safe to run twice; a second run just reports that the site is already up.
+The package already contains the built site, so nothing else has to be installed by hand: the
+launcher fetches uv and Python 3.12 itself, installs the server, creates the database, asks once
+for the Anthropic key (Enter skips it — Ranger then answers from the course text and says so on
+screen), prints a sign-in email and a one-time password, and opens <http://localhost:8080>.
+The first run downloads about 2 GB (PyTorch and the embedding model) and takes 5–15 minutes on a
+normal connection; later runs take seconds. `STOP_SIGHTLINE` stops it, `ADD_RANGER_KEY` adds the
+key later. `READ ME FIRST.txt` inside the zip says the same in fewer words.
 
-**First run** installs uv and Python 3.12, installs the server packages, installs the web
-packages, builds the site, writes a `.env` with a fresh session secret, and asks once for the
-Anthropic API key. About 2 GB comes down — PyTorch, the npm tree and the embedding model — so
-budget 5-15 minutes and stay connected. Later runs take seconds. When it finishes it opens
-<http://localhost:8080> and prints a sign-in email and a one-time password from
-`ops/bootstrap_accounts.py` — change that password under Account once you are in.
+Supported: Windows x64, Apple Silicon Macs on macOS 14+, Linux x64. Intel Macs and Windows on
+ARM cannot install the server's PyTorch wheels — use the live site, or a small server (`DEPLOY.md`).
 
-The API revalidates the embedding model against huggingface.co on every boot and falls back to
-its local cache when there is no network, so an offline start works after the first one.
+**The developer way.** Clone the repository with Git LFS installed first (`git lfs install`,
+then `git clone …`), otherwise the illustrations arrive as pointer files. Do **not** use GitHub's
+green *Code → Download ZIP* button for the same reason — use the release package above. A clone
+has no built site, so the launcher also needs [Node.js 20 or newer](https://nodejs.org) to build
+it (on Node 18 `npm ci` silently skips Tailwind's native binding and the build dies with "Cannot
+find native binding"). Everything else is the same launcher.
 
 **Where the data lives.** Everything the local copy remembers is under `data/`:
 `sightline.db` (accounts, progress, journal), `chroma/` (the tutor's index), `logs/api.log`
-and `logs/web.log`, and `run/` (process ids). Deleting `data/` resets your local copy and
-nothing else. `data/` is gitignored, because it holds real accounts.
+and `logs/web.log`, and `run/` (process ids and the mode it started in). Deleting `data/`
+resets your local copy and nothing else. `data/` is gitignored, because it holds real accounts.
 
-**The Ranger key.** Without an Anthropic key Ranger still answers, using only text pulled from
-the course corpus, and says so on screen. To add a key later, run `ADD_RANGER_KEY` (`.bat`,
-`.ps1`, `.command` or `.sh`) and restart. The key is written to `.env`, which is gitignored.
-
-**To stop:** `STOP_SIGHTLINE`. It stops the two local processes and touches nothing else.
-
-Ports default to 8000 (API) and 8080 (web); override with `SIGHTLINE_API_PORT` and
-`SIGHTLINE_WEB_PORT`, and set `SIGHTLINE_NONINTERACTIVE=1` to suppress every prompt.
-
-**On Windows**, keep the folder short and local — `C:\Sightline`, not inside OneDrive and not
-nested deep. SmartScreen may stop the first double-click: choose **More info** then **Run
-anyway**. A managed university laptop with an AllSigned PowerShell policy needs IT to allow
-the script.
+Ports default to 8080 for the site (and 8000 for the API when the site is served separately);
+override with `SIGHTLINE_WEB_PORT` / `SIGHTLINE_API_PORT`, set `SIGHTLINE_NONINTERACTIVE=1` to
+suppress every prompt, and `SIGHTLINE_NO_NODE=1` to force the prebuilt-site mode on a machine that
+has Node.
 
 ## Where things are
 

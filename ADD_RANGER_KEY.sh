@@ -33,6 +33,17 @@ if [ -f "$RUN_DIR/ports.env" ]; then
     [ -n "$_p" ] && WEB_PORT="$_p"
 fi
 
+# Which shape the site is running in, so the restart comes back the same way.
+# "single" means the course server is serving the pages itself and Node is not
+# involved at all; restarting without saying so could send it down the build
+# path on a computer that has no Node.
+RUN_MODE=""
+if [ -f "$RUN_DIR/mode" ]; then
+    RUN_MODE=$(tr -dc 'a-z' < "$RUN_DIR/mode" 2>/dev/null) || RUN_MODE=""
+fi
+NO_NODE=0
+[ "$RUN_MODE" = "single" ] && NO_NODE=1
+
 case "$(uname -s 2>/dev/null || echo unknown)" in
     Darwin) START_NAME="START_SIGHTLINE.command" ;;
     *)      START_NAME="START_SIGHTLINE.sh"      ;;
@@ -143,6 +154,7 @@ if [ -n "$API_PID" ] && kill -0 "$API_PID" 2>/dev/null; then
     say "Restarting the site so Ranger picks the key up."
     /bin/bash "$ROOT/STOP_SIGHTLINE.sh" >/dev/null 2>&1
     SIGHTLINE_NONINTERACTIVE=1 \
+    SIGHTLINE_NO_NODE="$NO_NODE" \
     SIGHTLINE_API_PORT="$API_PORT" \
     SIGHTLINE_WEB_PORT="$WEB_PORT" \
         /bin/bash "$ROOT/START_SIGHTLINE.sh" >/dev/null 2>&1

@@ -2,11 +2,12 @@
 
 import logging
 import uuid
+from pathlib import Path
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from .config import get_settings, verify_production_readiness
@@ -239,6 +240,37 @@ def create_app() -> FastAPI:
             "internal_error",
             f"Something went wrong on our side. Incident {incident_id}.",
         )
+
+    # ── Built site (optional) ────────────────────────────────────────────────
+    # Registered last so every /api route wins first. The policy string is the
+    # one ops/nginx.conf gives the SPA; the middleware's setdefault leaves it be.
+    dist = Path(settings.web_dist_dir).expanduser() if settings.web_dist_dir else None
+    if dist is not None and (dist / "index.html").is_file():
+        dist_root = dist.resolve()
+        spa_csp = (
+            "default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; "
+            "frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+        )
+        logger.info("serving the built site from %s", dist_root)
+
+        # GET and HEAD both: uptime checks and proxies probe with HEAD, and a
+        # 405 there reads as "site down". FileResponse sends headers only for HEAD.
+        @app.api_route("/{path:path}", methods=["GET", "HEAD"], include_in_schema=False)
+        async def built_site(path: str):
+            if path == "api" or path.startswith("api/"):
+                raise ApiError(404, "not_found", "Not Found")
+            candidate = (dist_root / path).resolve() if path else None
+            if candidate is not None and candidate.is_file() and dist_root in candidate.parents:
+                headers = {"Content-Security-Policy": spa_csp}
+                if path.startswith("assets/"):
+                    # Vite hashes bundle names, so they can be cached for good.
+                    headers["Cache-Control"] = "public, max-age=31536000, immutable"
+                return FileResponse(candidate, headers=headers)
+            # Client-side routes (/course, /learn/…) and anything unknown get the app.
+            return FileResponse(
+                dist_root / "index.html",
+                headers={"Content-Security-Policy": spa_csp, "Cache-Control": "no-cache"},
+            )
 
     return app
 
