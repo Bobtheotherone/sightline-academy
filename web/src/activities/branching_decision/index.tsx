@@ -27,6 +27,7 @@ import { SlotArt } from "../../components/SlotArt";
 import { Markdown } from "../Markdown";
 import { RiseIn } from "../motion";
 import { scenarioPlateSlot } from "./plates";
+import { ThoughtLayer } from "./ThoughtLayer";
 
 const QUALITY_TONE: Record<ChoiceQuality, FeedbackTone> = {
   best: "positive",
@@ -141,15 +142,19 @@ export default function BranchingDecisionActivity({ step, evidence, onEvidence }
   const strongest = useMemo(() => strongestRoute(payload), [payload]);
   const atTerminal = !done && path.length > 0 && !pending && currentNodeId === null;
 
-  /* Which moment the plate shows. While a choice's feedback is up, the scene
+  /* Which moment the scene shows. While a choice's feedback is up, the scene
    * the learner is reading about is still the one they just decided in — so the
    * picture changes when the decision does, one beat per beat. At the debrief
    * (no current node) it holds on the last node rather than rewinding to the
-   * opening shot, and "ride it again" resets the path and so the plate too. */
-  const plateSlot = scenarioPlateSlot(
-    step.id,
-    pending?.node.id ?? currentNodeId ?? last?.node.id ?? payload.startNode,
-  );
+   * opening shot, and "ride it again" resets the path and so the scene too.
+   * The field report follows the same clock as the plate: a node that carries
+   * its own `report` retells the moment (the creek's night return), and one
+   * that doesn't keeps the opening scenario text. */
+  const sceneNodeId =
+    pending?.node.id ?? currentNodeId ?? last?.node.id ?? payload.startNode;
+  const plateSlot = scenarioPlateSlot(step.id, sceneNodeId);
+  const report =
+    payload.nodes.find((n) => n.id === sceneNodeId)?.report ?? payload.scenario;
 
   const choose = (node: BranchNode, choice: BranchChoice) => {
     const nextPath = [...path, { nodeId: node.id, choiceId: choice.id }];
@@ -182,15 +187,23 @@ export default function BranchingDecisionActivity({ step, evidence, onEvidence }
           <FileText className="mt-0.5 size-5 shrink-0 text-clay-500" strokeWidth={1.5} aria-hidden />
           <div className="min-w-0">
             <p className="ts-eyebrow">Field report</p>
-            <Markdown md={payload.scenario} className="mt-2 text-base text-pine-950" />
+            {/* Keyed by scene: when the ride moves to a node with its own
+             * report, the new text rises in rather than silently mutating. */}
+            <RiseIn key={sceneNodeId}>
+              <Markdown md={report} className="mt-2 text-base text-pine-950" />
+            </RiseIn>
           </div>
         </div>
         {/* The scene, where the learner currently stands in it. Keyed by slot so
          * the entrance replays on the swap — the plate reads as the ride moving
-         * on rather than as a picture quietly substituted. */}
+         * on rather than as a picture quietly substituted. The ThoughtLayer
+         * rides inside the key, so open bubbles close when the scene moves on. */}
         {plateSlot && (
           <RiseIn key={plateSlot} className="mx-auto mt-5 w-full max-w-lg">
-            <SlotArt slot={plateSlot} ratio="16 / 9" />
+            <div className="relative">
+              <SlotArt slot={plateSlot} ratio="16 / 9" />
+              <ThoughtLayer slot={plateSlot} />
+            </div>
           </RiseIn>
         )}
       </Card>

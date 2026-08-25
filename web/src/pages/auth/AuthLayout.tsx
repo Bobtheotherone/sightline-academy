@@ -4,13 +4,13 @@ import { ContourPanel } from "../../components/ContourPanel";
 import { BlazeMarker } from "../../components/BlazeMarker";
 import { StatStrip, type Stat } from "../../components/StatStrip";
 import { Reveal, useReducedMotion } from "../../activities/motion";
+import { usePlanPrice } from "../../lib/usePlanPrice";
 
 /** The hero's facts, restated under the form so the half composes vertically. */
 const COURSE_FACTS: Stat[] = [
   { value: 6, label: "Modules" },
   { value: 22, label: "Lessons" },
   { value: 5, prefix: "~", suffix: " hrs", label: "Self-paced" },
-  { value: 0, prefix: "$", label: "Free, always" },
 ];
 
 /** Three authored field notes about judgment (DESIGN-003 §Auth). */
@@ -88,6 +88,14 @@ export function AuthLayout({
   lead: string;
   children: ReactNode;
 }) {
+  // Same source as the landing hero: the price the server will actually charge.
+  const price = usePlanPrice();
+  const priceStat: Stat = {
+    value: price.dollars,
+    prefix: "$",
+    suffix: "/mo",
+    label: price.label,
+  };
   return (
     <div className="grid flex-1 lg:grid-cols-[1fr_minmax(380px,44%)]">
       <ContourPanel
@@ -101,10 +109,10 @@ export function AuthLayout({
           </Reveal>
           <div className="mt-6 rounded-lg bg-paper-50 p-8 shadow-2">{children}</div>
           <Reveal index={3} className="mt-10 border-t border-line-200 pt-8">
-            <StatStrip items={COURSE_FACTS} columns={2} />
+            <StatStrip items={[...COURSE_FACTS, priceStat]} columns={2} />
             <p className="mt-7 font-mono text-xs leading-relaxed text-ink-500">
-              No card, no upsell — your email is only how your progress and certificate stay
-              attached to you.
+              Your email is only how your progress and certificate stay attached to
+              you.
             </p>
           </Reveal>
         </div>

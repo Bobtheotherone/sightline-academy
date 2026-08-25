@@ -8,13 +8,15 @@ import {
   lazy,
   Suspense,
   useEffect,
+  useState,
   type ComponentType,
   type LazyExoticComponent,
 } from "react";
-import { ChevronDown, CircleHelp } from "lucide-react";
+import { ChevronDown, CircleHelp, RotateCcw } from "lucide-react";
 import type { RendererType, StepOut } from "../lib/api";
 import type { ActivityProps, StepPayloadBase } from "./types";
 import { BlazeMarker } from "../components/BlazeMarker";
+import { Button } from "../components/Button";
 import { Card } from "../components/Card";
 import { EmptyState } from "../components/EmptyState";
 import { Glyph, hasGlyph } from "../components/Glyph";
@@ -43,6 +45,24 @@ const REGISTRY: Partial<Record<RendererType, LazyExoticComponent<ActivityCompone
   lab_objective: lazy(() => import("./lab_objective")),
 };
 
+/* Renderers a learner can meaningfully run again.
+ *
+ * Excluded on purpose: the three text renderers (structured_response,
+ * reflection, journal_builder) are already editable in place, and blanking the
+ * editor to "replay" them would read as losing the work rather than starting
+ * over. `content` has nothing to run. `branching_decision` is left out because
+ * it already carries its own "Ride it again" inside its debrief — a second
+ * control beneath it would be two doors to the same room. */
+const REPLAYABLE = new Set<RendererType>([
+  "prediction_reveal",
+  "multiple_choice",
+  "checkpoint",
+  "sort_categorize",
+  "match",
+  "hotspot_list",
+  "lab_objective",
+]);
+
 /** Activity-type mark (VISUAL_ASSETS B-043…B-054): renderer -> slot name. */
 const rendererGlyph = (renderer: string) => `act-${renderer.replace(/_/g, "-")}`;
 
@@ -65,7 +85,19 @@ export function ActivityUnavailable({ renderer }: { renderer: string }) {
 export function ActivityHost({ step, evidence, onEvidence, prefill }: ActivityProps) {
   const Renderer = REGISTRY[step.renderer];
   const base = (step.payload ?? {}) as Partial<StepPayloadBase>;
-  const answered = Boolean(evidence?.complete);
+  const banked = Boolean(evidence?.complete);
+
+  /* Replay lives here rather than in each renderer because every renderer
+   * already restores itself from `evidence`. Bumping `run` remounts the
+   * renderer with no evidence at all, which IS a clean slate — no renderer
+   * needed a reset path of its own. Evidence is swallowed for the duration so
+   * a practice run cannot overwrite a completed record, and the record is what
+   * the learner keeps. LessonPage keys the whole step by id, so `run` clears
+   * itself when they move on. */
+  const [run, setRun] = useState(0);
+  const replaying = run > 0;
+  const canReplay = banked && REPLAYABLE.has(step.renderer);
+  const answered = banked && !replaying;
 
   return (
     <section aria-label={step.title} className="flex flex-col gap-5">
@@ -74,13 +106,15 @@ export function ActivityHost({ step, evidence, onEvidence, prefill }: ActivityPr
       <header>
         <div className="flex flex-wrap items-center justify-between gap-2">
           <p className="ts-eyebrow">{SECTION_LABELS[step.section] ?? "Step"}</p>
-          {answered && (
+          {(answered || replaying) && (
             <span className="inline-flex items-center gap-1.5 rounded-full border border-line-200 bg-moss-100 px-2.5 py-1 text-xs font-medium text-ink-500">
               <BlazeMarker state="done" size="s" />
               {/* Content steps aren't "answered" — they're read (pass-4 P3). */}
-              {step.renderer === "content"
-                ? "Read — revisit freely"
-                : "Answered — changes are saved"}
+              {replaying
+                ? "Practice run — your record is safe"
+                : step.renderer === "content"
+                  ? "Read — revisit freely"
+                  : "Answered — changes are saved"}
             </span>
           )}
         </div>
@@ -131,10 +165,39 @@ export function ActivityHost({ step, evidence, onEvidence, prefill }: ActivityPr
             </SkeletonGroup>
           }
         >
-          <Renderer step={step} evidence={evidence} onEvidence={onEvidence} prefill={prefill} />
+          <Renderer
+            key={run}
+            step={step}
+            evidence={replaying ? null : evidence}
+            onEvidence={replaying ? () => {} : onEvidence}
+            prefill={prefill}
+          />
         </Suspense>
       ) : (
         <ActivityUnavailable renderer={step.renderer} />
+      )}
+
+      {canReplay && (
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-line-200 pt-4">
+          <Button
+            variant="secondary"
+            size="s"
+            iconLeft={<RotateCcw className="size-4" strokeWidth={1.5} aria-hidden />}
+            onClick={() => setRun((r) => r + 1)}
+          >
+            {replaying ? "Start this run over" : "Run it again"}
+          </Button>
+          {replaying && (
+            <Button variant="ghost" size="s" onClick={() => setRun(0)}>
+              Back to my answers
+            </Button>
+          )}
+          <p className="text-sm text-ink-500">
+            {replaying
+              ? "Nothing here is being saved — your completed record is untouched."
+              : "Replays don't touch your completed record."}
+          </p>
+        </div>
       )}
     </section>
   );

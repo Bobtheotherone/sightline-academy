@@ -366,22 +366,30 @@ unrelated drawings.
   output too: it must read as an illustrated plate, never as a photograph.
 - **Every illustration gets alt text describing its teaching content.**
 
+> **Repalette 2026-08-15 — "Fireweed Aurora" (owner directive).** Every hex in
+> this document was rewritten in place: pine is now spruce-on-navy (`pine-950`
+> = #0D1E2E night navy), `clay-*` is fireweed magenta (#B5446E), `sky-600` is
+> aurora green (#1E8A6E). Token NAMES are historical and unchanged. All 171
+> SVG assets were recolored by scripted hex swap in the same change; the SDXL
+> raster heroes still carry the old palette and are being replaced by the GPT
+> generation program (`artgen/gpt-pack/`).
+
 **Palette tokens** (assets are the token layer, so literal hex is correct in
 SVG and prompt text — components remain hex-free per ADR-008):
 
 | Token | Hex | Illustration role |
 | --- | --- | --- |
-| `--ts-pine-950` | `#0E2A23` | Line work, deepest masses, dark panels |
-| `--ts-pine-700` | `#1F5546` | Primary brand fill |
-| `--ts-pine-300` | `#9CC3B4` | Soft fills, mid-ground |
-| `--ts-moss-100` | `#EEF3EC` | Ground / app background |
-| `--ts-paper-0` | `#FBFCFA` | Plate background |
-| `--ts-clay-500` | `#C4622D` | Accent — blaze, focal point. **Sparingly.** |
-| `--ts-sky-600` | `#2E6E8E` | Water, info, Ranger identity |
-| `--ts-sun-400` | `#E0A72E` | Caution, badge gold |
+| `--ts-pine-950` | `#0D1E2E` | Line work, deepest masses, dark panels |
+| `--ts-pine-700` | `#2F6B52` | Primary brand fill |
+| `--ts-pine-300` | `#ABCDB8` | Soft fills, mid-ground |
+| `--ts-moss-100` | `#ECF3EF` | Ground / app background |
+| `--ts-paper-0` | `#F9FCFA` | Plate background |
+| `--ts-clay-500` | `#B5446E` | Accent — blaze, focal point. **Sparingly.** |
+| `--ts-sky-600` | `#1E8A6E` | Water, info, Ranger identity |
+| `--ts-sun-400` | `#DBA12E` | Caution, badge gold |
 | `--ts-danger-600` | `#A93226` | Risk semantics |
-| `--ts-ink-500` | `#4A5A54` | Secondary line, shadow |
-| `--ts-line-200` | `#D8E0DA` | Hairline |
+| `--ts-ink-500` | `#46555A` | Secondary line, shadow |
+| `--ts-line-200` | `#D6DFDA` | Hairline |
 
 **Accent discipline:** `clay-500` marks *the one thing the eye should land on*.
 An image with three clay elements has no focal point. Most plates use it once.
@@ -466,7 +474,7 @@ Copy these verbatim; they are load-bearing and already tuned.
 | --- | --- |
 | `STYLE_FLAT` | `flat colour fills, hard crisp vector edges, thick dark outlines, geometric simplified shapes` |
 | `STYLE_PLATE` | `modern editorial field guide plate, adobe illustrator vector artwork, screen print poster, generous clean negative space, calm balanced composition` |
-| `PALETTE_CORE` | `limited palette of deep forest green, clay orange, sage, cream, charcoal` |
+| `PALETTE_CORE` | `limited palette of deep spruce green, night navy, fireweed magenta, sage mint, glacier white, charcoal` |
 | `GEAR_FULL` | `white full-face motocross helmet with a dark tinted visor, long-sleeve riding jersey, riding pants, black gloves closed around the grips, black over-the-ankle boots planted on the footpegs` |
 | `MACHINE_SIDE` | `four-wheeled quad ATV, side profile, four chunky black knobby tires, front and rear cargo racks` |
 | `ENV_TRAIL` | `level dirt trail, a few large flat pine tree silhouettes behind, simple layered hills` |
@@ -770,7 +778,7 @@ because several have registered upgrade paths in Tier B/E.
 | Property | Value |
 | --- | --- |
 | Medium | `svg-authored` |
-| Ground | `paper-0` `#FBFCFA`, quiet edges so any `object-contain` ratio letterboxes invisibly |
+| Ground | `paper-0` `#F9FCFA`, quiet edges so any `object-contain` ratio letterboxes invisibly |
 | Line | 1.5 px effective at authored viewBox scale, `pine-950` |
 | Colours | ≤ 6 tokens per plate |
 | Devices | Contour field at ~6 % opacity where a background is needed; clay blaze as the focal mark |
@@ -838,13 +846,13 @@ its module's thesis in one image, with no text.
 
   | Hotspot | x % | y % | Cue that must be legible |
   | --- | --- | --- | --- |
-  | `crest` | 18 | 30 | Trail rises and vanishes — the vanishing point itself |
-  | `side_slope` | 30 | 48 | Off-camber: far edge lower than near, vegetation leaning |
+  | `crest` | 16.6 | 11.4 | Trail rises and vanishes — the vanishing point itself |
+  | `side_slope` | 18.9 | 46.6 | Off-camber: far edge lower than near, vegetation leaning |
   | `shadow_rut` | 40 | 62 | Linear shadows aligned with the trail |
-  | `wet_clay` | 55 | 70 | Darker smoother band at the low point |
-  | `loose_over_hard` | 68 | 58 | Uniform sparkle, scattered stones at the edge |
-  | `deadfall` | 78 | 44 | Horizontal line breaking vertical texture, part-screened by brush |
-  | `soft_edge` | 62 | 78 | Crumbled edge line, exposed roots, cracks parallel to the edge |
+  | `wet_clay` | 44.9 | 84.6 | Darker smoother band at the low point |
+  | `loose_over_hard` | 74.2 | 54.2 | Uniform sparkle, scattered stones at the edge |
+  | `deadfall` | 79.1 | 31.5 | Horizontal line breaking vertical texture, part-screened by brush |
+  | `soft_edge` | 67.7 | 83.5 | Crumbled edge line, exposed roots, cracks parallel to the edge |
 
 - **Acceptance:** seven-dot overlay check, all on-feature. Additionally: a viewer who has read `m4-l1-s1` should be able to name at least five cues *without* the markers on.
 
@@ -1089,7 +1097,7 @@ the app ships an inline SVG data-URI favicon; this set replaces it properly.
 | B-065 | `icon-192.png` | 192 × 192 PWA maskable |
 | B-066 | `icon-512.png` | 512 × 512 PWA maskable |
 | B-067 | `mask-icon.svg` | Monochrome Safari pinned tab |
-| B-068 | `og-default.png` | 1200 × 630 fallback social card — see [E-010 … E-024](#e-010--e-024--per-route-og-cards-15) |
+| B-068 | `og-default-v2.png` | 1200 × 630 fallback social card — see [E-010 … E-024](#e-010--e-024--per-route-og-cards-15) |
 
 - **Acceptance:** B-063 checked at actual 16 px in a real browser tab, not zoomed. Maskable icons verified against the 40 % safe zone.
 
@@ -1337,7 +1345,7 @@ dramatic (SF6).
 | ID | Step / node | Scene |
 | --- | --- | --- |
 | C-050 | `m1-l2-s2` header | Late afternoon, four riders, a spring-melt creek running fast and opaque, two already across on the far bank |
-| C-051 | `m1-l2-s2` node 2 | The group on the far bank pointing at failing light; the near rider still stopped |
+| C-051 | `m1-l2-s2` node 2 | The same crossing after dark, headlights lit: the far pair waiting on their bank, the near two stopped, every beam dying on black water |
 | C-052 | `m4-l3-s1` header | A junction: gentle switchbacks descending left, a steep damp grass shortcut dropping right with an off-camber traverse midway |
 | C-053 | `m4-l3-s1` node 2 | The switchback midway: a short off-camber wet stretch where spring water crosses |
 | C-054 | `m5-l3-s2` header | A climb, a machine on its side at the outside of a bend, engine still running, a rider sitting beside it holding a wrist |
@@ -1616,7 +1624,7 @@ blaze mark, and the route's own art inset at right.
 | --- | --- | --- | --- |
 | E-010 | `/` | "Ride like you've thought it through." | E-001 |
 | E-011 | `/login` | "Welcome back" | Blaze only |
-| E-012 | `/register` | "Start the course — it's free" | E-001 crop |
+| E-012 | `/register` | "Start the course" | E-001 crop |
 | E-013 | `/verify/:code` | "Verified completion" | A-027 `cert-seal` |
 | E-014 | `/dashboard` | "Basecamp" | B-083 |
 | E-015 | `/course` | "Six modules, one trail" | Trail map motif |
@@ -1659,6 +1667,41 @@ blaze mark, and the route's own art inset at right.
 > email infrastructure from this build and README lists password reset as the
 > first post-launch item. Registering the assets now means that when email
 > arrives, its visual language is already decided rather than improvised.
+
+---
+
+### 7.7 Tier G — Field practice (games) and range art
+
+Registered 2026-08-16 on integration of the GPT art pack (gpt-pack batches
+01–10). The games section (`/games`, DESIGN-004 §Play) was built after the
+original registry; these are its slots. Medium is `raster` (GPT Image via the
+gpt-pack, reviewed against the §5 rubric, AVIF/WebP/PNG ladder) throughout.
+
+| ID | Slot | Consumed by | Description |
+| --- | --- | --- | --- |
+| G-001 | `games-hero` | `GamesPage` header band, dark right-bleed | A practice range in a clearing: parked machine, marker-loop course, magenta start marker |
+| G-002 | `games-card-sharp-round` | `GameCard` art thumb (sharp round) | Three fanned field cards, front one carrying a blaze with a checkmark |
+| G-003 | `games-card-walkaround` | `GameCard` art thumb (walkaround order) | Top-down machine circled by a dashed five-stop loop, start stop magenta |
+| G-004 | `games-card-replays` | `RangeHeader` medallion on `/games/replay/*` | A trail looping back to a magenta blaze — ride it again |
+| G-005 | `games-empty` | `GamesPage` nothing-playable state | Blank diamond markers stacked against a post, waiting to be planted |
+| G-006 | `games-locked` | `GamesPage` all-locked state | A gated range, marker outlines faded beyond the fence |
+| G-007 | `moment-clean-run` | `CleanRun` banner default art (hunt/sort/match/order cleans) | A row of magenta targets along a trail, every one lit |
+| G-008 | `moment-perfect-round` | `CleanRun` on `RoundPage` (perfect round) | One large magenta blaze with a checkmark over a calm range |
+| G-009 | `og/og-games.png` | Static file in `web/public/og/` — per-route OG wiring pending (see E-010…E-024) | Night range with glowing markers, quiet left field for overlay type |
+
+**R-001 … R-006 · Per-module range cards.** Square blaze-diamond emblems, one
+per module, consumed by `GamesPage`'s module section headers (dynamic slot
+`range-${moduleId}`). The diamond frame is part of the design (U4 exemption by
+entry): they are range *badges*, not plates.
+
+| ID | Slot | Emblem |
+| --- | --- | --- |
+| R-001 | `range-m1` | Forking trail |
+| R-002 | `range-m2` | Utility ATV in profile |
+| R-003 | `range-m3` | Full-face helmet |
+| R-004 | `range-m4` | Nested contour rings |
+| R-005 | `range-m5` | Cold front over rain |
+| R-006 | `range-m6` | Road crossing, plan view |
 
 ---
 
@@ -1943,14 +1986,14 @@ flat vector illustration, clean side profile view,
 one adult rider seated upright on a four-wheeled quad ATV,
 full body visible from helmet to boots,
 white full-face motocross helmet with a dark tinted visor,
-deep forest green long-sleeve riding jersey,
+deep spruce green long-sleeve riding jersey,
 charcoal black riding pants clearly darker than the jersey,
 black gloves closed around the handlebar grips,
 black boot planted flat on the footpeg, knee bent,
-the machine is clay orange and cream with four black knobby tires,
+the machine is deep spruce green and glacier white with four black knobby tires,
 level dirt trail, a few large flat pine tree silhouettes behind,
 flat colour fills, hard crisp vector edges, thick dark outlines,
-limited palette of deep green, clay orange, sage, cream, charcoal,
+limited palette of deep spruce green, night navy, fireweed magenta, sage mint, glacier white, charcoal,
 geometric simplified shapes, modern editorial field guide plate,
 adobe illustrator vector artwork, screen print poster,
 generous clean negative space, calm balanced composition
@@ -2001,10 +2044,12 @@ engine (48,50)  footwells (62,68)    racks (82,38)     chassis (58,55)
 **`scene-trail-hazards`** (A-009) — 500 × 300, `ratio="5 / 3"`, step `m4-l1-s2`
 
 ```
-crest (18,30)         side_slope (30,48)      shadow_rut (40,62)
-wet_clay (55,70)      loose_over_hard (68,58) deadfall (78,44)
-soft_edge (62,78)
+crest (16.6,11.4)     side_slope (18.9,46.6)  shadow_rut (40,62)
+wet_clay (44.9,84.6)  loose_over_hard (74.2,54.2) deadfall (79.1,31.5)
+soft_edge (67.7,83.5)
 ```
+
+> **2026-08-21 — `scene-trail-hazards` re-measured.** The hunt base became a GPT raster (batch 13) cropped 5:3 from the top of a 1536×1024 source. Six of the seven percentages above were re-measured to the new plate's features (`shadow_rut` unchanged) and written into `m4-l1-s2` by owner decision, recorded in BUILDLOG. The crop (0,0,1536,922) and these numbers are now one contract: change either and re-measure the other.
 
 > The `3 / 2` vs `5 / 3` ratio bug shipped once and drifted every marker ~2–3 %
 > off its feature. It was caught by a playthrough, not by a unit test. The dot
@@ -2058,10 +2103,10 @@ output is determined by the spec rather than by its own taste.
     "id": "SET-C-KEYLIST",
     "medium": "svg-authored",
     "canvas": { "w": 720, "h": 400, "ratio": "9 / 5" },
-    "ground": "#FBFCFA",
-    "line": { "weight": 1.5, "color": "#0E2A23" },
-    "palette": ["#0E2A23","#1F5546","#9CC3B4","#EEF3EC","#FBFCFA","#C4622D"],
-    "accent": { "token": "clay-500", "hex": "#C4622D", "maxUses": 1 },
+    "ground": "#F9FCFA",
+    "line": { "weight": 1.5, "color": "#0D1E2E" },
+    "palette": ["#0D1E2E","#2F6B52","#ABCDB8","#ECF3EF","#F9FCFA","#B5446E"],
+    "accent": { "token": "clay-500", "hex": "#B5446E", "maxUses": 1 },
     "textAllowed": false,
     "budgetKB": 25,
     "referenceAssets": ["C-003"]          // frozen look; generate these FIRST
@@ -2120,4 +2165,5 @@ looks fine is how a set drifts.
 | Date | Change |
 | --- | --- |
 | 2026-08-06 | Created. 267 assets registered across six tiers. Pipeline, agentic procedure, acceptance rubric, and failure catalogue derived from the `hero-atv-rider` smoke test on the local RTX 5090 SDXL pipeline. Three orphaned shipped plates found (A-011 `scene-helmet-fit`, A-012 `scene-crossing`, A-013 `scene-loading-cargo`) — shipped in Wave 2, referenced by nothing — and wired via C-013 / C-011 / C-014 respectively. SPEC-007's `figure` block found to be used **zero** times across 18 content steps, which is what Tier C exists to fix. |
-
+| 2026-08-16 | **GPT art pack integrated** (gpt-pack batches 01–10, 99 images, each reviewed against §5 at full size). 83 slots now `raster` ladders: all 9 heroes re-rendered (A-001…A-007, B-082/083 — A-007 finally renders the trail-meets-road relationship §6.5 said diffusion couldn't), 20/22 lesson cards, 13/15 hotspot insets, 5/6 scenario plates, 11 callout vignettes (C-020…C-030, C-035 — the first Tier C figures to ship), moments D-007…D-011, states D-012…D-016 (D-016 replaces the greyed summit-approach on the locked assessment per §5.4.1), new Tier G (games) + R-series range cards (§7.7). Marketing E-001…E-009 + G-009 exported to `web/public/og/` as files; per-route OG wiring still pending (E-010…E-024 `render-html`). **Six rejects, re-roll queued:** C-033 (brand letterforms, U3), C-037 (unreadable at 5:3), B-005 (two-panel mud at 96 px), B-006 (four T-CLOC stops — contradicts the five the course teaches and G-003 draws), C-127 (metallic greys, U2), C-055 (phone-screen letterforms, U3). Their slots keep the shipped SVGs. C-054 reviewed against §5.4.1 and shipped: seated rider, helmet on, gear intact — calmer than its prose. Vite `assetsInlineLimit: 0`: 472 KB of base64 plates left the JS bundle (§9.4 enforced by config, not convention). |
+| 2026-08-21 | **Batch 13 integrated — modules 3–6 figure plates.** Eleven GPT images (Codex $imagegen, `artgen/incoming/batch-13/`) reviewed at full size against Part 5 and the batch-13 checklist; all eleven accepted with residuals recorded in each manifest note. Slots now raster: A-011 `scene-helmet-fit`, A-009 `scene-trail-hazards` (coordinate contract re-measured, Appendix D), C-006 `keylist-stability-model`, C-007 `keylist-four-families`, C-008 `keylist-before-you-go`, C-055 `scenario-one-bar` (the batch-11 re-roll, finally), C-010 `keylist-pavement-physics`, A-012 `scene-crossing`, A-013 `scene-loading-cargo` (5:2 crop for the host slot), C-012 `keylist-three-standards`, C-009 `keylist-stop-assess-communicate` (raster fallback; the animated SVG in `artgen/VISUAL_AUDIT_M3-M6.md` §5.9 remains the intended end state). Six keylist+figure pairs (C-006/007/008/010/011/012) became `hotspot_figure` blocks on the `keylist-tcloc` pattern: terms and details verbatim, medallion centres measured, no magenta in the art. Retired SVGs kept in `svg/`. Verified on the production build: lint 217/212/0/0, tsc + vite clean, seed tests green, 30 step screenshots (desktop + mobile) reviewed, zero page errors. Audit and prompt pack: `artgen/VISUAL_AUDIT_M3-M6.md`, `artgen/gpt-pack/batches/batch-13-images-only.md`. |

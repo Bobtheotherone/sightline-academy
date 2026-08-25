@@ -84,7 +84,7 @@ export function JournalCard({
   return (
     <Link to={to} className={`block break-inside-avoid rounded-md ${className}`}>
       <Card interactive bordered padding="none" className="overflow-hidden">
-        <div className="flex items-center justify-between gap-3 border-b border-line-200 bg-moss-50 px-5 py-2.5">
+        <div className="flex items-center justify-between gap-3 bg-moss-50 px-5 py-2.5">
           <p className="ts-eyebrow">{eyebrow}</p>
           <StatusStitch status={status} />
         </div>
@@ -93,7 +93,7 @@ export function JournalCard({
          * block height stays a whole multiple of the 32px rule and the last
          * rule lands under the last line of text — pb-5 then closes the sheet
          * before the next rule would be drawn, so no empty ruled band trails. */}
-        <div className="ts-ruled px-5 pb-5 pt-3" style={{ backgroundPosition: "0 6px" }}>
+        <div className="ts-ruled px-5 pb-5 pt-3">
           {/* The cover is a plate laid ON the page, not part of the text
            * column: a flex sibling, so the rules under the entry keep their
            * 32px rhythm and every baseline stays on its line. Its widths are

@@ -153,8 +153,25 @@ test("J1 — new learner first session: register, play M1, journal, resume", asy
   await expect(page.getByText("Locked in")).toBeVisible();
   await expect(page.getByText("The pattern", { exact: true })).toBeVisible();
 
-  // s3 content → s4 checkpoint
   await continueTo(page, "m1-l1-s3");
+
+  // s3 is a hotspot hunt with requireAll, so Continue stays gated until every
+  // one of the six decisions has been opened — skip the hunt, then read all six.
+  // exact: the crosshair overlay's own aria-label quotes "Reveal the rest" too.
+  await page.getByRole("button", { name: "Reveal the rest", exact: true }).click();
+  for (const mark of [
+    "Bare head",
+    "Pavement",
+    "Extra rider",
+    "Impairment",
+    "Wrong-size machine",
+    "Outrunning your eyes",
+  ]) {
+    await page
+      .getByRole("button", { name: new RegExp(`Waypoint \\d+: ${mark}`) })
+      .first()
+      .click();
+  }
   await continueTo(page, "m1-l1-s4");
 
   // Checkpoint: wrong once — authored feedback must show — then the best answer
@@ -180,7 +197,7 @@ test("J1 — new learner first session: register, play M1, journal, resume", asy
   await page.getByRole("button", { name: /Stop on the bank and assess/ }).click();
   await expect(page.getByText("Strong line")).toBeVisible();
   await page.getByRole("button", { name: "Continue the ride" }).click();
-  await page.getByRole("button", { name: /Not this one, not today/ }).click();
+  await page.getByRole("button", { name: /Not in the dark/ }).click();
   await page.getByRole("button", { name: "See the debrief" }).click();
   // Scoped to the stage: the step rail also carries a "Debrief" section label.
   await expect(step(page, "m1-l2-s2").getByText("Debrief", { exact: true })).toBeVisible();

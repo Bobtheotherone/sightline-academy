@@ -1,6 +1,16 @@
 import { lazy, Suspense, useEffect, useRef, useState, type RefObject } from "react";
 import { matchPath, NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { Map, NotebookPen, TrendingUp, Compass, LogOut, UserRound, BarChart3 } from "lucide-react";
+import {
+  Map,
+  NotebookPen,
+  Target,
+  TrendingUp,
+  Compass,
+  LogOut,
+  UserRound,
+  BarChart3,
+} from "lucide-react";
+import { canViewInstructor } from "../lib/api";
 import { AppFooter } from "./AppFooter";
 import { BlazeMarker } from "./BlazeMarker";
 import { Logo } from "./Logo";
@@ -16,8 +26,11 @@ import { useApiError } from "../lib/useApiError";
 // shell bundle until the slide-over first opens.
 const TutorChat = lazy(() => import("../pages/tutor/TutorChat"));
 
+/* `desktopOnly` keeps the mobile tab bar at its designed four stops
+ * (DESIGN-003 §Responsive) — Practice is reachable from module pages there. */
 const NAV = [
   { to: "/course", label: "Course", icon: Map },
+  { to: "/games", label: "Practice", icon: Target, desktopOnly: true },
   { to: "/journal", label: "Journal", icon: NotebookPen },
   { to: "/progress", label: "Progress", icon: TrendingUp },
   { to: "/tutor", label: "Ranger", icon: Compass },
@@ -75,7 +88,7 @@ function UserMenu() {
           <UserRound className="size-4 text-ink-500" strokeWidth={1.5} aria-hidden />
           Account
         </button>
-        {user.role === "instructor" && (
+        {canViewInstructor(user.role) && (
           <button type="button" className={item} onClick={() => navigate("/instructor")}>
             <BarChart3 className="size-4 text-ink-500" strokeWidth={1.5} aria-hidden />
             Instructor view
@@ -197,7 +210,7 @@ export function AppShell() {
         aria-label="Primary"
         className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-4 border-t border-line-200 bg-paper-0/85 backdrop-blur-chrome lg:hidden"
       >
-        {NAV.map(({ to, label, icon: Icon }) => (
+        {NAV.filter((item) => !item.desktopOnly).map(({ to, label, icon: Icon }) => (
           <NavLink
             key={to}
             to={to}

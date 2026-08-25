@@ -286,12 +286,21 @@ export default function ProgressPage() {
       </Reveal>
 
       {/* Badge shelf — earned in full color on their own plinths, unearned as
-       * embossed outlines. No ceremony here: this is the revisit surface. */}
+       * embossed outlines. No ceremony here: this is the revisit surface —
+       * D-010's vignette of a badge seating stands beside the heading instead. */}
       <section className="mt-10" aria-labelledby="badges-heading">
-        <div className="flex flex-wrap items-baseline justify-between gap-3">
-          <h2 id="badges-heading" className="font-display text-xl font-bold">
-            Badge shelf
-          </h2>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex min-w-0 items-center gap-3">
+            <SlotArt
+              slot="moment-badge-earned"
+              ratio="3 / 2"
+              sizes="80px"
+              className="w-20 shrink-0"
+            />
+            <h2 id="badges-heading" className="font-display text-xl font-bold">
+              Badge shelf
+            </h2>
+          </div>
           <p className="font-mono text-xs text-ink-500">
             {earnedCount} of {BADGE_FACTS.length} earned
           </p>

@@ -18,6 +18,7 @@ import type { ActivityProps, MatchPayload, MatchesValue } from "../types";
 import { FeedbackStrip } from "../../components/FeedbackStrip";
 import { BlazeMarker } from "../../components/BlazeMarker";
 import { Markdown } from "../Markdown";
+import { CleanRun, useStreak } from "../streak";
 import { matchPairIconUrl } from "../../assets/slotmap";
 
 function shuffled<T>(list: T[]): T[] {
@@ -48,6 +49,12 @@ export default function MatchActivity({ step, evidence, onEvidence }: ActivityPr
   /** True while the wrong pairing is flashing; the explanation outlives it. */
   const [flashing, setFlashing] = useState(false);
   const [anchors, setAnchors] = useState<Record<string, Anchor>>({});
+
+  /* Play layer (DESIGN-004 §Play): first-try connections feed the lesson
+   * streak; a zero-miss set this session earns the clean-run moment. */
+  const streak = useStreak();
+  const missed = useRef(new Set<string>());
+  const solvedThisSession = useRef(0);
 
   const leftOrder = useMemo(() => payload.pairs.map((p) => p.id), [payload]);
   const rightOrder = useMemo(
@@ -106,12 +113,18 @@ export default function MatchActivity({ step, evidence, onEvidence }: ActivityPr
       setLeftSel(null);
       setRightSel(null);
       setMiss(null);
+      if (!revisit) {
+        solvedThisSession.current += 1;
+        if (!missed.current.has(leftId)) streak.report(true);
+      }
       onEvidence({
         kind: "matches",
         value: { matches: next },
         complete: Object.keys(next).length === payload.pairs.length,
       });
     } else {
+      if (!revisit && !missed.current.has(leftId)) streak.report(false);
+      missed.current.add(leftId);
       setMiss((m) => ({ leftId, rightId, n: (m?.n ?? 0) + 1 }));
       setFlashing(true);
       setLeftSel(null);
@@ -283,6 +296,12 @@ export default function MatchActivity({ step, evidence, onEvidence }: ActivityPr
         </FeedbackStrip>
       )}
 
+      {allSolved &&
+        !revisit &&
+        solvedThisSession.current === payload.pairs.length &&
+        missed.current.size === 0 && (
+          <CleanRun detail="Every pair connected on the first try." />
+        )}
       {allSolved ? (
         <FeedbackStrip
           tone="positive"

@@ -1,5 +1,39 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" fill="none" stroke="#0D1E2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M8 47 H44 Q52 47 55.5 41" stroke-width="2.8"/>
-  <path d="M20 18 H42 Q46 18 46 22 V41 A3 3 0 0 1 40 41 V34 L38 34 V42.5 A3 3 0 0 1 32 42.5 V34 L30 34 V42.5 A3 3 0 0 1 24 42.5 V34 L22 34 V41.5 A3 3 0 0 1 16 41.5 V33 C10.5 34 7 31.5 7 27.5 C7 23.5 11 21.5 16 22.5 V21 Q16 18 20 18 Z" fill="#A93226"/>
-  <path d="M54.0 19.0 L54.0 5.0 M47.9 15.5 L60.1 8.5 M47.9 8.5 L60.1 15.5" stroke="#A93226" stroke-width="2.6"/>
+  <title>A hand gone cold and stiff on the brake lever — stop and tend the rider.</title>
+
+
+  <!-- 1. lever: behind the bar, so its mount end is hidden instead of notching the tube -->
+  <path d="M52 35.4 L4 42.2 L4 46.6 L52 39.8 Z" fill="#0D1E2E" stroke="none"/>
+  <circle cx="4.8" cy="44.4" r="2.9" fill="#0D1E2E" stroke="none"/>
+
+  <!-- 2. handlebar: sage tube running behind the fist and well out both sides -->
+  <path d="M11 24 H53 A7 7 0 0 1 53 38 H11 A7 7 0 0 1 11 24 Z" fill="#ABCDB8" stroke-width="2.4"/>
+
+  <!-- 3. thumb, tucked UNDER the fist, wrapping the near side of the bar -->
+  <path d="M20 27.5 C13.3 27.1 8.9 30.7 9.5 35.5 C10.1 39.7 14.5 41.3 18.7 39.7 C17.5 35.7 18.1 31.1 20 27.5 Z" fill="#F9FCFA" stroke-width="2.2"/>
+
+  <!-- 4. the hand, navy layer: palm and four fingers, drawn oversized to become the outline -->
+  <g fill="#0D1E2E" stroke="#0D1E2E">
+    <rect x="19.5" y="16" width="26" height="16" rx="7.5" stroke-width="4.4"/>
+    <g fill="none" stroke-width="9.6" stroke-linecap="round">
+      <path d="M23 29 C21.9 35 22.1 41 24.4 45.6"/>
+      <path d="M29.5 29 C28.7 35 28.9 41.5 31.3 46.2"/>
+      <path d="M36 29 C35.5 35 35.7 41.3 38 45.6"/>
+      <path d="M42 29 C41.9 34 42.1 39.4 44 43.4"/>
+    </g>
+  </g>
+
+  <!-- 5. the hand, paper layer: same shapes inset, fusing palm and fingers into one solid mass -->
+  <g fill="#F9FCFA" stroke="none">
+    <rect x="19.5" y="16" width="26" height="16" rx="7.5"/>
+    <g fill="none" stroke="#F9FCFA" stroke-width="5.2" stroke-linecap="round">
+      <path d="M23 29 C21.9 35 22.1 41 24.4 45.6"/>
+      <path d="M29.5 29 C28.7 35 28.9 41.5 31.3 46.2"/>
+      <path d="M36 29 C35.5 35 35.7 41.3 38 45.6"/>
+      <path d="M42 29 C41.9 34 42.1 39.4 44 43.4"/>
+    </g>
+  </g>
+
+  <!-- 6. cold: one snowflake, at the proportions sort-cond-frost uses for snow -->
+  <path d="M54 11 L54 3 M54 7.4 L52.4 5.5 M54 7.4 L55.6 5.5 M54 11 L54 19 M54 14.6 L55.6 16.5 M54 14.6 L52.4 16.5 M54 11 L60.9 7 M57.5 8.5 L58.3 6.1 M57.5 8.5 L59.9 9 M54 11 L47.1 15 M50.5 13.5 L49.7 15.9 M50.5 13.5 L48.1 13 M54 11 L47.1 7 M50.5 8.5 L48.1 9 M50.5 8.5 L49.7 6.1 M54 11 L60.9 15 M57.5 13.5 L59.9 13 M57.5 13.5 L58.3 15.9" stroke-width="2"/>
 </svg>

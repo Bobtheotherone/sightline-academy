@@ -85,9 +85,22 @@ export function SessionProvider({ children }: { children: ReactNode }) {
 
   const logout = useMutation<void, ApiError, void>({
     mutationFn: async () => {
-      await api.logout();
-      queryClient.clear();
-      queryClient.setQueryData<MeResponse | null>(["me"], null);
+      try {
+        await api.logout();
+      } catch (err) {
+        // A session that is already gone is not a failure to log out — it IS
+        // logged out. This is the normal case straight after deleting an
+        // account: the session row went with it, so /auth/logout answers 401.
+        // Rethrowing here used to skip the cleanup below, leaving the client
+        // still holding the deleted user and looking signed in.
+        const gone = err instanceof ApiError && (err.status === 401 || err.status === 0);
+        if (!gone) throw err;
+      } finally {
+        // Unconditional: forgetting the user locally must never depend on a
+        // network round trip we do not control.
+        queryClient.clear();
+        queryClient.setQueryData<MeResponse | null>(["me"], null);
+      }
     },
   });
 

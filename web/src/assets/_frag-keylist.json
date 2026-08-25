@@ -4,11 +4,6 @@
     "file": "svg/keylist-tcloc.svg",
     "alt": "Five T-CLOC inspection zones drawn as stations around a machine and walked as an ordered loop, numbered one to five from the marked start station and returning to it."
   },
-  "keylist-six-decisions": {
-    "status": "real",
-    "file": "svg/keylist-six-decisions.svg",
-    "alt": "Six risk decisions - bare head, pavement, extra rider, impairment, wrong-size machine and outrunning your eyes - drawn as six equal marks at equal distance around one geared rider, each touching the rider: a set with no single villain."
-  },
   "keylist-three-leaks": {
     "status": "real",
     "file": "svg/keylist-three-leaks.svg",

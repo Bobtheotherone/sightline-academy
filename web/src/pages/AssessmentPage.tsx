@@ -137,11 +137,11 @@ function LockedState({ modules }: { modules: ModuleProgressRollup[] }) {
           drift
           glow="clay"
           glowClassName="-right-[6%] -bottom-[20%] size-[70%]"
-          className="rounded-lg"
+          className="overflow-hidden rounded-lg"
         >
           <div className="grid items-center gap-8 p-8 md:grid-cols-[1.35fr_1fr] md:gap-10 md:py-10 md:pr-0 md:pl-10">
             <div>
-              <p className="ts-eyebrow text-sun-400!">
+              <p className="ts-eyebrow text-clay-400!">
                 {remaining.length === 1
                   ? "One module to go"
                   : `${remaining.length} modules to go`}
@@ -172,15 +172,26 @@ function LockedState({ modules }: { modules: ModuleProgressRollup[] }) {
                 </LinkButton>
               </div>
             </div>
-            <SlotArt
-              slot="hero-assessment"
-              variant="dark"
-              ratio="4 / 3"
-              bleed
-              scrim
-              sizes="(min-width: 1024px) 34vw, 100vw"
-              className="hidden self-end grayscale md:-mb-16 md:block md:translate-x-6"
-            />
+            {/* D-016, not the summit-approach hero: promising the summit to a
+             * learner with modules left is a reward they haven't earned
+             * (VISUAL_ASSETS §5.4.1). This plate shows it high and unclimbed.
+             * The left seam dissolves instead of cutting (DESIGN-006). */}
+            <div
+              className="hidden self-end md:-mb-16 md:block md:translate-x-6"
+              style={{
+                maskImage: "linear-gradient(90deg, transparent 0%, black 22%)",
+                WebkitMaskImage: "linear-gradient(90deg, transparent 0%, black 22%)",
+              }}
+            >
+              <SlotArt
+                slot="state-assessment-locked"
+                variant="dark"
+                ratio="5 / 3"
+                bleed
+                scrim
+                sizes="(min-width: 1024px) 34vw, 100vw"
+              />
+            </div>
           </div>
         </ContourPanel>
       </Reveal>
@@ -255,11 +266,11 @@ function IntroState({ onStart, ready }: { onStart: () => void; ready: boolean })
           drift
           glow="clay"
           glowClassName="-right-[6%] -bottom-[20%] size-[70%]"
-          className="rounded-lg"
+          className="overflow-hidden rounded-lg"
         >
           <div className="grid items-center gap-8 p-8 md:grid-cols-[1.35fr_1fr] md:gap-10 md:py-10 md:pr-0 md:pl-10">
             <div className="max-w-xl">
-              <p className="ts-eyebrow text-sun-400!">All six modules complete</p>
+              <p className="ts-eyebrow text-clay-400!">All six modules complete</p>
               <h2 className="mt-2 font-display text-2xl font-bold text-paper-0">
                 Ready when you are
               </h2>
@@ -279,14 +290,21 @@ function IntroState({ onStart, ready }: { onStart: () => void; ready: boolean })
                 </Button>
               </div>
             </div>
-            <SlotArt
-              slot="hero-assessment"
-              variant="dark"
-              ratio="4 / 3"
-              bleed
-              sizes="(min-width: 1024px) 34vw, 100vw"
+            <div
               className="hidden self-end md:-mb-16 md:block md:translate-x-6"
-            />
+              style={{
+                maskImage: "linear-gradient(90deg, transparent 0%, black 22%)",
+                WebkitMaskImage: "linear-gradient(90deg, transparent 0%, black 22%)",
+              }}
+            >
+              <SlotArt
+                slot="hero-assessment"
+                variant="dark"
+                ratio="4 / 3"
+                bleed
+                sizes="(min-width: 1024px) 34vw, 100vw"
+              />
+            </div>
           </div>
         </ContourPanel>
       </Reveal>

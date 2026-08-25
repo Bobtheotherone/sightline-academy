@@ -5,11 +5,12 @@
  * lands on submit and reviseCopy rides along as the coach's note while the
  * draft is in progress. Evidence is re-kinded to checkpoint_response.
  */
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { Flag } from "lucide-react";
 import type { StepOut } from "../../lib/api";
 import type { ActivityProps, CheckpointPayload, EvidenceDraft } from "../types";
 import { FeedbackStrip } from "../../components/FeedbackStrip";
+import { useStreak } from "../streak";
 import MultipleChoiceActivity from "../multiple_choice";
 import StructuredResponseActivity from "../structured_response";
 
@@ -20,6 +21,12 @@ export default function CheckpointActivity({ step, evidence, onEvidence }: Activ
   );
   const [drafting, setDrafting] = useState(false);
   const [revisit] = useState(Boolean(evidence?.complete));
+
+  /* Play layer (DESIGN-004 §Play): only the FIRST attempt speaks to the
+   * lesson streak — the same line the server's first-try XP bonus draws.
+   * Any evidence on mount means an attempt already happened somewhere. */
+  const streak = useStreak();
+  const attempted = useRef(Boolean(evidence));
 
   /* The inner renderer sees a step carrying the inner payload; its evidence
    * value shape is unchanged, only the kind differs. */
@@ -41,6 +48,10 @@ export default function CheckpointActivity({ step, evidence, onEvidence }: Activ
         setDrafting(text.trim().length > 0);
       }
     } else {
+      if (!attempted.current) {
+        attempted.current = true;
+        streak.report(Boolean(draft.complete));
+      }
       setLastAttemptBest(draft.complete);
     }
     onEvidence({ kind: "checkpoint_response", value: draft.value, complete: draft.complete });
@@ -49,11 +60,14 @@ export default function CheckpointActivity({ step, evidence, onEvidence }: Activ
   return (
     <div className="overflow-hidden rounded-md border border-line-200">
       <div className="ts-contour-dark flex items-center gap-3.5 px-5 py-4">
+        {/* Fireweed, not badge gold: the checkpoint is a blaze moment — the
+         * StepRail already marks it in clay, and gold on this band read as a
+         * clash (owner call, 2026-08-16). clay-400 is the on-navy fireweed. */}
         <span className="grid size-9 shrink-0 place-items-center rounded-sm bg-paper-0/10">
-          <Flag className="size-4.5 text-sun-400" strokeWidth={2} aria-hidden />
+          <Flag className="size-4.5 text-clay-400" strokeWidth={2} aria-hidden />
         </span>
         <div className="min-w-0">
-          <p className="text-xs font-semibold uppercase tracking-[0.08em] text-sun-400">
+          <p className="text-xs font-semibold uppercase tracking-[0.08em] text-clay-400">
             Checkpoint
           </p>
           <p className="mt-0.5 text-sm text-paper-0/80">

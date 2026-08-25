@@ -47,18 +47,21 @@ REPO = WEB_SRC.parent.parent
 SEARCH = [str(WEB_SRC), str(REPO / "content")]
 
 TOKENS = {
-    "#0E2A23", "#1F5546", "#9CC3B4", "#EEF3EC", "#FBFCFA", "#C4622D",
-    "#2E6E8E", "#E0A72E", "#A93226", "#4A5A54", "#D8E0DA",
+    "#0D1E2E", "#2F6B52", "#ABCDB8", "#ECF3EF", "#F9FCFA", "#B5446E",
+    "#1E8A6E", "#DBA12E", "#A93226", "#46555A", "#D6DFDA",
 }
 # Families whose slot names are BUILT AT RUNTIME from data, so a literal grep
 # cannot see them. Used only for orphan detection.
 DYNAMIC_FAMILIES = ("badge-", "act-", "topic-", "section-", "match-", "sort-",
                     "xp-", "lesson-", "level-", "artifact-", "inset-",
-                    "scenario-")
+                    "scenario-", "range-")
 
 # Families that are small glyphs/icons and get the tight size budget. This is a
 # DIFFERENT question from the one above — a scenario plate is dynamically
 # resolved but is a full 960x540 illustration, not an icon.
+# Slots allowed to carry authored <text>, by owner directive. See U3 note below.
+TEXT_ALLOWED = {"keylist-three-leaks"}
+
 GLYPH_FAMILIES = ("badge-", "act-", "topic-", "section-", "match-", "sort-",
                   "xp-")
 
@@ -152,7 +155,12 @@ def main() -> int:
             problems.append(f"{slot}: no alt text")
 
         body = fp.read_text(encoding="utf-8", errors="ignore")
-        if "<text" in body:
+        # U3 bans letterforms in plates. It was written to catch GARBLED
+        # GENERATED text (brand marks on gear, an AI-rendered phone screen);
+        # keylist-three-leaks carries AUTHORED labels by owner directive, and
+        # the manifest alt repeats every phrase for screen readers, which
+        # cannot see text baked into an <img>-embedded SVG.
+        if "<text" in body and slot not in TEXT_ALLOWED:
             problems.append(f"{slot}: contains <text> (U3)")
         if re.search(r'(?:xlink:)?href="http|@import|<script', body):
             problems.append(f"{slot}: external reference or script")

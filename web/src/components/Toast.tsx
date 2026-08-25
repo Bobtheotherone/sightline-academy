@@ -10,6 +10,7 @@ import {
 import { CheckCircle2, Info, AlertCircle, Award } from "lucide-react";
 import { ProgressRing } from "./Progress";
 import { useEntered } from "../activities/motion";
+import { slotIconUrl } from "../assets/slotmap";
 
 export type ToastVariant = "success" | "info" | "error" | "levelUp";
 
@@ -83,6 +84,9 @@ function ToastRow({ item, onDismiss }: { item: ToastItem; onDismiss: () => void 
   const style = VARIANT_STYLES[item.variant];
   const big = item.variant === "levelUp";
   const entered = useEntered();
+  /* D-009 rides beside the drawn ring — the ring stays the ceremony (it
+   * animates closed; a plate can't), the plate is the view from the new level. */
+  const levelArt = big ? slotIconUrl("moment-level-up") : undefined;
   return (
     <RadixToast.Root
       duration={style.duration}
@@ -119,6 +123,15 @@ function ToastRow({ item, onDismiss }: { item: ToastItem; onDismiss: () => void 
             <p className="mt-1 font-mono text-xs text-ink-500">{item.finePrint}</p>
           )}
         </div>
+        {levelArt && (
+          <img
+            src={levelArt}
+            alt=""
+            decoding="async"
+            className="ml-auto aspect-[3/2] w-24 shrink-0 self-center rounded-sm object-cover"
+            aria-hidden
+          />
+        )}
       </div>
     </RadixToast.Root>
   );

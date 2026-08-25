@@ -44,13 +44,25 @@ interface LiveTurn {
   answer?: TutorAskResponse;
   answeredAt?: string;
   errorMessage?: string;
+  /** Which failure this was — picks the failed bubble's plate (D-014/D-015). */
+  errorKind?: "timeout" | "rate-limited";
 }
 
-function OfflineBadge() {
+/** Shown whenever Ranger is off the live model. `reason` is the operator-facing
+ * string from /meta/health — it rides in `title` so the learner reads plain
+ * language and an instructor can still hover for the configuration detail. */
+function OfflineBadge({ reason }: { reason?: string | null }) {
   return (
-    <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-sun-400/60 bg-sun-400/15 px-2.5 py-1 text-xs font-medium text-pine-950">
-      <CloudOff className="size-3.5 text-sun-400 brightness-75" strokeWidth={2} aria-hidden />
-      Ranger is in offline mode
+    <span
+      className="inline-flex items-center gap-1.5 rounded-full border border-sun-400/60 bg-sun-400/15 px-2.5 py-1 text-xs font-medium text-pine-950"
+      title={reason ?? undefined}
+    >
+      <CloudOff
+        className="size-3.5 shrink-0 text-sun-400 brightness-75"
+        strokeWidth={2}
+        aria-hidden
+      />
+      Ranger is answering from the course text only right now.
     </span>
   );
 }
@@ -163,7 +175,15 @@ export default function TutorChat({
     queryFn: api.health,
     staleTime: 60_000,
   });
-  const offline = healthQuery.data?.provider === "extractive";
+  // Ranger counts as degraded when he is off the live model *or* when a key is
+  // present but unusable: settings.provider still reads "anthropic" in that
+  // second case (config.py), so degradedReason is the field that catches it.
+  const health = healthQuery.data;
+  const degradedReason = health?.tutor?.degradedReason ?? null;
+  const offline =
+    health?.tutor?.provider === "extractive" ||
+    health?.provider === "extractive" ||
+    degradedReason !== null;
 
   const ask = useMutation({
     // Streaming first (POST /tutor/ask/stream): tokens append into the pending
@@ -219,6 +239,8 @@ export default function TutorChat({
                 ...t,
                 status: "failed",
                 errorMessage: err instanceof ApiError ? err.message : TIMEOUT_COPY,
+                errorKind:
+                  err instanceof ApiError && err.status === 429 ? "rate-limited" : "timeout",
               }
             : t,
         ),
@@ -297,7 +319,7 @@ export default function TutorChat({
               stay on the title row instead of orphaning one there. */}
           {offline && (
             <span className="order-last flex w-full sm:order-none sm:w-auto">
-              <OfflineBadge />
+              <OfflineBadge reason={degradedReason} />
             </span>
           )}
           <div className="ml-auto flex shrink-0 items-center gap-1">
@@ -307,7 +329,7 @@ export default function TutorChat({
         </header>
       ) : (
         <div className="flex items-center gap-2 border-b border-line-200 px-4 py-2">
-          {offline && <OfflineBadge />}
+          {offline && <OfflineBadge reason={degradedReason} />}
           {lessonId && (
             <span className="truncate text-xs text-ink-500">Asking from this lesson</span>
           )}
@@ -405,6 +427,7 @@ export default function TutorChat({
                     timestamp={t.askedAt}
                     failed
                     errorMessage={t.errorMessage ?? TIMEOUT_COPY}
+                    errorKind={t.errorKind}
                     onRetry={() => ask.mutate({ key: t.key, question: t.question })}
                   />
                 )}

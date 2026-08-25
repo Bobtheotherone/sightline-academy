@@ -35,6 +35,7 @@ import { Skeleton, SkeletonGroup } from "../components/Skeleton";
 import { SlotArt } from "../components/SlotArt";
 import { StepRail } from "../components/StepRail";
 import { useEntered, useReducedMotion } from "../activities/motion";
+import { StreakChain, StreakProvider } from "../activities/streak";
 import { useEvidenceSaver, type EvidenceEntry } from "./lesson/useEvidenceSaver";
 import { LessonCompleteView } from "./lesson/LessonCompleteView";
 
@@ -267,6 +268,8 @@ function Player({ lessonId, data }: { lessonId: string; data: LessonResponse }) 
     : "Continue";
 
   return (
+    /* Keyed by lesson: each trail starts its sharp streak fresh (§Play). */
+    <StreakProvider key={lessonId}>
     <div className="flex min-h-0 flex-1 flex-col">
       {interstitial && (
         <SectionInterstitial
@@ -337,16 +340,21 @@ function Player({ lessonId, data }: { lessonId: string; data: LessonResponse }) 
          * the middle column it wrapped to three lines and left Back/Continue
          * drifting against it. Tablet up returns to one row. */}
         <div className="mx-auto grid w-full max-w-page grid-cols-2 items-center gap-x-4 gap-y-1 px-6 py-2.5 sm:grid-cols-[auto_1fr_auto] sm:py-3 lg:px-12">
-          <p
-            className={`col-span-2 min-w-0 text-center text-xs leading-snug sm:order-2 sm:col-span-1 sm:text-sm ${saveError ? "font-medium text-danger-600" : "text-ink-500"}`}
-            aria-live="polite"
-          >
-            {saveError
-              ? "That answer didn't save — check your connection and try again."
-              : !canContinue
-                ? continueReason(step)
-                : `Step ${index + 1} of ${steps.length}`}
-          </p>
+          <div className="col-span-2 flex min-w-0 flex-wrap items-center justify-center gap-x-3 gap-y-0.5 sm:order-2 sm:col-span-1">
+            <p
+              className={`min-w-0 text-center text-xs leading-snug sm:text-sm ${saveError ? "font-medium text-danger-600" : "text-ink-500"}`}
+              aria-live="polite"
+            >
+              {saveError
+                ? "That answer didn't save — check your connection and try again."
+                : !canContinue
+                  ? continueReason(step)
+                  : `Step ${index + 1} of ${steps.length}`}
+            </p>
+            {/* The sharp streak (§Play) — grows beside the counter, hidden on
+             * phones where the footer has no room to spare. */}
+            <StreakChain className="hidden sm:inline-flex" />
+          </div>
           <Button
             variant="ghost"
             className="justify-self-start sm:order-1"
@@ -367,6 +375,7 @@ function Player({ lessonId, data }: { lessonId: string; data: LessonResponse }) 
         </div>
       </footer>
     </div>
+    </StreakProvider>
   );
 }
 
@@ -404,14 +413,27 @@ export default function LessonPage() {
       <div className="mx-auto w-full max-w-2xl px-6 py-16">
         <Card padding="l">
           <EmptyState
-            art={<SlotArt slot="state-404" ratio="5 / 3" />}
+            /* Three different truths, three plates: nothing here (404), the
+             * connection (offline), or our side of the bridge (D-013). */
+            art={
+              <SlotArt
+                slot={
+                  query.error instanceof ApiError && query.error.status === 404
+                    ? "state-404"
+                    : query.error instanceof ApiError && query.error.status === 0
+                      ? "state-offline"
+                      : "state-error-500"
+                }
+                ratio="5 / 3"
+              />
+            }
             heading="Couldn't open this lesson"
             body={
               query.error instanceof ApiError && query.error.status === 404
                 ? "No lesson lives at this address. Head back to the course map to pick up the trail."
                 : query.error instanceof ApiError && query.error.status === 0
                   ? "The connection dropped before the lesson arrived. Check your network and try again."
-                  : "Something went wrong loading the lesson. Try again in a moment."
+                  : "Something broke on our side. Your progress up to now is saved — try again in a moment."
             }
             action={
               <>

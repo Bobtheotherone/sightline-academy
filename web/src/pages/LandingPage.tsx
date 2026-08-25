@@ -15,6 +15,7 @@ import { LinkButton } from "../components/Button";
 import { Card } from "../components/Card";
 import { ContourPanel } from "../components/ContourPanel";
 import { SlotArt } from "../components/SlotArt";
+import { usePlanPrice } from "../lib/usePlanPrice";
 import { StatStrip, type Stat } from "../components/StatStrip";
 import { TrailPath } from "../components/TrailPath";
 import { Reveal, useReducedMotion } from "../activities/motion";
@@ -61,12 +62,11 @@ function rise(shown: boolean): string {
 const GHOST_ON_DARK =
   "inline-flex h-12 items-center justify-center gap-2 rounded-sm border border-paper-0/30 px-6 text-base font-medium text-paper-0 transition-all duration-(--ts-dur-fast) ease-(--ts-ease-out) hover:-translate-y-px hover:border-paper-0/60 hover:bg-paper-0/10";
 
-/** 6 modules · 22 lessons · ~5 hrs · free — the facts, counted (DESIGN-003). */
+/** 6 modules · 22 lessons · ~5 hrs · price — the facts, counted (DESIGN-003). */
 const HERO_STATS: Stat[] = [
   { value: 6, label: "Modules" },
   { value: 22, label: "Lessons" },
   { value: 5, prefix: "~", suffix: " hrs", label: "Self-paced" },
-  { value: 0, prefix: "$", label: "Free, always" },
 ];
 
 const TOTAL_MINUTES = MODULE_FACTS.reduce((sum, mod) => sum + mod.minutes, 0);
@@ -91,6 +91,15 @@ function BandMeta({ facts, to, action }: { facts: string; to: string; action: st
 }
 
 function Hero() {
+  // Price comes from the server so this never advertises a figure that
+  // checkout would not honour.
+  const price = usePlanPrice();
+  const priceStat: Stat = {
+    value: price.dollars,
+    prefix: "$",
+    suffix: "/mo",
+    label: price.label,
+  };
   return (
     // The clay bloom is centred on the plate's leading edge, so it spills over
     // the empty panel above and left of the art instead of hiding under it.
@@ -103,7 +112,7 @@ function Hero() {
       <div className="mx-auto grid max-w-wide items-center gap-10 px-6 pt-16 pb-28 lg:grid-cols-[1fr_1.05fr] lg:px-12 lg:pt-24 lg:pb-32">
         <div>
           <Reveal index={0}>
-            <p className="ts-eyebrow text-pine-300!">A free online ATV &amp; road safety course</p>
+            <p className="ts-eyebrow text-pine-300!">An online ATV &amp; road safety course</p>
           </Reveal>
           <Reveal index={1}>
             <h1 className="mt-4 font-display text-4xl font-extrabold text-paper-0">
@@ -124,7 +133,7 @@ function Hero() {
                 variant="accent"
                 iconRight={<ArrowRight className="size-4" strokeWidth={2} aria-hidden />}
               >
-                Start the course — it's free
+                Start the course
               </LinkButton>
               <a href="#trail-heading" className={GHOST_ON_DARK}>
                 See the six modules
@@ -132,19 +141,31 @@ function Hero() {
             </div>
           </Reveal>
           <Reveal index={4}>
-            <StatStrip items={HERO_STATS} onDark className="mt-10 border-t border-paper-0/15 pt-8" />
+            <StatStrip
+              items={[...HERO_STATS, priceStat]}
+              onDark
+              className="mt-10 border-t border-paper-0/15 pt-8"
+            />
           </Reveal>
         </div>
 
-        {/* The plate bleeds off the panel's bottom-right edge — no box, no
-            border. The negative right margin eats the container gutter AND the
-            page's own side margin, so the art runs to the viewport edge at
-            every width (the panel's overflow-hidden clips the scrollbar
-            overshoot). 3:2 matches the render's own framing; priority + eager
-            keep the LCP image out of the lazy queue. */}
+        {/* The plate bleeds off the panel's right edge — no box, no border. The
+            negative right margin eats the container gutter AND the page's own
+            side margin, so the art runs to the viewport edge at every width
+            (the panel's overflow-hidden clips the scrollbar overshoot). 3:2
+            matches the render's own framing; priority + eager keep the LCP
+            image out of the lazy queue.
+
+            self-START, not self-end (owner directive 2026-08-16): the grid is
+            items-center, and below ~1600px the plate is SHORTER than the text
+            column, so bottom-aligning it opened a 246px dark gap above the art
+            at 1440 while the headline sat alone up top. Top-aligning pins the
+            plate's top edge to the headline at every width; the negative bottom
+            margin still keeps it from adding height to the row, so the art
+            continues to run off the panel's bottom edge on wide screens. */}
         <Reveal
           index={1}
-          className="-mr-6 -mb-28 self-end lg:-mb-36 lg:mr-[calc((100vw-min(100vw,var(--ts-container-wide)))*-0.5-48px)]"
+          className="-mr-6 -mb-28 self-start lg:-mb-36 lg:mr-[calc((100vw-min(100vw,var(--ts-container-wide)))*-0.5-48px)]"
         >
           <SlotArt
             slot="hero-landing"
@@ -161,7 +182,7 @@ function Hero() {
       <a
         href="#trail-heading"
         aria-label="Skip ahead to the six modules"
-        className="group absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2.5 rounded-sm px-4 py-2 text-paper-0/60 transition-colors duration-(--ts-dur-fast) hover:text-paper-0 lg:flex"
+        className="group absolute bottom-2 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2.5 rounded-sm px-4 py-2 text-paper-0/60 transition-colors duration-(--ts-dur-fast) hover:text-paper-0 lg:flex"
       >
         <span className="ts-blaze" aria-hidden />
         <ChevronDown
@@ -233,12 +254,18 @@ function TrailSection() {
     // gives it auto cross-axis margins, which cancel the stretch and shrink the
     // whole trail to max-content. The container lives one level in, as it does
     // in every sibling band.
+    /* scroll-mt-32 (128px), not 24: the header is sticky at 65px and every one
+       of these headings sits inside a Reveal, which holds its block 12px lower
+       until the observer fires. On a cold load the anchor scroll is computed
+       against that translated box, then the reveal shifts everything up 12px -
+       which put "The route" at y=58, under the header. 96px left only 5px of
+       clearance even once settled; 128 keeps the eyebrow clear in both states. */
     <section aria-labelledby="trail-heading">
       <div className="mx-auto max-w-wide px-6 py-20 lg:px-12 lg:py-24">
         <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-6">
           <Reveal className="min-w-0 max-w-2xl">
             <p className="ts-eyebrow">The route</p>
-            <h2 id="trail-heading" className="mt-2 scroll-mt-24 font-display text-3xl font-bold">
+            <h2 id="trail-heading" className="mt-2 scroll-mt-32 font-display text-3xl font-bold">
               Six modules, one trail
             </h2>
             <p className="mt-4 text-lg text-ink-500">
@@ -319,7 +346,7 @@ function RangerDemo() {
         <div>
           <Reveal index={0}>
             <p className="ts-eyebrow text-sky-600!">Meet Ranger</p>
-            <h2 id="ranger-heading" className="mt-2 scroll-mt-24 font-display text-3xl font-bold">
+            <h2 id="ranger-heading" className="mt-2 scroll-mt-32 font-display text-3xl font-bold">
               A tutor that tells you where its answers come from
             </h2>
           </Reveal>
@@ -468,7 +495,7 @@ function WhatYouBuild() {
         <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-6">
           <Reveal index={0} className="min-w-0 max-w-2xl">
             <p className="ts-eyebrow">Your field journal</p>
-            <h2 id="build-heading" className="mt-2 scroll-mt-24 font-display text-3xl font-bold">
+            <h2 id="build-heading" className="mt-2 scroll-mt-32 font-display text-3xl font-bold">
               You don't just finish — you build
             </h2>
             <p className="mt-4 text-lg text-ink-500">
@@ -490,14 +517,13 @@ function WhatYouBuild() {
             <li key={artifact.name}>
               <Reveal index={i} className="h-full">
                 <article className="h-full overflow-hidden rounded-md bg-paper-50 shadow-1">
-                  <div className="flex items-center justify-between gap-3 border-b border-line-200 px-5 py-2.5">
+                  <div className="flex items-center justify-between gap-3 px-5 py-2.5">
                     <p className="ts-eyebrow">{artifact.name}</p>
                     <span className="rounded-full border border-dashed border-ink-500/50 px-2.5 py-0.5 font-mono text-xs text-ink-500">
                       {artifact.module}
                     </span>
                   </div>
-                  {/* Rules shifted +6px so baselines sit ON the lines (JournalCard). */}
-                  <div className="ts-ruled px-5 pt-3 pb-5" style={{ backgroundPosition: "0 6px" }}>
+                  <div className="ts-ruled px-5 pt-3 pb-5">
                     <h3 className="font-display text-lg leading-8 font-bold text-pine-950">
                       {artifact.title}
                     </h3>
@@ -553,7 +579,7 @@ function HonestExpectations() {
         <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-6">
           <Reveal index={0} className="min-w-0 max-w-2xl">
             <p className="ts-eyebrow">Straight with you</p>
-            <h2 id="honest-heading" className="mt-2 scroll-mt-24 font-display text-3xl font-bold">
+            <h2 id="honest-heading" className="mt-2 scroll-mt-32 font-display text-3xl font-bold">
               What this course is — and isn't
             </h2>
             <p className="mt-4 text-lg text-ink-500">
@@ -611,7 +637,7 @@ function ClosingCta() {
         </Reveal>
         <Reveal index={2}>
           <p className="max-w-xl text-paper-0/75">
-            Free, self-paced, and yours to keep — six modules, twenty-two lessons, and a field
+            Self-paced and yours to keep — six modules, twenty-two lessons, and a field
             journal you'll actually ride with.
           </p>
         </Reveal>
@@ -623,7 +649,7 @@ function ClosingCta() {
               variant="accent"
               iconRight={<ArrowRight className="size-4" strokeWidth={2} aria-hidden />}
             >
-              Start the course — it's free
+              Start the course
             </LinkButton>
             <Link
               to="/login"

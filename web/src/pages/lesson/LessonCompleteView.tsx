@@ -59,13 +59,13 @@ function CompleteBanner({
     <ContourPanel
       variant="dark"
       drift
-      glow="sun"
+      glow="clay"
       glowClassName="-top-[25%] -right-[8%] size-[70%]"
       className="rounded-lg"
     >
       <div className="grid items-center gap-6 p-7 sm:grid-cols-[1.45fr_1fr] sm:gap-5 sm:py-8 sm:pr-0 sm:pl-9">
         <div className="min-w-0">
-          <p className="ts-eyebrow text-sun-400!">Lesson complete</p>
+          <p className="ts-eyebrow text-clay-400!">Lesson complete</p>
           <h1 className="mt-2 font-display text-2xl font-extrabold text-paper-0">{lesson.title}</h1>
           {rewards.xp.length > 0 && (
             <>
@@ -188,18 +188,35 @@ function ModuleCompleteMoment({ moduleId, rewards }: { moduleId: string; rewards
   return (
     <ContourPanel variant="dark" className="overflow-hidden rounded-lg">
       <div className="flex flex-col gap-6 p-8">
-        <div className="flex flex-wrap items-center gap-6">
-          {badge && (
-            <BadgeMedal badgeId={facts.badgeId} name={badge.name} earned ceremony size="l" />
-          )}
-          <div className="min-w-0 flex-1">
-            <p className="ts-eyebrow text-sun-400!">Module {facts.order} complete</p>
-            <h2 className="mt-1 font-display text-2xl font-bold text-paper-0">{facts.title}</h2>
-            <p className="mt-2 max-w-lg text-sm text-paper-0/80">
-              {facts.artifactType === "ride_plan"
-                ? "The Ride Plan you built here is the course's tangible product — printable from your journal, and yours to reuse for every ride after."
-                : `The ${artifact.name} you built here rides with you — it comes back when you write your Ride Plan.`}
-            </p>
+        <div className="grid items-center gap-6 sm:grid-cols-[1fr_auto]">
+          <div className="flex flex-wrap items-center gap-6">
+            {badge && (
+              <BadgeMedal badgeId={facts.badgeId} name={badge.name} earned ceremony size="l" />
+            )}
+            <div className="min-w-0 flex-1">
+              <p className="ts-eyebrow text-clay-400!">Module {facts.order} complete</p>
+              <h2 className="mt-1 font-display text-2xl font-bold text-paper-0">{facts.title}</h2>
+              <p className="mt-2 max-w-lg text-sm text-paper-0/80">
+                {facts.artifactType === "ride_plan"
+                  ? "The Ride Plan you built here is the course's tangible product — printable from your journal, and yours to reuse for every ride after."
+                  : `The ${artifact.name} you built here rides with you — it comes back when you write your Ride Plan.`}
+              </p>
+            </div>
+          </div>
+          {/* D-008: the badge settling into its blaze frame, the next ridge
+           * behind — the R2.6 "worth a screenshot" moment's own art. */}
+          <div
+            className="relative hidden w-52 self-stretch lg:block"
+            style={{ maskImage: ART_FADE, WebkitMaskImage: ART_FADE }}
+          >
+            <SlotArt
+              slot="moment-module-complete"
+              variant="dark"
+              ratio="3 / 2"
+              bleed
+              sizes="208px"
+              className="absolute inset-0 h-full w-full"
+            />
           </div>
         </div>
         <div className="flex flex-wrap items-center justify-between gap-4 rounded-md border border-paper-0/15 bg-paper-0/5 px-5 py-4">
@@ -292,13 +309,22 @@ export function LessonCompleteView({
           /* The onward step is a composed band, not two buttons floating over
            * bare ground at the end of the page. */
           <Card padding="m" className="flex flex-wrap items-center justify-between gap-4">
-            <div className="min-w-0 max-w-sm">
-              <p className="ts-eyebrow">Next on the trail</p>
-              <p className="mt-1 text-sm text-ink-500">
-                {nextLesson
-                  ? "Momentum is the whole trick — the next lesson picks up exactly where this one set you down."
-                  : "That's every lesson in this module. The overview shows what you earned and what's still open."}
-              </p>
+            <div className="flex min-w-0 items-center gap-4">
+              {/* D-007: a blaze newly planted, the route continuing — quiet. */}
+              <SlotArt
+                slot="moment-lesson-complete"
+                ratio="3 / 2"
+                sizes="112px"
+                className="hidden w-28 shrink-0 sm:block"
+              />
+              <div className="min-w-0 max-w-sm">
+                <p className="ts-eyebrow">Next on the trail</p>
+                <p className="mt-1 text-sm text-ink-500">
+                  {nextLesson
+                    ? "Momentum is the whole trick — the next lesson picks up exactly where this one set you down."
+                    : "That's every lesson in this module. The overview shows what you earned and what's still open."}
+                </p>
+              </div>
             </div>
             <div className="flex flex-wrap items-center gap-3">
               {nextLesson ? (

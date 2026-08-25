@@ -156,10 +156,7 @@ const GHOST_ARTIFACTS: ArtifactType[] = ["risk_profile", "inspection_log"];
  * between them (DESIGN-002 §Journal). */
 const MINI_CARD =
   "flex h-full flex-col overflow-hidden rounded-sm border border-line-200 bg-paper-0 transition-all duration-(--ts-dur-base) ease-(--ts-ease-out) hover:border-pine-300 hover:shadow-(--ts-shadow-1)";
-const MINI_BAND = "ts-eyebrow border-b bg-moss-50 px-4 py-1.5";
-/* Rules shifted +6px so baselines sit ON the lines, not through them — the same
- * offset JournalCard's sheet uses. */
-const RULE_OFFSET = { backgroundPosition: "0 6px" } as const;
+const MINI_BAND = "ts-eyebrow bg-moss-50 px-4 py-1.5";
 
 function JournalPeek() {
   const query = useQuery({ queryKey: ["journal"], queryFn: () => api.journal() });
@@ -180,10 +177,10 @@ function JournalPeek() {
           {recent.map((artifact) => (
             <li key={artifact.artifactType} className="flex-1">
               <Link to={`/journal/${artifact.artifactType}`} className={MINI_CARD}>
-                <p className={`${MINI_BAND} border-line-200`}>
+                <p className={`${MINI_BAND}`}>
                   {ARTIFACT_FACTS[artifact.artifactType]?.name}
                 </p>
-                <div className="ts-ruled flex-1 px-4 pb-3 pt-2" style={RULE_OFFSET}>
+                <div className="ts-ruled flex-1 px-4 pb-3 pt-2">
                   <p className="truncate font-display text-base font-bold leading-8">
                     {artifact.title || ARTIFACT_FACTS[artifact.artifactType]?.name}
                   </p>
@@ -207,10 +204,10 @@ function JournalPeek() {
             {GHOST_ARTIFACTS.map((type) => (
               <li key={type} className="flex-1">
                 <div className="flex h-full flex-col overflow-hidden rounded-sm border border-dashed border-line-200 bg-paper-0">
-                  <p className={`${MINI_BAND} border-dashed border-line-200`}>
+                  <p className={`${MINI_BAND}`}>
                     {ARTIFACT_FACTS[type].name}
                   </p>
-                  <div className="ts-ruled flex-1 px-4 pb-3 pt-2" style={RULE_OFFSET}>
+                  <div className="ts-ruled flex-1 px-4 pb-3 pt-2">
                     <p className="font-display text-base font-bold leading-8 text-ink-500">
                       Not written yet
                     </p>

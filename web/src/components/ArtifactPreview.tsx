@@ -29,7 +29,7 @@ export function ArtifactPreview({
       aria-label={`Artifact preview: ${title}`}
       className={`overflow-hidden rounded-md border border-line-200 bg-paper-0 shadow-1 ${className}`}
     >
-      <div className="flex items-center justify-between gap-3 border-b border-line-200 px-5 py-3">
+      <div className="flex items-center justify-between gap-3 px-5 py-3">
         <p className="ts-eyebrow">{eyebrow}</p>
         <span
           className={`rounded-full border px-2.5 py-0.5 font-mono text-xs ${
@@ -45,7 +45,7 @@ export function ArtifactPreview({
        * both leading-8 and the gaps are whole rules, so the block height stays
        * a multiple of 32px and pb-5 closes the sheet before the next rule would
        * be drawn — no empty ruled band trails the last entry. */}
-      <div className="ts-ruled px-5 pb-5 pt-3" style={{ backgroundPosition: "0 6px" }}>
+      <div className="ts-ruled px-5 pb-5 pt-3">
         <h3 className="font-display text-xl font-bold leading-8 text-pine-950">{title}</h3>
         <dl className="mt-8 flex flex-col gap-8">
           {entries.map((entry) => {

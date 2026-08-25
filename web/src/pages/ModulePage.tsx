@@ -8,7 +8,7 @@
  */
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Target } from "lucide-react";
 import { api, ApiError, type LessonSummary, type ModuleOut } from "../lib/api";
 import { ARTIFACT_FACTS, BADGE_FACTS, MODULE_FACTS } from "../lib/modules";
 import { Reveal } from "../activities/motion";
@@ -351,13 +351,22 @@ export default function ModulePage() {
         )}
         <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
           <h2 className="font-display text-xl font-bold">Lessons</h2>
-          {module.complete ? (
-            <p className="text-sm text-ink-500">Complete — revisit any lesson freely</p>
-          ) : (
-            <p className="font-mono text-sm text-ink-500">
-              {lessonsDone} of {ordered.length} done · {minutesLeft} min left
-            </p>
-          )}
+          <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+            {module.complete ? (
+              <p className="text-sm text-ink-500">Complete — revisit any lesson freely</p>
+            ) : (
+              <p className="font-mono text-sm text-ink-500">
+                {lessonsDone} of {ordered.length} done · {minutesLeft} min left
+              </p>
+            )}
+            <Link
+              to="/games"
+              className="inline-flex items-center gap-1.5 rounded-pill px-2.5 py-1 text-sm font-medium text-pine-700 transition-colors duration-(--ts-dur-fast) hover:bg-moss-100"
+            >
+              <Target className="size-4" strokeWidth={1.5} aria-hidden />
+              Field practice
+            </Link>
+          </div>
         </div>
         <ol className="mt-4 flex flex-col gap-3">
           {ordered.map((lesson, i) => (

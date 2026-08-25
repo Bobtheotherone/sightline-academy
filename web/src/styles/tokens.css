@@ -6,37 +6,40 @@
  */
 
 :root {
-  /* ---- Color: core brand hues (UNCHANGED from v1 — 250 shipped assets embed them) ---- */
-  --ts-pine-950: #0E2A23; /* deep forest ink — primary text, darkest surfaces */
-  --ts-pine-700: #1F5546; /* primary brand — buttons, active, links */
-  --ts-pine-300: #9CC3B4; /* soft brand — focus rings, subtle fills */
-  --ts-moss-100: #EEF3EC; /* base ground tint */
-  --ts-paper-0:  #FBFCFA; /* card / surface */
-  --ts-clay-500: #C4622D; /* accent — CTAs, XP, blaze fill */
-  --ts-sky-600:  #2E6E8E; /* info — Ranger identity, info callouts */
-  --ts-sun-400:  #E0A72E; /* caution semantic + badge gold */
+  /* ---- Color: core brand hues — "Fireweed Aurora" repalette (2026-08-15, owner
+   * directive). Token NAMES are historical (clay = fireweed magenta, sky = aurora
+   * green, pine = spruce/navy); values below are the law. Shipped SVG assets were
+   * recolored in the same change; SDXL rasters await the GPT regeneration. ---- */
+  --ts-pine-950: #0D1E2E; /* deep forest ink — primary text, darkest surfaces */
+  --ts-pine-700: #2F6B52; /* primary brand — buttons, active, links */
+  --ts-pine-300: #ABCDB8; /* soft brand — focus rings, subtle fills */
+  --ts-moss-100: #ECF3EF; /* base ground tint */
+  --ts-paper-0:  #F9FCFA; /* card / surface */
+  --ts-clay-500: #B5446E; /* accent — CTAs, XP, blaze fill */
+  --ts-sky-600:  #1E8A6E; /* info — Ranger identity, info callouts */
+  --ts-sun-400:  #DBA12E; /* caution semantic + badge gold */
   --ts-danger-600: #A93226; /* risk semantic */
-  --ts-ink-500:  #4A5A54; /* secondary text */
-  --ts-line-200: #D8E0DA; /* hairlines / borders */
+  --ts-ink-500:  #46555A; /* secondary text */
+  --ts-line-200: #D6DFDA; /* hairlines / borders */
 
   /* ---- Color: v2 ramp extensions (gradients, tints, hover states) ---- */
-  --ts-pine-800: #16443A; /* dark-panel gradient mid-stop, hover on pine-700 */
-  --ts-pine-500: #2E7A63; /* vivid mid — gradient highlights, progress fills */
-  --ts-pine-100: #DFEDE6; /* brand tint fill — selected states, chips */
-  --ts-moss-50:  #F5F9F4; /* ground wash top-stop, raised-surface alt */
-  --ts-paper-50: #FDFEFD; /* raised surface (NOT pure #fff — see DESIGN-001) */
-  --ts-clay-600: #A84E20; /* clay hover/pressed */
-  --ts-clay-100: #F7E5D8; /* clay tint — XP chip grounds, accent wash */
-  --ts-sun-100:  #FAF0D6; /* badge-gold tint — earned-badge glow ground */
-  --ts-sky-100:  #E0ECF3; /* info tint */
+  --ts-pine-800: #1E4440; /* dark-panel gradient mid-stop, hover on pine-700 */
+  --ts-pine-500: #3B8266; /* vivid mid — gradient highlights, progress fills */
+  --ts-pine-100: #DEEDE5; /* brand tint fill — selected states, chips */
+  --ts-moss-50:  #F4F9F6; /* ground wash top-stop, raised-surface alt */
+  --ts-paper-50: #FCFEFD; /* raised surface (NOT pure #fff — see DESIGN-001) */
+  --ts-clay-600: #983A5D; /* clay hover/pressed */
+  --ts-clay-100: #F6E0E9; /* clay tint — XP chip grounds, accent wash */
+  --ts-sun-100:  #F9EFD3; /* badge-gold tint — earned-badge glow ground */
+  --ts-sky-100:  #DCF0E8; /* info tint */
   --ts-danger-100: #F5E0DE; /* risk tint */
 
   /* ---- Surfaces & gradients (the v2 depth layer) ---- */
   --ts-ground: linear-gradient(180deg, var(--ts-moss-50) 0%, var(--ts-moss-100) 100%);
-  --ts-grad-panel: linear-gradient(160deg, #14382E 0%, var(--ts-pine-950) 58%, #0A2019 100%);
-  --ts-grad-scrim: linear-gradient(180deg, rgb(14 42 35 / 0) 0%, rgb(14 42 35 / 0.55) 62%, rgb(14 42 35 / 0.86) 100%);
-  --ts-glow-clay: radial-gradient(closest-side, rgb(196 98 45 / 0.28), transparent);
-  --ts-glow-sun:  radial-gradient(closest-side, rgb(224 167 46 / 0.30), transparent);
+  --ts-grad-panel: linear-gradient(160deg, #14293C 0%, var(--ts-pine-950) 58%, #081522 100%);
+  --ts-grad-scrim: linear-gradient(180deg, rgb(13 30 46 / 0) 0%, rgb(13 30 46 / 0.55) 62%, rgb(13 30 46 / 0.86) 100%);
+  --ts-glow-clay: radial-gradient(closest-side, rgb(181 68 110 / 0.28), transparent);
+  --ts-glow-sun:  radial-gradient(closest-side, rgb(219 161 46 / 0.30), transparent);
 
   /* ---- Typography (faces unchanged; scale gains fluid display sizes) ---- */
   --ts-font-display: "Bricolage Grotesque", system-ui, sans-serif;
@@ -70,10 +73,10 @@
   --ts-radius-pill: 999px;
 
   /* ---- Elevation (v2: layered, pine-tinted — never neutral gray) ---- */
-  --ts-shadow-1: 0 1px 2px rgb(14 42 35 / 0.05), 0 2px 8px rgb(14 42 35 / 0.05);   /* resting cards */
-  --ts-shadow-2: 0 2px 4px rgb(14 42 35 / 0.05), 0 10px 24px rgb(14 42 35 / 0.08); /* hover, sticky chrome */
-  --ts-shadow-3: 0 4px 10px rgb(14 42 35 / 0.06), 0 22px 48px rgb(14 42 35 / 0.12);/* overlays, modals */
-  --ts-shadow-glow-clay: 0 4px 20px rgb(196 98 45 / 0.28); /* primary-CTA hover bloom */
+  --ts-shadow-1: 0 1px 2px rgb(13 30 46 / 0.05), 0 2px 8px rgb(13 30 46 / 0.05);   /* resting cards */
+  --ts-shadow-2: 0 2px 4px rgb(13 30 46 / 0.05), 0 10px 24px rgb(13 30 46 / 0.08); /* hover, sticky chrome */
+  --ts-shadow-3: 0 4px 10px rgb(13 30 46 / 0.06), 0 22px 48px rgb(13 30 46 / 0.12);/* overlays, modals */
+  --ts-shadow-glow-clay: 0 4px 20px rgb(181 68 110 / 0.28); /* primary-CTA hover bloom */
   --ts-blur-chrome: 12px; /* translucent sticky header backdrop */
 
   /* ---- Motion (DESIGN-004 v2) ---- */
@@ -91,10 +94,11 @@
   --ts-z-chrome: 30; --ts-z-overlay: 40; --ts-z-toast: 50;
   /* Ring hue must clear WCAG 3:1 for non-text indicators on BOTH grounds, since
    * one ring serves the whole product and it paints on the surface OUTSIDE the
-   * focused element. pine-300 measures 1.89:1 on paper-0 (invisible — DESIGN-006
-   * bans that); pine-700 mirrors the failure on pine-950 at 1.91:1. clay-500 is
-   * the only brand step that clears both: 3.98:1 on paper-0, 3.73:1 on pine-950. */
-  --ts-focus-ring-color: var(--ts-clay-500);
+   * focused element. Fireweed clay-500 (#B5446E) clears paper-0 (~6.3:1) but
+   * fails pine-950 navy (~2.6:1), so the ring uses clay-400 — a lifted fireweed
+   * that clears both grounds (~3.6:1 on paper-0, ~4.5:1 on pine-950). */
+  --ts-clay-400: #CE6B92; /* lifted fireweed: focus ring + accent TEXT on dark panels (4.9:1 on pine-950) — not a fill color */
+  --ts-focus-ring-color: var(--ts-clay-400);
   --ts-focus-ring: 0 0 0 2px var(--ts-paper-0), 0 0 0 4px var(--ts-focus-ring-color); /* 2px ring, 2px offset via double shadow */
 
   /* ---- v1 aliases (shipped components still name these; they resolve to the
@@ -111,13 +115,13 @@
  */
 .ts-contour {
   background-color: var(--ts-moss-100);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3Cg fill='none' stroke='%230E2A23' stroke-opacity='0.08' stroke-width='1'%3E%3Cpath d='M-20 60 C 80 20, 160 100, 260 70 S 440 30, 460 80'/%3E%3Cpath d='M-20 120 C 90 80, 170 160, 270 128 S 440 92, 460 140'/%3E%3Cpath d='M-20 180 C 100 140, 180 220, 280 186 S 440 152, 460 200'/%3E%3Cpath d='M-20 240 C 90 205, 175 280, 275 246 S 440 212, 460 260'/%3E%3Cpath d='M-20 300 C 80 268, 165 340, 265 306 S 440 272, 460 320'/%3E%3Cpath d='M-20 360 C 90 330, 170 400, 270 366 S 440 332, 460 380'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3Cg fill='none' stroke='%230D1E2E' stroke-opacity='0.08' stroke-width='1'%3E%3Cpath d='M-20 60 C 80 20, 160 100, 260 70 S 440 30, 460 80'/%3E%3Cpath d='M-20 120 C 90 80, 170 160, 270 128 S 440 92, 460 140'/%3E%3Cpath d='M-20 180 C 100 140, 180 220, 280 186 S 440 152, 460 200'/%3E%3Cpath d='M-20 240 C 90 205, 175 280, 275 246 S 440 212, 460 260'/%3E%3Cpath d='M-20 300 C 80 268, 165 340, 265 306 S 440 272, 460 320'/%3E%3Cpath d='M-20 360 C 90 330, 170 400, 270 366 S 440 332, 460 380'/%3E%3C/g%3E%3C/svg%3E");
   background-size: 420px 420px;
 }
 .ts-contour-strong { background-color: transparent; background-image: inherit; }
 .ts-contour-strong,
 .ts-contour.ts-contour--strong {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3Cg fill='none' stroke='%230E2A23' stroke-opacity='0.11' stroke-width='1'%3E%3Cpath d='M-20 60 C 80 20, 160 100, 260 70 S 440 30, 460 80'/%3E%3Cpath d='M-20 120 C 90 80, 170 160, 270 128 S 440 92, 460 140'/%3E%3Cpath d='M-20 180 C 100 140, 180 220, 280 186 S 440 152, 460 200'/%3E%3Cpath d='M-20 240 C 90 205, 175 280, 275 246 S 440 212, 460 260'/%3E%3Cpath d='M-20 300 C 80 268, 165 340, 265 306 S 440 272, 460 320'/%3E%3Cpath d='M-20 360 C 90 330, 170 400, 270 366 S 440 332, 460 380'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3Cg fill='none' stroke='%230D1E2E' stroke-opacity='0.11' stroke-width='1'%3E%3Cpath d='M-20 60 C 80 20, 160 100, 260 70 S 440 30, 460 80'/%3E%3Cpath d='M-20 120 C 90 80, 170 160, 270 128 S 440 92, 460 140'/%3E%3Cpath d='M-20 180 C 100 140, 180 220, 280 186 S 440 152, 460 200'/%3E%3Cpath d='M-20 240 C 90 205, 175 280, 275 246 S 440 212, 460 260'/%3E%3Cpath d='M-20 300 C 80 268, 165 340, 265 306 S 440 272, 460 320'/%3E%3Cpath d='M-20 360 C 90 330, 170 400, 270 366 S 440 332, 460 380'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 /* Ambient drift: apply to a dedicated contour layer INSIDE a panel (child div or

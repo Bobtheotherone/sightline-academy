@@ -21,8 +21,8 @@ from PIL import Image
 OUT = Path(r"D:\Sightline_Saftey_Academy\web\public")
 OUT.mkdir(parents=True, exist_ok=True)
 
-PINE_950, CLAY_500, PAPER_0, PINE_300 = "#0E2A23", "#C4622D", "#FBFCFA", "#9CC3B4"
-INK_500 = "#4A5A54"
+PINE_950, CLAY_500, PAPER_0, PINE_300 = "#0D1E2E", "#B5446E", "#F9FCFA", "#ABCDB8"
+INK_500 = "#46555A"
 
 CONTOUR = (
     "<g fill='none' stroke='%s' stroke-opacity='0.07' stroke-width='1'>"
@@ -82,12 +82,12 @@ OG = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1
   <text x="290" y="214" fill="{PAPER_0}" font-family="system-ui, sans-serif"
         font-size="86" font-weight="800" letter-spacing="-1.5">Sightline</text>
   <text x="292" y="262" fill="{PINE_300}" font-family="system-ui, sans-serif"
-        font-size="27" font-weight="600" letter-spacing="7.5">SAFETY ACADEMY</text>
+        font-size="27" font-weight="600" letter-spacing="6.2">ATV SAFETY ACADEMY</text>
   <path d="M292 316 H1104" stroke="{PAPER_0}" stroke-opacity="0.16" stroke-width="2"/>
   <text x="292" y="386" fill="{PAPER_0}" font-family="system-ui, sans-serif"
         font-size="45" font-weight="600">Ride like you&#8217;ve thought it through.</text>
   <text x="292" y="446" fill="{PINE_300}" font-family="system-ui, sans-serif"
-        font-size="27" font-weight="400">A free ATV and road safety course built around judgment, not fear.</text>
+        font-size="27" font-weight="400">An ATV and road safety course built around judgment, not fear.</text>
   <g transform="translate(292,498)">
     <rect x="0" y="0" width="13" height="13" rx="3.5" fill="{CLAY_500}" transform="rotate(45 6.5 6.5)"/>
     <text x="30" y="15" fill="{PAPER_0}" font-family="system-ui, sans-serif"
@@ -114,7 +114,10 @@ JOBS = [
     (mark(64, 0, scale=0.72), "icon-192.png", 192, 192, False),
     (mark(64, 0, scale=0.72), "icon-512.png", 512, 512, False),
     (MASK_ICON, "mask-icon.svg", None, None, False),
-    (OG, "og-default.png", 1200, 630, False),
+    # v2: renamed deliberately. Scrapers cache OG images aggressively and
+    # key on URL, so overwriting og-default.png would keep serving the old
+    # "SAFETY ACADEMY" + "A free ... course" card from their caches.
+    (OG, "og-default-v2.png", 1200, 630, False),
 ]
 
 

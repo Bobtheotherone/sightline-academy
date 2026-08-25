@@ -17,10 +17,11 @@ import { ContourPanel } from "../components/ContourPanel";
 import { EmptyState } from "../components/EmptyState";
 import { Skeleton, SkeletonGroup } from "../components/Skeleton";
 import { SlotArt } from "../components/SlotArt";
+import { usePlanPrice } from "../lib/usePlanPrice";
 
 const COURSE_TITLE = "Sightline Safety Academy ATV & Road Safety Course";
 
-const COURSE_FACTS = ["6 modules", "22 lessons", "~5 hrs, self-paced", "Free, always"];
+const COURSE_FACTS = ["6 modules", "22 lessons", "~5 hrs, self-paced"];
 
 const DISCLAIMER =
   "Sightline Safety Academy is an online awareness and judgment course. This certificate is not a license, legal certification, or a substitute for hands-on rider training.";
@@ -34,19 +35,21 @@ function longDate(iso: string): string {
 
 /** The supporting column: what the reader is actually looking at, in every state. */
 function AboutRail() {
+  // Public page, public endpoint: show the price the server will charge.
+  const price = usePlanPrice();
   return (
     <RiseIn delay={120}>
       <Card padding="m">
         <p className="ts-eyebrow">What Sightline is</p>
         <h2 className="mt-1.5 font-display text-lg font-bold">
-          A free ATV &amp; road safety course
+          An ATV &amp; road safety course
         </h2>
         <p className="mt-2 text-sm text-ink-500">
           Judgment first — most crashes are decided before the wheels turn. A certificate means its
           holder worked through all six modules and passed the final assessment.
         </p>
         <ul className="mt-5 flex flex-col gap-2 border-t border-line-200 pt-5 font-mono text-xs text-ink-500">
-          {COURSE_FACTS.map((fact) => (
+          {[...COURSE_FACTS, price.display].map((fact) => (
             <li key={fact} className="flex items-center gap-2.5">
               <BlazeMarker state="done" size="s" />
               {fact}
@@ -159,7 +162,7 @@ export default function VerifyPage() {
                       variant="accent"
                       iconRight={<ArrowRight className="size-4" strokeWidth={2} aria-hidden />}
                     >
-                      Start the course — it's free
+                      Start the course
                     </LinkButton>
                     <LinkButton to="/" variant="secondary">
                       See the six modules
@@ -178,7 +181,7 @@ export default function VerifyPage() {
                       <>
                         <LinkButton to="/">Go to Sightline Safety Academy</LinkButton>
                         <LinkButton to="/register" variant="secondary">
-                          Start the course — it's free
+                          Start the course
                         </LinkButton>
                       </>
                     }
@@ -189,6 +192,7 @@ export default function VerifyPage() {
               {offline && (
                 <Card padding="l" className="rounded-lg">
                   <EmptyState
+                    art={<SlotArt slot="state-offline" ratio="5 / 3" />}
                     heading="We couldn't check that code"
                     body="The connection dropped before we could verify. Check your network and try again."
                     action={

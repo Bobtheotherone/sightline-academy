@@ -5,13 +5,13 @@
       "status": "real",
       "kind": "raster",
       "widths": [
-        1600,
+        1536,
         1200,
         800,
         400
       ],
-      "alt": "Illustration: a rider in a full-face helmet, gloves and over-the-ankle boots sits upright on a four-wheeled ATV on a level dirt trail, with pines and mountains behind.",
-      "note": "SDXL render (seed 1234), retouched and exported as a 4-width AVIF/WebP/PNG ladder."
+      "alt": "Illustration: A rider in full gear — helmet, gloves, boots — sits upright on a four-wheeled ATV on a blazed mountain trail, magenta waypoint diamonds receding along the route, fireweed blooming at the trail edge.",
+      "note": "GPT Image (gpt-pack batch 01, a001-hero-landing.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "hero-m1-mindset": {
       "status": "real",
@@ -21,8 +21,8 @@
         800,
         400
       ],
-      "alt": "Illustration: a rider in full protective gear stands on the ground beside a parked ATV on a forest trail, the machine switched off, looking ahead down the trail.",
-      "note": "SDXL render (seed 42). The rider's raised hand rendered malformed; removed by column-wise flat reconstruction of the background. Photo inpainting and a feathered clone were both tried first and both smeared — flat vector art has hard edges, so blending is always visible and structure must be rebuilt instead."
+      "alt": "Illustration: A rider stands beside a parked, switched-off ATV at a trail junction, a dotted scan line tracing from their visor to the blazed left route while an unmarked route fades right — the line is chosen before it is ridden.",
+      "note": "GPT Image (gpt-pack batch 01, a002-hero-m1-mindset.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "hero-m2-machine": {
       "status": "real",
@@ -32,8 +32,8 @@
         800,
         400
       ],
-      "alt": "Illustration: a utility ATV stands alone on a dirt trail with no rider, its tyres, racks and handlebars clearly visible.",
-      "note": "SDXL render, retouched and exported as an AVIF/WebP/PNG width ladder."
+      "alt": "Illustration: Side view of a utility ATV drawn as a field-guide plate, callout ticks marking the handlebars, rear rack, footwells, and a magenta tick at the front tire — the walkaround's starting point.",
+      "note": "GPT Image (gpt-pack batch 01, a003-hero-m2-machine.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "hero-m3-gear": {
       "status": "real",
@@ -43,8 +43,8 @@
         800,
         400
       ],
-      "alt": "Illustration: riding kit laid out in neat rows on a plain ground — helmets, jackets, gloves and boots arranged like museum specimens.",
-      "note": "SDXL render, retouched and exported as an AVIF/WebP/PNG width ladder."
+      "alt": "Illustration: Riding kit laid out like museum specimens: a full-face helmet with a magenta accent, padded gloves, and over-the-ankle boots in neat rows.",
+      "note": "GPT Image (gpt-pack batch 01, a004-hero-m3-gear.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "hero-m4-terrain": {
       "status": "real",
@@ -54,8 +54,8 @@
         800,
         400
       ],
-      "alt": "Illustration: a narrow dirt trail winds across a forested hillside in long switchbacks, with layered ridgelines receding behind it.",
-      "note": "SDXL render, retouched and exported as an AVIF/WebP/PNG width ladder."
+      "alt": "Illustration: A hillside drawn as nested contour bands, a switchback trail climbing to the summit, with a magenta caution cue marking the steep face.",
+      "note": "GPT Image (gpt-pack batch 01, a005-hero-m4-terrain.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "hero-m5-environment": {
       "status": "real",
@@ -65,8 +65,8 @@
         800,
         400
       ],
-      "alt": "Illustration: a heavy bank of storm cloud stands over a forested valley in cold overcast light.",
-      "note": "SDXL render (seed 7). Four seeds first produced a pastel sunset; leading the subject band with the storm instead of appending it fixed it."
+      "alt": "Illustration: A storm front crossing a forested valley drawn map-style: a pennanted cold-front line, rain over the west ridge, and a compass rose with a magenta needle.",
+      "note": "GPT Image (gpt-pack batch 01, a006-hero-m5-environment.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "hero-m6-roads": {
       "status": "real",
@@ -76,13 +76,18 @@
         800,
         400
       ],
-      "alt": "Illustration: an empty paved road running through forest, receding into the distance.",
-      "note": "SDXL render (seed 2025). The shipped brief — a trail MEETING a road with a machine stopped at the boundary — is a relationship between things and never rendered: with the rider led, no road appeared; with the road led, the machine vanished. VISUAL_ASSETS 6.5. The hero carries the module's subject; the crossing procedure stays in the lesson's vector keylist, where structure can actually be drawn."
+      "alt": "Illustration: Bird's-eye view of a dirt trail meeting a paved road at a marked crossing; the rider sits stopped and square at a magenta stop bar with sight lines swept both ways along the road.",
+      "note": "GPT Image (gpt-pack batch 01, a007-hero-m6-roads.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "scene-atv-anatomy": {
       "status": "real",
-      "file": "svg/scene-atv-anatomy.svg",
-      "alt": "Side view of a single-rider utility ATV with its systems in place: low-pressure tires, front brake caliper, coil-over suspension, engine, frame tube, footwell running boards, handlebars, and front and rear cargo racks."
+      "alt": "Illustration: A utility ATV in side view against a plain ground, drawn flat and unshaded so its parts read clearly — front and rear racks, handlebars, seat, engine and driveline, footwell, and both knobbly tires. Four thin leader lines run out from the machine to the labelled waypoints.",
+      "kind": "raster",
+      "widths": [
+        1024,
+        512
+      ],
+      "note": "GPT Image (gpt-pack batch 01, a003-hero-m2-machine.png), promoted from hero art to the m2-l1-s2 anatomy scene 2026-08-18; cropped (0,22,1536,943) to hold the 5:3 coordinate contract. Four drawn leader lines fix the positions of waypoints 1 (tires), 2 (handlebars), 7 (racks) and 8 (chassis) — those markers sit at the free end of each line, so the crop must not change without re-measuring them. Supersample-downscaled AVIF q72 / WebP q92 / PNG ladder."
     },
     "scene-walkaround-top": {
       "status": "lab-owned",
@@ -90,23 +95,43 @@
     },
     "scene-helmet-fit": {
       "status": "real",
-      "file": "svg/scene-helmet-fit.svg",
-      "alt": "Cross-section of a helmet on a rider's head showing shell, impact liner, and comfort padding as layers, with the strap V fastened and a two-finger brow-gap check drawn at the rim."
+      "kind": "raster",
+      "widths": [
+        1024,
+        512
+      ],
+      "alt": "A full-face helmet worn and fastened, cut away to show three layers — hard outer shell, thick crushable liner, thin comfort padding — with gloved fingers slid under the chin strap to check its tightness.",
+      "note": "GPT Image batch 14 (artgen/incoming/batch-14/a011-scene-helmet-fit.png), 2026-08-23. Re-roll of the batch-13 plate under artgen/gpt-pack/batches/batch-14-plate-rerolls.md, whose binding rule is the REAR-VIEW RULE: a quad drawn from directly behind shows two tires, the front pair hidden. The batch-13 plate for keylist-pavement-physics was rejected for splaying all four wheels into view. Integrated as scaled to 95% and padded on the plate ground to fit 5:3 without clipping the gloved hand. Owner accepted all seven on 2026-08-23 with known residuals recorded in the session review."
     },
     "scene-trail-hazards": {
       "status": "real",
-      "file": "svg/scene-trail-hazards.svg",
-      "alt": "A mid-morning forest trail dipping through a drainage, broadcasting seven cues: a blind crest, an off-camber section, shadowed ruts, a dark wet patch at the low point, gravel over hardpack on the climb out, a downed limb screened by brush, and a soft undercut edge above the water."
+      "kind": "raster",
+      "widths": [
+        1024,
+        512
+      ],
+      "alt": "A mid-morning forest trail dipping through a drainage, broadcasting seven cues: a blind crest, an off-camber section, shadowed ruts, a dark wet patch at the low point, gravel over hardpack on the climb out, a downed limb screened by brush, and a soft undercut edge above the water.",
+      "note": "GPT Image via Codex $imagegen (artgen/incoming/batch-13/a009-scene-trail-hazards.png), 2026-08-21, reviewed at full size against VISUAL_ASSETS Part 5 and the batch-13 checklist (artgen/VISUAL_AUDIT_M3-M6.md). Replaces the authored SVG hunt base. Cropped to 5:3 from the TOP (0,0,1536,922) so the blind crest survives. COORDINATE CONTRACT: six of the seven m4-l1-s2 hotspot x/y values were re-measured to this plate's features (shadow_rut unchanged) and recorded in BUILDLOG — do not change this crop without re-measuring. No magenta and no markers in the art: the renderer draws them. Retired SVG kept at svg/scene-trail-hazards.svg."
     },
     "scene-crossing": {
       "status": "real",
-      "file": "svg/scene-crossing.svg",
-      "alt": "Bird's-eye view of an ATV stopped square behind the stop bar at a road crossing, sight lines swept in both directions along the road and a vehicle approaching from the left."
+      "kind": "raster",
+      "widths": [
+        1536,
+        768
+      ],
+      "alt": "Seen from above, a quad stopped square behind the stop bar where a dirt trail meets a paved road, dotted sight lines running both ways along the road, a straight crossing lane at a right angle to the far side, a second machine waiting behind the first, and a car some distance away.",
+      "note": "GPT Image batch 14 (artgen/incoming/batch-14/a012-scene-crossing.png), 2026-08-23. Re-roll of the batch-13 plate under artgen/gpt-pack/batches/batch-14-plate-rerolls.md, whose binding rule is the REAR-VIEW RULE: a quad drawn from directly behind shows two tires, the front pair hidden. The batch-13 plate for keylist-pavement-physics was rejected for splaying all four wheels into view. Integrated as centre-crop 3:2, presented whole. Owner accepted all seven on 2026-08-23 with known residuals recorded in the session review."
     },
     "scene-loading-cargo": {
       "status": "real",
-      "file": "svg/scene-loading-cargo.svg",
-      "alt": "Rear-view comparison of rack loading: a low, centered, strapped case with a low center of gravity beside a tall loose stack whose high center of gravity tips the machine."
+      "kind": "raster",
+      "widths": [
+        1536,
+        768
+      ],
+      "alt": "Rear-view comparison of rack loading: a low, centered, strapped case with a low center of gravity beside a tall loose stack whose high center of gravity tips the machine; the tall stack is marked as the wrong choice.",
+      "note": "GPT Image batch 14 (artgen/incoming/batch-14/a013-scene-loading-cargo.png), 2026-08-23. Re-roll of the batch-13 plate under artgen/gpt-pack/batches/batch-14-plate-rerolls.md, whose binding rule is the REAR-VIEW RULE: a quad drawn from directly behind shows two tires, the front pair hidden. The batch-13 plate for keylist-pavement-physics was rejected for splaying all four wheels into view. Integrated as scaled to 83% and padded on the plate ground to fit 5:2 — a straight centre-crop would have cut the check and cross marks off the top. Owner accepted all seven on 2026-08-23 with known residuals recorded in the session review."
     },
     "badge-b-mindset": {
       "status": "real",
@@ -294,18 +319,18 @@
     },
     "keylist-tcloc": {
       "status": "real",
-      "file": "svg/keylist-tcloc.svg",
-      "alt": "Five T-CLOC inspection zones drawn as stations around a machine and walked as an ordered loop, numbered one to five from the marked start station and returning to it."
-    },
-    "keylist-six-decisions": {
-      "status": "real",
-      "file": "svg/keylist-six-decisions.svg",
-      "alt": "Six risk decisions - bare head, pavement, extra rider, impairment, wrong-size machine and outrunning your eyes - drawn as six equal marks at equal distance around one geared rider, each touching the rider: a set with no single villain."
+      "alt": "Plan view of a quad ATV with five inspection stops arranged around it as a dashed walking loop, arrows running one way: a knobby tire, a handlebar, a headlight, an oil droplet and a welded frame joint.",
+      "kind": "raster",
+      "widths": [
+        1536,
+        768
+      ],
+      "note": "GPT Image (c160-keylist-tcloc.png), 2026-08-19. Replaced the authored SVG, whose two weakest icons did not read (a crosshair meant to be a tire, a parallelogram meant to be a frame) and whose walk order was conveyed by making the learner count one to five dots under each badge. Presented at 3:2 — its native ratio — by the hotspot_figure block, NOT the 5:3 of a plain figure: the five stops are click targets at fixed percentages, so any crop would move them. The retired SVG is kept at svg/keylist-tcloc.svg."
     },
     "keylist-three-leaks": {
       "status": "real",
       "file": "svg/keylist-three-leaks.svg",
-      "alt": "A judgment reservoir with its level fallen, draining through three separate outlets of equal size: group gravity pulling the last rider along, familiarity discounting a repeated trail, and sunk momentum pushing on into failing light."
+      "alt": "A gauge labelled \"judgment level\" beside a tank: a dashed line marks where full was, and the level sits well below it, draining through three separate leaks of equal size into three pools underneath. Thoughts surface in the tank as it empties — \"Everyone else went.\", \"Don't hold them up.\", \"I know this trail.\", \"Nothing new here.\", \"We've come this far.\", \"But I'm almost there.\" — and once it is low, the leaks stop and fresh judgment pours back in from above."
     },
     "keylist-fit-checks": {
       "status": "real",
@@ -320,28 +345,53 @@
     },
     "keylist-stability-model": {
       "status": "real",
-      "file": "svg/keylist-stability-model.svg",
-      "alt": "One stability model at centre - centre of gravity held over the support base between the tires - with four applications around it: climbing slopes, side-hills, rider position as a control, and loads carried high."
+      "kind": "raster",
+      "widths": [
+        1536,
+        768
+      ],
+      "alt": "A rear view of a rider on a quad with the centre of gravity marked in the rider's torso and a plumb line falling inside the track width between the tires; four medallions around it show the same machine on an uphill slope, on a side-slope, with the rider leaning uphill, and carrying a tall rear load.",
+      "note": "GPT Image batch 14 (artgen/incoming/batch-14/c006-keylist-stability-model.png), 2026-08-23. Re-roll of the batch-13 plate under artgen/gpt-pack/batches/batch-14-plate-rerolls.md, whose binding rule is the REAR-VIEW RULE: a quad drawn from directly behind shows two tires, the front pair hidden. The batch-13 plate for keylist-pavement-physics was rejected for splaying all four wheels into view. Integrated as centre-crop 3:2, presented whole. Owner accepted all seven on 2026-08-23 with known residuals recorded in the session review."
     },
     "keylist-four-families": {
       "status": "real",
-      "file": "svg/keylist-four-families.svg",
-      "alt": "The four weather families split by what they degrade: water and light acting on the trail being read on the left, cold-and-heat and dust acting on the rider doing the reading on the right."
+      "kind": "raster",
+      "widths": [
+        1536,
+        768
+      ],
+      "alt": "A plate split in two: on the left, rain and low light falling on a dirt trail; on the right, a geared rider between a thermometer reading cold and hot and a machine ahead trailing dust — the two families that change the trail, and the two that change the rider.",
+      "note": "GPT Image batch 14 (artgen/incoming/batch-14/c007-keylist-four-families.png), 2026-08-23. Re-roll of the batch-13 plate under artgen/gpt-pack/batches/batch-14-plate-rerolls.md, whose binding rule is the REAR-VIEW RULE: a quad drawn from directly behind shows two tires, the front pair hidden. The batch-13 plate for keylist-pavement-physics was rejected for splaying all four wheels into view. Integrated as centre-crop 3:2, presented whole. Owner accepted all seven on 2026-08-23 with known residuals recorded in the session review."
     },
     "keylist-before-you-go": {
       "status": "real",
-      "file": "svg/keylist-before-you-go.svg",
-      "alt": "The three before-you-go artifacts laid out before the ride: a ride plan with the route and turnaround marked, a communication plan naming who is told and when, and the carry kit strapped to the machine's rack."
+      "kind": "raster",
+      "widths": [
+        1536,
+        768
+      ],
+      "alt": "A driveway before a ride: a paper map with a drawn route loop and a wristwatch on its corner, a phone propped against a hand-written note with a lit house window behind, and a kit bag strapped low on the rear rack of the parked quad — a geared rider crouched over the map.",
+      "note": "GPT Image via Codex $imagegen (artgen/incoming/batch-13/c008-keylist-before-you-go.png), 2026-08-21, reviewed at full size against VISUAL_ASSETS Part 5 and the batch-13 checklist (artgen/VISUAL_AUDIT_M3-M6.md). Replaces the authored SVG (three clip-art cards over drop shadows). Presented whole at 3:2 by the m5-l2-s1 hotspot_figure block; the three artifacts are click targets at measured percentages — do not crop. Retired SVG kept at svg/keylist-before-you-go.svg."
     },
     "keylist-stop-assess-communicate": {
       "status": "real",
-      "file": "svg/keylist-stop-assess-communicate.svg",
-      "alt": "Stop, assess and communicate drawn as a strict three-stage sequence numbered one to three, each stage passing through a gate that only the previous stage opens."
+      "kind": "raster",
+      "widths": [
+        1024,
+        512
+      ],
+      "alt": "Three medallions in a row — a raised gloved palm over a switched-off quad, an open eye over a rider kneeling beside a seated rider, and a handheld radio beside a phone — joined left to right by two opened gates.",
+      "note": "GPT Image batch 14 (artgen/incoming/batch-14/c009-keylist-stop-assess-communicate.png), 2026-08-23. Re-roll of the batch-13 plate under artgen/gpt-pack/batches/batch-14-plate-rerolls.md, whose binding rule is the REAR-VIEW RULE: a quad drawn from directly behind shows two tires, the front pair hidden. The batch-13 plate for keylist-pavement-physics was rejected for splaying all four wheels into view. Integrated as centre-crop 5:3. Owner accepted all seven on 2026-08-23 with known residuals recorded in the session review."
     },
     "keylist-pavement-physics": {
       "status": "real",
-      "file": "svg/keylist-pavement-physics.svg",
-      "alt": "Three engineering facts - a tire built to deform, a locked rear axle, and a high centre of gravity - with their arrows all converging on the same conclusion at the pavement."
+      "kind": "raster",
+      "widths": [
+        1536,
+        768
+      ],
+      "alt": "Three medallions — a soft knobby tire squashed flat on pavement, a solid rear axle with the outside wheel scrubbing in a turn, and a rear view of a quad tipping on grippy pavement — with three arrows converging on one point on a strip of road.",
+      "note": "GPT Image batch 14 (artgen/incoming/batch-14/c010-keylist-pavement-physics.png), 2026-08-23. Re-roll of the batch-13 plate under artgen/gpt-pack/batches/batch-14-plate-rerolls.md, whose binding rule is the REAR-VIEW RULE: a quad drawn from directly behind shows two tires, the front pair hidden. The batch-13 plate for keylist-pavement-physics was rejected for splaying all four wheels into view. Integrated as centre-crop 3:2, presented whole. Owner accepted all seven on 2026-08-23 with known residuals recorded in the session review."
     },
     "keylist-good-crossing": {
       "status": "deferred",
@@ -351,38 +401,43 @@
     },
     "keylist-three-standards": {
       "status": "real",
-      "file": "svg/keylist-three-standards.svg",
-      "alt": "Three standards posted as signs at one trail junction - zero impairment, yielding generously to others, and staying on designated trail - applying to whichever branch is taken."
+      "kind": "raster",
+      "widths": [
+        1536,
+        768
+      ],
+      "alt": "At a forest trail junction a single post carries three square signs: a bottle and glass struck through, a hiker and a horse given room by a machine pulled aside, and a trail with its shortcut crossed out — a geared rider stopped beneath them.",
+      "note": "GPT Image via Codex $imagegen (artgen/incoming/batch-13/c012-keylist-three-standards.png), 2026-08-21, reviewed at full size against VISUAL_ASSETS Part 5 and the batch-13 checklist (artgen/VISUAL_AUDIT_M3-M6.md). Replaces the authored SVG (stick figure, blob horse). Presented whole at 3:2 by the m6-l3-s1 hotspot_figure block; the three signs are click targets at measured percentages — do not crop. Retired SVG kept at svg/keylist-three-standards.svg."
     },
     "match-thumb-throttle": {
       "status": "real",
       "file": "svg/match-thumb-throttle.svg",
-      "alt": "Thumb throttle: the hand stays closed around the grip while the thumb alone works a small lever on the bar."
+      "alt": "Thumb throttle: the rider's right hand gripping the bar, thumb pressing down the flat throttle paddle hinged below it."
     },
     "match-front-brake": {
       "status": "real",
       "file": "svg/match-front-brake.svg",
-      "alt": "Front brake: a hand lever hinged at a perch beside the grip and swept out in front of the handlebar."
+      "alt": "Front brake: the hand lever on its perch — a long blade tapering from the pivot to a ball at the tip, swept out ahead of the grip."
     },
     "match-rear-brake": {
       "status": "real",
       "file": "svg/match-rear-brake.svg",
-      "alt": "Rear brake: an over-the-ankle boot with its toe down on the foot pedal pad, the pedal arm swept back to its pivot."
+      "alt": "Rear/foot brake: an over-the-ankle riding boot with its toe down on the cleated pedal pad."
     },
     "match-stop-switch": {
       "status": "real",
       "file": "svg/match-stop-switch.svg",
-      "alt": "Engine stop switch: a proud rocker in a raised bezel, thrown to the side marked by a bold stop bar so it can be found by feel."
+      "alt": "Engine stop switch: a two-way rocker in a raised housing, thrown to the red off side that carries the power mark, so it can be found by feel."
     },
     "match-gear-selector": {
       "status": "real",
       "file": "svg/match-gear-selector.svg",
-      "alt": "Gear selector: a routed gate plate with the lever seated at the bottom of the deep leg, chevrons marking the low range."
+      "alt": "Gear selector: a ball lever standing in the deep leg of a doglegged gate plate."
     },
     "match-body-position": {
       "status": "real",
       "file": "svg/match-body-position.svg",
-      "alt": "Body position, the invisible control: a helmeted rider standing on the footboards with weight moved forward over the bars, the direction of the lean marked in clay."
+      "alt": "Body position, the invisible control: a helmeted rider up off the seat with weight carried forward over the bars, the direction of the shift marked in clay."
     },
     "match-turnaround-time": {
       "status": "real",
@@ -571,188 +626,463 @@
     },
     "inset-tires": {
       "status": "real",
-      "file": "svg/inset-tires.svg",
-      "alt": "Close-up of a low-pressure ATV tire under load: the rim stays perfectly round while the carcass squats, bulges at the sidewall and moulds itself over a stone, spreading into a long contact patch instead of the single point a rigid wheel would make."
+      "alt": "Illustration: A low-pressure tire at ground level, its carcass visibly deforming around the terrain, marked magenta at the contact.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 08, c120-inset-tires.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "inset-handlebars": {
       "status": "real",
-      "file": "svg/inset-handlebars.svg",
-      "alt": "The handlebar cluster as the rider looks down on it: engine stop switch under the left thumb, brake lever standing off the right grip, and the thumb throttle hinged at the inboard end of that grip — the only control feeding the engine."
+      "alt": "Illustration: The bar cluster from the rider's seat: levers, switch cluster, display pod, and the magenta thumb throttle.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 08, c121-inset-handlebars.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "inset-brakes": {
       "status": "real",
-      "file": "svg/inset-brakes.svg",
-      "alt": "Behind the front wheel: a vented brake disc turning inside the rim with the caliper clamped over its edge, and a hose running up to the master cylinder and lever at the handlebar, so the whole squeeze-to-clamp circuit is visible at once."
+      "alt": "Illustration: The brake caliper — magenta — clamped over a drilled disc, its line running back toward the lever.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 08, c122-inset-brakes.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "inset-suspension": {
       "status": "real",
-      "file": "svg/inset-suspension.svg",
-      "alt": "A coil-over shock caught part way through its travel: the frame holds its line, the lower arm swings down, the spring compresses, and the tire stays pressed into a rock — with the stroke still held in reserve marked alongside the shock."
+      "alt": "Illustration: A coil-over shock with a magenta spring working through its travel, mounted above the wheel.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 08, c123-inset-suspension.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder; re-cropped 2026-08-18 to 4:3 from (147,0,1283,852) of the original so no ground is in frame — the shock is the subject."
     },
     "inset-engine": {
       "status": "real",
-      "file": "svg/inset-engine.svg",
-      "alt": "The engine mass with the fuel tank sitting on it, marked with the two walkaround stops joined by one check line: the fuel filler cap on top and the oil sight glass on the crankcase."
+      "alt": "Illustration: The engine mass between frame tubes, with the fuel cap and oil sight marked as check points.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 08, c124-inset-engine.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "inset-footwells": {
       "status": "real",
-      "file": "svg/inset-footwells.svg",
-      "alt": "An over-the-ankle boot planted flat on the footpeg inside the running board, with the heel guard drawn as the wall standing between that foot and the rear wheel turning just behind it."
+      "alt": "Illustration: A boot planted on the peg, the magenta-edged footwell guard standing between it and the rear wheel.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 08, c125-inset-footwells.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "inset-racks": {
       "status": "real",
-      "file": "svg/inset-racks.svg",
-      "alt": "A rear cargo rack carrying a low, centred case strapped down through both rails, with the posted rack limit tag hanging off the side and the load's centre of gravity marked sitting low and over the middle of the rack."
+      "alt": "Illustration: A rear rack carrying a low, centred bag strapped down magenta, a blank load-limit tag hanging from the rail.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 08, c126-inset-racks.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "walk-tires-ok": {
+      "status": "held",
+      "alt": "One rear knobby tire seen square from the side, sitting on flat ground with a full, evenly rounded sidewall and a short narrow contact patch — the profile of a tire at pressure.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (walkaround change-detector pack, c150), 2026-08-18. HELD, not wired: the m2-l3-s2 change detector needs a matched PAIR per zone and this plate has no usable partner — its 'after' came back as the same wheel drawn smaller and floating off the ground line rather than a squatting one (staged as _spare-tire-rejected.png; translation-testing confirmed it, aligning improved the match 6% against 41% for the genuinely misregistered lights pair). The ladder is already exported. Land a real low-pressure plate as walk-tires-low, flip this back to real, and add the T entry to walkaroundZones.ts — the lab picks it up with no other change."
+    },
+    "walk-controls-ok": {
+      "status": "real",
+      "alt": "The right handlebar from the rider's seat: the ribbed grip whole and closed at its outboard end, the brake lever on its perch at a normal standoff.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (walkaround change-detector pack, c151), reviewed 2026-08-18; supersample-downscaled AVIF/WebP/PNG ladder. Paired plate for the m2-l3-s2 change detector — the reference state for the controls zone."
+    },
+    "walk-controls-torn": {
+      "status": "real",
+      "alt": "The same handlebar, but the outboard end of the grip has split open and pulled back off the bar, leaving the bar end bare where a hand would sit.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (walkaround change-detector pack, c152), reviewed 2026-08-18; supersample-downscaled AVIF/WebP/PNG ladder. Paired plate for the m2-l3-s2 change detector — the changed state for the controls zone: a torn grip."
+    },
+    "walk-lights-ok": {
+      "status": "real",
+      "alt": "The front of the machine straight on: the headlight pod set into the bodywork with its lens clean and whole, the light off.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (walkaround change-detector pack, c153), reviewed 2026-08-18; supersample-downscaled AVIF/WebP/PNG ladder. Paired plate for the m2-l3-s2 change detector — the reference state for the lights zone."
+    },
+    "walk-lights-cracked": {
+      "status": "real",
+      "alt": "The same headlight, but the lens now carries a star of fracture lines radiating from a single impact point — the housing intact, nothing missing.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (walkaround change-detector pack, c154), reviewed 2026-08-18; supersample-downscaled AVIF/WebP/PNG ladder. Paired plate for the m2-l3-s2 change detector — the changed state for the lights zone: a cracked lens."
+    },
+    "walk-oil-ok": {
+      "status": "real",
+      "alt": "The underside of the parked machine from a low angle: the skid plate clean and dry, and on the ground beneath it one old dried stain, flat and matte and long settled.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (walkaround change-detector pack, c155), reviewed 2026-08-18; supersample-downscaled AVIF/WebP/PNG ladder. Paired plate for the m2-l3-s2 change detector — the reference state for the oil zone — note the old stain is present here too."
+    },
+    "walk-oil-drip": {
+      "status": "real",
+      "alt": "The same underside and the same old dry stain, with one thing added: a fresh wet drip running off the skid plate and a small glossy spot on the ground below it.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (walkaround change-detector pack, c156), reviewed 2026-08-18; supersample-downscaled AVIF/WebP/PNG ladder. Paired plate for the m2-l3-s2 change detector — the changed state for the oil zone: a fresh drip. The old stain is deliberately unchanged — it is not the signal."
+    },
+    "walk-chassis-ok": {
+      "status": "real",
+      "alt": "The rear cargo rack from a raised angle, a compact case sitting low and centred on it with the strap pulled tight and flat across the lid.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (walkaround change-detector pack, c157), reviewed 2026-08-18; supersample-downscaled AVIF/WebP/PNG ladder. Paired plate for the m2-l3-s2 change detector — the reference state for the chassis zone."
+    },
+    "walk-chassis-loose": {
+      "status": "real",
+      "alt": "The same rack and case, but the strap has gone slack across the lid and its free end hangs down past the rack rail.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (walkaround change-detector pack, c158), reviewed 2026-08-18; supersample-downscaled AVIF/WebP/PNG ladder. Paired plate for the m2-l3-s2 change detector — the changed state for the chassis zone: a loose strap."
     },
     "inset-chassis": {
       "status": "real",
-      "file": "svg/inset-chassis.svg",
-      "alt": "The same machine with its bodywork dropped back to a hairline so only the frame tubes remain, and the load path traced through them: rack rail into the backbone, along the backbone, out through the suspension mounts and down into the contact patches."
+      "alt": "The same machine with its bodywork dropped back to a hairline so only the frame tubes remain, and the load path traced through them: rack rail into the backbone, along the backbone, out through the suspension mounts and down into the contact patches.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 08, c127-inset-frame.png), the detailed frame cutaway; wired 2026-08-18 — the slot had been left on the placeholder svg/inset-chassis.svg while its seven siblings were converted. Supersample-downscaled AVIF q72 / WebP q92 / PNG ladder."
     },
     "inset-crest": {
       "status": "real",
-      "file": "svg/inset-crest.svg",
-      "alt": "A blind crest read as a cue: the trail's edges converge as it climbs and the surface simply stops at the ridge line. The far side of the valley is visible in the distance, everything between is not, and the sight distance is marked ending at the crest."
+      "alt": "Illustration: The trail rising to a crest and vanishing — the centre dots stop at a magenta point, and that is all the sight distance there is.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 09, c128-inset-blind-crest.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "inset-side-slope": {
       "status": "real",
-      "file": "svg/inset-side-slope.svg",
-      "alt": "Cross-section of an off-camber trail bench cut into a hillside: the far edge sits below the near edge, the surface line is measured against level to show the drop, and every sapling on the slope leans the same way, downhill."
+      "alt": "Illustration: An off-camber section in cross-section: the far edge lower than the near, vegetation leaning downslope, a magenta tilt mark on the tread.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 09, c129-inset-off-camber.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "inset-shadow-rut": {
       "status": "real",
-      "file": "svg/inset-shadow-rut.svg",
-      "alt": "A tree shadow lying across the trail: straight over flat ground, and kinking down and back out where it crosses each rut. The bend in a line that should have been straight is the only thing that gives a rut away in flat light."
+      "alt": "Illustration: Deep ruts running through a band of shadow, one lit edge marked magenta where the light crosses the line.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 09, c130-inset-shadowed-ruts.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "inset-wet-clay": {
       "status": "real",
-      "file": "svg/inset-wet-clay.svg",
-      "alt": "The low point of a drainage dip: the trail surface changes colour and goes darker and smoother well before any standing water appears, with runoff arriving from both slopes and a shallow pool collecting at the bottom. The dry-to-damp edge is marked."
+      "alt": "Illustration: Water collecting in the low point of a dip, the magenta waterline marking where the trail surface changes colour.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 09, c131-inset-wet-patch.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "inset-loose-over-hard": {
       "status": "real",
-      "file": "svg/inset-loose-over-hard.svg",
-      "alt": "Cut through the tread: a thin sheet of loose gravel lying on a hard packed base nothing keys into, a wheel track that has already ploughed the loose layer aside, and the stones thrown clear and piled on the verges. The interface between loose and hard is marked."
+      "alt": "Illustration: Loose gravel spread over hardpack, stones scattering like marbles at the edges — one marked magenta.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 09, c132-inset-gravel.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "inset-deadfall": {
       "status": "real",
-      "file": "svg/inset-deadfall.svg",
-      "alt": "A downed limb read as a cue: one horizontal line lying across a stand of vertical trunks, broken into fragments by brush screening it, with the line the eye has to complete across those gaps drawn in."
+      "alt": "Illustration: A downed limb lying across the trail, part-screened by brush, its fresh break marked magenta.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 09, c133-inset-downed-limb.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "inset-soft-edge": {
       "status": "real",
-      "file": "svg/inset-soft-edge.svg",
-      "alt": "Section through an undercut trail edge: the tread runs on well past the ground beneath it, cracks run parallel to the lip, chunks have already broken away, roots hang in the shadow of the void, and the water that took the toe out is still working at it."
+      "alt": "Illustration: The trail edge in cross-section: a crumbling lip, exposed roots beneath, magenta clods letting go above the water.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 09, c134-inset-soft-edge.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "lesson-m1-l1": {
       "status": "real",
-      "file": "svg/lesson-m1-l1.svg",
-      "alt": "Six equal trail-blaze marks set in one row, one of them accented: the handful of decisions behind most ATV crashes drawn as a short, countable list rather than as freak accidents."
+      "alt": "Illustration: Six blaze marks in a row, one magenta — the short list of decisions behind most serious crashes, drawn as a set.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 06, b001-lesson-m1-l1.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "lesson-m1-l2": {
       "status": "real",
-      "file": "svg/lesson-m1-l2.svg",
-      "alt": "A machine halted on the near bank of a creek at a marked stopping point, the crossing still ahead of it: the moment where pressure to keep up meets a decision that has not been made yet."
+      "alt": "Illustration: A creek line with one machine stopped on the near bank while three riders wait across — judgment under group pressure.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 06, b002-lesson-m1-l2.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "lesson-m1-l3": {
       "status": "real",
-      "file": "svg/lesson-m1-l3.svg",
-      "alt": "An open field notebook carrying four written entries with one entry marked: a personal risk profile is a short written list of your own habits, not a general warning that applies to everyone equally."
+      "alt": "Illustration: An open notebook with ruled entries, one marked magenta — your own risk profile taking shape.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 06, b003-lesson-m1-l3.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "lesson-m2-l1": {
       "status": "real",
-      "file": "svg/lesson-m2-l1.svg",
-      "alt": "A utility ATV in side profile with eight callout ticks placed around it, one marked as the start point: the machine is a set of named systems you can learn and check one at a time."
+      "alt": "Illustration: A machine silhouette ringed by eight tick marks — the systems a rider should be able to point to.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 06, b004-lesson-m2-l1.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "lesson-m2-l2": {
       "status": "real",
-      "file": "svg/lesson-m2-l2.svg",
-      "alt": "A handlebar control cluster shown in isolation: thumb throttle above the grip, brake lever under the bar and kill switch inboard, so each control is learned by where the hand finds it."
+      "alt": "Illustration: A handlebar cluster seen from the rider's seat — both ribbed grips, a brake lever swept ahead of each, and the thumb throttle paddle picked out in magenta.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (b005-lesson-m2-l2.png), 2026-08-19. Replaced the authored SVG placeholder, which was flat outline geometry — a grey bar with a black dot and a magenta rectangle — and read as unfinished beside its raster siblings. batch-11-rerolls had specified this re-roll and was never run; the first attempt had failed as two stacked panels that turned to mud at 96px. Cropped 3:2 → 16:9 to match lesson-m2-l1/l4; supersample-downscaled AVIF/WebP/PNG ladder. Content inset to 0.80 and padded with its own page background so the tile floats with page margin like lesson-m2-l1 and l4 do: at native scale the tile ran nearly edge to edge (94% and 90% of frame width against the siblings' 55% and 78%), which read as cramped and full-bleed next to them in the lesson list."
     },
     "lesson-m2-l3": {
       "status": "real",
-      "file": "svg/lesson-m2-l3.svg",
-      "alt": "A machine ringed by a dotted loop with five inspection stations on it, one marked as the start: the pre-ride check is a fixed circuit walked in the same order every time, not a glance."
+      "alt": "Illustration: A quad seen from directly above, ringed by a dashed inspection loop with five stops — four spruce and one magenta, where the lap begins.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (b006-lesson-m2-l3.png), 2026-08-19. Replaced the authored SVG placeholder. batch-11-rerolls had specified this re-roll and was never run; the first attempt had failed with FOUR stops when T-CLOC is five — this one was counted, four spruce plus one magenta. Cropped 3:2 → 16:9 centred on content: the tile very nearly fills the frame vertically (2px top, 1px bottom), so this crop must not be retaken by eye. Supersample-downscaled AVIF/WebP/PNG ladder. Content inset to 0.80 and padded with its own page background so the tile floats with page margin like lesson-m2-l1 and l4 do: at native scale the tile ran nearly edge to edge (94% and 90% of frame width against the siblings' 55% and 78%), which read as cramped and full-bleed next to them in the lesson list."
     },
     "lesson-m2-l4": {
       "status": "real",
-      "file": "svg/lesson-m2-l4.svg",
-      "alt": "A fully geared rider on a machine with two measurements drawn: reach from shoulder to the marked grip, and seat height down to the ground. Fit is measured, not felt."
+      "alt": "Illustration: A rider standing before a machine with a magenta reach line to the bars and a stance line at the ground — fit measured, not guessed.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 06, b007-lesson-m2-l4.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "lesson-m3-l1": {
       "status": "real",
-      "file": "svg/lesson-m3-l1.svg",
-      "alt": "A full-face helmet cut back in layers so the crushable liner shows as a thick band between the hard outer shell and the head space: the liner is the part that does the work in a crash."
+      "alt": "Illustration: A helmet in profile with its crushable liner exposed as a magenta band — the mechanism every fit rule falls out of.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 06, b008-lesson-m3-l1.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "lesson-m3-l2": {
       "status": "real",
-      "file": "svg/lesson-m3-l2.svg",
-      "alt": "Three columns holding one gear item each, read head to toe: helmet, gloves and over-ankle boots. Gear is a complete set covered top to bottom, not a helmet plus whatever is handy."
+      "alt": "Illustration: Helmet, glove, and over-the-ankle boot in a row — the head-to-toe kit as three groups.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 06, b009-lesson-m3-l2.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "lesson-m3-l3": {
       "status": "real",
-      "file": "svg/lesson-m3-l3.svg",
-      "alt": "A pocket gear card with five checked rows, one accented: your own gear standard written down as a short checklist you can carry and check against before every ride."
+      "alt": "Illustration: A card of five checkbox rows, one checked magenta — the gear card as a pocket ritual.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 06, b010-lesson-m3-l3.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "lesson-m4-l1": {
       "status": "real",
-      "file": "svg/lesson-m4-l1.svg",
-      "alt": "A trail receding to a marked far point with a scanning arc swept across it from side to side: reading terrain means working the eyes far ahead, near, and out to both edges in a repeating cycle."
+      "alt": "Illustration: A trail receding to its vanishing point with a magenta scan arc sweeping far, near, and sides.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 07, b011-lesson-m4-l1.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "lesson-m4-l2": {
       "status": "real",
-      "file": "svg/lesson-m4-l2.svg",
-      "alt": "A machine seen from behind with its centre of gravity marked and a plumb line dropped between the wheels: the machine stays up while that line falls inside the rectangle its four contact patches make."
+      "alt": "Illustration: A machine seen from behind with a plumb line dropping into a support rectangle at the ground — the stability envelope as geometry.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 07, b012-lesson-m4-l2.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "lesson-m4-l3": {
       "status": "real",
-      "file": "svg/lesson-m4-l3.svg",
-      "alt": "One junction offering two routes up the same slope: a longer blazed switchback marked as the chosen line, and a short steep shortcut left unmarked. The decision is made at the junction, not on the climb."
+      "alt": "Illustration: A junction: a gentle blazed switchback bending left, a steep shortcut dropping right.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 07, b013-lesson-m4-l3.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "lesson-m4-l4": {
       "status": "real",
-      "file": "svg/lesson-m4-l4.svg",
-      "alt": "A single trail blaze set on a hillside drawn as nested contour rings: the module's terrain reading closes with one checkpoint, the ground understood as shape and steepness before it is ridden."
+      "alt": "Illustration: A single magenta blaze centred on a spruce contour ring — the terrain module's checkpoint.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 07, b014-lesson-m4-l4.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "lesson-m5-l1": {
       "status": "real",
-      "file": "svg/lesson-m5-l1.svg",
-      "alt": "The same marked trail drawn twice side by side, dry on one side and wet on the other: the route does not change with the weather but the traction, braking distance and line choice all do."
+      "alt": "Illustration: One trail drawn twice, dry and wet side by side, a blaze diamond at the split — conditions change the same ground.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 07, b015-lesson-m5-l1.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "lesson-m5-l2": {
       "status": "real",
-      "file": "svg/lesson-m5-l2.svg",
-      "alt": "Three pre-ride objects on one line: a map with the destination marked, a phone showing the time you said you would be back, and a small pack. Preparation is decided before the engine starts."
+      "alt": "Illustration: Map, phone showing a clock, and a small pack — the before-you-go trio laid out.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 07, b016-lesson-m5-l2.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "lesson-m5-l3": {
       "status": "real",
-      "file": "svg/lesson-m5-l3.svg",
-      "alt": "A machine lying on its side and an undamaged helmet resting intact on the ground beside it: after a spill the gear has already done its job, and what matters next is the calm sequence of stop, assess, communicate."
+      "alt": "Illustration: A machine resting on its side with an untouched helmet beside it and the trail marker standing — the first minutes, drawn calm.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 07, b017-lesson-m5-l3.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "lesson-m5-l4": {
       "status": "real",
-      "file": "svg/lesson-m5-l4.svg",
-      "alt": "A trail blaze set directly on an advancing cold-front line with clear sky behind it: the environment module closes on the habit of reading the sky as a moving edge, not as the weather you set out in."
+      "alt": "Illustration: A magenta blaze over a pennanted cold-front line — the environment module's checkpoint.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 07, b018-lesson-m5-l4.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "lesson-m6-l1": {
       "status": "real",
-      "file": "svg/lesson-m6-l1.svg",
-      "alt": "A low-pressure knobby tire pressed onto pavement with its contact patch deforming: tires built to flex and bite into loose ground squirm on hard surfaces, which is why pavement handling is unpredictable."
+      "alt": "Illustration: A knobby tire pressed onto hard pavement, its contact patch squirming magenta — why the machine itself objects.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 07, b019-lesson-m6-l1.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "lesson-m6-l2": {
       "status": "real",
-      "file": "svg/lesson-m6-l2.svg",
-      "alt": "A trail meeting a paved road from above, with a marked stop bar set back from the edge and the crossing path drawn at a right angle to the road: cross pavement square, at the shortest possible line, after stopping."
+      "alt": "Illustration: Bird's-eye view of a magenta stop bar and a square crossing arrow over the dark road.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 07, b020-lesson-m6-l2.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "lesson-m6-l3": {
       "status": "real",
-      "file": "svg/lesson-m6-l3.svg",
-      "alt": "A hiker, a horse and a machine spaced out along one trail with the machine halted at a marked point: engines yield to feet and hooves, and the yielding happens early enough to be obvious."
+      "alt": "Illustration: A hiker, a horse and rider, and a stopped ATV spaced courteously along one trail, a blaze post between them.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 08, b021-lesson-m6-l3.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "lesson-m6-l4": {
       "status": "real",
-      "file": "svg/lesson-m6-l4.svg",
-      "alt": "A folded ride-plan sheet with all six sections filled in and one accented: the capstone pulls route, terrain, weather, gear, machine check and contact time into one written plan before the ride starts."
+      "alt": "Illustration: A folded ride-plan sheet of six filled sections, one magenta — the capstone as a document.",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "note": "GPT Image (gpt-pack batch 08, b022-lesson-m6-l4.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "level-1-trailhead": {
       "status": "real",
@@ -892,8 +1222,8 @@
         800,
         400
       ],
-      "alt": "Illustration: a forested valley with a trail running through it toward a distant peak, seen from below.",
-      "note": "SDXL render, retouched and exported as an AVIF/WebP/PNG width ladder."
+      "alt": "Illustration: The final ridge of a summit approach, the trail switchbacking up toward a magenta summit marker visible ahead.",
+      "note": "GPT Image (gpt-pack batch 01, b082-hero-assessment.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "hero-graduate": {
       "status": "real",
@@ -903,38 +1233,439 @@
         800,
         400
       ],
-      "alt": "Illustration: a wide view over layered mountain ranges receding to the horizon, with a trail running back down through the ridges below.",
-      "note": "SDXL render, retouched and exported as an AVIF/WebP/PNG width ladder."
+      "alt": "Illustration: The summit reached: one magenta blaze planted in the rock, the whole range and a river valley spread out below.",
+      "note": "GPT Image (gpt-pack batch 01, b083-hero-graduate.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "scenario-creek-line": {
       "status": "real",
-      "file": "svg/scenario-creek-line.svg",
-      "alt": "Late afternoon at a creek crossing. The water runs fast and opaque - a broken, streaked surface with rocks throwing standing waves - so its depth and bottom cannot be read, and both banks are undercut. Two riders in full gear are stopped on the near bank where the trail ends at the water, the lead rider's arm raised; two more riders are already across on the far bank."
+      "alt": "Illustration: mid-morning at a fast, opaque spring creek - two riders already across on the far bank, two stopped on the near side, the crossing marker standing at the water.",
+      "kind": "raster",
+      "widths": [
+        1024,
+        512
+      ],
+      "note": "GPT Image (gpt-pack batch 09, c050-scenario-creek-header.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "scenario-creek-pressure": {
       "status": "real",
-      "file": "svg/scenario-creek-pressure.svg",
-      "alt": "The same crossing with the light going. Two riders are together on the far bank, one of them off his machine and pointing at a sun that is nearly down. One rider is still stopped alone on the near bank, small in open ground with his shadow stretching away and the fast opaque water between him and the group."
+      "alt": "Illustration: the same crossing after dark - headlights and starlight on black water, the far group waiting at the edge, nothing about the creek readable anymore.",
+      "kind": "raster",
+      "widths": [
+        1024,
+        512
+      ],
+      "note": "GPT Image (gpt-pack batch 09, c051), reviewed 2026-08-16. Night render kept deliberately: the n2 beat IS low visibility (owner direction 2026-08-16); the earlier dusk retouch was reverted same day. Re-rolled 2026-08-16 with headlights lit, matching the node-2 report text (\"your headlight flattens the water into one black sheet\") — the beams read on the bank and die on the water, which is the point."
     },
     "scenario-shortcut-slope": {
       "status": "real",
-      "file": "svg/scenario-shortcut-slope.svg",
-      "alt": "A hillside junction offering two ways down to the same valley. On the left a made trail descends in long shallow switchback zigzags; on the right a steep grassy shortcut drops almost straight down on worn tire tracks, with an off-camber traverse crossing its middle where the surface visibly tilts sideways. Contour lines are widely spaced on the left and bunched on the right: the same drop, far less distance."
+      "alt": "Illustration: A rider stopped square at a junction: gentle switchbacks descending left, a steep damp shortcut dropping right with an off-camber traverse midway.",
+      "kind": "raster",
+      "widths": [
+        1024,
+        512
+      ],
+      "note": "GPT Image (gpt-pack batch 09, c052-scenario-junction-header.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "scenario-offcamber-wet": {
       "status": "real",
-      "file": "svg/scenario-offcamber-wet.svg",
-      "alt": "A short off-camber stretch of switchback. The trail is benched into a hillside that rises above it and falls away below it into treetops far down, and over one stretch the outside of the tread rolls over toward the drop. A spring seep runs out of a notch in the cut bank and crosses the tilted section as a dark wet band. A rider in full gear approaches slowly on the level part of the trail before it, machine level."
+      "alt": "Illustration: Midway down the switchback: spring water crossing the trail in a short off-camber wet stretch, the rider stopped before it.",
+      "kind": "raster",
+      "widths": [
+        1024,
+        512
+      ],
+      "note": "GPT Image (gpt-pack batch 10, c053-scenario-switchback-node2.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "scenario-silent-radio": {
       "status": "real",
-      "file": "svg/scenario-silent-radio.svg",
-      "alt": "A quad lying on its side at the outside of a bend on a forest climb, drawn muted and low in contrast so the people are the subject. The rider is sitting up on the ground beside it in full gear with the helmet still on, calmly supporting one wrist with the other hand. A second rider in full gear is walking over to them. No injury is shown."
+      "alt": "Illustration: On a climbing trail, a machine rests on its side at the outside of a bend; a rider sits beside it, helmet on, holding one wrist, while a second rider stops above.",
+      "kind": "raster",
+      "widths": [
+        1024,
+        512
+      ],
+      "note": "GPT Image (gpt-pack batch 10, c054-scenario-incident-header.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
     },
     "scenario-one-bar": {
       "status": "real",
-      "file": "svg/scenario-one-bar.svg",
-      "alt": "Dusk in a quiet clearing. Two riders in full gear sit on the ground beside an upright, switched-off quad. One holds a phone up checking for a signal; the other is wearing a spare layer taken from the pack that lies open on the ground beside them, with a second rolled layer still to hand. The carry kit is doing its job."
+      "kind": "raster",
+      "widths": [
+        1024,
+        512
+      ],
+      "alt": "The same bend a few minutes later, engines off: one rider sits against a rock holding a wrist in their lap while a second kneels beside them holding up a phone whose screen shows a single bar of signal; the third rider waits beside a stopped machine up the trail.",
+      "note": "GPT Image via Codex $imagegen (artgen/incoming/batch-13/c055-scenario-one-bar.png), 2026-08-21, reviewed at full size against VISUAL_ASSETS Part 5 and the batch-13 checklist (artgen/VISUAL_AUDIT_M3-M6.md). Replaces the authored SVG (no continuity with c054, stray magenta, toy machine). Re-roll of the batch-11 C-055 brief; reviewed against 5.4.1 — helmets on, gear intact, no injury drawn, calmer than its prose. Centre-cropped 16:9 (0,80,1536,944), rungs match c054. Residual: the signal glyph has three bars, one filled — still reads as one bar. Retired SVG kept at svg/scenario-one-bar.svg."
+    },
+    "games-hero": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        1200,
+        800,
+        400
+      ],
+      "alt": "Illustration: A practice range in a forest clearing: a parked ATV beside a course of diamond markers laid out in a loop, the starting marker magenta.",
+      "note": "GPT Image (gpt-pack batch 01, g001-games-hero.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "callout-pattern": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        800,
+        400
+      ],
+      "alt": "Illustration: a parked ATV on a forest trail beside a column of five wordless warning panels — a helmet crossed out, a paved road, two riders on a single machine crossed out, a bottle and glass crossed out, and a small rider against an oversized machine — the short list that search-and-rescue callouts keep repeating.",
+      "note": "GPT Image re-roll 2026-08-16 (artgen/incoming/batch-11/c020-callout-pattern.png). The batch-03 render depicted an ABSENCE — an empty ring where a helmet should be — which read as nothing at the 176px this vignette actually renders at. The re-roll names the five factors as wordless panels instead. Exported scale-to-FIT with paper side padding, not centre-cropped: the panel column runs nearly the full source height, so a 5:3 centre crop clipped the helmet and oversized-machine panels."
+    },
+    "callout-why-it-works": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        800,
+        400
+      ],
+      "alt": "Illustration: The same machine on two mornings side by side; on the second, a small fresh drip under the engine is circled — visible only because the walkaround ritual made you look.",
+      "note": "GPT Image (gpt-pack batch 03, c021-callout-why-it-works.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "callout-checkin": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        800,
+        400
+      ],
+      "alt": "Illustration: Two places at once: a rider wrapped warm beside a dead machine at dusk, and a lit window in town where the ride plan lies on the table — connected by a dotted line.",
+      "note": "GPT Image (gpt-pack batch 03, c022-callout-checkin.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "callout-counting": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        800,
+        400
+      ],
+      "alt": "Illustration: At a narrow trail meeting, the lead rider holds up three gloved fingers — three machines follow behind.",
+      "note": "GPT Image (gpt-pack batch 03, c023-callout-counting.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "callout-awareness-line": {
+      "status": "held",
+      "kind": "raster",
+      "widths": [
+        800,
+        400
+      ],
+      "alt": "Illustration: Three concentric scopes around a rider and machine: what this course teaches, what the owner's manual gives, and what hands-on training gives.",
+      "note": "HELD, not wired 2026-08-19: the three-nested-rings treatment read as decoration rather than as the three sources of knowledge it meant. m2-l3-s1's caution callout now borrows callout-fit. Files kept — re-point CALLOUT_ART in activities/content/index.tsx to bring it back."
+    },
+    "callout-fit": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        800,
+        400
+      ],
+      "alt": "Illustration: A too-large machine towering over a small rider, gold alert ticks failing at the seat, bars, and footwells — all four fit gates at once.",
+      "note": "GPT Image (gpt-pack batch 03, c025-callout-fit.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "callout-model": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        800,
+        400
+      ],
+      "alt": "Illustration: The lab's clean support-rectangle diagram beside a real slope's messy rocks and grass, joined by an 'approximately' mark — a concept model, not the terrain.",
+      "note": "GPT Image (gpt-pack batch 03, c026-callout-model.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "callout-boundary": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        800,
+        400
+      ],
+      "alt": "Illustration: A gold line divides trailside scene-safety and basic aid from a clinic building — the boundary between what a rider does and what professionals do.",
+      "note": "GPT Image (gpt-pack batch 03, c027-callout-boundary.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "callout-traffic": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        800,
+        400
+      ],
+      "alt": "Illustration: A rider stopped at the trailside as a semi truck passes on the road — the mass and closing speed the trail never produces.",
+      "note": "GPT Image (gpt-pack batch 03, c028-callout-traffic.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "callout-out-loud": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        800,
+        400
+      ],
+      "alt": "Illustration: A speech bubble holding a single spruce-green blaze over a quiet trail — the out-loud rule made visible.",
+      "note": "GPT Image (gpt-pack batch 03, c030-callout-out-loud.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "callout-cues": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        800,
+        400
+      ],
+      "alt": "Illustration: The same trail drawn twice: on the left a novice's view of obstacles, on the right the expert's view — green cue marks pointing at the texture changes that matter.",
+      "note": "GPT Image (gpt-pack batch 04, c035-callout-cues.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "moment-lesson-complete": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        800,
+        400
+      ],
+      "alt": "Illustration: A magenta blaze newly planted beside the trail, the route continuing on toward the ridge.",
+      "note": "GPT Image (gpt-pack batch 04, d007-moment-lesson-complete.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "moment-module-complete": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        800,
+        400
+      ],
+      "alt": "Illustration: A module badge settling into a magenta blaze-shaped frame, the next module's ridge visible behind it.",
+      "note": "GPT Image (gpt-pack batch 04, d008-moment-module-complete.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "moment-level-up": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        800,
+        400
+      ],
+      "alt": "Illustration: A level ring completing around a trail emblem, a magenta spark at the point where the arc closes.",
+      "note": "GPT Image (gpt-pack batch 04, d009-moment-level-up.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "moment-badge-earned": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        800,
+        400
+      ],
+      "alt": "Illustration: A shelf of faded badge outlines with one full-colour badge newly seated in its slot.",
+      "note": "GPT Image (gpt-pack batch 04, d010-moment-badge-earned.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "moment-certificate": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        800,
+        400
+      ],
+      "alt": "Illustration: A hand stamp pressing a circular mountain seal onto the corner of a certificate sheet.",
+      "note": "GPT Image (gpt-pack batch 04, d011-moment-certificate.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "state-offline": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        800,
+        400
+      ],
+      "alt": "Illustration: A crisp trail marker in the foreground; the trail and the next marker fade into fog — temporary, not broken.",
+      "note": "GPT Image (gpt-pack batch 04, d012-state-offline.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "state-error-500": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        800,
+        400
+      ],
+      "alt": "Illustration: A footbridge washed out mid-span over a stream, the trail intact on both sides.",
+      "note": "GPT Image (gpt-pack batch 04, d013-state-error-500.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "state-tutor-timeout": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        800,
+        400
+      ],
+      "alt": "Illustration: Ranger's hat resting on a post beside a cold campfire ring and an open map — waiting, still present.",
+      "note": "GPT Image (gpt-pack batch 05, d014-state-tutor-timeout.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "state-rate-limited": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        800,
+        400
+      ],
+      "alt": "Illustration: A closed wooden gate across the trail with a clock hung on the post — reopening, not refusing.",
+      "note": "GPT Image (gpt-pack batch 05, d015-state-rate-limited.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "state-assessment-locked": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        800,
+        400
+      ],
+      "alt": "Illustration: The summit marker visible high above an unclimbed stretch of trail, the waypoints below still unfilled outlines.",
+      "note": "GPT Image (gpt-pack batch 05, d016-state-assessment-locked.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "games-card-sharp-round": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "alt": "Illustration: Three fanned field cards, the front one carrying a magenta blaze with a checkmark.",
+      "note": "GPT Image (gpt-pack batch 05, g002-card-sharp-round.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "games-card-walkaround": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "alt": "Illustration: A machine seen from above, circled by a dashed walkaround loop with five stops — the starting stop magenta.",
+      "note": "GPT Image (gpt-pack batch 05, g003-card-walkaround-order.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "games-card-replays": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        640,
+        320
+      ],
+      "alt": "Illustration: A trail looping back on itself to return to a magenta blaze — ride it again.",
+      "note": "GPT Image (gpt-pack batch 05, g004-card-replays.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "games-empty": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        800,
+        400
+      ],
+      "alt": "Illustration: A stack of blank diamond markers leaning on a post, waiting to be planted — the range not yet set up.",
+      "note": "GPT Image (gpt-pack batch 05, g005-games-empty.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "games-locked": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        800,
+        400
+      ],
+      "alt": "Illustration: A gated practice range with faded marker outlines beyond the fence, one lit magenta marker deeper in.",
+      "note": "GPT Image (gpt-pack batch 05, g006-games-locked.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "moment-clean-run": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        800,
+        400
+      ],
+      "alt": "Illustration: A row of magenta targets along a winding trail, every one of them lit — nothing missed.",
+      "note": "GPT Image (gpt-pack batch 05, g007-moment-clean-run.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "moment-perfect-round": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        800,
+        400
+      ],
+      "alt": "Illustration: One large magenta blaze carrying a checkmark over a calm range clearing — a perfect round.",
+      "note": "GPT Image (gpt-pack batch 05, g008-moment-perfect-round.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "range-m1": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        320,
+        160
+      ],
+      "alt": "Illustration: Range card for Module 1: a forking trail inside a magenta blaze diamond.",
+      "note": "GPT Image (gpt-pack batch 10, r001-range-m1.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "range-m2": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        320,
+        160
+      ],
+      "alt": "Illustration: Range card for Module 2: a utility ATV in profile inside a magenta blaze diamond.",
+      "note": "GPT Image (gpt-pack batch 10, r002-range-m2.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "range-m3": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        320,
+        160
+      ],
+      "alt": "Illustration: Range card for Module 3: a full-face helmet inside a magenta blaze diamond.",
+      "note": "GPT Image (gpt-pack batch 10, r003-range-m3.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "range-m4": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        320,
+        160
+      ],
+      "alt": "Illustration: Range card for Module 4: nested contour rings inside a magenta blaze diamond.",
+      "note": "GPT Image (gpt-pack batch 10, r004-range-m4.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "range-m5": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        320,
+        160
+      ],
+      "alt": "Illustration: Range card for Module 5: a cold front line over rain inside a magenta blaze diamond.",
+      "note": "GPT Image (gpt-pack batch 10, r005-range-m5.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "range-m6": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        320,
+        160
+      ],
+      "alt": "Illustration: Range card for Module 6: a road crossing in plan view inside a magenta blaze diamond.",
+      "note": "GPT Image (gpt-pack batch 10, r006-range-m6.png), reviewed against the Part 5 rubric 2026-08-16; supersample-downscaled AVIF/WebP/PNG ladder."
+    },
+    "scene-six-decisions": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        1024,
+        512
+      ],
+      "alt": "Illustration: one fully geared rider stands at the centre of a ring, with six equal medallions spaced evenly around it — a full-face helmet, a paved road, two riders on a machine built for one, a bottle beside a glass, a small rider next to an oversized machine, and a trail vanishing over a crest. Six decisions at equal distance from the rider; none outranks the others.",
+      "note": "GPT Image re-roll 2026-08-17 (artgen/incoming/batch-12/c001-scene-six-decisions.png), replacing the hand-drawn keylist-six-decisions SVG. Base plate for the m1-l1-s3 hotspot hunt, so it deliberately carries NO markers and NO fireweed magenta — the renderer draws the interactive markers and magenta means 'clickable'. Exported scale-to-FIT with paper side padding, not centre-cropped: the top and bottom medallions run past a 5:3 centre crop."
+    },
+    "scene-six-decisions-cut": {
+      "status": "real",
+      "kind": "raster",
+      "widths": [
+        1024,
+        512
+      ],
+      "alt": "Decorative overlay: the same six-decisions plate with its background removed, layered over the original so the interactive markers sit behind the artwork. It renders aria-hidden; scene-six-decisions carries the real description.",
+      "note": "Alpha cut-out companion to scene-six-decisions: identical artwork with the page background flood-filled to transparent (contiguous fill from the border plus seeds inside the sage ring, near-white only, so every medallion interior and the rider's white gear survive). Layered ON TOP of the full plate with the interactive pink drawn between the two, so a marker can never paint over the artwork. Decorative duplicate - alt is intentionally empty; scene-six-decisions carries the description."
     }
   }
 }

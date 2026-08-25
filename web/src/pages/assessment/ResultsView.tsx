@@ -62,7 +62,7 @@ function ScoreLine({ result }: { result: AssessmentResult }) {
   const missed = result.perQuestion.filter((p) => !p.correct).length;
   return (
     <p className="font-mono text-sm tabular-nums">
-      <span className={result.passed ? "text-sun-400" : "text-clay-500"}>
+      <span className={result.passed ? "text-clay-400" : "text-clay-500"}>
         {Math.round(result.scorePct)}%
       </span>{" "}
       · {result.perQuestion.length - missed} of {result.perQuestion.length} correct · bar is 80%
@@ -197,7 +197,7 @@ function PassResult({
                 className="shrink-0 [&_figcaption_span]:text-paper-0"
               />
               <div className="min-w-0">
-                <p className="ts-eyebrow text-sun-400!">Final assessment — passed</p>
+                <p className="ts-eyebrow text-clay-400!">Final assessment — passed</p>
                 <h1 className="mt-1 font-display text-3xl font-extrabold text-paper-0">
                   You've earned your sightline
                 </h1>
@@ -210,7 +210,7 @@ function PassResult({
                   {result.certificateCode ? (
                     <>
                       {" "}under code{" "}
-                      <span className="font-mono text-sun-400">{result.certificateCode}</span>
+                      <span className="font-mono text-clay-400">{result.certificateCode}</span>
                     </>
                   ) : null}
                   .

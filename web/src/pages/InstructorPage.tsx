@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Download } from "lucide-react";
-import { api, ApiError } from "../lib/api";
+import { api, ApiError, canViewInstructor } from "../lib/api";
 import { useSession } from "../lib/session";
 import { MODULE_FACTS } from "../lib/modules";
 import { CountUp, Reveal } from "../activities/motion";
@@ -336,7 +336,7 @@ function Overview() {
 
 export default function InstructorPage() {
   const { user } = useSession();
-  if (user?.role !== "instructor") return <Forbidden />;
+  if (!canViewInstructor(user?.role)) return <Forbidden />;
 
   return (
     <div className="mx-auto w-full max-w-page flex-1 px-6 py-10 lg:px-12">

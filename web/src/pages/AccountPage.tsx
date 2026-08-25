@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { Link, useNavigate } from "react-router-dom";
 import { Download } from "lucide-react";
 import { api, type MeResponse } from "../lib/api";
 import { useSession } from "../lib/session";
@@ -248,6 +248,119 @@ function DataSection() {
   );
 }
 
+
+/**
+ * Subscription state and the two hosted actions (SPEC-012).
+ *
+ * Both buttons hand off to Stripe rather than rendering any billing UI here:
+ * "manage" opens Stripe's billing portal, where changing a card, downloading
+ * invoices and cancelling all live. Nothing about a payment method is stored
+ * in, or passes through, this application.
+ */
+function SubscriptionSection() {
+  const { user } = useSession();
+  const onApiError = useApiError();
+
+  const statusQuery = useQuery({ queryKey: ["billingStatus"], queryFn: api.billingStatus });
+  const planQuery = useQuery({ queryKey: ["plan"], queryFn: api.plan });
+
+  const portal = useMutation({
+    mutationFn: api.billingPortal,
+    onSuccess: (res) => {
+      window.location.href = res.url;
+    },
+    onError: onApiError,
+  });
+
+  const status = statusQuery.data;
+  const access = status?.access;
+  const plan = planQuery.data;
+
+  // Staff read the course by role, so a billing card would be noise at best
+  // and an invitation to pay for something they already have at worst.
+  if (user?.isStaff) {
+    return (
+      <Card padding="l">
+        <h2 className="font-display text-lg font-bold">Course access</h2>
+        <p className="mt-3 text-sm text-ink-500">
+          Your <strong>{user.role}</strong> account has full access to the course. There is
+          nothing to subscribe to and nothing to pay.
+        </p>
+      </Card>
+    );
+  }
+
+  const price =
+    plan && plan.activeCents > 0
+      ? `$${(plan.activeCents / 100).toFixed(plan.activeCents % 100 === 0 ? 0 : 2)}/mo`
+      : null;
+
+  const periodEnd = access?.currentPeriodEnd
+    ? new Date(access.currentPeriodEnd).toLocaleDateString(undefined, {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      })
+    : null;
+
+  let headline = "No subscription yet";
+  let detail = "Start one to open the course. Your progress so far is kept either way.";
+  if (access?.reason === "comp") {
+    headline = "Complimentary access";
+    detail = "Access to this course was granted to you directly. There is nothing to pay.";
+  } else if (access?.reason === "paywall_disabled") {
+    headline = "Open access";
+    detail = "The course is currently open — no subscription is needed.";
+  } else if (access?.status === "active") {
+    headline = access.cancelAtPeriodEnd ? "Active — ending soon" : "Active";
+    detail = access.cancelAtPeriodEnd
+      ? `Cancelled. You keep full access until ${periodEnd ?? "the end of the period"}.`
+      : periodEnd
+        ? `Renews ${periodEnd}${price ? ` at ${price}` : ""}.`
+        : "Your subscription is active.";
+  } else if (access?.status === "past_due") {
+    headline = "Payment needs attention";
+    detail =
+      "The last payment didn't go through. You still have access — update your card to keep it.";
+  } else if (access?.reason === "expired") {
+    headline = "Subscription ended";
+    detail = "Start a new one whenever you like; everything you finished is still here.";
+  }
+
+  return (
+    <Card padding="l">
+      <h2 className="font-display text-lg font-bold">Subscription</h2>
+      <div className={FIELD_GRID}>
+        <div>
+          <p className="font-medium text-pine-950">{headline}</p>
+          <p className="mt-1.5 text-sm text-ink-500">{detail}</p>
+
+          <div className="mt-5 flex flex-wrap gap-3">
+            {access?.allowed && status?.hasStripeCustomer && (
+              <Button
+                variant="secondary"
+                loading={portal.isPending}
+                onClick={() => portal.mutate()}
+              >
+                Manage or cancel
+              </Button>
+            )}
+            {!access?.allowed && (
+              <Link to="/subscribe">
+                <Button variant="accent">Start the course</Button>
+              </Link>
+            )}
+          </div>
+        </div>
+        <p className={HINT_COLUMN}>
+          Payments and invoices are handled by Stripe. Cancelling stops the next charge and
+          leaves your access running until the period you have already paid for ends.
+        </p>
+      </div>
+    </Card>
+  );
+}
+
 export default function AccountPage() {
   const { user } = useSession();
   if (!user) return null;
@@ -285,12 +398,15 @@ export default function AccountPage() {
         </dl>
       </Reveal>
       <Reveal index={1}>
-        <DisplayNameSection />
+        <SubscriptionSection />
       </Reveal>
       <Reveal index={2}>
-        <PasswordSection />
+        <DisplayNameSection />
       </Reveal>
       <Reveal index={3}>
+        <PasswordSection />
+      </Reveal>
+      <Reveal index={4}>
         <DataSection />
       </Reveal>
     </div>

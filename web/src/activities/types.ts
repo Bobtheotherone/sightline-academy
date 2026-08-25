@@ -27,7 +27,29 @@ export type ContentBlock =
   | { type: "text"; md: string }
   | { type: "callout"; variant: "tip" | "caution" | "story"; title?: string; md: string }
   | { type: "figure"; assetSlot: string; caption: string }
-  | { type: "keylist"; title: string; items: { term: string; detail: string }[] };
+  | { type: "keylist"; title: string; items: { term: string; detail: string }[] }
+  /* A figure whose plate carries click targets: each stop is sealed under a
+   * pulsing clay disc until the learner opens it. `x`/`y` are percentages of
+   * the plate, so the slot must be presented at the ratio its art was drawn
+   * at — `ratio` exists for exactly that, and changing either without the
+   * other moves every target. */
+  | {
+      type: "hotspot_figure";
+      assetSlot: string;
+      /** Optional: omit it and the figure renders with no caption line. */
+      caption?: string;
+      ratio?: string;
+      prompt?: string;
+      stops: {
+        id: string;
+        x: number;
+        y: number;
+        /** Diameter of the seal, as a percentage of plate WIDTH. */
+        size?: number;
+        term: string;
+        detail: string;
+      }[];
+    };
 
 export interface ContentPayload extends StepPayloadBase {
   blocks: ContentBlock[];
@@ -99,6 +121,16 @@ export interface Hotspot {
   y: number;
   description: string;
   detail?: string;
+  /**
+   * Traced outline of the feature, as [x, y] pairs in the same scene
+   * percentages as `x`/`y`. When present it replaces the default elliptical
+   * hit window for the spot phase, so the target is the shape the cue is
+   * actually drawn as — a log is a log, not the oval around it.
+   *
+   * Omit it and the hotspot keeps the ellipse, which is what every scene
+   * without a traced region still relies on.
+   */
+  region?: [number, number][];
 }
 
 export interface HotspotListPayload extends StepPayloadBase {
@@ -106,6 +138,15 @@ export interface HotspotListPayload extends StepPayloadBase {
   intro: string;
   hotspots: Hotspot[];
   requireAll: boolean;
+  /**
+   * Open on the "spot the marks" hunt instead of the sealed medallions.
+   *
+   * Opt-in per step, and off by default. The hunt shows the plate bare — no
+   * seals, no numbers, no clay — which for a first-time learner reads as the
+   * step having lost its artwork rather than as an invitation to look. Steps
+   * that want the hunt ask for it explicitly.
+   */
+  spotFirst?: boolean;
 }
 
 // ---------------------------------------------------------------------------
@@ -126,6 +167,9 @@ export interface BranchChoice {
 export interface BranchNode {
   id: string;
   prompt: string;
+  /** Optional per-node field report — replaces the opening `scenario` text
+   * once the ride reaches this node (SPEC-007 §7 addendum, 2026-08-16). */
+  report?: string;
   choices: BranchChoice[];
 }
 

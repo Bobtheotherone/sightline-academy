@@ -25,6 +25,7 @@
   --color-paper-50: var(--ts-paper-50);
   --color-clay-600: var(--ts-clay-600);
   --color-clay-500: var(--ts-clay-500);
+  --color-clay-400: var(--ts-clay-400);
   --color-clay-100: var(--ts-clay-100);
   --color-sky-600: var(--ts-sky-600);
   --color-sky-100: var(--ts-sky-100);
@@ -154,7 +155,7 @@
  * tokens.css, ink swapped to paper for pine-950 panels. */
 .ts-contour-dark {
   background-color: var(--ts-pine-950);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3Cg fill='none' stroke='%23FBFCFA' stroke-opacity='0.07' stroke-width='1'%3E%3Cpath d='M-20 60 C 80 20, 160 100, 260 70 S 440 30, 460 80'/%3E%3Cpath d='M-20 120 C 90 80, 170 160, 270 128 S 440 92, 460 140'/%3E%3Cpath d='M-20 180 C 100 140, 180 220, 280 186 S 440 152, 460 200'/%3E%3Cpath d='M-20 240 C 90 205, 175 280, 275 246 S 440 212, 460 260'/%3E%3Cpath d='M-20 300 C 80 268, 165 340, 265 306 S 440 272, 460 320'/%3E%3Cpath d='M-20 360 C 90 330, 170 400, 270 366 S 440 332, 460 380'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3Cg fill='none' stroke='%23F9FCFA' stroke-opacity='0.07' stroke-width='1'%3E%3Cpath d='M-20 60 C 80 20, 160 100, 260 70 S 440 30, 460 80'/%3E%3Cpath d='M-20 120 C 90 80, 170 160, 270 128 S 440 92, 460 140'/%3E%3Cpath d='M-20 180 C 100 140, 180 220, 280 186 S 440 152, 460 200'/%3E%3Cpath d='M-20 240 C 90 205, 175 280, 275 246 S 440 212, 460 260'/%3E%3Cpath d='M-20 300 C 80 268, 165 340, 265 306 S 440 272, 460 320'/%3E%3Cpath d='M-20 360 C 90 330, 170 400, 270 366 S 440 332, 460 380'/%3E%3C/g%3E%3C/svg%3E");
   background-size: 420px 420px;
 }
 
@@ -191,6 +192,18 @@
       background: var(--ts-line-200);
       animation: none;
     }
+  }
+
+  /* Thought-marker breathe (scenario plates, owner directive 2026-08-16): a
+   * registered ambient alongside contour drift and the blaze breathe. rgb
+   * triplet is clay-400 #CE6B92 — box-shadow needs alpha the token can't
+   * carry. The tokens.css reduced-motion kill collapses it to the ring. */
+  @keyframes ts-thought-breathe {
+    0%, 100% { box-shadow: 0 0 0 2px rgb(206 107 146 / 0.45), 0 0 0 0 rgb(206 107 146 / 0); }
+    50% { box-shadow: 0 0 0 2px rgb(206 107 146 / 0.8), 0 0 12px 4px rgb(206 107 146 / 0.35); }
+  }
+  .ts-thought {
+    animation: ts-thought-breathe 3s var(--ts-ease-in-out) infinite;
   }
 }
 
@@ -257,6 +270,56 @@
   animation: ts-hotspot-pulse 2.2s var(--ts-ease-in-out) infinite;
 }
 
+/* Hotspot seal (activities/content/HotspotFigure). Opening a sealed stop used
+ * to swap two elements on the same frame: the seal vanished and the artwork was
+ * simply there. It read as a glitch rather than as an act, so the seal now lifts
+ * — scaling up and fading as it comes off — while the ring that replaces it
+ * springs in behind. The tokens.css reduced-motion kill collapses both. */
+@keyframes ts-seal-lift {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+}
+.ts-seal-lift {
+  animation: ts-seal-lift 380ms var(--ts-ease-out) forwards;
+  pointer-events: none;
+}
+@keyframes ts-seal-settle {
+  from {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.ts-seal-settle {
+  animation: ts-seal-settle 420ms var(--ts-ease-spring) 100ms backwards;
+}
+
+/* Spot-mode miss ripple (DESIGN-004 §Play): a guess that lands on nothing gets
+ * one soft expanding ring — feedback, never punishment. Forwards so the ring
+ * ends invisible; the element unmounts shortly after. */
+@keyframes ts-spot-miss {
+  from {
+    transform: scale(0.4);
+    opacity: 0.6;
+  }
+  to {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+.ts-spot-miss {
+  animation: ts-spot-miss 500ms var(--ts-ease-out) forwards;
+}
+
 /* Section interstitial contour travel (DESIGN-004 moment 7 — no entry delay). */
 @keyframes ts-interstitial-drift {
   from {
@@ -314,11 +377,43 @@
 
 /* Subtly ruled notebook background for journal surfaces (DESIGN-003). */
 .ts-ruled {
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent 31px,
-    var(--ts-line-200) 31px,
-    var(--ts-line-200) 32px
-  );
+  /* TWO layers.
+   * Layer 1 (on top) is the card's single divider between its header band and
+   * the sheet: 2px, so it reads as heavier than the page rules beneath it. It
+   * is pinned exactly ON the pattern's first line — that line underlines
+   * nothing, and used to paint as a second hairline 5px under the header's own
+   * border-b, which is the doubled line at the top of every ruled card. The
+   * headers no longer carry border-b; THIS is the divider now.
+   * Layer 2 is the ruled sheet, 32px pitch. The +6px offset that lands body
+   * baselines on the lines lives here rather than in five inline styles, so
+   * the divider can stay pinned to it. */
+  background-image:
+    linear-gradient(var(--ts-line-200), var(--ts-line-200)),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 31px,
+      var(--ts-line-200) 31px,
+      var(--ts-line-200) 32px
+    );
+  background-repeat: no-repeat, repeat;
+  background-size: 100% 2px, auto;
+  background-position: 0 5px, 0 6px;
+}
+
+/* Display headings on a ruled card need their own baseline correction.
+ * The rules sit on a 32px pitch and the +6px background offset lands the BODY
+ * face on them: measured on the landing artifact cards, Inter 14/32 puts its
+ * baseline 4.0px above the rule, but Bricolage 19/32 puts it only 1.5px above,
+ * because the two faces sit differently inside an identical line box. That 2.5px
+ * left every bold title crammed onto its line with the 5px descenders cutting
+ * through it. One offset cannot serve both faces, so correct the display one
+ * here — VISUALLY only. position:relative keeps the element's layout box on the
+ * 32px pitch, which the whole ruled rhythm depends on (shifting margins or
+ * line-height instead walks every following baseline off its line).
+ * Targets .font-display rather than h1-h6: the dashboard's ruled cards title
+ * their entries with a <p>, not a heading tag. */
+.ts-ruled .font-display {
+  position: relative;
+  top: -3px;
 }

@@ -281,7 +281,7 @@ export function GraduateHero() {
     // Every module complete, certificate pending — the assessment is the trailhead.
     return (
       <HeroPanel slot="hero-assessment">
-        <p className="ts-eyebrow text-sun-400!">All six modules complete</p>
+        <p className="ts-eyebrow text-clay-400!">All six modules complete</p>
         <h2 className="mt-2 font-display text-2xl font-bold text-paper-0">
           The final assessment is open
         </h2>
@@ -299,7 +299,7 @@ export function GraduateHero() {
 
   return (
     <HeroPanel slot="hero-graduate">
-      <p className="ts-eyebrow text-sun-400!">Graduate</p>
+      <p className="ts-eyebrow text-clay-400!">Graduate</p>
       <h2 className="mt-2 font-display text-2xl font-bold text-paper-0">
         You've ridden the whole trail
       </h2>
@@ -307,7 +307,7 @@ export function GraduateHero() {
         Certificate earned{cert ? ` ${shortDate(cert.issuedAt)}` : ""} — verification code in hand.
         Your Ride Plan is the piece that keeps working after the course ends.
       </p>
-      {cert && <p className="mt-2 font-mono text-sm text-sun-400">{cert.code}</p>}
+      {cert && <p className="mt-2 font-mono text-sm text-clay-400">{cert.code}</p>}
       {/* Stacked below sm: two icon buttons on one wrap line add their
        * min-content widths together, which pushes the bento column — and with
        * it the page — past the viewport at 375px. */}

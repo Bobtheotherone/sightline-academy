@@ -9,6 +9,7 @@ import { Markdown } from "../../activities/Markdown";
 import { useEntered, useReducedMotion } from "../../activities/motion";
 import { Button } from "../../components/Button";
 import { Glyph } from "../../components/Glyph";
+import { slotIconUrl } from "../../assets/slotmap";
 import type { SourceRef } from "../../lib/api";
 
 /** Ranger's bubble surface: raised paper, no hairline — elevation carries it. */
@@ -202,8 +203,15 @@ export interface ChatMessageProps {
   /** Failed asks render the DESIGN-005 error copy with a retry button. */
   failed?: boolean;
   errorMessage?: string;
+  /** Which failure the bubble is showing — picks its D-series plate. */
+  errorKind?: "timeout" | "rate-limited";
   onRetry?: () => void;
 }
+
+const ERROR_ART: Record<string, string> = {
+  timeout: "state-tutor-timeout",
+  "rate-limited": "state-rate-limited",
+};
 
 /** One message bubble — user right (pine tint) / ranger left (paper card). */
 export function ChatMessage({
@@ -215,6 +223,7 @@ export function ChatMessage({
   timestamp,
   failed = false,
   errorMessage,
+  errorKind = "timeout",
   onRetry,
 }: ChatMessageProps) {
   const rise = useMessageRise();
@@ -233,10 +242,21 @@ export function ChatMessage({
   }
 
   if (failed) {
+    const errorArt = slotIconUrl(ERROR_ART[errorKind]);
     return (
       <div className={`flex max-w-[92%] items-start gap-2.5 self-start ${rise}`}>
         <RangerAvatar />
         <div className={`p-4 ${BUBBLE}`}>
+          {/* Decorative plate — the sentence carries the state (DESIGN-005). */}
+          {errorArt && (
+            <img
+              src={errorArt}
+              alt=""
+              decoding="async"
+              className="mb-3 aspect-[5/3] w-44 rounded-sm object-cover"
+              aria-hidden
+            />
+          )}
           <p className="text-sm">{errorMessage}</p>
           {onRetry && (
             <Button variant="secondary" size="s" className="mt-3" onClick={onRetry}>

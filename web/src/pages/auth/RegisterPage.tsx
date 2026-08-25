@@ -70,7 +70,7 @@ export default function RegisterPage() {
   return (
     <AuthLayout
       title="Create your account"
-      lead="The whole course is free. Your progress, journal, and certificate live here."
+      lead="Your progress, journal, and certificate live here."
     >
       <form onSubmit={submit} noValidate className="flex flex-col gap-5">
         {rateLimited && (

@@ -30,7 +30,21 @@ export class ApiError extends Error {
 // Shared enums / small shapes
 // ---------------------------------------------------------------------------
 
-export type Role = "learner" | "instructor";
+export type Role =
+  | "learner"
+  | "developer"
+  | "instructor"
+  | "admin"
+  | "owner";
+
+/** Mirrors the server's roles.INSTRUCTOR_VIEW_ROLES: who may open the
+ *  instructor analytics. The owner and admins hold it alongside instructors —
+ *  gating on the "instructor" role alone locks the course owner out of his
+ *  own dashboard while the API still serves him the data. */
+export function canViewInstructor(role: Role | undefined): boolean {
+  return role === "instructor" || role === "admin" || role === "owner";
+}
+
 export type SectionId =
   | "briefing"
   | "learn"
@@ -65,14 +79,28 @@ export type ArtifactStatus = "draft" | "complete";
 // Auth (SPEC-004 §Auth)
 // ---------------------------------------------------------------------------
 
+/** Why this account may (or may not) open the course. Decided server-side. */
+export interface AccessOut {
+  allowed: boolean;
+  /** role = staff, stripe = subscription, comp = granted, paywall_disabled = gate off. */
+  reason: "role" | "stripe" | "comp" | "paywall_disabled" | "none" | "expired";
+  status: "active" | "past_due" | "canceled" | "none";
+  currentPeriodEnd: string | null;
+  cancelAtPeriodEnd: boolean;
+}
+
 export interface UserOut {
   id: string;
   email: string;
   displayName: string;
   role: Role;
+  /** Revenue visibility. Exactly one account holds this — never inferred from role. */
+  canAccessFunds: boolean;
+  isStaff: boolean;
   createdAt: string;
   xpTotal: number;
   level: number;
+  access: AccessOut | null;
 }
 
 export interface LearnerStateOut {
@@ -335,12 +363,51 @@ export interface TutorSuggestedResponse {
 // Meta & instructor (SPEC-004 §Meta, §Instructor)
 // ---------------------------------------------------------------------------
 
+export interface TutorHealth {
+  provider: "anthropic" | "extractive";
+  model: string;
+  keyPresent: boolean;
+  keyWellFormed: boolean;
+  /** Non-null whenever Ranger is not on the live model. Operator-facing. */
+  degradedReason: string | null;
+}
+
 export interface HealthResponse {
   status: string;
   db: string;
   chroma: { docs: number };
   provider: "anthropic" | "extractive";
+  tutor: TutorHealth | null;
   version: string;
+}
+
+// ---------------------------------------------------------------------------
+// Billing (SPEC-012)
+// ---------------------------------------------------------------------------
+
+export interface PlanResponse {
+  currency: string;
+  interval: string;
+  standardCents: number;
+  launchCents: number;
+  activeCents: number;
+  launchSaleActive: boolean;
+  billingAvailable: boolean;
+  paywallEnforced: boolean;
+}
+
+export interface BillingStatusResponse {
+  access: AccessOut;
+  hasStripeCustomer: boolean;
+  source: string;
+  billingAvailable: boolean;
+}
+
+export interface CheckoutResponse {
+  /** Stripe-hosted URL to redirect to; null when already entitled. */
+  url: string | null;
+  alreadyEntitled: boolean;
+  reason?: string;
 }
 
 export interface InstructorOverview {
@@ -530,6 +597,13 @@ export const api = {
   exportUrl: `${BASE}/auth/export`,
   deleteAccount: (body: { confirmEmail: string }) =>
     request<void>("/auth/me", { method: "DELETE", body }),
+
+  // Billing (SPEC-012). No card data passes through this client: `checkout`
+  // and `portal` return Stripe-hosted URLs that the browser navigates to.
+  plan: () => request<PlanResponse>("/billing/plan"),
+  billingStatus: () => request<BillingStatusResponse>("/billing/status"),
+  startCheckout: () => request<CheckoutResponse>("/billing/checkout", { method: "POST" }),
+  billingPortal: () => request<{ url: string }>("/billing/portal", { method: "POST" }),
 
   // Course
   course: () => request<CourseResponse>("/course"),

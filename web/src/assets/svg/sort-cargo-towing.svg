@@ -1,13 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" fill="none" stroke="#0D1E2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M30.5 43.8 V40.1 Q30.5 37.9 33.4 37.9 H40.1 L43.1 32.7 H51.2 L54.2 37.9 H60.1 Q63.0 37.9 63.0 40.8 V40.1 Z" fill="#ABCDB8" stroke="#0D1E2E"/>
-  <path d="M57.1 37.9 L59.3 31.2 M56.4 31.2 H62.3" stroke-width="2"/>
-  <circle cx="36.4" cy="43.1" r="5.3" fill="#ABCDB8"/>
-  <circle cx="36.4" cy="43.1" r="1.9" stroke-width="1.6"/>
-  <circle cx="57.1" cy="43.1" r="5.3" fill="#ABCDB8"/>
-  <circle cx="57.1" cy="43.1" r="1.9" stroke-width="1.6"/>
-  <rect x="4" y="22" width="23" height="16" rx="2" fill="#ABCDB8"/>
-  <circle cx="15.5" cy="45" r="6.4" fill="#ABCDB8"/>
-  <circle cx="15.5" cy="45" r="2.3" stroke-width="1.5"/>
-  <path d="M15.5 38.6 V42.7 M27 35 L32.5 40.5" stroke-width="2.2"/>
-  <circle cx="34.5" cy="42.5" r="5" fill="#DBA12E"/>
+  <title>A quad with a safety flag towing a small utility trailer, the drawbar coupling circled in amber as the thing to check first.</title>
+  <path d="M6 55 H58"/>
+  <path d="M47.8 43.8 V35.4 H60.2 V43.8" fill="#ABCDB8"/>
+  <path d="M38.6 47.4 H43.2 L47.0 43.8 H61"/>
+  <path d="M55.6 44.6 V47" stroke-width="1.8"/>
+  <circle cx="55.6" cy="50.2" r="2.8" fill="#ABCDB8"/>
+  <path d="M35.6 37.4 L38.4 18.2"/>
+  <path d="M38.4 18.2 L45.2 20.8 L38.4 23.4 Z" fill="#ABCDB8"/>
+  <path d="M4 47.6 V43.2 Q4 40.6 6.8 40.6 H15.4 L19.4 34.2 H28 L32 40.6 H35.8 Q38.6 40.6 38.6 43.2 V47.6 Z" fill="#ABCDB8"/>
+  <rect x="33" y="37.4" width="5.6" height="3.2" rx="0.7" fill="#ABCDB8"/>
+  <path d="M11 40.6 L7.1 27.6 M4.3 27.6 H10.7"/>
+  <circle cx="9.9" cy="46.7" r="6.3" fill="#ABCDB8"/>
+  <circle cx="9.9" cy="46.7" r="2.3" stroke-width="1.6"/>
+  <circle cx="30.9" cy="46.7" r="6.3" fill="#ABCDB8"/>
+  <circle cx="30.9" cy="46.7" r="2.3" stroke-width="1.6"/>
+  <circle cx="43.2" cy="47.4" r="3" stroke="#DBA12E" stroke-width="2.4"/>
 </svg>

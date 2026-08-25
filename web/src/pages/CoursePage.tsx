@@ -28,7 +28,7 @@ function SummitPanel({ open }: { open: boolean }) {
   return (
     <ContourPanel
       variant="dark"
-      glow={open ? "sun" : undefined}
+      glow={open ? "clay" : undefined}
       glowClassName="-top-[30%] -left-[8%] size-[70%]"
       className="flex flex-col items-start gap-5 overflow-hidden rounded-md p-5 shadow-1 sm:flex-row sm:items-center sm:gap-6 sm:p-6"
     >

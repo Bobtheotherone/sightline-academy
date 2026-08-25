@@ -17,7 +17,10 @@ import manifest from "./manifest.json";
 
 interface SlotMeta {
   status: string;
+  kind?: string;
   file?: string;
+  /** Raster only: intrinsic widths exported for this slot, largest first. */
+  widths?: number[];
   alt?: string;
 }
 
@@ -35,6 +38,26 @@ const ART_URLS = import.meta.glob<string>("./svg/*.svg", {
   query: "?url",
   import: "default",
 });
+
+/**
+ * Raster ladders (GPT art pack) for slots that moved off SVG. Consumers here
+ * are small fixed-size thumbs — LessonRow, range chips — so the SMALLEST rung
+ * is the right resolution: a 96–160px thumb has no use for the 640w plate.
+ * WebP first (every browser this app supports reads it), PNG as insurance.
+ */
+const RASTER_URLS = import.meta.glob<string>("./raster/*.{webp,png}", {
+  eager: true,
+  query: "?url",
+  import: "default",
+});
+
+function rasterIconUrl(slot: string, meta: SlotMeta): string | undefined {
+  if (!meta.widths?.length) return undefined;
+  const w = Math.min(...meta.widths);
+  return (
+    RASTER_URLS[`./raster/${slot}-${w}w.webp`] ?? RASTER_URLS[`./raster/${slot}-${w}w.png`]
+  );
+}
 
 // ---------------------------------------------------------------------------
 // C-070 … C-095 · Sort item icons (26)
@@ -162,7 +185,9 @@ const LESSON_STEM = /^(m\d+-l\d+)(?:-|$)/;
 export function slotIconUrl(slot: string | undefined): string | undefined {
   if (!slot) return undefined;
   const meta = SLOTS[slot];
-  return meta?.status === "real" && meta.file ? ART_URLS[`./${meta.file}`] : undefined;
+  if (meta?.status !== "real") return undefined;
+  if (meta.kind === "raster") return rasterIconUrl(slot, meta);
+  return meta.file ? ART_URLS[`./${meta.file}`] : undefined;
 }
 
 /** Icon URL for a `sort_categorize` item, or undefined when it has no art. */

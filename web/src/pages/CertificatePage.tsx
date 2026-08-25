@@ -84,7 +84,9 @@ function NotYet() {
 
       <Card padding="l" className="mt-8">
         <EmptyState
-          art={<SlotArt slot="cert-seal" ratio="5 / 3" />}
+          /* D-011 — the seal pressing into the sheet — is exactly what this
+           * copy promises; the diploma page keeps the real seal's draw-in. */
+          art={<SlotArt slot="moment-certificate" ratio="3 / 2" />}
           heading="The frame is waiting"
           body="Your certificate is issued the moment you pass the final assessment, with a verification code anyone can check."
           action={<LinkButton to="/course">Keep riding the course</LinkButton>}

@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { Logo } from "./Logo";
 
 const FINE_PRINT =
-  "Sightline Safety Academy is an online awareness and judgment course. It is not a license, legal certification, or a substitute for hands-on rider training.";
+  "Sightline ATV Safety Academy is an online awareness and judgment course. It is not a license, legal certification, or a substitute for hands-on rider training.";
 
 const FINE_PRINT_SHORT =
   "Not a license or a substitute for hands-on rider training.";
@@ -39,20 +39,12 @@ function MarketingFooter({ className }: { className: string }) {
       <div className="mx-auto max-w-wide px-6 py-16 lg:px-12 lg:py-20">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="lg:pr-8">
-            <Link
-              to="/"
-              className="inline-block rounded-sm"
-              aria-label="Sightline Safety Academy — home"
-            >
-              <span className="block font-display text-3xl leading-none font-bold">
-                Sightline
-              </span>
-              <span className="mt-2 block text-xs font-semibold tracking-[0.14em] text-paper-0/70 uppercase">
-                Safety Academy
-              </span>
-            </Link>
+            {/* Was a hand-rolled copy of the wordmark, which meant the
+                subtitle and the descender spacing had to be fixed twice and
+                could drift apart. It renders the shared lockup now. */}
+            <Logo size="l" onDark showMarker={false} />
             <p className="mt-5 max-w-xs text-sm text-paper-0/75">
-              A free, self-paced ATV and road safety course. Judgment first —
+              A self-paced ATV and road safety course. Judgment first —
               because most crashes are decided before the wheels turn.
             </p>
           </div>
@@ -68,7 +60,7 @@ function MarketingFooter({ className }: { className: string }) {
           </FooterNav>
 
           <FooterNav title="Account">
-            <FooterLink to="/register">Create a free account</FooterLink>
+            <FooterLink to="/register">Create an account</FooterLink>
             <FooterLink to="/login">Log in</FooterLink>
             <FooterLink to="/verify/sample">Verify a certificate</FooterLink>
           </FooterNav>
@@ -90,7 +82,7 @@ function MarketingFooter({ className }: { className: string }) {
         </div>
 
         <div className="mt-8 flex flex-col gap-2 font-mono text-xs text-paper-0/60 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Sightline Safety Academy</p>
+          <p>© {new Date().getFullYear()} Sightline ATV Safety Academy</p>
           <p>Ride like you've thought it through.</p>
         </div>
       </div>

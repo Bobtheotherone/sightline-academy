@@ -10,12 +10,13 @@
  * they are never recoloured by selection or drag: the danger/caution accents
  * inside the art are doing the sort's own teaching work.
  */
-import { useMemo, useState, type DragEvent } from "react";
+import { useMemo, useRef, useState, type DragEvent } from "react";
 import { GripVertical } from "lucide-react";
 import type { ActivityProps, ClassificationValue, SortCategorizePayload } from "../types";
 import { FeedbackStrip } from "../../components/FeedbackStrip";
 import { Markdown } from "../Markdown";
 import { BlazeCheckDraw } from "../motion";
+import { CleanRun, useStreak } from "../streak";
 import { sortItemIconUrl } from "../../assets/slotmap";
 
 function shuffled<T>(list: T[]): T[] {
@@ -42,6 +43,14 @@ export default function SortCategorizeActivity({ step, evidence, onEvidence }: A
   const [justPlacedId, setJustPlacedId] = useState<string | null>(null);
   const [dragOverZone, setDragOverZone] = useState<string | null>(null);
 
+  /* Play layer (DESIGN-004 §Play): first-try placements feed the lesson
+   * streak; a whole sort with zero misses this session earns the clean-run
+   * moment. Misses are session-local — resuming a half-done sort never
+   * claims a clean run it can't prove. */
+  const streak = useStreak();
+  const missed = useRef(new Set<string>());
+  const placedThisSession = useRef(0);
+
   const trayOrder = useMemo(
     () => (payload.shuffle ? shuffled(payload.items) : payload.items).map((i) => i.id),
     [payload],
@@ -63,12 +72,18 @@ export default function SortCategorizeActivity({ step, evidence, onEvidence }: A
       setPlacements(next);
       setJustPlacedId(itemId);
       setWrong(null);
+      if (!revisit) {
+        placedThisSession.current += 1;
+        if (!missed.current.has(itemId)) streak.report(true);
+      }
       onEvidence({
         kind: "classification",
         value: { placements: next },
         complete: Object.keys(next).length === payload.items.length,
       });
     } else {
+      if (!revisit && !missed.current.has(itemId)) streak.report(false);
+      missed.current.add(itemId);
       setWrong((w) => ({ itemId, n: (w?.n ?? 0) + 1 }));
       setShakingId(itemId);
     }
@@ -173,6 +188,12 @@ export default function SortCategorizeActivity({ step, evidence, onEvidence }: A
         </FeedbackStrip>
       )}
 
+      {allSorted &&
+        !revisit &&
+        placedThisSession.current === payload.items.length &&
+        missed.current.size === 0 && (
+          <CleanRun detail="Every card landed where it belongs, first try." />
+        )}
       {allSorted ? (
         <FeedbackStrip
           tone="positive"
