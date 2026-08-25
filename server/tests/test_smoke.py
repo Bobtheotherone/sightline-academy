@@ -87,7 +87,9 @@ def ctx() -> Ctx:  # type: ignore[misc]
     # before the startup sequence runs. configure() mutates the sessionmaker
     # in place, so every `from .db import SessionLocal` sees the new bind.
     settings = get_settings()
-    engine = create_engine(settings.database_url, connect_args={"check_same_thread": False})
+    # `database_url` is now the DATABASE_URL env field (empty here); the resolved
+    # connection string lives on `sqlalchemy_url`, which falls back to SQLite.
+    engine = create_engine(settings.sqlalchemy_url, connect_args={"check_same_thread": False})
     event.listens_for(engine, "connect")(db_mod._set_sqlite_pragmas)
     old_engine, old_settings = db_mod.engine, db_mod.settings
     db_mod.engine = engine

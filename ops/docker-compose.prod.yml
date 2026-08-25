@@ -1,0 +1,65 @@
+# Sightline ATV Safety Academy — production overlay (ADR-008).
+#
+#   docker compose -f ops/docker-compose.yml -f ops/docker-compose.prod.yml up -d
+#
+# What this changes versus the base file, and why:
+#
+#  * Secrets come from the PROCESS environment, not from a .env file baked next
+#    to the code. On a host, put them in the platform's secret store (Fly
+#    secrets / Render environment group) or, on a plain VPS, a root-owned
+#    0600 EnvironmentFile loaded by systemd. A secret on disk beside the app is
+#    a secret in every backup of the app.
+#
+#  * The web container binds to 127.0.0.1 only. Caddy (or any TLS terminator)
+#    is the sole thing listening on a public interface, so plain HTTP is never
+#    reachable from outside the box and the session cookie cannot be sent in
+#    the clear.
+#
+#  * The data volume is no longer where the database lives. DATABASE_URL points
+#    at managed Postgres; the volume keeps only the Chroma vector index, which
+#    is derived data and is rebuilt from content/ on boot if lost.
+
+services:
+  api:
+    env_file: []
+    environment:
+      APP_ENV: production
+      DATA_DIR: /data
+      # Every one of these must be present in the shell that runs compose.
+      # Compose substitutes them here rather than reading a file, so a missing
+      # secret fails loudly at `up` instead of silently defaulting.
+      PUBLIC_BASE_URL: ${PUBLIC_BASE_URL:?set PUBLIC_BASE_URL}
+      SESSION_SECRET: ${SESSION_SECRET:?set SESSION_SECRET}
+      SECURE_COOKIES: "1"
+      TRUSTED_PROXY_HOPS: "1"
+      DATABASE_URL: ${DATABASE_URL:?set DATABASE_URL — do not run production on SQLite}
+      OWNER_EMAIL: ${OWNER_EMAIL:?set OWNER_EMAIL}
+      ADMIN_EMAILS: ${ADMIN_EMAILS:-}
+      INSTRUCTOR_EMAILS: ${INSTRUCTOR_EMAILS:-}
+      DEVELOPER_EMAILS: ${DEVELOPER_EMAILS:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      TUTOR_MODEL: ${TUTOR_MODEL:-claude-sonnet-4-6}
+      TUTOR_MESSAGES_PER_HOUR: ${TUTOR_MESSAGES_PER_HOUR:-30}
+      TUTOR_MESSAGES_PER_DAY: ${TUTOR_MESSAGES_PER_DAY:-150}
+      REQUIRE_SUBSCRIPTION: ${REQUIRE_SUBSCRIPTION:-1}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY:-}
+      STRIPE_PUBLISHABLE_KEY: ${STRIPE_PUBLISHABLE_KEY:-}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET:-}
+      STRIPE_PRICE_ID_STANDARD: ${STRIPE_PRICE_ID_STANDARD:-}
+      STRIPE_PRICE_ID_LAUNCH: ${STRIPE_PRICE_ID_LAUNCH:-}
+      LAUNCH_SALE_ACTIVE: ${LAUNCH_SALE_ACTIVE:-1}
+      PRICE_STANDARD_CENTS: ${PRICE_STANDARD_CENTS:-1000}
+      PRICE_LAUNCH_CENTS: ${PRICE_LAUNCH_CENTS:-500}
+      FIXTURES: "0"
+    # Defence in depth: even after the container drops to the `sightline` user,
+    # nothing in it should be able to gain privileges back.
+    security_opt:
+      - no-new-privileges:true
+
+  web:
+    ports: !override
+      # Loopback only. Caddy terminates TLS and proxies here; the container is
+      # unreachable from the network without going through it.
+      - "127.0.0.1:8080:80"
+    security_opt:
+      - no-new-privileges:true

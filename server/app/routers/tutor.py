@@ -38,6 +38,8 @@ from ..schemas import (
     TutorStreamMeta,
     TutorSuggestedOut,
 )
+from ..services import entitlements as ent_svc
+from ..services import quota as quota_svc
 from ..tutor import pipeline
 
 router = APIRouter(prefix="/tutor", tags=["tutor"])
@@ -77,6 +79,12 @@ def ask(
         raise ApiError(
             422, "validation_error", "Type a question first — Ranger can't answer a blank message."
         )
+    # Ranger costs real money per question and runs on a personal key, so both
+    # gates are checked before any upstream call: the learner must be entitled
+    # to the course at all, and must be inside their own usage allowance.
+    ent_svc.require_course_access(db, user)
+    quota_svc.check_tutor_quota(db, user)
+    quota_svc.record_tutor_use(db, user)
     reply = pipeline.answer(db, user, body.message, body.lesson_id)
     return TutorAskOut.model_validate(
         {
@@ -108,6 +116,12 @@ def ask_stream(
         raise ApiError(
             422, "validation_error", "Type a question first — Ranger can't answer a blank message."
         )
+    # Ranger costs real money per question and runs on a personal key, so both
+    # gates are checked before any upstream call: the learner must be entitled
+    # to the course at all, and must be inside their own usage allowance.
+    ent_svc.require_course_access(db, user)
+    quota_svc.check_tutor_quota(db, user)
+    quota_svc.record_tutor_use(db, user)
 
     def event_stream():
         try:

@@ -72,14 +72,32 @@ class LoginIn(ApiModel):
     password: str
 
 
+class AccessOut(ApiModel):
+    """Why this account may (or may not) open the course.
+
+    The server decides; the client only renders. Shipping the reason as well as
+    the boolean lets the UI say something useful ("your card was declined")
+    instead of a generic locked state.
+    """
+
+    allowed: bool
+    reason: str  # role | stripe | comp | paywall_disabled | none | expired
+    status: str
+    current_period_end: str | None = None
+    cancel_at_period_end: bool = False
+
+
 class UserOut(ApiModel):
     id: str
     email: str
     display_name: str
     role: str
+    can_access_funds: bool = False
+    is_staff: bool = False
     created_at: str
     xp_total: int
     level: int
+    access: AccessOut | None = None
 
 
 class AuthUserOut(ApiModel):
@@ -394,11 +412,28 @@ class ChromaHealth(ApiModel):
     docs: int
 
 
+class TutorHealth(ApiModel):
+    """Operator-facing tutor state.
+
+    ``provider`` alone could not distinguish "no key configured" from "key
+    present but rejected upstream" — both showed as a working connection or a
+    silent downgrade with nothing in between. Booleans and a reason string
+    only; never any key material, not even a prefix.
+    """
+
+    provider: str
+    model: str
+    key_present: bool
+    key_well_formed: bool
+    degraded_reason: str | None = None
+
+
 class HealthOut(ApiModel):
     status: str
     db: str
     chroma: ChromaHealth
     provider: str
+    tutor: TutorHealth | None = None
     version: str
 
 
@@ -447,3 +482,52 @@ class InstructorOverviewOut(ApiModel):
     knowledge_check_stats: list[KnowledgeCheckStat]
     tutor_themes: list[TutorTheme]
     triage_counts: list[TriageCount]
+
+
+# ── Billing (SPEC-012) ───────────────────────────────────────────────────────
+
+
+class PlanOut(ApiModel):
+    """Public pricing, so marketing copy never hardcodes a drifting number."""
+
+    currency: str
+    interval: str
+    standard_cents: int
+    launch_cents: int
+    active_cents: int
+    launch_sale_active: bool
+    billing_available: bool
+    paywall_enforced: bool
+
+
+class BillingStatusOut(ApiModel):
+    access: AccessOut
+    has_stripe_customer: bool
+    source: str
+    billing_available: bool
+
+
+class CheckoutOut(ApiModel):
+    #: Stripe-hosted URL to redirect to; null when the caller is already entitled.
+    url: str | None = None
+    already_entitled: bool = False
+    reason: str | None = None
+
+
+class PortalOut(ApiModel):
+    url: str
+
+
+def camelize(value):
+    """Recursively convert dict keys from snake_case to camelCase.
+
+    Most responses are ApiModel instances, which alias automatically. The admin
+    routes return plain dicts (their shapes are small, varied and internal), so
+    they pass through here instead — the wire convention stays camelCase
+    everywhere rather than depending on which router you happened to hit.
+    """
+    if isinstance(value, dict):
+        return {to_camel(k): camelize(v) for k, v in value.items()}
+    if isinstance(value, list):
+        return [camelize(v) for v in value]
+    return value

@@ -37,6 +37,12 @@ RUN uv sync --frozen --no-dev
 # server cwd. Editing course content = editing content/ and rebuilding.
 COPY content/ /app/content/
 
+# Operational tooling that must exist in production, not just in the repo:
+# the owner account cannot be created through the admin API (only an
+# account that already holds funds access may grant it), so the bootstrap
+# has to ship with the image.
+COPY ops/bootstrap_accounts.py /app/ops/bootstrap_accounts.py
+
 # Serve the baked model straight from the cache above: without this,
 # sentence-transformers/huggingface_hub still revalidates against huggingface.co
 # on every boot and STARTUP FAILS when DNS/HF is unreachable (verified: DNS
@@ -49,5 +55,27 @@ ENV HF_HUB_OFFLINE=1
 ENV DATA_DIR=/data
 RUN mkdir -p /data
 
+# Drop root. A remote-code-execution bug in any dependency lands as an
+# unprivileged user instead of as root inside the container, which is the
+# difference between "read the app's own files" and "own the container".
+# The uid is fixed so the named volume's ownership survives a rebuild.
+# Only /data is chowned. Recursively chowning /app would rewrite every file
+# in the venv and the baked model, duplicating a multi-gigabyte layer for no
+# benefit: the app only ever READS /app, and root-owned files are already
+# world-readable. (Measured: chowning /app took the image from 4.3 GB to
+# 6.6 GB, which matters a great deal when choosing a host.)
+RUN groupadd --gid 10001 sightline \
+    && useradd --uid 10001 --gid 10001 --no-create-home --shell /usr/sbin/nologin sightline \
+    && chown -R sightline:sightline /data
+
+# /app is read-only to this user, so Python cannot cache bytecode there.
+# Say so explicitly rather than letting it fail silently on every import.
+ENV PYTHONDONTWRITEBYTECODE=1
+USER sightline
+
 EXPOSE 8000
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# --proxy-headers so request.client reflects the peer nginx reports. The app
+# does its own forwarded-header handling for rate-limit identity (see
+# app/auth.py client_ip) and never trusts the leftmost entry either way.
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", \
+     "--proxy-headers", "--forwarded-allow-ips", "*"]

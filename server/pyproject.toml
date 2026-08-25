@@ -19,6 +19,14 @@ dependencies = [
     "torch",
     "httpx",
     "pyyaml",
+    # Subscription billing (SPEC-012). Stripe-hosted Checkout, so no card data
+    # ever reaches this server; the SDK is used for session creation and for
+    # webhook signature verification.
+    "stripe>=11",
+    # PostgreSQL driver for the hosted deploy (ADR-008). psycopg 3, matching
+    # the `postgresql+psycopg://` scheme config.py normalises to. Unused when
+    # DATABASE_URL is empty and the app falls back to local SQLite.
+    "psycopg[binary]>=3.1",
 ]
 
 [dependency-groups]

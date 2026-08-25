@@ -5,6 +5,22 @@
 name: sightline
 
 services:
+  # One-shot: make the data volume writable by the unprivileged app user.
+  #
+  # The API container runs as uid 10001 (Dockerfile.api). Docker only copies
+  # ownership from the image into a named volume the first time that volume is
+  # created — an existing volume from an earlier, root-running build keeps its
+  # root ownership, and the app then dies with "attempt to write a readonly
+  # database" on boot. Fixing it here means both a fresh install and an upgrade
+  # of an existing one just work, with no manual step to forget.
+  data-init:
+    image: busybox:1.36
+    user: root
+    command: ["sh", "-c", "chown -R 10001:10001 /data && chmod 0750 /data"]
+    volumes:
+      - sightline-data:/data
+    restart: "no"
+
   api:
     build:
       context: ..
@@ -15,6 +31,9 @@ services:
       DATA_DIR: /data
     volumes:
       - sightline-data:/data
+    depends_on:
+      data-init:
+        condition: service_completed_successfully
     restart: unless-stopped
     healthcheck:
       # python is what the image has (no curl in python:3.12-slim); urlopen

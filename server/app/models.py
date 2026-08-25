@@ -26,7 +26,15 @@ class User(Base):
     email: Mapped[str] = mapped_column(String, unique=True, index=True)  # lowercased
     display_name: Mapped[str] = mapped_column(String)
     password_hash: Mapped[str] = mapped_column(String)
-    role: Mapped[str] = mapped_column(String, default="learner")  # 'learner' | 'instructor'
+    # SPEC-011: 'learner' | 'developer' | 'instructor' | 'admin' | 'owner'
+    role: Mapped[str] = mapped_column(String, default="learner")
+    # Access to revenue data and payout configuration. Deliberately a separate
+    # column from `role` rather than implied by it: the requirement is that
+    # exactly ONE account holds it, which a role cannot express (roles are
+    # many-to-one) and which must survive adding more admins later.
+    can_access_funds: Mapped[bool] = mapped_column(Boolean, default=False)
+    # Who provisioned this account, when it was made through the admin API.
+    created_by_user_id: Mapped[str | None] = mapped_column(String, nullable=True)
     created_at: Mapped[str] = mapped_column(String, default=utc_now_iso)
     last_login_at: Mapped[str | None] = mapped_column(String, nullable=True)
 
@@ -203,6 +211,23 @@ class Certificate(Base):
 # ── Tutor ────────────────────────────────────────────────────────────────────
 
 
+class TutorUsage(Base):
+    """One row per tutor question, for per-user quota accounting.
+
+    The Anthropic key is personal and metered, so an unbounded tutor endpoint
+    is a spend risk, not merely a load one. Counting in the database rather
+    than in process memory means the quota survives a restart and holds across
+    replicas — an in-memory counter would reset every deploy.
+    """
+
+    __tablename__ = "tutor_usage"
+
+    id: Mapped[str] = mapped_column(String, primary_key=True)  # uuid
+    user_id: Mapped[str] = mapped_column(String, ForeignKey("users.id"), index=True)
+    created_at: Mapped[str] = mapped_column(String, default=utc_now_iso, index=True)
+    provider: Mapped[str] = mapped_column(String)  # 'anthropic' | 'extractive'
+
+
 class TutorMessage(Base):
     __tablename__ = "tutor_messages"
 
@@ -214,3 +239,88 @@ class TutorMessage(Base):
     sources: Mapped[list] = mapped_column(JSON)  # list of chunk ids
     triage_category: Mapped[str | None] = mapped_column(String, nullable=True)
     created_at: Mapped[str] = mapped_column(String, default=utc_now_iso)
+
+
+# ── Billing & entitlement (SPEC-012) ─────────────────────────────────────────
+
+
+class Entitlement(Base):
+    """Whether a learner may open the course, and why.
+
+    One row per user. `source` records how access was granted so that a comped
+    account is distinguishable from a paying one during a refund dispute, and
+    so revoking a subscription never silently strips a staff account.
+    """
+
+    __tablename__ = "entitlements"
+
+    user_id: Mapped[str] = mapped_column(String, ForeignKey("users.id"), primary_key=True)
+    # 'active' | 'past_due' | 'canceled' | 'none'
+    status: Mapped[str] = mapped_column(String, default="none", index=True)
+    # 'stripe' | 'role' | 'comp'
+    source: Mapped[str] = mapped_column(String, default="none")
+    stripe_customer_id: Mapped[str | None] = mapped_column(String, nullable=True, index=True)
+    stripe_subscription_id: Mapped[str | None] = mapped_column(String, nullable=True, index=True)
+    # ISO-8601. Access is honoured through the end of a paid period even after
+    # the learner cancels — cancelling should stop the next charge, not confiscate
+    # the month already bought.
+    current_period_end: Mapped[str | None] = mapped_column(String, nullable=True)
+    cancel_at_period_end: Mapped[bool] = mapped_column(Boolean, default=False)
+    price_id: Mapped[str | None] = mapped_column(String, nullable=True)
+    note: Mapped[str | None] = mapped_column(String, nullable=True)  # why, for comps
+    updated_at: Mapped[str] = mapped_column(String, default=utc_now_iso)
+
+
+class ProcessedWebhook(Base):
+    """Stripe event ids already applied, for idempotency.
+
+    Stripe retries deliveries and does not promise exactly-once. Replaying a
+    `subscription.deleted` after a fresh `subscription.created` would revoke a
+    live subscription, so every event is applied at most once.
+    """
+
+    __tablename__ = "processed_webhooks"
+
+    event_id: Mapped[str] = mapped_column(String, primary_key=True)
+    event_type: Mapped[str] = mapped_column(String)
+    received_at: Mapped[str] = mapped_column(String, default=utc_now_iso)
+
+
+# ── Accountability ───────────────────────────────────────────────────────────
+
+
+class AuditLog(Base):
+    """Append-only record of privileged actions (the 'I' in the CIA triad).
+
+    Role grants, funds-access grants, comps and account creation all land here.
+    Without this, "only Osama can grant funds access" is an assertion; with it,
+    it is checkable after the fact.
+    """
+
+    __tablename__ = "audit_log"
+
+    id: Mapped[str] = mapped_column(String, primary_key=True)  # uuid
+    actor_user_id: Mapped[str | None] = mapped_column(String, nullable=True, index=True)
+    actor_email: Mapped[str | None] = mapped_column(String, nullable=True)
+    action: Mapped[str] = mapped_column(String, index=True)
+    target_user_id: Mapped[str | None] = mapped_column(String, nullable=True, index=True)
+    detail: Mapped[dict] = mapped_column(JSON, default=dict)
+    ip: Mapped[str | None] = mapped_column(String, nullable=True)
+    created_at: Mapped[str] = mapped_column(String, default=utc_now_iso, index=True)
+
+
+class LoginAttempt(Base):
+    """Per-account failed-login counter.
+
+    The per-IP limiter is defeated by anyone who can vary X-Forwarded-For, so
+    it cannot be the only brute-force control. This one is keyed on the account
+    being attacked, which the attacker cannot rotate: they must guess *this*
+    account's password, so the counter always finds them.
+    """
+
+    __tablename__ = "login_attempts"
+
+    email: Mapped[str] = mapped_column(String, primary_key=True)  # lowercased
+    failures: Mapped[int] = mapped_column(Integer, default=0)
+    first_failure_at: Mapped[str] = mapped_column(String, default=utc_now_iso)
+    locked_until: Mapped[str | None] = mapped_column(String, nullable=True)

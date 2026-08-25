@@ -1,0 +1,54 @@
+# TLS terminator for the Sightline ATV Safety Academy deploy (ADR-008).
+#
+# Caddy is used rather than raw nginx-with-certbot for one reason: it obtains
+# and renews Let's Encrypt certificates automatically, with no cron job to
+# forget. An expired certificate is the most common way a small site goes
+# "down" without anyone touching it.
+#
+# Install on the host (not in the compose stack, so a stack restart never takes
+# TLS with it), then:
+#
+#   sudo caddy fmt --overwrite /etc/caddy/Caddyfile
+#   sudo systemctl reload caddy
+#
+# Replace atv.example.edu with the real hostname before deploying.
+
+atv.example.edu {
+	# The compose stack publishes only on loopback (docker-compose.prod.yml),
+	# so this is the sole public entrypoint.
+	reverse_proxy 127.0.0.1:8080 {
+		# Ranger streams answers over SSE; without this Caddy buffers the
+		# whole response and the tutor appears frozen until it finishes.
+		flush_interval -1
+	}
+
+	encode gzip zstd
+
+	header {
+		# Caddy sets TLS up correctly by default; this is the browser-side
+		# half. The app and nginx also emit these — belt and braces, because
+		# whichever layer is bypassed, the header still lands.
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		# Don't advertise the server software.
+		-Server
+	}
+
+	log {
+		output file /var/log/caddy/sightline.log {
+			roll_size 20mb
+			roll_keep 10
+		}
+		# Request bodies are never logged: sign-in posts carry passwords and
+		# the Stripe webhook carries billing detail.
+		format json
+	}
+}
+
+# Bare-domain redirect, so a link to the apex still lands on the course.
+# Delete this block if the apex is used for something else.
+example.edu {
+	redir https://atv.example.edu{uri} permanent
+}

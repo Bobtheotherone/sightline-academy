@@ -9,6 +9,7 @@ from ..db import get_db
 from ..errors import ApiError
 from ..models import CourseMeta, Lesson, Module, Step, StepEvidence, User
 from ..schemas import CourseOut, LessonDetailOut, ModuleDetailOut
+from ..services import entitlements as ent_svc
 from ..services import progress as progress_svc
 from ..services.seed import COURSE_ID
 
@@ -74,6 +75,9 @@ def get_module(
     user: User = Depends(auth_svc.current_user),
     db: Session = Depends(get_db),
 ) -> ModuleDetailOut:
+    # The course map at /course stays readable without a subscription so a
+    # visitor can see what they would be buying; the lessons themselves do not.
+    ent_svc.require_course_access(db, user)
     module = db.get(Module, module_id)
     if module is None:
         raise ApiError(404, "not_found", "That module isn't on this trail map.")
@@ -97,6 +101,7 @@ def get_lesson(
     user: User = Depends(auth_svc.current_user),
     db: Session = Depends(get_db),
 ) -> LessonDetailOut:
+    ent_svc.require_course_access(db, user)
     lesson = db.get(Lesson, lesson_id)
     if lesson is None:
         raise ApiError(404, "not_found", "That lesson isn't on this trail map.")

@@ -1,7 +1,13 @@
-# BuildKit per-Dockerfile ignore: the api image only needs server/ + content/.
+# BuildKit per-Dockerfile ignore: the api image needs server/ + content/,
+# plus the one ops script that has to be runnable inside the container.
 *
 !server
 !content
+# Allowed one file at a time rather than un-ignoring ops/ wholesale, so a
+# future secret or key dropped in ops/ can never be baked into the image.
+!ops
+ops/*
+!ops/bootstrap_accounts.py
 server/.venv
 server/**/__pycache__
 server/**/*.pyc

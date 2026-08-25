@@ -31,6 +31,7 @@ from ..schemas import (
     ProgressOut,
     VerifyOut,
 )
+from ..services import entitlements as ent_svc
 from ..services import progress as progress_svc
 from ..services import xp
 from ..services.seed import COURSE_ID, COURSE_TITLE
@@ -53,6 +54,7 @@ def put_step_evidence(
     user: User = Depends(auth_svc.current_user),
     db: Session = Depends(get_db),
 ) -> EvidencePutOut:
+    ent_svc.require_course_access(db, user)
     result = progress_svc.put_evidence(db, user, step_id, body)
     return EvidencePutOut.model_validate(result)
 
@@ -163,6 +165,7 @@ def get_assessment(
     user: User = Depends(auth_svc.current_user), db: Session = Depends(get_db)
 ) -> AssessmentBankOut:
     """Sanitized question set for the assessment page (same unlock gate)."""
+    ent_svc.require_course_access(db, user)
     _ensure_assessment_unlocked(db, user.id)
     bank = _assessment_bank(db)
     return AssessmentBankOut.model_validate(
