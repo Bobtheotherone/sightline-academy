@@ -1,145 +1,167 @@
-# Sightline Safety Academy
+# Sightline ATV Safety Academy
 
-Sightline Safety Academy is a web-based interactive learning platform for ATV (all-terrain
-vehicle) and adjacent road safety. Anyone can create an account and work through a
-six-module curriculum of interactive activities — sorting, hotspot exploration,
-branching scenarios, matching, prediction-reveals, structured reflection — building a
-persistent Field Journal along the way, earning XP and badges, and finishing with a
-capstone Ride Plan, a final assessment, and a completion certificate. A curriculum-aware
-AI tutor, **Ranger**, answers any ATV- or road-safety question via retrieval-augmented
-generation over a local ChromaDB corpus; with no API key configured it still answers in
-a fully offline extractive mode. The stack is FastAPI + SQLite + Chroma on the back,
-React + Vite + Tailwind on the front, deployed as a single-host Docker Compose pair.
+A web course that teaches ATV and road safety by making the learner do things rather than
+watch things: six modules, 22 lessons, 59 interactive steps, a field journal built along the
+way, a final assessment and a certificate. Ranger, the built-in tutor, answers questions from
+a 33-document course corpus. FastAPI + SQLite + Chroma behind, React + Vite + Tailwind in front.
 
-## Repository layout
+## Run it on your machine
 
-- `server/` — FastAPI app (uv project, Python 3.12)
-- `web/` — Vite + React + TypeScript SPA
-- `content/` — curriculum + RAG corpus (data, not docs: seeded/ingested at boot)
-- `ops/` — Dockerfiles, nginx config, docker-compose
-- `qa/` — the visual-crawl harness and its route×state manifest (QA-001)
-- `artifacts/` — the reviewed crawl passes and the final launch gate walk
+**Requirements.** [Node.js 20 or newer](https://nodejs.org) — the LTS build. On Node 18
+`npm ci` silently skips Tailwind's native binding and the build dies with "Cannot find native
+binding", so the launchers refuse anything below 20. And a supported platform: Windows x64, an
+Apple Silicon Mac on macOS 14 or newer, or Linux x64. Intel Macs, Windows on ARM and older
+macOS cannot install the server's PyTorch wheels at all — on those, use the live site or put
+it on a small VPS (`DEPLOY.md`). Everything else the launcher fetches itself, Python 3.12
+included.
 
-## Commands
+| Your computer | Do this |
+|---|---|
+| Windows | Double-click `START_SIGHTLINE.bat` |
+| macOS | Double-click `START_SIGHTLINE.command` |
+| Linux | Run `./START_SIGHTLINE.sh` |
 
-### Configuration (both dev and prod)
+It is safe to run twice; a second run just reports that the site is already up.
 
-The server reads `.env` from the repo root:
+**First run** installs uv and Python 3.12, installs the server packages, installs the web
+packages, builds the site, writes a `.env` with a fresh session secret, and asks once for the
+Anthropic API key. About 2 GB comes down — PyTorch, the npm tree and the embedding model — so
+budget 5-15 minutes and stay connected. Later runs take seconds. When it finishes it opens
+<http://localhost:8080> and prints a sign-in email and a one-time password from
+`ops/bootstrap_accounts.py` — change that password under Account once you are in.
+
+The API revalidates the embedding model against huggingface.co on every boot and falls back to
+its local cache when there is no network, so an offline start works after the first one.
+
+**Where the data lives.** Everything the local copy remembers is under `data/`:
+`sightline.db` (accounts, progress, journal), `chroma/` (the tutor's index), `logs/api.log`
+and `logs/web.log`, and `run/` (process ids). Deleting `data/` resets your local copy and
+nothing else. `data/` is gitignored, because it holds real accounts.
+
+**The Ranger key.** Without an Anthropic key Ranger still answers, using only text pulled from
+the course corpus, and says so on screen. To add a key later, run `ADD_RANGER_KEY` (`.bat`,
+`.ps1`, `.command` or `.sh`) and restart. The key is written to `.env`, which is gitignored.
+
+**To stop:** `STOP_SIGHTLINE`. It stops the two local processes and touches nothing else.
+
+Ports default to 8000 (API) and 8080 (web); override with `SIGHTLINE_API_PORT` and
+`SIGHTLINE_WEB_PORT`, and set `SIGHTLINE_NONINTERACTIVE=1` to suppress every prompt.
+
+**On Windows**, keep the folder short and local — `C:\Sightline`, not inside OneDrive and not
+nested deep. SmartScreen may stop the first double-click: choose **More info** then **Run
+anyway**. A managed university laptop with an AllSigned PowerShell policy needs IT to allow
+the script.
+
+## Where things are
+
+| Path | What is in it |
+|---|---|
+| `server/` | The FastAPI app: auth, course, progress, tutor, admin, billing. uv project, Python 3.12 pinned. |
+| `web/` | The React + Vite single-page app. `npm run build` is typecheck plus bundle. |
+| `content/curriculum/` | The course itself, as markdown. Six module files, an overview, and the final assessment. Editing these edits the course. |
+| `content/corpus/` | The 33 short documents Ranger retrieves from. Separate from the curriculum on purpose. |
+| `web/src/activities/` | One folder per activity renderer, twelve of them, plus the shared contracts in `types.ts`. |
+| `web/src/assets/` | Illustration slots: `manifest.json` is the register, `svg/` and `raster/` hold the plates, `stability/` holds the lab sprites. Rasters are Git LFS. |
+| `artgen/`, `output/` | Untracked source material for the art pipeline — prompt packs, raw renders. Not needed to run or change the site. |
+| `qa/` | The visual-crawl harness and its route manifest, the SVG review tooling, and `stability-rebuild/` (how the physics lab was built). |
+| `sightline-handoff/` | The spec package this was built from: SPECS, DESIGN, CURRICULUM, DECISIONS, QA. Still the reference for how anything is meant to behave. |
+| `tools/live/` | The scripts that publish this laptop's copy to the internet. Developer-only; see `docs/OPERATIONS.md`. |
+| `ops/` | Dockerfiles, nginx and Caddy configs, `bootstrap_accounts.py`. For a real server later, not for the laptop. |
+| `docs/` | Onboarding, how the course is built, and operations. |
+| `backups/` | Local database snapshots. Untracked — they hold real learner emails. |
+
+## Editing the course
+
+1. Edit the markdown in `content/curriculum/`. A module file is YAML front matter, then
+   `# Lesson:` headings, then `## Step:` headings each carrying a `yaml step` fence and a
+   `json payload` fence. `docs/HOW-THE-COURSE-IS-BUILT.md` explains the format.
+2. Restart the API. Locally that is `STOP_SIGHTLINE` then `START_SIGHTLINE`; on the live
+   laptop it is `systemctl --user restart sightline-api.service`.
+3. On boot the seed hashes the curriculum files and re-seeds when the hash changed. The log
+   line tells you which happened:
+   `seed: 6 modules / 22 lessons / 59 steps seeded` or `seed: content unchanged — no-op`.
+4. Reload the page and read the step you changed. Learner progress survives a re-seed.
+
+A bad payload stops the boot rather than dropping a lesson quietly, naming the file and the
+step: `[seed] module-04-reading-the-terrain.md: step m4-l1-s1: payload is not valid JSON`.
+
+**The corpus is different.** `content/corpus/` re-ingests only when the number of files
+changes. Editing the text inside an existing corpus file changes nothing until you boot the
+API once with `SEED_FORCE=1`, which wipes and rebuilds the index.
+
+## Checks
+
+| What it proves | Command |
+|---|---|
+| Types and bundle | `cd web && npm run build` |
+| Lint | `cd web && npx eslint src` |
+| Server behaviour (174 tests) | `cd server && uv run pytest` |
+| Stability lab physics | `cd web && node src/activities/lab_objective/stabilityRun.check.ts` |
+| Every art slot resolves | `cd web/src/assets && python3 lint_assets.py` |
+| The three user journeys | `cd web && npx playwright test` |
+| Every route in every state | `python qa/visual_crawl.py --base http://localhost:4173 --manifest qa/route-manifest.json --out qa/crawl-runs` |
+
+The physics check is a TypeScript file run straight through Node and needs Node 22+.
+
+The last two need a browser installed once — `npx playwright install chromium` for the
+journeys, `pip install playwright && playwright install chromium` for the crawl — and both
+expect the servers to be up already. Each names its exact boot recipe at the top of its own
+file: `web/playwright.config.ts` and `qa/visual_crawl.py`. The crawl's output is a folder of
+screenshots that a person then looks at, not a pass/fail; reviewed passes are in
+`artifacts/crawl/`.
+
+## How the live site is served today
+
+The public site runs from the developer's Linux laptop, not from a rented server and not from
+Docker. Three `systemd --user` units do the work: `sightline-api` (uvicorn on 127.0.0.1:8000),
+`sightline-web` (`vite preview` serving the built site on 127.0.0.1:8080), and
+`sightline-ngrok` (`tools/ngrok` publishing 8080 at a reserved free-tier URL). The units live
+in `~/.config/systemd/user/` on that laptop, not in this repository.
+
+`tools/live/START_SIGHTLINE_LINUX.sh` starts all three, waits for health, and writes the
+public address into `SIGHTLINE_LINK.txt`. `tools/live/STOP_SIGHTLINE_LINUX.sh` stops them.
+`tools/check-site.sh` reports whether the local and public ends are both up.
+
+On the free ngrok tier the first visit from any browser lands on a grey ngrok interstitial
+with a **Visit Site** button. It is once per browser, and it is ngrok's page, not ours.
+
+Full runbook, including what to do when something is down: `docs/OPERATIONS.md`.
+
+## Deploying for real
+
+Moving the site off the laptop means a host that can take a 4.3 GB container image, a managed
+Postgres, a domain, and TLS. `DEPLOY.md` is the runbook top to bottom — the database first
+(the step that actually takes the site off a personal machine), then the compose pair behind
+Caddy, the secret file, Stripe, claiming the owner account, and how to verify each part
+landed. What it cannot do is open the accounts: the host, the domain and the Stripe account
+have to be created by the professor, in his name, with his bank details.
+
+## Accounts and roles
+
+Five roles, assigned when a configured address registers and changed afterwards through the
+admin API by someone permitted to grant that role:
+
+- **learner** — takes the course, pays for access.
+- **developer** — student worker: free access, no learner data, no admin.
+- **instructor** — faculty: free access plus the instructor dashboard and CSV export.
+- **admin** — full operations. Can create learner and developer accounts. Never sees funds.
+- **owner** — exactly one account, the responsible faculty member. The only role with funds
+  access, and the only one that can create instructor or admin accounts.
+
+`OWNER_EMAIL`, `ADMIN_EMAILS`, `INSTRUCTOR_EMAILS` and `DEVELOPER_EMAILS` in `.env` decide who
+gets what. `ops/bootstrap_accounts.py` creates the owner and admin accounts and prints a
+one-time password for each new one, shown once and stored only as an argon2id hash. It is the
+only path that can mint the first funds-access account. `--dry-run` previews;
+`--reset-password EMAIL` issues a fresh one. Run it from `server/`:
 
 ```sh
-cp .env.example .env
+cd server
+DATA_DIR=../data uv run python ../ops/bootstrap_accounts.py --dry-run
 ```
 
-Then edit: set a real `SESSION_SECRET` (64 hex chars), your instructor email(s) in
-`INSTRUCTOR_EMAILS`, and optionally `ANTHROPIC_API_KEY` (leave empty for the offline
-extractive tutor mode). For local development over plain http, set `SECURE_COOKIES=0`.
+## Billing is off
 
-### Development
-
-One-time setup:
-
-```sh
-cd server && uv sync
-cd web && npm i
-```
-
-Run (two terminals):
-
-```sh
-cd server && uv run uvicorn app.main:app --reload   # API on :8000
-cd web && npm run dev                               # Vite on :5173, proxies /api -> :8000
-```
-
-Database seeding and corpus ingest happen automatically on API boot — there is no
-separate ingest command to remember. The first boot downloads the embedding model
-(all-MiniLM-L6-v2) into the local cache.
-
-### Production (Docker)
-
-```sh
-cp .env.example .env    # then edit — see Configuration above
-docker compose -f ops/docker-compose.yml up -d --build
-```
-
-The site is served on port **8080** (`http://localhost:8080`); nginx proxies `/api/*`
-to the api container. On first boot the api seeds the course from `content/curriculum/`
-and ingests `content/corpus/` into Chroma — the embedding model is baked into the image
-at build time and `HF_HUB_OFFLINE=1` keeps huggingface_hub from revalidating it against
-the Hub at runtime, so the build needs network but first boot does not.
-
-**Content is baked into the api image at build time** (content-as-code, ADR-006):
-`content/` is `COPY`ed into the image, not bind-mounted. To change course or corpus
-content, edit `content/` and re-run the `up -d --build` command above.
-
-### Verify
-
-```sh
-curl localhost:8080/api/meta/health
-```
-
-Returns db, chroma, and tutor-provider status as JSON.
-
-### Backup
-
-All persistent state (SQLite database + Chroma index) lives in the single named
-volume `sightline-data` (created by compose as `sightline_sightline-data`). To back
-it up: stop the api, copy the volume contents, start the api again:
-
-```sh
-docker compose -f ops/docker-compose.yml stop api
-docker run --rm -v sightline_sightline-data:/data -v "$PWD":/backup alpine \
-  tar czf /backup/sightline-data-backup.tgz -C /data .
-docker compose -f ops/docker-compose.yml start api
-```
-
-To restore, extract the archive back into the volume the same way
-(`tar xzf /backup/sightline-data-backup.tgz -C /data`) before starting the api.
-
-## TLS / domain
-
-The compose file publishes plain HTTP on port 8080 and deliberately leaves TLS to the
-host. The recommended recipe is host-level [Caddy](https://caddyserver.com): install
-Caddy on the host, point your domain's DNS at the machine, and give Caddy a two-line
-site block that reverse-proxies to the compose stack — Caddy then obtains and renews
-Let's Encrypt certificates automatically, and `SECURE_COOKIES=1` (the default) is
-correct because learners always connect over HTTPS. Example `Caddyfile`:
-
-```
-academy.example.com {
-    reverse_proxy localhost:8080
-}
-```
-
-## Post-launch (deliberately deferred)
-
-- Password reset
-- Email verification
-- OAuth sign-in
-- Postgres migration path (kept open by the SQLAlchemy layer; not built)
-- Session-management UI
-- 3D lab stretch activity
-- Redis-backed rate limiting at scale
-
-## Design notes
-
-- **No sound.** The product ships silent by deliberate decision (DESIGN-004).
-- **One light theme.** A single, fully-specified light theme; no dark mode (DESIGN-001).
-
-## Verification artifacts
-
-The launch bar was verified continuously, not terminally. The records live in
-the repo:
-
-- `artifacts/crawl/` — the reviewed screenshot-crawl passes (one `REVIEW.md`
-  per pass; pass 5 is the zero-P1/zero-P2 exit pass over the full 92-state
-  route×state matrix, and its appendix holds the full-site traversal audit:
-  90 page visits, zero dead links, zero console errors).
-- `artifacts/launch/` — the final gate walk: `QA-004-checklist.md` (every
-  launch-checklist box with its evidence) and `SPEC-001-acceptance.md`
-  (every product-requirement AC, how it was verified, and where).
-- `web/e2e/` — the three QA-002 user journeys (J1 first session, J2 full
-  completion + capstone + assessment fail→pass + certificate, J3 the Ranger
-  conversation across all four grounding/triage modes), run
-  with Playwright against a fixture-seeded stack (`npm run e2e` in `web/`;
-  boot recipe in `web/playwright.config.ts`). The API smoke + four unit
-  targets live in `server/tests/` (`uv run pytest`).
+The landing page quotes a monthly price, but no card is ever charged and everyone who
+registers gets the whole course. With Stripe unconfigured the paywall disables itself rather
+than locking people out, and says so at boot: `BILLING NOT CONFIGURED`. Turning it on needs a
+Stripe account in the owner's name with the owner's bank details — `DEPLOY.md` §5.

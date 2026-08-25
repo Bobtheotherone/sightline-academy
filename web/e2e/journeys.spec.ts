@@ -155,10 +155,10 @@ test("J1 — new learner first session: register, play M1, journal, resume", asy
 
   await continueTo(page, "m1-l1-s3");
 
-  // s3 is a hotspot hunt with requireAll, so Continue stays gated until every
-  // one of the six decisions has been opened — skip the hunt, then read all six.
-  // exact: the crosshair overlay's own aria-label quotes "Reveal the rest" too.
-  await page.getByRole("button", { name: "Reveal the rest", exact: true }).click();
+  // s3 is a hotspot scene with requireAll, so Continue stays gated until every
+  // one of the six decisions has been opened. The spot-the-cue hunt is opt-in
+  // per step (`spotFirst`) and this step does not ask for it, so the scene
+  // opens sealed and numbered — read all six.
   for (const mark of [
     "Bare head",
     "Pavement",
@@ -444,7 +444,7 @@ test("J3 — Ranger conversation: grounding, triage, persistence, clear", async 
   await login(page, "mid@crawl.test", FIXTURE_PASSWORD);
   await page.goto("/tutor");
   await expect(page.getByRole("heading", { name: "Ranger" })).toBeVisible();
-  await expect(page.getByText("Ranger is in offline mode")).toBeVisible();
+  await expect(page.getByText("Ranger is answering from the course text only right now.")).toBeVisible();
 
   // Q1 — curriculum: "From the course" label + a source chip that deep-links
   // to Module 2.

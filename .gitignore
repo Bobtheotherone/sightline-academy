@@ -15,11 +15,38 @@ web/test-results/
 data/
 server/data/
 
-# Env & secrets
+# Env & secrets. .env.example is the tracked template and stays.
 .env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.jar
+id_rsa*
 
 # Crawl output (screenshot dumps stay local; artifacts/ reviews are committed)
 qa/crawl-runs/
+
+# Handover documents that carry the owner's sign-in. These are delivered to
+# Osama by hand, never through the repo.
+HANDOFF_OSAMA.md
+OSAMA-EMAIL.txt
+
+# Live database snapshots. Real learner emails and password hashes.
+backups/
+*.sqlite3
+*.db
+*.db-wal
+*.db-shm
+
+# Local build + tool artifacts that are rebuilt, not reviewed.
+web/dist-preview/
+tools/ngrok
+
+# Scratch drops that landed in qa/ by hand.
+qa/ChatGPT Image*.png
+qa/svg/_live.html
 
 # OS noise
 Thumbs.db

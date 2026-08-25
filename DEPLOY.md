@@ -207,6 +207,10 @@ bootstrap tool. That tool is the *only* path that mints one.
    ```bash
    docker compose -f ops/docker-compose.yml exec -T api        python /app/ops/bootstrap_accounts.py --dry-run
    docker compose -f ops/docker-compose.yml exec -T api        python /app/ops/bootstrap_accounts.py
+
+   On a plain checkout without Docker the script finds `server/` on its own:
+
+   cd server && uv run python ../ops/bootstrap_accounts.py
    ```
    It creates any missing account with a random password printed **once**, and
    aligns the role of any account that already exists without touching its
